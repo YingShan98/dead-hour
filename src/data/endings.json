@@ -1,0 +1,69 @@
+{
+  "endings": [
+    {
+      "id": "ending_death_health",
+      "title": "The City Took You",
+      "type": "bad",
+      "priority": 1,
+      "conditions": {
+        "requiredStats": [{ "stat": "health", "max": 0 }]
+      },
+      "narrative": [
+        "Your body gave out. The city you tried to save had no more use for you.",
+        "But somewhere, a stranger remembered your name."
+      ],
+      "epilogue": null
+    },
+    {
+      "id": "ending_death_morale",
+      "title": "The Quiet Collapse",
+      "type": "bad",
+      "priority": 2,
+      "conditions": {
+        "requiredStats": [{ "stat": "morale", "max": 0 }]
+      },
+      "narrative": [
+        "It wasn't the dead that got you in the end.",
+        "You simply stopped. Sat down. And didn't get back up.",
+        "The city moved on without you."
+      ],
+      "epilogue": null
+    },
+    {
+      "id": "ending_solo_survivor",
+      "title": "Alone in the Ruins",
+      "type": "neutral",
+      "priority": 10,
+      "conditions": {
+        "requiredFlags": ["survived_one_year"],
+        "blockedFlags": ["has_group"],
+        "requiredStats": [{ "stat": "health", "min": 1 }]
+      },
+      "narrative": [
+        "You made it. Alone.",
+        "The city is quieter now — not peaceful, just empty.",
+        "You stop counting the days. It doesn't feel like surviving anymore."
+      ],
+      "epilogue": "You scavenge the ruins for another three months before finding a radio signal from the coast."
+    },
+    {
+      "id": "ending_community_leader",
+      "title": "The Last City",
+      "type": "good",
+      "priority": 20,
+      "conditions": {
+        "requiredFlags": ["survived_one_year", "has_group", "built_shelter"],
+        "requiredStats": [
+          { "stat": "leadership", "min": 15 },
+          { "stat": "trust", "min": 12 }
+        ]
+      },
+      "narrative": [
+        "You didn't just survive. You built something.",
+        "Forty-three people call this place home now. They argue about rations and watch schedules and who gets the corner room.",
+        "Normal problems. Human problems. You never thought you'd be grateful for those."
+      ],
+      "epilogue": "Three years later, another settlement sends a radio signal. They've heard about you."
+    }
+  ]
+}

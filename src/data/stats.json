@@ -1,0 +1,54 @@
+{
+  "stats": [
+    {
+      "key": "health",
+      "label": "Health",
+      "description": "Physical wellbeing. Reaches 0 and the city wins.",
+      "icon": "❤",
+      "default": 10,
+      "min": 0,
+      "max": 20,
+      "visible": true
+    },
+    {
+      "key": "morale",
+      "label": "Morale",
+      "description": "Mental fortitude. Low morale closes options and attracts trouble.",
+      "icon": "◈",
+      "default": 10,
+      "min": 0,
+      "max": 20,
+      "visible": true
+    },
+    {
+      "key": "leadership",
+      "label": "Leadership",
+      "description": "Your ability to rally others. Opens group-based choices.",
+      "icon": "▲",
+      "default": 0,
+      "min": 0,
+      "max": 20,
+      "visible": true
+    },
+    {
+      "key": "stealth",
+      "label": "Stealth",
+      "description": "Your ability to move unseen. Opens avoidance-based choices.",
+      "icon": "◉",
+      "default": 0,
+      "min": 0,
+      "max": 20,
+      "visible": true
+    },
+    {
+      "key": "trust",
+      "label": "Trust",
+      "description": "How much the survivors around you trust your judgment.",
+      "icon": "◆",
+      "default": 5,
+      "min": 0,
+      "max": 20,
+      "visible": false
+    }
+  ]
+}

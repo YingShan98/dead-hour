@@ -1,0 +1,39 @@
+{
+  "id": "scene_001",
+  "title": "The Morning Commute",
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -48 },
+  "narrative": [
+    "The subway is running late again. You check your phone — a blurry video trending on social media shows a man biting a police officer outside City Hall.",
+    "People around you scroll past it with mild disgust. Nobody seems alarmed.",
+    "Your stop is coming up. You have a meeting in twenty minutes."
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_001_choice_a",
+      "text": "Save the video and keep scrolling. It's probably nothing.",
+      "conditions": {},
+      "effects": {
+        "flags": { "saw_patient_zero_video": true },
+        "stats": {},
+        "items": []
+      },
+      "nextSceneId": "scene_002"
+    },
+    {
+      "id": "scene_001_choice_b",
+      "text": "Show the video to the person beside you. Something feels wrong.",
+      "conditions": {},
+      "effects": {
+        "flags": {
+          "saw_patient_zero_video": true,
+          "warned_a_stranger": true
+        },
+        "stats": { "leadership": 1 },
+        "items": []
+      },
+      "nextSceneId": "scene_002"
+    }
+  ]
+}

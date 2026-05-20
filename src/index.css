@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #0d0d0d;
+    color: #c8c8b4;
+    font-family: 'Crimson Text', Georgia, serif;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #161616;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+  }
+
+  /* Selection colour */
+  ::selection {
+    background-color: #b03030;
+    color: #c8c8b4;
+  }
+}
+
+@layer components {
+  /* Narrative text — the main reading experience */
+  .narrative-text {
+    @apply font-body text-narrative text-text leading-relaxed;
+  }
+
+  /* Scene title */
+  .scene-title {
+    @apply font-display text-2xl text-text tracking-wide;
+  }
+
+  /* UI label — stats, numbers, game metadata */
+  .ui-label {
+    @apply font-ui text-sm text-text-dim tracking-widest uppercase;
+  }
+
+  /* Choice button */
+  .choice-btn {
+    @apply w-full text-left px-4 py-3 rounded
+           border border-border
+           font-body text-text text-base
+           bg-surface
+           transition-all duration-200
+           hover:border-accent hover:text-text hover:bg-[#1e1212]
+           disabled:opacity-30 disabled:cursor-not-allowed;
+  }
+
+  /* Stat bar */
+  .stat-bar {
+    @apply h-1.5 rounded-full bg-border overflow-hidden;
+  }
+  .stat-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+}

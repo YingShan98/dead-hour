@@ -1,0 +1,40 @@
+{
+  "id": "scene_003",
+  "title": "End of Day",
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -36 },
+  "narrative": [
+    "By evening, the news has shifted. The 'civil unrest' has a new name: an unexplained outbreak of violent behaviour near the waterfront.",
+    "Three hospitals report unusual patient intake. The mayor's office has not commented.",
+    "You stand at your apartment window, watching the city. It looks the same. But it doesn't feel the same."
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_003_choice_a",
+      "text": "Go to bed. You're overthinking this.",
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 1 },
+        "flags": {},
+        "items": []
+      },
+      "nextSceneId": "scene_003"
+    },
+    {
+      "id": "scene_003_choice_b",
+      "text": "Stay up and gather supplies — just in case.",
+      "conditions": {},
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "morale": -1 },
+        "items": [
+          { "itemId": "canned_food", "delta": 3 },
+          { "itemId": "painkillers", "delta": 2 }
+        ]
+      },
+      "nextSceneId": "scene_003"
+    }
+  ],
+  "onEnter": {}
+}

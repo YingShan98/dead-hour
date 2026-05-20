@@ -1,0 +1,53 @@
+{
+  "id": "scene_002",
+  "title": "Business as Usual",
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -46 },
+  "narrative": [
+    "Your office is the same as always. Fluorescent lights. The hum of the coffee machine. Someone's passive-aggressive note about labelling food in the fridge.",
+    "On the TV in the corner, a news ticker scrolls: CIVIL UNREST IN DOWNTOWN. POLICE ADVISE AVOIDING THE AREA.",
+    "Your manager stops by your desk. The quarterly report is due by noon."
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_002_choice_a",
+      "text": "Work on the report. Act normal.",
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": -1 },
+        "flags": {},
+        "items": []
+      },
+      "nextSceneId": "scene_003"
+    },
+    {
+      "id": "scene_002_choice_b",
+      "text": "Spend the morning researching the downtown situation instead.",
+      "conditions": {},
+      "effects": {
+        "flags": { "researched_outbreak_early": true },
+        "stats": { "morale": 1 },
+        "items": []
+      },
+      "nextSceneId": "scene_003"
+    },
+    {
+      "id": "scene_002_choice_c",
+      "text": "Slip out early and head toward the disturbance to see it yourself.",
+      "conditions": {
+        "requiredStats": [{ "stat": "leadership", "min": 1 }]
+      },
+      "hint": "Requires Leadership 1+",
+      "effects": {
+        "flags": {
+          "researched_outbreak_early": true,
+          "went_to_city_hall_early": true
+        },
+        "stats": { "leadership": 1, "morale": 2 },
+        "items": []
+      },
+      "nextSceneId": "scene_003"
+    }
+  ]
+}
