@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "locale": "zh",
+    "purpose": "Registry for story flags used by Chinese content. Keep this file updated whenever a scene sets, requires, or blocks a flag.",
+    "statusGuide": {
+      "active": "Flag is set and already used by a later scene or ending condition.",
+      "seed": "Flag is set now and intentionally saved for future payoff.",
+      "planned": "Flag is referenced by an ending or future branch but not set yet.",
+      "draft": "Temporary authoring marker that should be removed or replaced before release."
+    }
+  },
+  "flags": [
+    {
+      "id": "noticed_clues",
+      "label": "注意到早期线索",
+      "category": "act1_warning",
+      "status": "seed",
+      "description": "玩家主动追问报纸上的异常失踪案。",
+      "setBy": ["scene_001_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Act 2 can unlock faster recognition of infected behavior, safer route choices, or extra dialogue with informed survivors."
+    },
+    {
+      "id": "ignored_clues",
+      "label": "忽略早期线索",
+      "category": "act1_warning",
+      "status": "seed",
+      "description": "玩家把早期失踪案当成普通新闻处理。",
+      "setBy": ["scene_001_choice_b"],
+      "usedBy": [],
+      "plannedUse": "Act 2 can make the first outbreak response slower or block some early-preparation dialogue."
+    },
+    {
+      "id": "disinfected_wound",
+      "label": "处理过伤口",
+      "category": "medical",
+      "status": "seed",
+      "description": "玩家认真消毒了手指伤口。",
+      "setBy": ["scene_002_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Later medical scenes can reduce infection risk or unlock credibility with clinic characters."
+    },
+    {
+      "id": "has_first_aid_training",
+      "label": "具备基础急救判断",
+      "category": "medical",
+      "status": "seed",
+      "description": "玩家展现出基础急救意识。",
+      "setBy": ["scene_002_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for medical choices throughout Acts 2-3, especially clinic and wound-treatment branches."
+    },
+    {
+      "id": "searched_details",
+      "label": "查阅失踪案资料",
+      "category": "information",
+      "status": "active",
+      "description": "玩家利用断网前的时间调查失踪案位置。",
+      "setBy": ["scene_002_choice_b"],
+      "usedBy": ["scene_005_choice_d"],
+      "plannedUse": "Can later support city-route choices, outbreak-pattern recognition, and radio/safe-zone skepticism."
+    },
+    {
+      "id": "bought_plates",
+      "label": "购买加厚铁板",
+      "category": "preparation",
+      "status": "seed",
+      "description": "玩家选择了重防御准备路线。",
+      "setBy": ["scene_003_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use as a narrative memory flag for later home-base upgrades or others recognizing the fortified door."
+    },
+    {
+      "id": "warned_neighbor",
+      "label": "提醒五金店老板",
+      "category": "social",
+      "status": "seed",
+      "description": "玩家提醒五金店老板多囤货。",
+      "setBy": ["scene_003_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Can return as a merchant/survivor relationship, a later rescue, or a trust modifier."
+    },
+    {
+      "id": "trap_strategy",
+      "label": "选择陷阱策略",
+      "category": "preparation",
+      "status": "seed",
+      "description": "玩家购买铁丝网和强力胶，偏向陷阱与迟滞敌人。",
+      "setBy": ["scene_003_choice_b"],
+      "usedBy": [],
+      "plannedUse": "Use for later trap-building, ambush, stealth, or militia tactical dialogue."
+    },
+    {
+      "id": "knows_details",
+      "label": "掌握咬人事件位置",
+      "category": "information",
+      "status": "active",
+      "description": "玩家从早餐店打听到异常事件的具体位置。",
+      "setBy": ["scene_003_choice_c"],
+      "usedBy": ["scene_005_choice_c"],
+      "plannedUse": "Can support route-planning and early recognition of danger clusters."
+    },
+    {
+      "id": "energy_prepared",
+      "label": "完成充电准备",
+      "category": "resource",
+      "status": "seed",
+      "description": "玩家在断网断电前给设备充电。",
+      "setBy": ["scene_004_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for flashlight, phone, radio recording, or nighttime navigation options in Act 2."
+    },
+    {
+      "id": "resource_check",
+      "label": "清点基础物资",
+      "category": "resource",
+      "status": "seed",
+      "description": "玩家在零点前清点水和食物。",
+      "setBy": ["scene_004_choice_b"],
+      "usedBy": [],
+      "plannedUse": "Use for rationing choices, morale stability, or group-resource trust in Acts 2-3."
+    },
+    {
+      "id": "warned_neighbors",
+      "label": "提醒隔壁邻居",
+      "category": "social",
+      "status": "active",
+      "description": "玩家冒险提醒邻居堵门窗。",
+      "setBy": ["scene_004_choice_c"],
+      "usedBy": ["scene_006_choice_c"],
+      "plannedUse": "Can grow into a neighbor survivor thread, trust gains, or a costly rescue request."
+    },
+    {
+      "id": "pei_warning_received",
+      "label": "收到裴嘉应警告",
+      "category": "npc",
+      "status": "seed",
+      "description": "玩家接到裴嘉应关于急诊室失控的电话。",
+      "setBy": ["scene_004_choice_a", "scene_004_choice_b", "scene_004_choice_c"],
+      "usedBy": [],
+      "plannedUse": "Use to introduce Pei Jiaying's hospital thread, rescue route, or clinic connection."
+    },
+    {
+      "id": "door_fortified",
+      "label": "铁门完成加固",
+      "category": "preparation",
+      "status": "seed",
+      "description": "玩家用加厚铁板守住出租屋入口。",
+      "setBy": ["scene_005_fortified_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for home-defense scenes, siege events, or returning to the apartment later."
+    },
+    {
+      "id": "has_home_base",
+      "label": "拥有临时据点",
+      "category": "shelter",
+      "status": "active",
+      "description": "玩家把出租屋暂时变成可防守据点。",
+      "setBy": ["scene_005_fortified_choice_a"],
+      "usedBy": ["scene_006_choice_a"],
+      "plannedUse": "Can branch into stay-in-city survival and later shelter-building progress."
+    },
+    {
+      "id": "hallway_trapped",
+      "label": "楼道陷阱生效",
+      "category": "preparation",
+      "status": "seed",
+      "description": "玩家在楼道设置铁丝陷阱并拖住第一波感染者。",
+      "setBy": ["scene_005_trapped_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for future stealth/tactical reputation, or consequences if neighbors discover the trap."
+    },
+    {
+      "id": "made_noise_at_hour_zero",
+      "label": "零点制造噪音",
+      "category": "risk",
+      "status": "seed",
+      "description": "陷阱制造巨大声响，可能吸引更多感染者。",
+      "setBy": ["scene_005_trapped_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use to increase pressure in nearby streets or trigger a pursuit scene."
+    },
+    {
+      "id": "left_home_early",
+      "label": "提前离开住处",
+      "category": "mobility",
+      "status": "seed",
+      "description": "玩家在楼道彻底堵死前离开出租屋。",
+      "setBy": ["scene_005_scout_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use to close home-base options but open mobile/scout routes."
+    },
+    {
+      "id": "knows_infected_pattern",
+      "label": "理解感染扩散模式",
+      "category": "information",
+      "status": "seed",
+      "description": "玩家把早期地点串联起来，理解危险正在扩散。",
+      "setBy": ["scene_005_scout_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for avoiding outbreak clusters and advising other survivors."
+    },
+    {
+      "id": "knows_city_layout",
+      "label": "记住城市路线",
+      "category": "mobility",
+      "status": "active",
+      "description": "玩家掌握可避开危险区域的城市路线。",
+      "setBy": ["scene_005_scout_choice_a"],
+      "usedBy": ["scene_006_choice_d"],
+      "plannedUse": "Use for Act 2 flee-to-suburbs branch and later navigation checks."
+    },
+    {
+      "id": "weak_defense",
+      "label": "简易防线",
+      "category": "preparation",
+      "status": "seed",
+      "description": "玩家缺乏专门准备，只能临时顶门。",
+      "setBy": ["scene_005_unprepared_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for injury, damaged-door consequences, or forced relocation."
+    },
+    {
+      "id": "stayed_in_city",
+      "label": "选择留在城内",
+      "category": "act2_branch",
+      "status": "seed",
+      "description": "玩家开始固守或城市搜刮路线。",
+      "setBy": ["scene_006_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Use for the Act 2 stay-in-city branch and Day 30 convergence."
+    },
+    {
+      "id": "started_scavenging",
+      "label": "开始搜刮物资",
+      "category": "act2_branch",
+      "status": "seed",
+      "description": "玩家主动进入街区搜刮水、食物和药。",
+      "setBy": ["scene_006_choice_b"],
+      "usedBy": [],
+      "plannedUse": "Use for supermarket/resource conflict scenes."
+    },
+    {
+      "id": "checked_on_neighbors",
+      "label": "查看邻居生还",
+      "category": "social",
+      "status": "seed",
+      "description": "玩家回头确认被提醒的邻居是否还活着。",
+      "setBy": ["scene_006_choice_c"],
+      "usedBy": [],
+      "plannedUse": "Use for neighbor companion, trust chain, or rescue debt."
+    },
+    {
+      "id": "fled_toward_suburbs",
+      "label": "向郊区撤离",
+      "category": "act2_branch",
+      "status": "seed",
+      "description": "玩家开始向郊区撤离路线。",
+      "setBy": ["scene_006_choice_d"],
+      "usedBy": [],
+      "plannedUse": "Use for the Act 2 flee-to-suburbs branch and exposure/stranger encounters."
+    },
+    {
+      "id": "helped_the_kid",
+      "label": "帮助便利店孩子",
+      "category": "npc",
+      "status": "seed",
+      "description": "玩家用食物安抚并帮助躲在便利店柜台后的孩子。",
+      "setBy": ["scene_007_choice_b"],
+      "usedBy": [],
+      "plannedUse": "Use for The Kid thread, morale payoffs, and ending memory."
+    },
+    {
+      "id": "sealed_store_door",
+      "label": "封住便利店后门",
+      "category": "stealth",
+      "status": "seed",
+      "description": "玩家用宽胶带封住破裂后门，减少气味或声音外泄。",
+      "setBy": ["scene_007_choice_c"],
+      "usedBy": [],
+      "plannedUse": "Use to reduce pursuit risk or make the store a safer temporary cache."
+    },
+    {
+      "id": "act2_draft_frontier",
+      "label": "Act 2 草稿边界",
+      "category": "authoring",
+      "status": "draft",
+      "description": "当前中文剧情写作边界标记。",
+      "setBy": ["scene_008_choice_a"],
+      "usedBy": [],
+      "plannedUse": "Remove this once the next real Act 2 scene is written."
+    },
+    {
+      "id": "survived_one_year",
+      "label": "存活满一年",
+      "category": "ending",
+      "status": "planned",
+      "description": "玩家到达 Act 4 结尾并存活。",
+      "setBy": [],
+      "usedBy": ["ending_solo_survivor", "ending_community_leader"],
+      "plannedUse": "Set in the final Act 4 convergence scene before ending evaluation."
+    },
+    {
+      "id": "has_group",
+      "label": "拥有幸存者团体",
+      "category": "faction",
+      "status": "planned",
+      "description": "玩家不再是独行者，已经被某个团体接纳或领导一组幸存者。",
+      "setBy": [],
+      "usedBy": ["ending_solo_survivor", "ending_community_leader"],
+      "plannedUse": "Set through clinic, collective, militia, or community-building routes in Acts 2-3."
+    },
+    {
+      "id": "built_shelter",
+      "label": "建立稳定庇护所",
+      "category": "ending",
+      "status": "planned",
+      "description": "玩家建立或维护了足以支撑结局的长期据点。",
+      "setBy": [],
+      "usedBy": ["ending_community_leader"],
+      "plannedUse": "Set during Act 3 or Act 4 shelter/community arc."
+    }
+  ]
+}

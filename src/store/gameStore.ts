@@ -37,7 +37,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
   startNewGame: async (saveSlot = 0) => {
     set({ isLoading: true, error: null })
     try {
-      const [firstScene, endings, items] = await Promise.all([loadScene('scene_001'), loadEndings(), loadItems()])
+      const [firstScene, endings, items] = await Promise.all([
+        loadScene('scene_001'),
+        loadEndings(),
+        loadItems(),
+      ])
 
       const freshState: GameState = {
         ...DEFAULT_GAME_STATE,
@@ -137,7 +141,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const saved = loadGame(slot)
       if (!saved) throw new Error(`No save data found in slot ${slot}`)
 
-      const [scene, endings, items] = await Promise.all([loadScene(saved.currentSceneId), loadEndings(), loadItems()])
+      const [scene, endings, items] = await Promise.all([
+        loadScene(saved.currentSceneId),
+        loadEndings(),
+        loadItems(),
+      ])
 
       set({
         gameState: saved,

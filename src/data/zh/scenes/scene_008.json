@@ -1,0 +1,23 @@
+{
+  "id": "scene_008",
+  "title": "未完的路线",
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 18 },
+  "conditions": {},
+  "narrative": [
+    "傍晚时，城市广播只剩下重复的噪音。你在一面破碎的公交站牌前停下，玻璃后的线路图被血手印遮住一半。",
+    "北边是医院和主干道，南边是老居民区，西边通向郊外。每个方向都可能有活路，也都可能是陷阱。",
+    "你的第一天还没有结束。真正的选择才刚刚开始。"
+  ],
+  "choices": [
+    {
+      "id": "scene_008_choice_a",
+      "text": "暂时停在这里，等待后续章节。",
+      "conditions": {},
+      "effects": {
+        "flags": { "act2_draft_frontier": true }
+      },
+      "nextSceneId": "scene_009"
+    }
+  ]
+}

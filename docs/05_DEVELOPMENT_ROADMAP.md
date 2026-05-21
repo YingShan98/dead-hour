@@ -70,13 +70,13 @@ Goal: the game engine works and is tested, even without any real scenes.
 - [ ] Implement `loader.ts` (start with static imports; lazy-load comes later)
 - [ ] Define `DEFAULT_GAME_STATE` in `src/engine/defaults.ts`
 - [ ] Implement Zustand store in `src/store/gameStore.ts`
-- [ ] Write `scripts/validate-scenes.ts` — a CLI script to validate JSON scenes against the schema
-- [ ] Write 3–5 mock scenes in JSON to exercise the engine
+- [x] Write `scripts/validate-scenes.mjs` — a CLI script to validate JSON scenes against the schema
+- [x] Write 3–5 mock scenes in JSON to exercise the engine
 - [ ] Achieve >80% test coverage on engine functions
 
 ### Deliverable
 
-`npm test` passes. All engine functions handle happy path + error cases.
+`pnpm run test:run` passes. All engine functions handle happy path + error cases.
 
 ---
 
@@ -98,7 +98,7 @@ Goal: A human can sit down and play Act 1 from start to finish.
 
 - [ ] Write all Act 1 scenes (~15–20 scenes)
 - [ ] At minimum, 2–3 meaningful branch points in Act 1
-- [ ] Validate all scenes pass `validate-scenes.ts`
+- [x] Validate all scenes pass `pnpm run validate-scenes`
 - [ ] At least one "bad" ending triggerable in Act 1 (health = 0)
 
 **Engine integration:**
@@ -232,7 +232,7 @@ Track things you're deferring deliberately:
 | Cloud save / account system | Extension      | Requires backend                                  |
 | Localization                | Extension      | Architecture supports it (string externalization) |
 | Mobile-native app           | Extension      | Could wrap in Capacitor later                     |
-| Scene editor GUI            | Extension      | `validate-scenes.ts` is sufficient for now        |
+| Scene editor GUI            | Extension      | `validate-scenes.mjs` is sufficient for now       |
 | Procedural content          | Extension      | All content is hand-authored in v1                |
 
 ---

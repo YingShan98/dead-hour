@@ -2,8 +2,8 @@
   "items": [
     {
       "id": "medkit",
-      "label": "Medical Kit",
-      "description": "A basic first aid kit. Restores 3 health when used.",
+      "label": "急救包",
+      "description": "基础急救用品。恢复 3 点生命值。",
       "category": "medical",
       "stackable": true,
       "maxStack": 5,
@@ -12,8 +12,8 @@
     },
     {
       "id": "canned_food",
-      "label": "Canned Food",
-      "description": "Non-perishable. Restores 1 morale when consumed.",
+      "label": "罐头",
+      "description": "耐储存的食物。恢复 1 点士气。",
       "category": "food",
       "stackable": true,
       "maxStack": 20,
@@ -21,34 +21,54 @@
       "useEffect": { "stats": { "morale": 1 } }
     },
     {
-      "id": "radio",
-      "label": "Emergency Radio",
-      "description": "Lets you tune in to broadcasts. Unlocks radio-based scene options.",
-      "category": "tool",
-      "stackable": false,
-      "maxStack": 1,
+      "id": "steel_plates",
+      "label": "加厚铁板",
+      "description": "2mm加厚钢板。沉重但极度坚固，加固大门的绝佳材料。",
+      "category": "misc",
+      "stackable": true,
+      "maxStack": 5,
       "usable": false,
       "useEffect": null
     },
     {
-      "id": "knife",
-      "label": "Hunting Knife",
-      "description": "Better than nothing. Enables certain confrontation choices.",
+      "id": "iron_wire",
+      "label": "细铁丝网",
+      "description": "锋利的铁丝，适合用来制作迟滞敌人的陷阱。",
+      "category": "tool",
+      "stackable": true,
+      "maxStack": 5,
+      "usable": false,
+      "useEffect": null
+    },
+    {
+      "id": "industrial_glue",
+      "label": "工业强力胶",
+      "description": "粘性极强，用于固定陷阱或紧急修补。",
+      "category": "tool",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": false,
+      "useEffect": null
+    },
+    {
+      "id": "wide_tape",
+      "label": "灰色宽胶带",
+      "description": "粘性极强，适合紧急修补工具或封死裂缝。",
+      "category": "tool",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "useEffect": { "stats": { "morale": 1 } }
+    },
+    {
+      "id": "modified_grinder",
+      "label": "改装角磨机",
+      "description": "缠绕了铁丝网护手的角磨机。虽然笨重，但杀伤力惊人。",
       "category": "weapon",
       "stackable": false,
       "maxStack": 1,
       "usable": false,
       "useEffect": null
-    },
-    {
-      "id": "painkillers",
-      "label": "Painkillers",
-      "description": "Takes the edge off. Restores 1 health and 1 morale.",
-      "category": "medical",
-      "stackable": true,
-      "maxStack": 10,
-      "usable": true,
-      "useEffect": { "stats": { "health": 1, "morale": 1 } }
     }
   ]
 }

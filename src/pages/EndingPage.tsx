@@ -12,11 +12,16 @@ const TYPE_COLOURS: Record<string, string> = {
 
 function endingTypeLabel(type: string, LL: TranslationFunctions): string {
   switch (type) {
-    case 'bad': return LL.endingTypeBad()
-    case 'neutral': return LL.endingTypeNeutral()
-    case 'good': return LL.endingTypeGood()
-    case 'secret': return LL.endingTypeSecret()
-    default: return type
+    case 'bad':
+      return LL.endingTypeBad()
+    case 'neutral':
+      return LL.endingTypeNeutral()
+    case 'good':
+      return LL.endingTypeGood()
+    case 'secret':
+      return LL.endingTypeSecret()
+    default:
+      return type
   }
 }
 

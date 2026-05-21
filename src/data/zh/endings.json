@@ -2,36 +2,36 @@
   "endings": [
     {
       "id": "ending_death_health",
-      "title": "The City Took You",
+      "title": "城市吞噬了你",
       "type": "bad",
       "priority": 1,
       "conditions": {
         "requiredStats": [{ "stat": "health", "max": 0 }]
       },
       "narrative": [
-        "Your body gave out. The city you tried to save had no more use for you.",
-        "But somewhere, a stranger remembered your name."
+        "你的身体达到了极限。你曾试图拯救的这座城市，已经不再需要你了。",
+        "但在某个地方，总会有一个陌生人记得你的名字。"
       ],
       "epilogue": null
     },
     {
       "id": "ending_death_morale",
-      "title": "The Quiet Collapse",
+      "title": "无声的崩溃",
       "type": "bad",
       "priority": 2,
       "conditions": {
         "requiredStats": [{ "stat": "morale", "max": 0 }]
       },
       "narrative": [
-        "It wasn't the dead that got you in the end.",
-        "You simply stopped. Sat down. And didn't get back up.",
-        "The city moved on without you."
+        "到头来，夺走你生命的并不是那些死者。",
+        "你只是停下了脚步。坐了下来。然后再也没有站起来。",
+        "城市在没有你的情况下，继续在废墟中荒废。"
       ],
       "epilogue": null
     },
     {
       "id": "ending_solo_survivor",
-      "title": "Alone in the Ruins",
+      "title": "废墟中的孤独者",
       "type": "neutral",
       "priority": 10,
       "conditions": {
@@ -40,15 +40,15 @@
         "requiredStats": [{ "stat": "health", "min": 1 }]
       },
       "narrative": [
-        "You made it. Alone.",
-        "The city is quieter now — not peaceful, just empty.",
-        "You stop counting the days. It doesn't feel like surviving anymore."
+        "你成功了。独自一人。",
+        "城市现在变得安静了——不是平静，只是空虚。",
+        "你不再去计算日子。这已经感觉不再像是生存了。"
       ],
-      "epilogue": "You scavenge the ruins for another three months before finding a radio signal from the coast."
+      "epilogue": "你在废墟中又搜寻了三个月，直到收到了来自海岸的无线电信号。"
     },
     {
       "id": "ending_community_leader",
-      "title": "The Last City",
+      "title": "最后的城市",
       "type": "good",
       "priority": 20,
       "conditions": {
@@ -59,11 +59,11 @@
         ]
       },
       "narrative": [
-        "You didn't just survive. You built something.",
-        "Forty-three people call this place home now. They argue about rations and watch schedules and who gets the corner room.",
-        "Normal problems. Human problems. You never thought you'd be grateful for those."
+        "你不仅仅是活了下来。你建立了一些东西。",
+        "现在有四十三个人把这里当成家。他们为物资配给、值班表以及谁能住进角落的房间而争论不休。",
+        "平凡的问题。人类的问题。你从没想过你会对这些琐事心存感激。"
       ],
-      "epilogue": "Three years later, another settlement sends a radio signal. They've heard about you."
+      "epilogue": "三年后，另一个定居点发出了无线电信号。他们听说了你的故事。"
     }
   ]
 }

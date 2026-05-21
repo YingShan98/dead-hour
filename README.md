@@ -46,7 +46,7 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 ### Prerequisites
 
 - Node.js 18+
-- npm 9+
+- pnpm 9+
 
 ### Install & Run
 
@@ -129,7 +129,7 @@ A single playthrough covers roughly 40–60 scenes out of 120–150 total. No tw
 
 ## Authoring Story Content
 
-All story content lives in `src/data/scenes/` as JSON files. The engine code never needs to change when you add new scenes.
+All story content lives in locale-specific JSON folders such as `src/data/zh/scenes/`. The engine code never needs to change when you add new scenes.
 
 A minimal scene looks like this:
 
@@ -178,15 +178,15 @@ Full project documentation lives in `/docs`:
 
 ## Development Status
 
-| Phase                       | Status         |
-| --------------------------- | -------------- |
-| Phase 0 — Project setup     | ⬜ Not started |
-| Phase 1 — Engine core       | ⬜ Not started |
-| Phase 2 — Act 1 playable    | ⬜ Not started |
-| Phase 3 — Act 2 + branching | ⬜ Not started |
-| Phase 4 — Act 3 + factions  | ⬜ Not started |
-| Phase 5 — Act 4 + endings   | ⬜ Not started |
-| Phase 6 — Polish + release  | ⬜ Not started |
+| Phase                       | Status              |
+| --------------------------- | ------------------- |
+| Phase 0 — Project setup     | ✅ Mostly complete  |
+| Phase 1 — Engine core       | ✅ Core implemented |
+| Phase 2 — Act 1 playable    | 🟨 In progress      |
+| Phase 3 — Act 2 + branching | ⬜ Not started      |
+| Phase 4 — Act 3 + factions  | ⬜ Not started      |
+| Phase 5 — Act 4 + endings   | ⬜ Not started      |
+| Phase 6 — Polish + release  | ⬜ Not started      |
 
 ---
 

@@ -12,7 +12,13 @@ interface StatMeta {
 const VISIBLE_STATS: StatMeta[] = [
   { key: 'health', getLabel: (LL) => LL.statHealth(), icon: '❤', max: 20, colour: '#b03030' },
   { key: 'morale', getLabel: (LL) => LL.statMorale(), icon: '◈', max: 20, colour: '#b08030' },
-  { key: 'leadership', getLabel: (LL) => LL.statLeadership(), icon: '▲', max: 20, colour: '#4a7c5f' },
+  {
+    key: 'leadership',
+    getLabel: (LL) => LL.statLeadership(),
+    icon: '▲',
+    max: 20,
+    colour: '#4a7c5f',
+  },
   { key: 'stealth', getLabel: (LL) => LL.statStealth(), icon: '◉', max: 20, colour: '#4a6a8b' },
 ]
 

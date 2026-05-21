@@ -1,0 +1,36 @@
+{
+  "id": "scene_005_fortified",
+  "title": "铁门之后",
+  "act": "act1",
+  "gameTime": { "hoursFromStart": 0 },
+  "conditions": {
+    "requiredItems": [{ "itemId": "steel_plates", "minQuantity": 3 }]
+  },
+  "narrative": [
+    "你把三张加厚铁板压在门内侧，用铁丝和铁链一圈圈绞紧。每收紧一寸，门板就发出一声低沉的呻吟。",
+    "第一下撞击来得比你想象中更重。门框震得墙皮簌簌落下，但铁板没有松。第二下，第三下，外面的东西开始用指甲刮门。",
+    "你坐在地上，背靠着冰冷的铁板。这里暂时还像一个家，只是门外的人声正在一点点变少。"
+  ],
+  "choices": [
+    {
+      "id": "scene_005_fortified_choice_a",
+      "text": "守住出租屋，把这里变成第一个据点。",
+      "conditions": {},
+      "effects": {
+        "flags": {
+          "door_fortified": true,
+          "has_home_base": true
+        },
+        "stats": {
+          "morale": 2,
+          "trust": -1
+        },
+        "items": [
+          { "itemId": "steel_plates", "delta": -3 },
+          { "itemId": "modified_grinder", "delta": 1 }
+        ]
+      },
+      "nextSceneId": "scene_006"
+    }
+  ]
+}

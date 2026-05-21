@@ -1,0 +1,55 @@
+{
+  "id": "scene_007",
+  "title": "便利店卷帘门",
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 12 },
+  "conditions": {},
+  "narrative": [
+    "中午前，太阳把街上的血迹晒成暗褐色。便利店的卷帘门卡在半人高的位置，里面的冷柜还亮着，但制冷机已经停止运转。",
+    "货架之间有窸窣声。也许是老鼠，也许是人，也许是昨晚之后已经不能再叫人的东西。",
+    "你需要水、食物和药。你也需要决定，接下来是一个人活下去，还是冒险相信别人。"
+  ],
+  "choices": [
+    {
+      "id": "scene_007_choice_a",
+      "text": "【搜刮】压低身体钻进去，只拿最轻的食物和药品。",
+      "conditions": {},
+      "effects": {
+        "items": [
+          { "itemId": "canned_food", "delta": 2 },
+          { "itemId": "medkit", "delta": 1 }
+        ],
+        "stats": { "stealth": 1 }
+      },
+      "nextSceneId": "scene_008"
+    },
+    {
+      "id": "scene_007_choice_b",
+      "text": "【交换】把一罐食物递给躲在柜台后的孩子，让他别出声。",
+      "conditions": {
+        "requiredItems": [{ "itemId": "canned_food", "minQuantity": 1 }]
+      },
+      "hint": "需要 罐头 x1",
+      "effects": {
+        "flags": { "helped_the_kid": true },
+        "items": [{ "itemId": "canned_food", "delta": -1 }],
+        "stats": { "trust": 2, "morale": 1 }
+      },
+      "nextSceneId": "scene_008"
+    },
+    {
+      "id": "scene_007_choice_c",
+      "text": "【工具】用宽胶带封住破裂的后门，减少里面的气味外泄。",
+      "conditions": {
+        "requiredItems": [{ "itemId": "wide_tape", "minQuantity": 1 }]
+      },
+      "hint": "需要 灰色宽胶带 x1",
+      "effects": {
+        "flags": { "sealed_store_door": true },
+        "items": [{ "itemId": "wide_tape", "delta": -1 }],
+        "stats": { "stealth": 1 }
+      },
+      "nextSceneId": "scene_008"
+    }
+  ]
+}

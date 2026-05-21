@@ -238,7 +238,7 @@ Scene A → Scene B → Scene A creates an infinite loop. The engine won't detec
 
 ### 3. Orphaned scenes
 
-A scene with no `nextSceneId` pointing to it will never be reached. Run `validate-scenes.ts` periodically to catch these.
+A scene with no `nextSceneId` pointing to it will never be reached. Run `pnpm run validate-scenes` periodically to catch these.
 
 ### 4. Flags that never get set
 
@@ -294,4 +294,4 @@ Before committing a new scene:
 - [ ] All `nextSceneId` values point to scenes that exist (or will exist in this phase)
 - [ ] No `nextSceneId` creates a loop back to this scene
 - [ ] Any `hint` is written in the format: `"Requires [Stat] [N]+"`
-- [ ] Scene passes `npx ts-node scripts/validate-scenes.ts`
+- [ ] Scene passes `pnpm run validate-scenes`

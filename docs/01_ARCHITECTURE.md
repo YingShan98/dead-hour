@@ -90,7 +90,7 @@ dead-hour/
 │   └── components/
 │
 ├── scripts/
-│   └── validate-scenes.ts    # CLI tool to validate all JSON scene files
+│   └── validate-scenes.mjs   # CLI tool to validate all JSON scene files
 │
 ├── vite.config.ts
 ├── tsconfig.json
