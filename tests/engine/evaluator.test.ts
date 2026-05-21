@@ -37,23 +37,33 @@ describe('evaluate()', () => {
   })
 
   it('passes when all required flags are present', () => {
-    const state = mockState({ flags: { met_doctor: true, saw_video: true } })
-    expect(evaluate({ requiredFlags: ['met_doctor', 'saw_video'] }, state)).toBe(true)
+    const state = mockState({ flags: { npc_met_doctor: true, info_searched_details: true } })
+    expect(evaluate({ requiredFlags: ['npc_met_doctor', 'info_searched_details'] }, state)).toBe(true)
   })
 
   it('fails when a required flag is missing', () => {
-    const state = mockState({ flags: { met_doctor: true } })
-    expect(evaluate({ requiredFlags: ['met_doctor', 'saw_video'] }, state)).toBe(false)
+    const state = mockState({ flags: { npc_met_doctor: true } })
+    expect(evaluate({ requiredFlags: ['npc_met_doctor', 'info_searched_details'] }, state)).toBe(false)
+  })
+
+  it('fails when a required flag is explicitly false', () => {
+    const state = mockState({ flags: { npc_met_doctor: false } })
+    expect(evaluate({ requiredFlags: ['npc_met_doctor'] }, state)).toBe(false)
   })
 
   it('passes when no blocked flags are set', () => {
     const state = mockState({ flags: {} })
-    expect(evaluate({ blockedFlags: ['betrayed_militia'] }, state)).toBe(true)
+    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(true)
+  })
+
+  it('passes when a blocked flag is explicitly false', () => {
+    const state = mockState({ flags: { faction_betrayed_militia: false } })
+    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(true)
   })
 
   it('fails when a blocked flag is set to true', () => {
-    const state = mockState({ flags: { betrayed_militia: true } })
-    expect(evaluate({ blockedFlags: ['betrayed_militia'] }, state)).toBe(false)
+    const state = mockState({ flags: { faction_betrayed_militia: true } })
+    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(false)
   })
 
   it('passes stat minimum check', () => {

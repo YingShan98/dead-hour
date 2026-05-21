@@ -15,7 +15,7 @@
       "text": "暂时停在这里，等待后续章节。",
       "conditions": {},
       "effects": {
-        "flags": { "act2_draft_frontier": true }
+        "flags": { "draft_act2_frontier": true }
       },
       "nextSceneId": "scene_009"
     }

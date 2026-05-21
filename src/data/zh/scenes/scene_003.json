@@ -15,7 +15,7 @@
       "text": "【强力防御】买下三张铁板和两卷宽胶带，并提醒老板多囤点货。",
       "conditions": {},
       "effects": {
-        "flags": { "bought_plates": true, "warned_neighbor": true },
+        "flags": { "prep_bought_plates": true, "social_warned_neighbor": true },
         "stats": { "leadership": 1 },
         "items": [
           { "itemId": "steel_plates", "delta": 3 },
@@ -29,7 +29,7 @@
       "text": "【陷阱策略】放弃铁板，购买细铁丝网和工业强力胶准备封锁走廊。",
       "conditions": {},
       "effects": {
-        "flags": { "trap_strategy": true },
+        "flags": { "prep_trap_strategy": true },
         "stats": { "stealth": 1 },
         "items": [
           { "itemId": "iron_wire", "delta": 3 },
@@ -43,7 +43,7 @@
       "text": "【情报优先】不买重物，留在早餐店向大叔打听‘咬人’事件的具体位置。",
       "conditions": {},
       "effects": {
-        "flags": { "knows_details": true },
+        "flags": { "info_knows_details": true },
         "stats": { "leadership": 1, "morale": -1 }
       },
       "nextSceneId": "scene_004"

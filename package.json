@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite",
     "i18n": "typesafe-i18n",
+    "sync-flags": "node scripts/sync-flags.mjs",
+    "gen-flags": "node scripts/gen-flag-types.mjs",
+    "flags": "pnpm sync-flags && pnpm gen-flags",
+    "prebuild": "pnpm flags && pnpm validate-scenes",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",

@@ -18,8 +18,8 @@
       "conditions": {},
       "effects": {
         "flags": {
-          "door_fortified": true,
-          "has_home_base": true
+          "prep_door_fortified": true,
+          "shelter_has_home_base": true
         },
         "stats": {
           "morale": 2,

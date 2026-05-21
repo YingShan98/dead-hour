@@ -44,11 +44,11 @@ describe('checkForEnding()', () => {
 
   it('returns the first matching ending by ascending priority', () => {
     const endings = [
-      ending({ id: 'ending_good', priority: 20, conditions: { requiredFlags: ['done'] } }),
-      ending({ id: 'ending_bad', priority: 1, conditions: { requiredFlags: ['done'] } }),
+      ending({ id: 'ending_good', priority: 20, conditions: { requiredFlags: ['ending_survived_one_year'] } }),
+      ending({ id: 'ending_bad', priority: 1, conditions: { requiredFlags: ['ending_survived_one_year'] } }),
     ]
 
-    const result = checkForEnding(endings, mockState({ flags: { done: true } }))
+    const result = checkForEnding(endings, mockState({ flags: { ending_survived_one_year: true } }))
 
     expect(result?.id).toBe('ending_bad')
   })

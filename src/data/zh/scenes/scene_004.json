@@ -15,7 +15,7 @@
       "text": "【备战】既然断网了，就把家里所有的充电设备充满电。",
       "conditions": {},
       "effects": {
-        "flags": { "energy_prepared": true, "pei_warning_received": true },
+        "flags": { "resource_energy_prepared": true, "npc_pei_warning_received": true },
         "stats": { "morale": 1 }
       },
       "nextSceneId": "scene_005"
@@ -25,7 +25,7 @@
       "text": "【盘点】清点剩下的水和饼干，确保每一份物资都精准计算。",
       "conditions": {},
       "effects": {
-        "flags": { "resource_check": true, "pei_warning_received": true },
+        "flags": { "resource_check": true, "npc_pei_warning_received": true },
         "items": [{ "itemId": "canned_food", "delta": 1 }]
       },
       "nextSceneId": "scene_005"
@@ -35,7 +35,7 @@
       "text": "【邻里】敲开隔壁的门，提醒他们把门窗堵死。",
       "conditions": {},
       "effects": {
-        "flags": { "warned_neighbors": true, "pei_warning_received": true },
+        "flags": { "social_warned_neighbors": true, "npc_pei_warning_received": true },
         "stats": { "trust": 1, "leadership": 1, "morale": -1 }
       },
       "nextSceneId": "scene_005"

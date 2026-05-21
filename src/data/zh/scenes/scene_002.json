@@ -16,7 +16,7 @@
       "conditions": {},
       "effects": {
         "stats": { "health": 1, "morale": -2 },
-        "flags": { "disinfected_wound": true, "has_first_aid_training": true }
+        "flags": { "medical_disinfected_wound": true, "medical_has_first_aid_training": true }
       },
       "nextSceneId": "scene_003"
     },
@@ -25,7 +25,7 @@
       "text": "【生存】不去管它。趁着还有网络，仔细查阅这些失踪案发生的具体位置。",
       "conditions": {},
       "effects": {
-        "flags": { "searched_details": true },
+        "flags": { "info_searched_details": true },
         "stats": { "morale": -1 }
       },
       "nextSceneId": "scene_003"

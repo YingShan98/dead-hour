@@ -37,7 +37,7 @@
       "id": "scene_005_choice_c",
       "text": "【提前撤离】根据打听来的位置，趁楼道还没堵死时离开。",
       "conditions": {
-        "requiredFlags": ["knows_details"]
+        "requiredFlags": ["info_knows_details"]
       },
       "hint": "需要 事件位置线索",
       "effects": {},
@@ -47,7 +47,7 @@
       "id": "scene_005_choice_d",
       "text": "【提前撤离】根据查到的失踪案位置，避开最危险的街区。",
       "conditions": {
-        "requiredFlags": ["searched_details"]
+        "requiredFlags": ["info_searched_details"]
       },
       "hint": "需要 失踪案资料",
       "effects": {},

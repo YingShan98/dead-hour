@@ -14,11 +14,11 @@
       "id": "scene_006_choice_a",
       "text": "【固守】先检查住处和楼道，把这里当成临时据点。",
       "conditions": {
-        "requiredFlags": ["has_home_base"]
+        "requiredFlags": ["shelter_has_home_base"]
       },
       "hint": "需要 临时据点",
       "effects": {
-        "flags": { "stayed_in_city": true },
+        "flags": { "act2_stayed_in_city": true },
         "stats": { "morale": 1 }
       },
       "nextSceneId": "scene_007"
@@ -28,7 +28,7 @@
       "text": "【潜行】避开主街，先去附近便利店找水和药。",
       "conditions": {},
       "effects": {
-        "flags": { "started_scavenging": true },
+        "flags": { "act2_started_scavenging": true },
         "stats": { "stealth": 1 }
       },
       "nextSceneId": "scene_007"
@@ -37,11 +37,11 @@
       "id": "scene_006_choice_c",
       "text": "【邻里】查看昨晚被你提醒过的邻居是否还活着。",
       "conditions": {
-        "requiredFlags": ["warned_neighbors"]
+        "requiredFlags": ["social_warned_neighbors"]
       },
       "hint": "需要 已提醒邻居",
       "effects": {
-        "flags": { "checked_on_neighbors": true },
+        "flags": { "social_checked_on_neighbors": true },
         "stats": { "trust": 1, "leadership": 1 }
       },
       "nextSceneId": "scene_007"
@@ -50,11 +50,11 @@
       "id": "scene_006_choice_d",
       "text": "【撤离】按记住的路线离开小区，避开老医院方向。",
       "conditions": {
-        "requiredFlags": ["knows_city_layout"]
+        "requiredFlags": ["info_knows_city_layout"]
       },
       "hint": "需要 城市路线记忆",
       "effects": {
-        "flags": { "fled_toward_suburbs": true },
+        "flags": { "act2_fled_toward_suburbs": true },
         "stats": { "stealth": 1, "morale": -1 }
       },
       "nextSceneId": "scene_007"

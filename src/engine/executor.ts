@@ -1,13 +1,9 @@
 import type { EffectSet, GameState, StatKey } from './types'
+import statsData from '@/data/zh/stats.json'
 
-// Stat boundaries — kept in sync with stats.json
-const STAT_BOUNDS: Record<StatKey, { min: number; max: number }> = {
-  health: { min: 0, max: 20 },
-  morale: { min: 0, max: 20 },
-  leadership: { min: 0, max: 20 },
-  stealth: { min: 0, max: 20 },
-  trust: { min: 0, max: 20 },
-}
+const STAT_BOUNDS = Object.fromEntries(
+  statsData.stats.map((s) => [s.key, { min: s.min, max: s.max }]),
+) as Record<StatKey, { min: number; max: number }>
 
 /**
  * Applies an EffectSet to the current state and returns a NEW state object.

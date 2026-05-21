@@ -15,7 +15,7 @@
       "text": "【情报】询问报刊亭老板最近是否听说过相关的传闻。",
       "conditions": {},
       "effects": {
-        "flags": { "noticed_clues": true },
+        "flags": { "act1_noticed_clues": true },
         "stats": { "leadership": 1, "morale": -1 }
       },
       "nextSceneId": "scene_002"
@@ -25,7 +25,7 @@
       "text": "【日常】不关你的事。把报纸折好塞进工具箱，回家。",
       "conditions": {},
       "effects": {
-        "flags": { "ignored_clues": true },
+        "flags": { "act1_ignored_clues": true },
         "stats": { "morale": 0 }
       },
       "nextSceneId": "scene_002"

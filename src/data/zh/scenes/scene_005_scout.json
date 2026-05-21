@@ -16,9 +16,9 @@
       "conditions": {},
       "effects": {
         "flags": {
-          "left_home_early": true,
-          "knows_infected_pattern": true,
-          "knows_city_layout": true
+          "mobility_left_home_early": true,
+          "info_knows_infected_pattern": true,
+          "info_knows_city_layout": true
         },
         "stats": {
           "stealth": 1,

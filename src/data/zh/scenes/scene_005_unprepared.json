@@ -16,7 +16,7 @@
       "conditions": {},
       "effects": {
         "flags": {
-          "weak_defense": true
+          "prep_weak_defense": true
         },
         "stats": {
           "health": -1,

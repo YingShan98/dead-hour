@@ -35,8 +35,8 @@
       "type": "neutral",
       "priority": 10,
       "conditions": {
-        "requiredFlags": ["survived_one_year"],
-        "blockedFlags": ["has_group"],
+        "requiredFlags": ["ending_survived_one_year"],
+        "blockedFlags": ["faction_has_group"],
         "requiredStats": [{ "stat": "health", "min": 1 }]
       },
       "narrative": [
@@ -52,7 +52,7 @@
       "type": "good",
       "priority": 20,
       "conditions": {
-        "requiredFlags": ["survived_one_year", "has_group", "built_shelter"],
+        "requiredFlags": ["ending_survived_one_year", "faction_has_group", "ending_built_shelter"],
         "requiredStats": [
           { "stat": "leadership", "min": 15 },
           { "stat": "trust", "min": 12 }

@@ -1,3 +1,7 @@
+import type { KnownFlag } from './flagKeys'
+
+export type { KnownFlag }
+
 // ─── Stat Keys ───────────────────────────────────────────────────────────────
 
 export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust'
@@ -49,8 +53,8 @@ export interface ItemCondition {
 }
 
 export interface ConditionSet {
-  requiredFlags?: string[]
-  blockedFlags?: string[]
+  requiredFlags?: KnownFlag[]
+  blockedFlags?: KnownFlag[]
   requiredStats?: StatCondition[]
   requiredItems?: ItemCondition[]
 }
@@ -61,7 +65,7 @@ export interface ItemEffect {
 }
 
 export interface EffectSet {
-  flags?: Record<string, boolean>
+  flags?: Partial<Record<KnownFlag, boolean>>
   stats?: Partial<Record<StatKey, number>> // delta values
   items?: ItemEffect[]
 }
@@ -120,7 +124,7 @@ export interface GameState {
   gameTime: GameTime
   stats: PlayerStats
   inventory: InventoryItem[]
-  flags: Record<string, boolean>
+  flags: Partial<Record<KnownFlag, boolean>>
   visitedScenes: string[]
   choiceHistory: ChoiceRecord[]
   saveSlot: number

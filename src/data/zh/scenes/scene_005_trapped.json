@@ -21,8 +21,8 @@
       "conditions": {},
       "effects": {
         "flags": {
-          "hallway_trapped": true,
-          "made_noise_at_hour_zero": true
+          "prep_hallway_trapped": true,
+          "risk_made_noise_at_hour_zero": true
         },
         "stats": {
           "stealth": 2,

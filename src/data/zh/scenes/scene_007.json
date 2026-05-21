@@ -31,7 +31,7 @@
       },
       "hint": "需要 罐头 x1",
       "effects": {
-        "flags": { "helped_the_kid": true },
+        "flags": { "npc_helped_the_kid": true },
         "items": [{ "itemId": "canned_food", "delta": -1 }],
         "stats": { "trust": 2, "morale": 1 }
       },
@@ -45,7 +45,7 @@
       },
       "hint": "需要 灰色宽胶带 x1",
       "effects": {
-        "flags": { "sealed_store_door": true },
+        "flags": { "stealth_sealed_store_door": true },
         "items": [{ "itemId": "wide_tape", "delta": -1 }],
         "stats": { "stealth": 1 }
       },
