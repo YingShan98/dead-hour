@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import type { GameState, Scene, Ending } from '@/engine/types'
+import type { GameState, Scene, Ending, ItemDefinition } from '@/engine/types'
 import { applyEffects } from '@/engine/executor'
 import { getAvailableChoices } from '@/engine/evaluator'
-import { loadScene, loadEndings } from '@/engine/loader'
+import { loadScene, loadEndings, loadItems } from '@/engine/loader'
 import { checkForEnding } from '@/engine/endingEvaluator'
 import { saveGame, loadGame } from '@/engine/saveManager'
 import { DEFAULT_GAME_STATE } from '@/engine/defaults'
@@ -12,6 +12,7 @@ interface GameStore {
   gameState: GameState
   currentScene: Scene | null
   availableEndings: Ending[]
+  itemDefinitions: ItemDefinition[]
   triggeredEnding: Ending | null
   isLoading: boolean
   error: string | null
@@ -27,6 +28,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   gameState: DEFAULT_GAME_STATE,
   currentScene: null,
   availableEndings: [],
+  itemDefinitions: [],
   triggeredEnding: null,
   isLoading: false,
   error: null,
@@ -35,7 +37,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   startNewGame: async (saveSlot = 0) => {
     set({ isLoading: true, error: null })
     try {
-      const [firstScene, endings] = await Promise.all([loadScene('scene_001'), loadEndings()])
+      const [firstScene, endings, items] = await Promise.all([loadScene('scene_001'), loadEndings(), loadItems()])
 
       const freshState: GameState = {
         ...DEFAULT_GAME_STATE,
@@ -56,6 +58,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         gameState: stateAfterEntry,
         currentScene: firstScene,
         availableEndings: endings,
+        itemDefinitions: items,
         triggeredEnding: null,
         isLoading: false,
       })
@@ -134,12 +137,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const saved = loadGame(slot)
       if (!saved) throw new Error(`No save data found in slot ${slot}`)
 
-      const [scene, endings] = await Promise.all([loadScene(saved.currentSceneId), loadEndings()])
+      const [scene, endings, items] = await Promise.all([loadScene(saved.currentSceneId), loadEndings(), loadItems()])
 
       set({
         gameState: saved,
         currentScene: scene,
         availableEndings: endings,
+        itemDefinitions: items,
         triggeredEnding: null,
         isLoading: false,
       })

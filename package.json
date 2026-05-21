@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "i18n": "typesafe-i18n",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -23,6 +24,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.1",
+    "typesafe-i18n": "^5.27.1",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

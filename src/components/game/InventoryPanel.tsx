@@ -1,28 +1,31 @@
+import { useGameStore } from '@/store/gameStore'
+import { useI18nContext } from '@/i18n/i18n-react'
 import type { InventoryItem } from '@/engine/types'
-import itemsData from '@/data/items.json'
-
-const ITEM_MAP = Object.fromEntries(itemsData.items.map((item) => [item.id, item]))
 
 interface Props {
   inventory: InventoryItem[]
 }
 
 export default function InventoryPanel({ inventory }: Props) {
+  const { LL } = useI18nContext()
+  const itemDefinitions = useGameStore((s) => s.itemDefinitions)
+  const itemMap = Object.fromEntries(itemDefinitions.map((item) => [item.id, item]))
+
   if (inventory.length === 0) {
     return (
       <div className="flex flex-col gap-3">
-        <p className="ui-label text-muted">Inventory</p>
-        <p className="font-body text-text-dim text-sm italic">Nothing carried.</p>
+        <p className="ui-label text-muted">{LL.inventoryLabel()}</p>
+        <p className="font-body text-text-dim text-sm italic">{LL.nothingCarried()}</p>
       </div>
     )
   }
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="ui-label text-muted">Inventory</p>
+      <p className="ui-label text-muted">{LL.inventoryLabel()}</p>
       <div className="flex flex-col gap-1.5">
         {inventory.map(({ itemId, quantity }) => {
-          const def = ITEM_MAP[itemId]
+          const def = itemMap[itemId]
           if (!def) return null
           return (
             <div

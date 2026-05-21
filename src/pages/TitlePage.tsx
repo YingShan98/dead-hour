@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
 import { listSaves } from '@/engine/saveManager'
+import { useI18nContext } from '@/i18n/i18n-react'
 
 export default function TitlePage() {
   const navigate = useNavigate()
   const { startNewGame, loadFromSave, isLoading } = useGameStore()
+  const { LL } = useI18nContext()
 
   const saves = listSaves()
   const hasSave = saves.some((s) => s.exists)
@@ -36,12 +38,10 @@ export default function TitlePage() {
       <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
         {/* Title block */}
         <div className="text-center">
-          <p className="ui-label text-muted mb-4 tracking-[0.3em]">— a word adventure —</p>
+          <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.tagline()}</p>
           <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
           <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
-          <p className="mt-6 font-body text-text-dim text-lg italic">
-            48 hours before everything changed.
-          </p>
+          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.gameSubtitle()}</p>
         </div>
 
         {/* Menu */}
@@ -52,7 +52,7 @@ export default function TitlePage() {
             className="choice-btn text-center font-display text-xl tracking-wide py-4
                        border-accent text-accent hover:bg-[#1e0a0a]"
           >
-            {isLoading ? 'Loading...' : 'New Game'}
+            {isLoading ? LL.loading() : LL.newGame()}
           </button>
 
           {hasSave && (
@@ -61,13 +61,13 @@ export default function TitlePage() {
               disabled={isLoading}
               className="choice-btn text-center"
             >
-              Continue
+              {LL.continue()}
             </button>
           )}
         </div>
 
         {/* Footer */}
-        <p className="ui-label text-muted text-xs">v0.1.0 — solo project</p>
+        <p className="ui-label text-muted text-xs">{LL.versionLabel()}</p>
       </div>
     </div>
   )

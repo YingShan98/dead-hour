@@ -1,20 +1,22 @@
 import type { Scene } from '@/engine/types'
+import { useI18nContext } from '@/i18n/i18n-react'
 
 interface Props {
   scene: Scene
 }
 
-function formatGameTime(hoursFromStart: number): string {
-  if (hoursFromStart < 0) {
-    const abs = Math.abs(hoursFromStart)
-    return `T-${abs}h — Before the Outbreak`
-  }
-  const days = Math.floor(hoursFromStart / 24)
-  if (days === 0) return 'Day 1 — Hour Zero'
-  return `Day ${days}`
-}
-
 export default function SceneDisplay({ scene }: Props) {
+  const { LL } = useI18nContext()
+
+  function formatGameTime(hoursFromStart: number): string {
+    if (hoursFromStart < 0) {
+      return LL.timeBeforeOutbreak({ hours: Math.abs(hoursFromStart) })
+    }
+    const days = Math.floor(hoursFromStart / 24)
+    if (days === 0) return LL.timeHourZero()
+    return LL.timeDay({ days })
+  }
+
   return (
     <div className="animate-fade-in">
       {/* Time indicator */}
