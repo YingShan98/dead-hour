@@ -18,9 +18,7 @@ export default function SceneDisplay({ scene }: Props) {
   return (
     <div className="animate-fade-in">
       {/* Time indicator */}
-      <p className="ui-label text-muted mb-3">
-        {formatGameTime(scene.gameTime.hoursFromStart)}
-      </p>
+      <p className="ui-label text-muted mb-3">{formatGameTime(scene.gameTime.hoursFromStart)}</p>
 
       {/* Scene title */}
       <h2 className="scene-title mb-6">{scene.title}</h2>

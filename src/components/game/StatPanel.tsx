@@ -7,10 +7,10 @@ const VISIBLE_STATS: Array<{
   max: number
   colour: string
 }> = [
-  { key: 'health',     label: 'Health',     icon: '❤',  max: 20, colour: '#b03030' },
-  { key: 'morale',     label: 'Morale',     icon: '◈',  max: 20, colour: '#b08030' },
-  { key: 'leadership', label: 'Leadership', icon: '▲',  max: 20, colour: '#4a7c5f' },
-  { key: 'stealth',    label: 'Stealth',    icon: '◉',  max: 20, colour: '#4a6a8b' },
+  { key: 'health', label: 'Health', icon: '❤', max: 20, colour: '#b03030' },
+  { key: 'morale', label: 'Morale', icon: '◈', max: 20, colour: '#b08030' },
+  { key: 'leadership', label: 'Leadership', icon: '▲', max: 20, colour: '#4a7c5f' },
+  { key: 'stealth', label: 'Stealth', icon: '◉', max: 20, colour: '#4a6a8b' },
 ]
 
 interface Props {
@@ -32,10 +32,7 @@ export default function StatPanel({ stats }: Props) {
               <span className="font-ui text-xs text-text-dim">
                 {icon} {label}
               </span>
-              <span
-                className="font-ui text-xs"
-                style={{ color: isLow ? '#b03030' : '#7a7a6a' }}
-              >
+              <span className="font-ui text-xs" style={{ color: isLow ? '#b03030' : '#7a7a6a' }}>
                 {value}/{max}
               </span>
             </div>

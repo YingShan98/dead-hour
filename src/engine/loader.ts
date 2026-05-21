@@ -2,12 +2,7 @@ import type { Scene, Ending } from './types'
 
 const sceneCache = new Map<string, Scene>()
 
-const ACT_FOLDERS = [
-  'act1_hour-48',
-  'act2_outbreak',
-  'act3_survival',
-  'act4_year-mark',
-] as const
+const ACT_FOLDERS = ['act1_hour-48', 'act2_outbreak', 'act3_survival', 'act4_year-mark'] as const
 
 /**
  * Loads a scene by ID. Results are cached after first load.
@@ -31,7 +26,9 @@ export async function loadScene(sceneId: string): Promise<Scene> {
     }
   }
 
-  throw new Error(`[loader] Scene not found: "${sceneId}". Check that the JSON file exists and the id matches.`)
+  throw new Error(
+    `[loader] Scene not found: "${sceneId}". Check that the JSON file exists and the id matches.`,
+  )
 }
 
 /**

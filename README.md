@@ -28,16 +28,16 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 
 ## Tech Stack
 
-| Concern | Choice |
-|---------|--------|
-| Framework | React 18 + TypeScript |
-| Build tool | Vite |
-| State management | Zustand |
-| Styling | Tailwind CSS |
-| Routing | React Router v6 |
-| Testing | Vitest + React Testing Library |
-| Story content | JSON (data-driven, no CMS) |
-| Persistence | localStorage |
+| Concern          | Choice                         |
+| ---------------- | ------------------------------ |
+| Framework        | React 18 + TypeScript          |
+| Build tool       | Vite                           |
+| State management | Zustand                        |
+| Styling          | Tailwind CSS                   |
+| Routing          | React Router v6                |
+| Testing          | Vitest + React Testing Library |
+| Story content    | JSON (data-driven, no CMS)     |
+| Persistence      | localStorage                   |
 
 ---
 
@@ -116,12 +116,12 @@ src/
 
 ## Story Overview
 
-| Act | In-Game Time | Description |
-|-----|-------------|-------------|
-| Act 1: The Warning | Hour −48 to Hour 0 | Life before the outbreak |
-| Act 2: The Fall | Day 1–30 | The city collapses |
-| Act 3: The Long Winter | Day 31–180 | Factions, scarcity, identity |
-| Act 4: The Year Mark | Day 181–365 | Convergence and endings |
+| Act                    | In-Game Time       | Description                  |
+| ---------------------- | ------------------ | ---------------------------- |
+| Act 1: The Warning     | Hour −48 to Hour 0 | Life before the outbreak     |
+| Act 2: The Fall        | Day 1–30           | The city collapses           |
+| Act 3: The Long Winter | Day 31–180         | Factions, scarcity, identity |
+| Act 4: The Year Mark   | Day 181–365        | Convergence and endings      |
 
 A single playthrough covers roughly 40–60 scenes out of 120–150 total. No two runs are the same.
 
@@ -164,29 +164,29 @@ See [`docs/06_CONTENT_AUTHORING_GUIDE.md`](docs/06_CONTENT_AUTHORING_GUIDE.md) f
 
 Full project documentation lives in `/docs`:
 
-| File | Contents |
-|------|----------|
-| `00_PROJECT_OVERVIEW.md` | Goals, game loop, scope |
-| `01_ARCHITECTURE.md` | Folder structure, layer design, state shape |
-| `02_DATA_MODEL.md` | JSON schemas + TypeScript interfaces |
-| `03_GAME_ENGINE_SPEC.md` | Engine implementation reference |
-| `04_STORY_STRUCTURE.md` | Acts, branches, endings, NPC roster |
-| `05_DEVELOPMENT_ROADMAP.md` | Phased plan, milestones, task checklists |
-| `06_CONTENT_AUTHORING_GUIDE.md` | How to write scenes in JSON |
+| File                            | Contents                                    |
+| ------------------------------- | ------------------------------------------- |
+| `00_PROJECT_OVERVIEW.md`        | Goals, game loop, scope                     |
+| `01_ARCHITECTURE.md`            | Folder structure, layer design, state shape |
+| `02_DATA_MODEL.md`              | JSON schemas + TypeScript interfaces        |
+| `03_GAME_ENGINE_SPEC.md`        | Engine implementation reference             |
+| `04_STORY_STRUCTURE.md`         | Acts, branches, endings, NPC roster         |
+| `05_DEVELOPMENT_ROADMAP.md`     | Phased plan, milestones, task checklists    |
+| `06_CONTENT_AUTHORING_GUIDE.md` | How to write scenes in JSON                 |
 
 ---
 
 ## Development Status
 
-| Phase | Status |
-|-------|--------|
-| Phase 0 — Project setup | ⬜ Not started |
-| Phase 1 — Engine core | ⬜ Not started |
-| Phase 2 — Act 1 playable | ⬜ Not started |
+| Phase                       | Status         |
+| --------------------------- | -------------- |
+| Phase 0 — Project setup     | ⬜ Not started |
+| Phase 1 — Engine core       | ⬜ Not started |
+| Phase 2 — Act 1 playable    | ⬜ Not started |
 | Phase 3 — Act 2 + branching | ⬜ Not started |
-| Phase 4 — Act 3 + factions | ⬜ Not started |
-| Phase 5 — Act 4 + endings | ⬜ Not started |
-| Phase 6 — Polish + release | ⬜ Not started |
+| Phase 4 — Act 3 + factions  | ⬜ Not started |
+| Phase 5 — Act 4 + endings   | ⬜ Not started |
+| Phase 6 — Polish + release  | ⬜ Not started |
 
 ---
 

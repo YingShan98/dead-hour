@@ -1,4 +1,5 @@
 # 02 — Data Model
+
 ### Dead Hour | Schema Reference
 
 All story content is stored as JSON. This document defines the exact shape of every data structure — both the JSON files and their corresponding TypeScript interfaces.
@@ -89,67 +90,67 @@ A **scene** is a single narrative moment — a location, a conversation, a crisi
 // src/engine/types.ts
 
 export interface Scene {
-  id: string;
-  title: string;
-  act: Act;
-  gameTime: { hoursFromStart: number };
+  id: string
+  title: string
+  act: Act
+  gameTime: { hoursFromStart: number }
 
   // Array of paragraphs — rendered sequentially
-  narrative: string[];
+  narrative: string[]
 
   // Conditions the player must meet to even enter this scene
-  conditions: ConditionSet;
+  conditions: ConditionSet
 
-  choices: Choice[];
+  choices: Choice[]
 
   // Effects applied automatically when entering the scene (no choice required)
-  onEnter?: EffectSet;
+  onEnter?: EffectSet
 }
 
 export interface Choice {
-  id: string;
-  text: string;
+  id: string
+  text: string
 
   // Conditions the player must meet for this choice to appear
-  conditions: ConditionSet;
+  conditions: ConditionSet
 
   // What happens when this choice is selected
-  effects: EffectSet;
+  effects: EffectSet
 
   // Where this choice leads
-  nextSceneId: string;
+  nextSceneId: string
 
   // Optional: flavour hint shown before committing (e.g. "Requires Morale 5+")
-  hint?: string;
+  hint?: string
 }
 
 export interface ConditionSet {
-  requiredFlags?: string[];
-  blockedFlags?: string[];
-  requiredStats?: StatCondition[];
-  requiredItems?: ItemCondition[];
+  requiredFlags?: string[]
+  blockedFlags?: string[]
+  requiredStats?: StatCondition[]
+  requiredItems?: ItemCondition[]
 }
 
 export interface StatCondition {
-  stat: StatKey;
-  min?: number;
-  max?: number;
+  stat: StatKey
+  min?: number
+  max?: number
 }
 
 export interface ItemCondition {
-  itemId: string;
-  minQuantity?: number;
+  itemId: string
+  minQuantity?: number
 }
 
 export interface EffectSet {
-  flags?: Record<string, boolean>;
-  stats?: Partial<Record<StatKey, number>>;   // delta values (positive or negative)
-  items?: ItemEffect[];
+  flags?: Record<string, boolean>
+  stats?: Partial<Record<StatKey, number>> // delta values (positive or negative)
+  items?: ItemEffect[]
 }
 
 export interface ItemEffect {
-  itemId: string;
-  delta: number;   // positive = gain, negative = consume
+  itemId: string
+  delta: number // positive = gain, negative = consume
 }
 ```
 
@@ -221,20 +222,20 @@ Defines all stats, their starting values, valid range, and display labels.
 ### TypeScript Interface
 
 ```typescript
-export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust';
+export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust'
 
 export interface StatDefinition {
-  key: StatKey;
-  label: string;
-  description: string;
-  icon: string;
-  default: number;
-  min: number;
-  max: number;
-  visible: boolean;    // whether to show in UI
+  key: StatKey
+  label: string
+  description: string
+  icon: string
+  default: number
+  min: number
+  max: number
+  visible: boolean // whether to show in UI
 }
 
-export type PlayerStats = Record<StatKey, number>;
+export type PlayerStats = Record<StatKey, number>
 ```
 
 ---
@@ -296,19 +297,19 @@ Master registry of all items that can exist in the game.
 
 ```typescript
 export interface ItemDefinition {
-  id: string;
-  label: string;
-  description: string;
-  category: 'medical' | 'food' | 'tool' | 'weapon' | 'misc';
-  stackable: boolean;
-  maxStack: number;
-  usable: boolean;
-  useEffect: EffectSet | null;
+  id: string
+  label: string
+  description: string
+  category: 'medical' | 'food' | 'tool' | 'weapon' | 'misc'
+  stackable: boolean
+  maxStack: number
+  usable: boolean
+  useEffect: EffectSet | null
 }
 
 export interface InventoryItem {
-  itemId: string;
-  quantity: number;
+  itemId: string
+  quantity: number
 }
 ```
 
@@ -380,13 +381,13 @@ Each ending has a set of conditions that trigger it. Endings are evaluated **aft
 
 ```typescript
 export interface Ending {
-  id: string;
-  title: string;
-  type: 'bad' | 'neutral' | 'good' | 'secret';
-  priority: number;     // Higher = checked last; good endings should have higher priority
-  conditions: ConditionSet;
-  narrative: string[];
-  epilogue: string | null;
+  id: string
+  title: string
+  type: 'bad' | 'neutral' | 'good' | 'secret'
+  priority: number // Higher = checked last; good endings should have higher priority
+  conditions: ConditionSet
+  narrative: string[]
+  epilogue: string | null
 }
 ```
 
@@ -396,13 +397,13 @@ export interface Ending {
 
 Flags are `string → boolean` values stored in game state. Naming convention:
 
-| Pattern | Example |
-|---------|---------|
-| `met_{npc}` | `met_doctor`, `met_militia_leader` |
-| `did_{action}` | `did_warn_neighbors`, `did_steal_supplies` |
-| `has_{thing}` | `has_group`, `has_shelter` |
-| `chose_{path}` | `chose_to_stay`, `chose_to_flee` |
+| Pattern                | Example                                      |
+| ---------------------- | -------------------------------------------- |
+| `met_{npc}`            | `met_doctor`, `met_militia_leader`           |
+| `did_{action}`         | `did_warn_neighbors`, `did_steal_supplies`   |
+| `has_{thing}`          | `has_group`, `has_shelter`                   |
+| `chose_{path}`         | `chose_to_stay`, `chose_to_flee`             |
 | `survived_{milestone}` | `survived_one_year`, `survived_first_winter` |
-| `betrayed_{npc}` | `betrayed_militia` |
+| `betrayed_{npc}`       | `betrayed_militia`                           |
 
 Flags are **permanent within a playthrough** — once set to `true`, they don't revert (unless a later scene explicitly sets them to `false`, which should be used sparingly).

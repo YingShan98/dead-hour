@@ -1,4 +1,5 @@
 # 05 — Development Roadmap
+
 ### Dead Hour | Solo Dev Plan
 
 ---
@@ -14,15 +15,15 @@
 
 ## Phase Overview
 
-| Phase | Focus | Est. Duration |
-|-------|-------|--------------|
-| **Phase 0** | Project setup | 1–2 days |
-| **Phase 1** | Engine + data model | 1–2 weeks |
-| **Phase 2** | Act 1 playable end-to-end | 2–3 weeks |
-| **Phase 3** | Act 2 + real branching | 3–4 weeks |
-| **Phase 4** | Act 3 + factions | 4–6 weeks |
-| **Phase 5** | Act 4 + endings | 2–3 weeks |
-| **Phase 6** | Polish + release | 2–3 weeks |
+| Phase       | Focus                     | Est. Duration |
+| ----------- | ------------------------- | ------------- |
+| **Phase 0** | Project setup             | 1–2 days      |
+| **Phase 1** | Engine + data model       | 1–2 weeks     |
+| **Phase 2** | Act 1 playable end-to-end | 2–3 weeks     |
+| **Phase 3** | Act 2 + real branching    | 3–4 weeks     |
+| **Phase 4** | Act 3 + factions          | 4–6 weeks     |
+| **Phase 5** | Act 4 + endings           | 2–3 weeks     |
+| **Phase 6** | Polish + release          | 2–3 weeks     |
 
 **Rough total: 4–5 months** at a comfortable solo pace with part-time effort.
 
@@ -50,6 +51,7 @@ Goal: clean repo, working dev environment, CI-ready.
 - [ ] Commit: `chore: initial project setup`
 
 ### Deliverable
+
 Running dev server (`npm run dev`) shows a blank page with no TypeScript errors.
 
 ---
@@ -73,6 +75,7 @@ Goal: the game engine works and is tested, even without any real scenes.
 - [ ] Achieve >80% test coverage on engine functions
 
 ### Deliverable
+
 `npm test` passes. All engine functions handle happy path + error cases.
 
 ---
@@ -84,6 +87,7 @@ Goal: A human can sit down and play Act 1 from start to finish.
 ### Tasks
 
 **UI (build just enough):**
+
 - [ ] `TitlePage` — Start Game / Load Game buttons
 - [ ] `GamePage` — scene text + choice list + basic stat display
 - [ ] `EndingPage` — placeholder, just shows ending title
@@ -91,17 +95,20 @@ Goal: A human can sit down and play Act 1 from start to finish.
 - [ ] Basic Tailwind dark theme (noir/post-apocalyptic atmosphere)
 
 **Content:**
+
 - [ ] Write all Act 1 scenes (~15–20 scenes)
 - [ ] At minimum, 2–3 meaningful branch points in Act 1
 - [ ] Validate all scenes pass `validate-scenes.ts`
 - [ ] At least one "bad" ending triggerable in Act 1 (health = 0)
 
 **Engine integration:**
+
 - [ ] Hook `selectChoice` in store to actual UI
 - [ ] Auto-save after each scene
 - [ ] `TimelineBar` component showing progress through act
 
 ### Deliverable
+
 Playable Act 1. Show it to one other person and watch them play it without your help.
 
 ---
@@ -113,22 +120,26 @@ Goal: The game's first major branch (Stay in city vs. Flee to suburbs) is implem
 ### Tasks
 
 **Content:**
+
 - [ ] Write Act 2 scenes — both branches (~30–40 total)
 - [ ] Implement first major NPC encounters (Dr. Marsh, Rook)
 - [ ] Implement first resource scarcity mechanics in scenes
 - [ ] Write 2–3 additional "bad" endings that can trigger in Act 2
 
 **UI:**
+
 - [ ] `InventoryPanel` — shows items with quantities
 - [ ] Item use action (usable items can be activated from inventory)
 - [ ] Scene transition animation (simple fade)
 - [ ] Choice tooltip showing stat requirements
 
 **Engine:**
+
 - [ ] Lazy loading by act folder (code splitting)
 - [ ] Journal/history view showing past choices (stretch goal)
 
 ### Deliverable
+
 Full Acts 1–2 playable. At least 4 distinct bad endings reachable. At least 2 meaningfully different paths through Act 2.
 
 ---
@@ -140,6 +151,7 @@ Goal: The faction system is alive. Joining a faction changes what you see.
 ### Tasks
 
 **Content:**
+
 - [ ] Write Act 3 scenes — all three faction paths
 - [ ] Implement Yusuf (Collective) storyline
 - [ ] Implement The Kid recurring thread
@@ -147,15 +159,18 @@ Goal: The faction system is alive. Joining a faction changes what you see.
 - [ ] "Ghost" — the Loner NPC that mirrors player dominant stat
 
 **Engine:**
+
 - [ ] Faction membership gating (scenes only load if correct flag is set)
 - [ ] Recurring NPC state — NPCs can be dead, alive, or hostile based on flags
 - [ ] In-game day counter prominently displayed
 
 **UI:**
+
 - [ ] NPC relationship sidebar (optional — shows trust level with key characters)
 - [ ] Multiple save slots (3 slots, selectable from title screen)
 
 ### Deliverable
+
 Full Acts 1–3 playable. At least 6 distinct endings triggerable across all acts.
 
 ---
@@ -167,21 +182,25 @@ Goal: The game is completable. All major endings are reachable.
 ### Tasks
 
 **Content:**
+
 - [ ] Write Act 4 scenes (~20–30)
 - [ ] Write `scene_final` — the convergence scene
 - [ ] Implement all 8 planned endings
 - [ ] Write epilogue text for each ending
 
 **Engine:**
+
 - [ ] Final ending evaluator pass — verify priority ordering is correct
 - [ ] Playthrough stats: time played, choices made, deaths
 - [ ] "New Game+" flag — carry knowledge between runs (optional)
 
 **UI:**
+
 - [ ] `EndingPage` — full ending text, epilogue, playthrough summary
 - [ ] Share/screenshot ending card (stretch goal)
 
 ### Deliverable
+
 Full game completable. All planned endings reachable through normal play.
 
 ---
@@ -207,14 +226,14 @@ Goal: A game you're proud to share publicly.
 
 Track things you're deferring deliberately:
 
-| Item | Deferred Until | Why |
-|------|----------------|-----|
-| Audio/music | Phase 6+ | Scope; can be added without engine changes |
-| Cloud save / account system | Extension | Requires backend |
-| Localization | Extension | Architecture supports it (string externalization) |
-| Mobile-native app | Extension | Could wrap in Capacitor later |
-| Scene editor GUI | Extension | `validate-scenes.ts` is sufficient for now |
-| Procedural content | Extension | All content is hand-authored in v1 |
+| Item                        | Deferred Until | Why                                               |
+| --------------------------- | -------------- | ------------------------------------------------- |
+| Audio/music                 | Phase 6+       | Scope; can be added without engine changes        |
+| Cloud save / account system | Extension      | Requires backend                                  |
+| Localization                | Extension      | Architecture supports it (string externalization) |
+| Mobile-native app           | Extension      | Could wrap in Capacitor later                     |
+| Scene editor GUI            | Extension      | `validate-scenes.ts` is sufficient for now        |
+| Procedural content          | Extension      | All content is hand-authored in v1                |
 
 ---
 
@@ -236,6 +255,7 @@ Merge `dev` → `main` at the end of each phase.
 ## Definition of "Done" per Phase
 
 A phase is done when:
+
 1. All tasks are checked off
 2. `npm test` passes with no failures
 3. `npm run build` produces no TypeScript errors

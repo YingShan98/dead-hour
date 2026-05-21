@@ -57,22 +57,30 @@ describe('evaluate()', () => {
   })
 
   it('passes stat minimum check', () => {
-    const state = mockState({ stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5 } })
+    const state = mockState({
+      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5 },
+    })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(true)
   })
 
   it('fails stat minimum check when below threshold', () => {
-    const state = mockState({ stats: { health: 10, morale: 10, leadership: 3, stealth: 0, trust: 5 } })
+    const state = mockState({
+      stats: { health: 10, morale: 10, leadership: 3, stealth: 0, trust: 5 },
+    })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(false)
   })
 
   it('passes stat maximum check', () => {
-    const state = mockState({ stats: { health: 0, morale: 10, leadership: 0, stealth: 0, trust: 5 } })
+    const state = mockState({
+      stats: { health: 0, morale: 10, leadership: 0, stealth: 0, trust: 5 },
+    })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(true)
   })
 
   it('fails stat maximum check when above threshold', () => {
-    const state = mockState({ stats: { health: 5, morale: 10, leadership: 0, stealth: 0, trust: 5 } })
+    const state = mockState({
+      stats: { health: 5, morale: 10, leadership: 0, stealth: 0, trust: 5 },
+    })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(false)
   })
 
@@ -115,7 +123,9 @@ describe('getAvailableChoices()', () => {
   })
 
   it('returns all choices when all conditions are met', () => {
-    const state = mockState({ stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5 } })
+    const state = mockState({
+      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5 },
+    })
     const available = getAvailableChoices(choices, state)
     expect(available).toHaveLength(2)
   })

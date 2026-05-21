@@ -35,10 +35,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   startNewGame: async (saveSlot = 0) => {
     set({ isLoading: true, error: null })
     try {
-      const [firstScene, endings] = await Promise.all([
-        loadScene('scene_001'),
-        loadEndings(),
-      ])
+      const [firstScene, endings] = await Promise.all([loadScene('scene_001'), loadEndings()])
 
       const freshState: GameState = {
         ...DEFAULT_GAME_STATE,
@@ -72,7 +69,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const { gameState, currentScene, availableEndings } = get()
     if (!currentScene) return
 
-    const choice = currentScene.choices.find(c => c.id === choiceId)
+    const choice = currentScene.choices.find((c) => c.id === choiceId)
     if (!choice) {
       set({ error: `Choice not found: ${choiceId}` })
       return
@@ -80,7 +77,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     // Verify the choice is still valid (guard against stale UI)
     const available = getAvailableChoices(currentScene.choices, gameState)
-    if (!available.find(c => c.id === choiceId)) {
+    if (!available.find((c) => c.id === choiceId)) {
       set({ error: 'That choice is no longer available.' })
       return
     }
@@ -94,10 +91,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       // 2. Record choice in history
       newState = {
         ...newState,
-        choiceHistory: [
-          ...newState.choiceHistory,
-          { sceneId: currentScene.id, choiceId },
-        ],
+        choiceHistory: [...newState.choiceHistory, { sceneId: currentScene.id, choiceId }],
       }
 
       // 3. Load next scene
@@ -140,10 +134,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const saved = loadGame(slot)
       if (!saved) throw new Error(`No save data found in slot ${slot}`)
 
-      const [scene, endings] = await Promise.all([
-        loadScene(saved.currentSceneId),
-        loadEndings(),
-      ])
+      const [scene, endings] = await Promise.all([loadScene(saved.currentSceneId), loadEndings()])
 
       set({
         gameState: saved,

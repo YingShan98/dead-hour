@@ -7,7 +7,7 @@ export default function TitlePage() {
   const { startNewGame, loadFromSave, isLoading } = useGameStore()
 
   const saves = listSaves()
-  const hasSave = saves.some(s => s.exists)
+  const hasSave = saves.some((s) => s.exists)
 
   async function handleNewGame() {
     await startNewGame(0)
@@ -15,7 +15,7 @@ export default function TitlePage() {
   }
 
   async function handleContinue() {
-    const latestSave = saves.find(s => s.exists)
+    const latestSave = saves.find((s) => s.exists)
     if (!latestSave) return
     await loadFromSave(latestSave.slot)
     navigate('/game')
@@ -34,16 +34,11 @@ export default function TitlePage() {
       />
 
       <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
-
         {/* Title block */}
         <div className="text-center">
           <p className="ui-label text-muted mb-4 tracking-[0.3em]">— a word adventure —</p>
-          <h1 className="font-display text-7xl text-text leading-none animate-flicker">
-            DEAD
-          </h1>
-          <h1 className="font-display text-7xl text-accent leading-none">
-            HOUR
-          </h1>
+          <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
+          <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
           <p className="mt-6 font-body text-text-dim text-lg italic">
             48 hours before everything changed.
           </p>
@@ -72,9 +67,7 @@ export default function TitlePage() {
         </div>
 
         {/* Footer */}
-        <p className="ui-label text-muted text-xs">
-          v0.1.0 — solo project
-        </p>
+        <p className="ui-label text-muted text-xs">v0.1.0 — solo project</p>
       </div>
     </div>
   )

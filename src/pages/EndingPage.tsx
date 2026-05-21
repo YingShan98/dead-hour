@@ -2,10 +2,10 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
 
 const TYPE_COLOURS: Record<string, string> = {
-  bad:     'text-danger',
+  bad: 'text-danger',
   neutral: 'text-warning',
-  good:    'text-safe',
-  secret:  'text-accent',
+  good: 'text-safe',
+  secret: 'text-accent',
 }
 
 export default function EndingPage() {
@@ -30,16 +30,13 @@ export default function EndingPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
       <div className="max-w-lg w-full flex flex-col gap-8 animate-fade-in">
-
         {/* Ending type label */}
         <p className={`ui-label tracking-[0.25em] ${colourClass}`}>
           — {triggeredEnding.type} ending —
         </p>
 
         {/* Ending title */}
-        <h1 className="font-display text-5xl text-text leading-tight">
-          {triggeredEnding.title}
-        </h1>
+        <h1 className="font-display text-5xl text-text leading-tight">{triggeredEnding.title}</h1>
 
         <hr className="border-border" />
 
@@ -81,10 +78,7 @@ export default function EndingPage() {
           >
             Play Again
           </button>
-          <button
-            onClick={() => navigate('/')}
-            className="choice-btn text-center"
-          >
+          <button onClick={() => navigate('/')} className="choice-btn text-center">
             Return to Title
           </button>
         </div>

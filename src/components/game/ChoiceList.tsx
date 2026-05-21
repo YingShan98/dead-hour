@@ -10,7 +10,7 @@ interface Props {
 
 export default function ChoiceList({ choices, gameState, onSelect, disabled }: Props) {
   const available = getAvailableChoices(choices, gameState)
-  const locked = choices.filter(c => !available.find(a => a.id === c.id))
+  const locked = choices.filter((c) => !available.find((a) => a.id === c.id))
 
   return (
     <div className="flex flex-col gap-2 mt-8">
@@ -30,7 +30,7 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
       ))}
 
       {/* Locked choices — shown greyed out with hint */}
-      {locked.map(choice => (
+      {locked.map((choice) => (
         <div
           key={choice.id}
           className="w-full px-4 py-3 rounded border border-border
@@ -40,9 +40,7 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
         >
           <span className="opacity-40">{choice.text}</span>
           {choice.hint && (
-            <span className="ml-3 ui-label text-xs text-muted opacity-60">
-              [{choice.hint}]
-            </span>
+            <span className="ml-3 ui-label text-xs text-muted opacity-60">[{choice.hint}]</span>
           )}
         </div>
       ))}

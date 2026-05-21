@@ -57,12 +57,12 @@ export interface ConditionSet {
 
 export interface ItemEffect {
   itemId: string
-  delta: number   // positive = gain, negative = consume
+  delta: number // positive = gain, negative = consume
 }
 
 export interface EffectSet {
   flags?: Record<string, boolean>
-  stats?: Partial<Record<StatKey, number>>  // delta values
+  stats?: Partial<Record<StatKey, number>> // delta values
   items?: ItemEffect[]
 }
 
@@ -71,7 +71,7 @@ export interface EffectSet {
 export type Act = 'act1' | 'act2' | 'act3' | 'act4'
 
 export interface GameTime {
-  hoursFromStart: number  // negative = before outbreak, positive = after
+  hoursFromStart: number // negative = before outbreak, positive = after
 }
 
 export interface Choice {
@@ -80,7 +80,7 @@ export interface Choice {
   conditions: ConditionSet
   effects: EffectSet
   nextSceneId: string
-  hint?: string           // shown as a tooltip when choice is locked
+  hint?: string // shown as a tooltip when choice is locked
 }
 
 export interface Scene {
@@ -88,10 +88,10 @@ export interface Scene {
   title: string
   act: Act
   gameTime: GameTime
-  narrative: string[]     // array of paragraphs
+  narrative: string[] // array of paragraphs
   conditions: ConditionSet
   choices: Choice[]
-  onEnter?: EffectSet     // effects applied automatically on scene entry
+  onEnter?: EffectSet // effects applied automatically on scene entry
 }
 
 // ─── Endings ──────────────────────────────────────────────────────────────────
@@ -102,7 +102,7 @@ export interface Ending {
   id: string
   title: string
   type: EndingType
-  priority: number        // lower = checked first; good endings have higher priority
+  priority: number // lower = checked first; good endings have higher priority
   conditions: ConditionSet
   narrative: string[]
   epilogue: string | null

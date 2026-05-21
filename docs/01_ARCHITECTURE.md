@@ -1,4 +1,5 @@
 # 01 — Architecture
+
 ### Dead Hour | Technical Design
 
 ---
@@ -15,9 +16,11 @@ React 18 + TypeScript
 ```
 
 ### Why Zustand over Redux?
+
 Game state is one large object that many components read. Zustand gives you that with minimal boilerplate. Redux is overkill for a single-player game.
 
 ### Why JSON files over a CMS?
+
 - Zero infrastructure — no server, no account
 - Version-controlled alongside code (Git)
 - Human-readable and hand-editable
@@ -133,27 +136,27 @@ The top-level game state object (lives in Zustand):
 ```typescript
 interface GameState {
   // Identity
-  currentSceneId: string;
-  
+  currentSceneId: string
+
   // Time tracking
-  gameTime: GameTime;          // { hour: -48, day: 0, phase: 'pre-outbreak' }
-  
+  gameTime: GameTime // { hour: -48, day: 0, phase: 'pre-outbreak' }
+
   // Player character
-  stats: PlayerStats;          // { health, morale, leadership, stealth, ... }
-  
+  stats: PlayerStats // { health, morale, leadership, stealth, ... }
+
   // Resources
-  inventory: InventoryItem[];  // [{ itemId, quantity }]
-  
+  inventory: InventoryItem[] // [{ itemId, quantity }]
+
   // Narrative memory
-  flags: Record<string, boolean>;   // { 'met_doctor': true, 'betrayed_militia': false }
-  visitedScenes: string[];
-  
+  flags: Record<string, boolean> // { 'met_doctor': true, 'betrayed_militia': false }
+  visitedScenes: string[]
+
   // History
-  choiceHistory: ChoiceRecord[];    // For recap / journal feature
-  
+  choiceHistory: ChoiceRecord[] // For recap / journal feature
+
   // Meta
-  saveSlot: number;
-  playthroughId: string;       // UUID for tracking unique runs
+  saveSlot: number
+  playthroughId: string // UUID for tracking unique runs
 }
 ```
 

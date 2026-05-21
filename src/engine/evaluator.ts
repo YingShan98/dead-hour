@@ -33,7 +33,7 @@ export function evaluate(conditions: ConditionSet | undefined, state: GameState)
   // All item requirements must pass
   if (conditions.requiredItems) {
     for (const req of conditions.requiredItems) {
-      const item = state.inventory.find(i => i.itemId === req.itemId)
+      const item = state.inventory.find((i) => i.itemId === req.itemId)
       const qty = item?.quantity ?? 0
       const minQty = req.minQuantity ?? 1
       if (qty < minQty) return false
@@ -47,5 +47,5 @@ export function evaluate(conditions: ConditionSet | undefined, state: GameState)
  * Filters a list of choices to only those available to the player right now.
  */
 export function getAvailableChoices(choices: Choice[], state: GameState): Choice[] {
-  return choices.filter(choice => evaluate(choice.conditions, state))
+  return choices.filter((choice) => evaluate(choice.conditions, state))
 }

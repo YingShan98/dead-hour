@@ -1,4 +1,5 @@
 # 06 — Content Authoring Guide
+
 ### Dead Hour | How to Write Scenes
 
 This document is a practical reference for writing story content in JSON. You'll return to this every time you author new scenes.
@@ -228,18 +229,23 @@ Use `onEnter` for effects that happen automatically when entering a scene — re
 ## Common Mistakes to Avoid
 
 ### 1. Forgetting to clamp stats
+
 Stats clamp automatically in the executor (between `min` and `max`), but writing `"health": -99` in an effect is still valid JSON. Don't try to use effects to force states — use ending conditions for game-over scenarios.
 
 ### 2. Circular `nextSceneId` references
+
 Scene A → Scene B → Scene A creates an infinite loop. The engine won't detect this — you will, when your browser freezes. Keep a scene graph diagram or simple spreadsheet tracking which scenes link to which.
 
 ### 3. Orphaned scenes
+
 A scene with no `nextSceneId` pointing to it will never be reached. Run `validate-scenes.ts` periodically to catch these.
 
 ### 4. Flags that never get set
+
 If you gate a scene on `requiredFlags: ['has_radio']` but no earlier scene sets that flag, no player will ever reach your scene. Cross-reference flag usage in a simple spreadsheet.
 
 ### 5. Over-gating choices
+
 If you gate every interesting choice behind stats, low-stat players will always get boring options. At least one interesting choice per scene should always be available.
 
 ---

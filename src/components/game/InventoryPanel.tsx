@@ -1,9 +1,7 @@
 import type { InventoryItem } from '@/engine/types'
 import itemsData from '@/data/items.json'
 
-const ITEM_MAP = Object.fromEntries(
-  itemsData.items.map(item => [item.id, item])
-)
+const ITEM_MAP = Object.fromEntries(itemsData.items.map((item) => [item.id, item]))
 
 interface Props {
   inventory: InventoryItem[]
@@ -34,9 +32,7 @@ export default function InventoryPanel({ inventory }: Props) {
               title={def.description}
             >
               <span className="font-body text-sm text-text">{def.label}</span>
-              {def.stackable && (
-                <span className="font-ui text-xs text-text-dim">×{quantity}</span>
-              )}
+              {def.stackable && <span className="font-ui text-xs text-text-dim">×{quantity}</span>}
             </div>
           )
         })}

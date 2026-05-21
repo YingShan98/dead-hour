@@ -8,15 +8,8 @@ import InventoryPanel from '@/components/game/InventoryPanel'
 
 export default function GamePage() {
   const navigate = useNavigate()
-  const {
-    currentScene,
-    gameState,
-    triggeredEnding,
-    isLoading,
-    error,
-    selectChoice,
-    dismissError,
-  } = useGameStore()
+  const { currentScene, gameState, triggeredEnding, isLoading, error, selectChoice, dismissError } =
+    useGameStore()
 
   // Redirect to title if no game is loaded
   useEffect(() => {
@@ -43,7 +36,6 @@ export default function GamePage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto flex min-h-screen">
-
         {/* ── Sidebar ───────────────────────────────────────────── */}
         <aside className="w-56 shrink-0 border-r border-border p-6 flex flex-col gap-8 sticky top-0 h-screen overflow-y-auto">
           {/* Logo */}
