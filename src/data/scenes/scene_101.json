@@ -1,0 +1,58 @@
+{
+  "id": "scene_101",
+  "title": { "zh": "报纸角落" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -48 },
+  "onEnter": {
+    "flags": { "finger_cut": true },
+    "stats": { "infection": 1 },
+    "items": []
+  },
+  "narrative": [
+    { "zh": "周五傍晚五点半，你擦干净最后一块齿轮，搁在维修台边。" },
+    { "zh": "就在修好的电焊机本体落地站稳时，外壳边缘不知注意到的毛边划进了你的右手中指中。" },
+    { "zh": "伤口不深，血珠子立刻涌出来，滴在刚好漏到桌面的机油痕迹上，格外刺眼。" },
+    { "zh": "这台焊机是上周在旧货市场翻了一天淘来的废旧货，翻新了不天。你找过创可贴——没有，用完了。翻出一卷灰色宽胶带，绕了两圈，算定。" },
+    { "zh": "晚饭后，你翻开当天买的《城市晚报》。社会版的左下角，还有三则失踪报道。第一则的最后一句用到了方括号小字：'据第一位失踪者的邻居反映，失踪前数公听见其屋内传出类似在公咬或公打的声响，环境较为异常。'" },
+    { "zh": "你盯着那行字看了一两秒。在公咬，旁边有个小户，独居中年男人屡屡，" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_101_choice_a",
+      "text": { "zh": "把报纸卷起来塞进工具箱。这种社会新闻警惕方面来就行，不用深想。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "noticed_outbreak_signs": false },
+        "stats": { "morale": 1, "will": -1 },
+        "items": []
+      },
+      "nextSceneId": "scene_102"
+    },
+    {
+      "id": "scene_101_choice_b",
+      "text": { "zh": "标一条报道的时间。到点放未读对比记下来。总觉得只需一对上。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "noticed_outbreak_signs": true },
+        "stats": { "will": 1 },
+        "items": []
+      },
+      "nextSceneId": "scene_102"
+    },
+    {
+      "id": "scene_101_choice_c",
+      "text": { "zh": "翻出手机，顺手搜索最近的街道有否上报类似案件，查了三条本地新闻和一主群。" },
+      "conditions": {},
+      "effects": {
+        "flags": {
+          "noticed_outbreak_signs": true,
+          "researched_outbreak_early": true
+        },
+        "stats": { "will": 2, "morale": -1 },
+        "items": []
+      },
+      "nextSceneId": "scene_102"
+    }
+  ]
+}

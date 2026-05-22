@@ -1,0 +1,54 @@
+{
+  "id": "scene_102",
+  "title": { "zh": "胶带与伤口" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -47 },
+  "narrative": [
+    { "zh": "睡前你低头看了一眼右手中指。胶带边缘翻起来一点，底下的布面已经渗了些机油，还有一点点暗红色的干血。" },
+    { "zh": "划开的时候一眼看，现在也一眼。只是有点疼，但不知道有没有什么东西在慢慢结疤。" },
+    { "zh": "旧货市场的焊机本来就是不清楚。翻新之后其实是什么样的旧底，在旧货市场待了多久，当初的主人是谁——你都不知道。" },
+    { "zh": "但那台焊机你不清楚。翻新之后其实是什么样的底。" }
+  ],
+  "conditions": {
+    "requiredFlags": ["finger_cut"]
+  },
+  "choices": [
+    {
+      "id": "scene_102_choice_a",
+      "text": { "zh": "当没看到，明天买创可贴换上。小伤，不碍事。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wound_ignored": true },
+        "stats": { "infection": 1, "health": 1 },
+        "items": []
+      },
+      "hint": { "zh": "感染值将上升" },
+      "nextSceneId": "scene_103"
+    },
+    {
+      "id": "scene_102_choice_b",
+      "text": { "zh": "用酒精棉片对伤口重新处理一遍，缠上干净的纱布。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "medkit", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：急救箱" },
+      "effects": {
+        "flags": { "wound_cleaned": true },
+        "stats": { "infection": -1, "will": 1 },
+        "items": [{ "itemId": "medkit", "delta": -1 }]
+      },
+      "nextSceneId": "scene_103"
+    },
+    {
+      "id": "scene_102_choice_c",
+      "text": { "zh": "把那道伤口仔细看了。深度正常，但伤口边缘有点奇异的颜色。用清水冲了好几遍，换上干净胶带，然后躺下。睡不着。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wound_cleaned": true, "noticed_outbreak_signs": true },
+        "stats": { "infection": -1, "will": 2, "morale": -1 },
+        "items": []
+      },
+      "nextSceneId": "scene_103"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "scene_108",
+  "title": { "zh": "零时" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": 0 },
+  "narrative": [
+    { "zh": "半夜，你不知道几点，在半睡半醒之间。" },
+    { "zh": "窗外某个地方传来一声很远的玻璃破碎声，然后是叫喊，很快就沉寂下来。路灯忽明忽暗，楼下空旷的停车场。" },
+    { "zh": "你躺着，没动。身体有一种奇异的感觉——不是疲惫，不是舒爽，而是某种内部的、细密的、像有什么东西正在你血管里慢慢重新拉线。" },
+    { "zh": "右手中指的伤口不见了，换成了一种奇怪的感觉，如同变成了一种很细密的东西在挠的感觉。好像在变好，又好像——有别的什么在里面慢慢重新走线。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_108_choice_a",
+      "text": { "zh": "闭上眼，把念头往下压。这是应激后神经紧绷之后的放松。睡着了。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 5 }]
+      },
+      "hint": { "zh": "需要意志力 5+" },
+      "effects": {
+        "flags": { "resisted_primal_urge": true, "survived_first_night": true },
+        "stats": { "will": 2, "health": 2, "infection": -1 },
+        "items": []
+      },
+      "nextSceneId": "scene_109_awakening"
+    },
+    {
+      "id": "scene_108_choice_b",
+      "text": { "zh": "坐起来，在黑暗里待了一会儿。翻出缩缩饼干，开了两包，然后把自己的状态在心里默默列条记下来，字迹工整。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "survived_first_night": true, "wrote_journal": true },
+        "stats": { "will": 3, "morale": 1 },
+        "items": [{ "itemId": "canned_food", "delta": -1 }]
+      },
+      "nextSceneId": "scene_109_awakening"
+    },
+    {
+      "id": "scene_108_choice_c",
+      "text": { "zh": "肚子饿了。很饿，比平时更饿，好像身体在消耗什么东西。你翻遍了在房间，找到几包缩缩饼干——但吃了两包就停下来了，因为你忽然非常想要一种你说不清楚的东西。" },
+      "conditions": {},
+      "effects": {
+        "flags": {
+          "survived_first_night": true,
+          "gave_in_to_raw_hunger": true
+        },
+        "stats": { "infection": 2, "health": 1, "will": -2 },
+        "items": []
+      },
+      "nextSceneId": "scene_109_turning"
+    },
+    {
+      "id": "scene_108_choice_d",
+      "text": { "zh": "你没睡。一直靠在门边，握着角磨机，听着窗外的动静，直到天亮。整整七个小时，你没有恐惧，没有焦躁，心跳平稳——只是非常清醒，清醒得有点不像自己。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 7 }]
+      },
+      "hint": { "zh": "需要意志力 7+" },
+      "effects": {
+        "flags": {
+          "survived_first_night": true,
+          "resisted_primal_urge": true,
+          "superpower_awakening": true
+        },
+        "stats": { "will": 3, "infection": -1, "stealth": 2 },
+        "items": []
+      },
+      "nextSceneId": "scene_109_awakening"
+    }
+  ]
+}

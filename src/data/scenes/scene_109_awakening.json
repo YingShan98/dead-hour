@@ -1,0 +1,53 @@
+{
+  "id": "scene_109_awakening",
+  "title": { "zh": "天亮·其一" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 8 },
+  "narrative": [
+    { "zh": "天光从窗帘边缘透进来，灰白色，好像这座城市还有一次正常的早晨。" },
+    { "zh": "你活着了一下一会儿。右手中指，那道胶带底下，皮肤泛滑，没有红透，没有渗液。愈合的速度比你预期的快了很多。" },
+    { "zh": "你站起来，在光和平坦的屋子里站了一会儿，感觉到一种你说不清楚来源的东西，你的听觉好像变得更近了——楼下有人翻身，一楼，很清晰。你以前从来听不到的。" },
+    { "zh": "你盯着自己的手看了一会儿。" },
+    { "zh": "门外的世界在继续，但不是昨天那个了。" }
+  ],
+  "conditions": {
+    "blockedFlags": ["zombie_turning"]
+  },
+  "choices": [
+    {
+      "id": "scene_109_awakening_choice_a",
+      "text": { "zh": "这是幻觉，或者是高度紧绷之后的某种放大。记下来，继续观察。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "infection": -1 },
+        "items": []
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_109_awakening_choice_b",
+      "text": { "zh": "试了一下——握紧拳头，集中想着楼道里的动静。和昨天不一样。" },
+      "conditions": {
+        "requiredFlags": ["superpower_awakening"]
+      },
+      "hint": { "zh": "需要：已触发觉醒" },
+      "effects": {
+        "flags": { "superpower_awakening": true },
+        "stats": { "health": 1, "stealth": 1, "will": 1, "infection": 1 },
+        "items": []
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_109_awakening_choice_c",
+      "text": { "zh": "吃点东西。现在需要的是储能，不是结论。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 2, "morale": 1 },
+        "items": [{ "itemId": "canned_food", "delta": -1 }]
+      },
+      "nextSceneId": "scene_110"
+    }
+  ]
+}

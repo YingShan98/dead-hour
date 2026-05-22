@@ -49,6 +49,26 @@
       "min": 0,
       "max": 20,
       "visible": false
+    },
+    {
+      "key": "infection",
+      "label": { "zh": "感染值" },
+      "description": { "zh": "病毒在体内扩散的程度。达到10后完全失控。" },
+      "icon": "⬡",
+      "default": 0,
+      "min": 0,
+      "max": 10,
+      "visible": false
+    },
+    {
+      "key": "will",
+      "label": { "zh": "意志力" },
+      "description": { "zh": "心理上对生命的抵抗力——对身体的控制。" },
+      "icon": "✦",
+      "default": 5,
+      "min": 0,
+      "max": 10,
+      "visible": false
     }
   ]
 }

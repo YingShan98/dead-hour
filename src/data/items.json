@@ -2,18 +2,18 @@
   "items": [
     {
       "id": "medkit",
-      "label": { "zh": "急救包" },
-      "description": { "zh": "基础急救用品。恢复 3 点生命值。" },
+      "label": { "zh": "急救箱" },
+      "description": { "zh": "基础急救用品。使用后恢复3点生命值，感染值-1。" },
       "category": "medical",
       "stackable": true,
       "maxStack": 5,
       "usable": true,
-      "useEffect": { "stats": { "health": 3 } }
+      "useEffect": { "stats": { "health": 3, "infection": -1 } }
     },
     {
       "id": "canned_food",
-      "label": { "zh": "罐头" },
-      "description": { "zh": "耐储存的食物。恢复 1 点士气。" },
+      "label": { "zh": "罐头食品" },
+      "description": { "zh": "耐储存食物。食用后恢复1点士气。" },
       "category": "food",
       "stackable": true,
       "maxStack": 20,
@@ -21,19 +21,9 @@
       "useEffect": { "stats": { "morale": 1 } }
     },
     {
-      "id": "steel_plates",
+      "id": "iron_plate",
       "label": { "zh": "加厚铁板" },
-      "description": { "zh": "2mm加厚钢板。沉重但极度坚固，加固大门的绝佳材料。" },
-      "category": "misc",
-      "stackable": true,
-      "maxStack": 5,
-      "usable": false,
-      "useEffect": null
-    },
-    {
-      "id": "iron_wire",
-      "label": { "zh": "细铁丝网" },
-      "description": { "zh": "锋利的铁丝，适合用来制作迟滞敌人的陷阱。" },
+      "description": { "zh": "2mm厚铁板，约七十乘以百毫米。可用螺丝固定在门扇内侧，大幅提升门的抗冲击能力。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 5,
@@ -41,9 +31,9 @@
       "useEffect": null
     },
     {
-      "id": "industrial_glue",
-      "label": { "zh": "工业强力胶" },
-      "description": { "zh": "粘性极强，用于固定陷阱或紧急修补。" },
+      "id": "duct_tape",
+      "label": { "zh": "宽胶带" },
+      "description": { "zh": "灰色，约公分宽，粘性极好。用途很广。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 10,
@@ -51,19 +41,39 @@
       "useEffect": null
     },
     {
-      "id": "wide_tape",
-      "label": { "zh": "灰色宽胶带" },
-      "description": { "zh": "粘性极强，适合紧急修补工具或封死裂缝。" },
-      "category": "tool",
+      "id": "painkillers",
+      "label": { "zh": "止疼药" },
+      "description": { "zh": "缓解疼痛。恢复1点生命值和1点士气。" },
+      "category": "medical",
       "stackable": true,
       "maxStack": 10,
       "usable": true,
-      "useEffect": { "stats": { "morale": 1 } }
+      "useEffect": { "stats": { "health": 1, "morale": 1 } }
     },
     {
-      "id": "modified_grinder",
-      "label": { "zh": "改装角磨机" },
-      "description": { "zh": "缠绕了铁丝网护手的角磨机。虽然笨重，但杀伤力惊人。" },
+      "id": "radio",
+      "label": { "zh": "手提收音机" },
+      "description": { "zh": "能接收广播信号。解锁基于无线电的场景选项。" },
+      "category": "tool",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "useEffect": null
+    },
+    {
+      "id": "knife",
+      "label": { "zh": "多功能折叠刀" },
+      "description": { "zh": "轻巧多用。解锁部分近身对抗选项。" },
+      "category": "weapon",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "useEffect": null
+    },
+    {
+      "id": "angle_grinder",
+      "label": { "zh": "角磨机（改装）" },
+      "description": { "zh": "缠了铁丝网护手的改装角磨机。工具，不是武器——但也多用途。" },
       "category": "weapon",
       "stackable": false,
       "maxStack": 1,

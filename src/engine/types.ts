@@ -4,7 +4,7 @@ export type { GameFlag }
 
 // ─── Stat Keys ───────────────────────────────────────────────────────────────
 
-export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust'
+export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust' | 'infection' | 'will'
 
 export type PlayerStats = Record<StatKey, number>
 

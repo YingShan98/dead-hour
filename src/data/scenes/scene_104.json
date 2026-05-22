@@ -1,0 +1,56 @@
+{
+  "id": "scene_104",
+  "title": { "zh": "五金店与铁板" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -34 },
+  "narrative": [
+    { "zh": "回到出租屋的路上，你经过那家开了好多年的五金店。门口的货架上摆着一叠灰色加厚铁板——2mm厚板，长宽大约七十乘以百毫米。蒙着层积年的尘，'清仓处理，不再进货'的纸条贴在侧面。" },
+    { "zh": "你慢步顿了顿，低头看了一眼。焊机旁边本来就有同款，废品来已经配置好放着的。" },
+    { "zh": "但你脑子里还在转另一个念头——这种厚度的铁板，用螺丝固定在门扇内侧，能大幅提升门的抗冲击能力。" },
+    { "zh": "是多余的防备，还是正常的备用？" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_104_choice_a",
+      "text": { "zh": "买下一叠铁板回去，顺手拿了两卷宽胶带。多用，可能用得上。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "will": 1 },
+        "items": [
+          { "itemId": "iron_plate", "delta": 3 },
+          { "itemId": "duct_tape", "delta": 2 }
+        ]
+      },
+      "nextSceneId": "scene_105"
+    },
+    {
+      "id": "scene_104_choice_b",
+      "text": { "zh": "只买了一块铁板，备着焊机用就行。没多想。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": 1 },
+        "items": [
+          { "itemId": "iron_plate", "delta": 1 }
+        ]
+      },
+      "nextSceneId": "scene_105"
+    },
+    {
+      "id": "scene_104_choice_c",
+      "text": { "zh": "买了三块铁板和两卷胶带，还进超市买了一箱矿泉水和几盒缩缩饼干，一并搬回家。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "will": 2, "morale": -1 },
+        "items": [
+          { "itemId": "iron_plate", "delta": 3 },
+          { "itemId": "duct_tape", "delta": 2 },
+          { "itemId": "canned_food", "delta": 5 }
+        ]
+      },
+      "nextSceneId": "scene_105"
+    }
+  ]
+}
