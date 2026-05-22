@@ -1,22 +1,22 @@
 {
   "id": "scene_006",
-  "title": "第一天清晨",
+  "title": { "zh": "第一天清晨" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 8 },
   "conditions": {},
   "narrative": [
-    "天亮时，城市没有恢复秩序。警笛声断断续续地响了一夜，最后像电池耗尽一样沉下去。",
-    "楼下的街面横着几辆相撞的车。便利店卷帘门被撕开一半，里面有人影在货架之间缓慢移动。",
-    "你活过了零点。现在的问题不再是新闻是真是假，而是你要在这座城市里留下来，还是趁它彻底合拢之前离开。"
+    { "zh": "天亮时，城市没有恢复秩序。警笛声断断续续地响了一夜，最后像电池耗尽一样沉下去。" },
+    { "zh": "楼下的街面横着几辆相撞的车。便利店卷帘门被撕开一半，里面有人影在货架之间缓慢移动。" },
+    { "zh": "你活过了零点。现在的问题不再是新闻是真是假，而是你要在这座城市里留下来，还是趁它彻底合拢之前离开。" }
   ],
   "choices": [
     {
       "id": "scene_006_choice_a",
-      "text": "【固守】先检查住处和楼道，把这里当成临时据点。",
+      "text": { "zh": "【固守】先检查住处和楼道，把这里当成临时据点。" },
       "conditions": {
         "requiredFlags": ["shelter_has_home_base"]
       },
-      "hint": "需要 临时据点",
+      "hint": { "zh": "需要 临时据点" },
       "effects": {
         "flags": { "act2_stayed_in_city": true },
         "stats": { "morale": 1 }
@@ -25,7 +25,7 @@
     },
     {
       "id": "scene_006_choice_b",
-      "text": "【潜行】避开主街，先去附近便利店找水和药。",
+      "text": { "zh": "【潜行】避开主街，先去附近便利店找水和药。" },
       "conditions": {},
       "effects": {
         "flags": { "act2_started_scavenging": true },
@@ -35,11 +35,11 @@
     },
     {
       "id": "scene_006_choice_c",
-      "text": "【邻里】查看昨晚被你提醒过的邻居是否还活着。",
+      "text": { "zh": "【邻里】查看昨晚被你提醒过的邻居是否还活着。" },
       "conditions": {
         "requiredFlags": ["social_warned_neighbors"]
       },
-      "hint": "需要 已提醒邻居",
+      "hint": { "zh": "需要 已提醒邻居" },
       "effects": {
         "flags": { "social_checked_on_neighbors": true },
         "stats": { "trust": 1, "leadership": 1 }
@@ -48,11 +48,11 @@
     },
     {
       "id": "scene_006_choice_d",
-      "text": "【撤离】按记住的路线离开小区，避开老医院方向。",
+      "text": { "zh": "【撤离】按记住的路线离开小区，避开老医院方向。" },
       "conditions": {
         "requiredFlags": ["info_knows_city_layout"]
       },
-      "hint": "需要 城市路线记忆",
+      "hint": { "zh": "需要 城市路线记忆" },
       "effects": {
         "flags": { "act2_fled_toward_suburbs": true },
         "stats": { "stealth": 1, "morale": -1 }

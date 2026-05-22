@@ -36,36 +36,6 @@ describe('evaluate()', () => {
     expect(evaluate(undefined, mockState())).toBe(true)
   })
 
-  it('passes when all required flags are present', () => {
-    const state = mockState({ flags: { npc_met_doctor: true, info_searched_details: true } })
-    expect(evaluate({ requiredFlags: ['npc_met_doctor', 'info_searched_details'] }, state)).toBe(true)
-  })
-
-  it('fails when a required flag is missing', () => {
-    const state = mockState({ flags: { npc_met_doctor: true } })
-    expect(evaluate({ requiredFlags: ['npc_met_doctor', 'info_searched_details'] }, state)).toBe(false)
-  })
-
-  it('fails when a required flag is explicitly false', () => {
-    const state = mockState({ flags: { npc_met_doctor: false } })
-    expect(evaluate({ requiredFlags: ['npc_met_doctor'] }, state)).toBe(false)
-  })
-
-  it('passes when no blocked flags are set', () => {
-    const state = mockState({ flags: {} })
-    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(true)
-  })
-
-  it('passes when a blocked flag is explicitly false', () => {
-    const state = mockState({ flags: { faction_betrayed_militia: false } })
-    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(true)
-  })
-
-  it('fails when a blocked flag is set to true', () => {
-    const state = mockState({ flags: { faction_betrayed_militia: true } })
-    expect(evaluate({ blockedFlags: ['faction_betrayed_militia'] }, state)).toBe(false)
-  })
-
   it('passes stat minimum check', () => {
     const state = mockState({
       stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5 },
@@ -111,14 +81,14 @@ describe('getAvailableChoices()', () => {
   const choices: Choice[] = [
     {
       id: 'choice_a',
-      text: 'Always available',
+      text: { zh: 'Always available' },
       conditions: {},
       effects: {},
       nextSceneId: 'scene_002',
     },
     {
       id: 'choice_b',
-      text: 'Requires leadership 3',
+      text: { zh: 'Requires leadership 3' },
       conditions: { requiredStats: [{ stat: 'leadership', min: 3 }] },
       effects: {},
       nextSceneId: 'scene_002',

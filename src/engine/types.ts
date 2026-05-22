@@ -1,6 +1,6 @@
-import type { KnownFlag } from './flagKeys'
-
-export type { KnownFlag }
+import type { GameFlag } from '@/data/flags'
+import { Locales } from '@/i18n/i18n-types'
+export type { GameFlag }
 
 // ─── Stat Keys ───────────────────────────────────────────────────────────────
 
@@ -10,8 +10,8 @@ export type PlayerStats = Record<StatKey, number>
 
 export interface StatDefinition {
   key: StatKey
-  label: string
-  description: string
+  label: LocaleString
+  description: LocaleString
   icon: string
   default: number
   min: number
@@ -25,8 +25,8 @@ export type ItemCategory = 'medical' | 'food' | 'tool' | 'weapon' | 'misc'
 
 export interface ItemDefinition {
   id: string
-  label: string
-  description: string
+  label: LocaleString
+  description: LocaleString
   category: ItemCategory
   stackable: boolean
   maxStack: number
@@ -53,8 +53,8 @@ export interface ItemCondition {
 }
 
 export interface ConditionSet {
-  requiredFlags?: KnownFlag[]
-  blockedFlags?: KnownFlag[]
+  requiredFlags?: GameFlag[]
+  blockedFlags?: GameFlag[]
   requiredStats?: StatCondition[]
   requiredItems?: ItemCondition[]
 }
@@ -65,9 +65,27 @@ export interface ItemEffect {
 }
 
 export interface EffectSet {
-  flags?: Partial<Record<KnownFlag, boolean>>
+  flags?: Partial<Record<GameFlag, boolean>>
   stats?: Partial<Record<StatKey, number>> // delta values
   items?: ItemEffect[]
+}
+
+// ─── Localisation ─────────────────────────────────────────────────────────────
+//
+// LocaleString is a map of locale → text.
+// Only the base locale (zh) is required. Other locales are optional —
+// the engine falls back to zh when a locale key is absent.
+//
+// In scene JSON:
+//   "narrative": [
+//     { "zh": "地铁又晚点了。" },
+//     { "zh": "你看到手机上有一段病毒视频。", "en": "A viral video is trending on your phone." }
+//   ]
+
+export type LocaleString = {
+  [L in Locales]?: string
+} & {
+  zh: string    // base locale always required
 }
 
 // ─── Scenes & Choices ─────────────────────────────────────────────────────────
@@ -80,19 +98,19 @@ export interface GameTime {
 
 export interface Choice {
   id: string
-  text: string
+  text: LocaleString
   conditions: ConditionSet
   effects: EffectSet
   nextSceneId: string
-  hint?: string // shown as a tooltip when choice is locked
+  hint?: LocaleString // shown as a tooltip when choice is locked
 }
 
 export interface Scene {
   id: string
-  title: string
+  title: LocaleString
   act: Act
   gameTime: GameTime
-  narrative: string[] // array of paragraphs
+  narrative: LocaleString[] // array of paragraphs
   conditions: ConditionSet
   choices: Choice[]
   onEnter?: EffectSet // effects applied automatically on scene entry
@@ -104,12 +122,12 @@ export type EndingType = 'bad' | 'neutral' | 'good' | 'secret'
 
 export interface Ending {
   id: string
-  title: string
+  title: LocaleString
   type: EndingType
-  priority: number // lower = checked first; good endings have higher priority
+  priority: number // lower = checked first; bad endings have higher priority
   conditions: ConditionSet
-  narrative: string[]
-  epilogue: string | null
+  narrative: LocaleString[]
+  epilogue: LocaleString | null
 }
 
 // ─── Game State ───────────────────────────────────────────────────────────────
@@ -124,7 +142,7 @@ export interface GameState {
   gameTime: GameTime
   stats: PlayerStats
   inventory: InventoryItem[]
-  flags: Partial<Record<KnownFlag, boolean>>
+  flags: Partial<Record<GameFlag, boolean>>
   visitedScenes: string[]
   choiceHistory: ChoiceRecord[]
   saveSlot: number

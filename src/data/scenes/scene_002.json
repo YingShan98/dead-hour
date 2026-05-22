@@ -1,0 +1,34 @@
+{
+  "id": "scene_002",
+  "title": { "zh": "意外与深夜推送" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -40 },
+  "narrative": [
+    { "zh": "回到旧出租屋，你打算把那台二手电焊机修好。就在拧最后一颗螺丝时，外壳边缘的毛边划破了你的中指。血珠子一下子涌了出来。" },
+    { "zh": "你翻遍抽屉也没找到创可贴。你不耐烦地扯了一截灰色宽胶带，绕着手指缠了两圈。胶带粘得非常牢，很快就止住了血。" },
+    { "zh": "晚上十点，手机突然连续振动。'【紧急】我市再发一例失踪案……听到隔壁传来类似动物咀嚼的异响。'咀嚼……这个词和报纸上的'啃咬'重叠在一起，让你整晚都在做噩梦。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_002_choice_a",
+      "text": { "zh": "【医疗】撕掉胶带，忍痛用工业酒精彻底消毒伤口。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 1, "morale": -2 },
+        "flags": { "medical_disinfected_wound": true, "medical_has_first_aid_training": true }
+      },
+      "nextSceneId": "scene_003"
+    },
+    {
+      "id": "scene_002_choice_b",
+      "text": { "zh": "【生存】不去管它。趁着还有网络，仔细查阅这些失踪案发生的具体位置。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "info_searched_details": true },
+        "stats": { "morale": -1 }
+      },
+      "nextSceneId": "scene_003"
+    }
+  ]
+}

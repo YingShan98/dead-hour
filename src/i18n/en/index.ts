@@ -1,48 +1,105 @@
-import type { BaseTranslation } from '../i18n-types'
+import type { Translation } from '../i18n-types'
 
-const en = {
-  // ── Title screen ─────────────────────────────────────────────────────────
-  tagline: '— Text Adventure Game —',
-  gameSubtitle: 'In the 48 hours before everything changes.',
-  newGame: 'New Game',
-  continue: 'Continue',
-  versionLabel: 'v0.1.0 — Independent Game',
+/**
+ * English translation — scaffolded and ready for translation.
+ *
+ * STATUS: Untranslated. The engine falls back to the base locale (zh)
+ * for any key that is absent here.
+ *
+ * TO TRANSLATE: fill in the string values below.
+ * Keys must exactly match the structure in src/i18n/zh/index.ts.
+ * Run `pnpm i18n:generate` after editing to regenerate types.
+ */
+const en: Translation = {
 
-  // ── Loading & errors ──────────────────────────────────────────────────────
-  loading: 'Loading...',
-  loadingScene: 'Loading scene…',
-  dismiss: 'Dismiss',
+  // ── General UI ─────────────────────────────────────────────────────────────
+  ui: {
+    loading:      'Loading…',
+    error:        'An error occurred',
+    dismiss:      'Dismiss',
+    back:         'Back',
+    confirm:      'Confirm',
+    cancel:       'Cancel',
+  },
 
-  // ── Game page ─────────────────────────────────────────────────────────────
-  yourMove: 'Your Move',
-  requirementsNotMet: 'Requirements not met',
+  // ── Title Page ─────────────────────────────────────────────────────────────
+  title: {
+    tagline:      '— a word adventure —',
+    subtitle:     '48 hours before everything changed.',
+    newGame:      'New Game',
+    continue:     'Continue',
+    version:      'v{version} — solo project',
+  },
 
-  // ── Stat panel ────────────────────────────────────────────────────────────
-  statusLabel: 'Status',
-  statHealth: 'Health',
-  statMorale: 'Morale',
-  statLeadership: 'Leadership',
-  statStealth: 'Stealth',
+  // ── Game Page ──────────────────────────────────────────────────────────────
+  game: {
+    yourMove:         'Your move',
+    loadingScene:     'Loading scene…',
+    requiresHint:     'Requires {hint}',
+    autoSaved:        'Auto-saved',
+  },
 
-  // ── Inventory panel ───────────────────────────────────────────────────────
-  inventoryLabel: 'Inventory',
-  nothingCarried: 'Nothing carried.',
+  // ── Time display ───────────────────────────────────────────────────────────
+  time: {
+    beforeOutbreak:   'T-{hours}h — Before the Outbreak',
+    dayOne:           'Day 1 — Hour Zero',
+    day:              'Day {day}',
+  },
 
-  // ── Scene time display ────────────────────────────────────────────────────
-  timeBeforeOutbreak: 'T-{hours:number} hours — Before Outbreak',
-  timeHourZero: 'Day 1 — Hour Zero',
-  timeDay: 'Day {days:number}',
+  // ── Stats ──────────────────────────────────────────────────────────────────
+  stats: {
+    label:        'Status',
+    health:       'Health',
+    morale:       'Morale',
+    leadership:   'Leadership',
+    stealth:      'Stealth',
+    trust:        'Trust',
+  },
 
-  // ── Ending screen ─────────────────────────────────────────────────────────
-  endingTypeBad: 'Bad Ending',
-  endingTypeNeutral: 'Neutral Ending',
-  endingTypeGood: 'Good Ending',
-  endingTypeSecret: 'Secret Ending',
-  noEndingData: 'No ending data found.',
-  returnToTitle: 'Return to Title',
-  playAgain: 'Play Again',
-  choicesMade: 'Choices Made: {count:number}',
-  scenesVisited: 'Scenes Visited: {count:number}',
-} satisfies BaseTranslation
+  // ── Inventory ──────────────────────────────────────────────────────────────
+  inventory: {
+    label:        'Inventory',
+    empty:        'Nothing carried.',
+    quantity:     '×{qty}',
+  },
+
+  // ── Ending Page ────────────────────────────────────────────────────────────
+  ending: {
+    type: {
+      bad:     'bad ending',
+      neutral: 'neutral ending',
+      good:    'good ending',
+      secret:  'secret ending',
+    },
+    choicesMade:    'Choices made: {count}',
+    scenesVisited:  'Scenes visited: {count}',
+    playAgain:      'Play Again',
+    returnToTitle:  'Return to Title',
+    noData:         'No ending data found.',
+  },
+
+  // ── Save slots ─────────────────────────────────────────────────────────────
+  save: {
+    slot:       'Save {slot}',
+    empty:      'Empty slot',
+    savedAt:    'Saved at {date}',
+  },
+
+  // ── Achievements ───────────────────────────────────────────────────────────
+  achievements: {
+    label:      'Achievements',
+    unlocked:   'Unlocked: {title}',
+    secret:     '???',
+  },
+
+  // ── Errors ─────────────────────────────────────────────────────────────────
+  errors: {
+    sceneNotFound:    'Scene not found: {id}',
+    saveNotFound:     'Save slot {slot} does not exist.',
+    choiceUnavailable:'That choice is no longer available.',
+    noGameLoaded:     'No game loaded.',
+  },
+
+}
 
 export default en

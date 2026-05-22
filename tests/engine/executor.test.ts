@@ -23,24 +23,6 @@ describe('applyEffects()', () => {
     expect(applyEffects(undefined, state)).toBe(state)
   })
 
-  it('sets flags correctly', () => {
-    const state = mockState()
-    const result = applyEffects({ flags: { npc_met_doctor: true } }, state)
-    expect(result.flags.npc_met_doctor).toBe(true)
-  })
-
-  it('explicitly sets a flag to false (unset)', () => {
-    const state = mockState({ flags: { npc_met_doctor: true } })
-    const result = applyEffects({ flags: { npc_met_doctor: false } }, state)
-    expect(result.flags.npc_met_doctor).toBe(false)
-  })
-
-  it('does not mutate original state', () => {
-    const state = mockState()
-    applyEffects({ flags: { npc_met_doctor: true } }, state)
-    expect(state.flags.npc_met_doctor).toBeUndefined()
-  })
-
   it('applies positive stat delta', () => {
     const state = mockState()
     const result = applyEffects({ stats: { leadership: 2 } }, state)

@@ -1,0 +1,34 @@
+{
+  "id": "scene_001",
+  "title": "报纸角落的阴影",
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -48 },
+  "narrative": [
+    { "zh": "周五傍晚五点半，你擦干净最后一块齿轮，搁在维修台边。钳工房里只剩下你一个人，空气中弥漫着冷却液和金属碎屑的味道。" },
+    { "zh": "你在校门口买了一份《城市晚报》。翻到社会版左下角，你看到三则失踪报道。报道末尾有一行不起眼的小字：‘据邻居反映，失踪前夜听见其屋内传出类似动物啃咬的声响。’" },
+    { "zh": "‘啃咬声’？城东住宅区里怎么会有这种动静。你盯着那行字看了几秒，本能地感到一阵寒意。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_001_choice_a",
+      "text": { "zh": "询问报刊亭老板最近是否听说过相关的传闻。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "act1_noticed_clues": true },
+        "stats": { "leadership": 1, "morale": -1 }
+      },
+      "nextSceneId": "scene_002"
+    },
+    {
+      "id": "scene_001_choice_b",
+      "text": { "zh": "不关你的事。把报纸折好塞进工具箱，回家。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "act1_ignored_clues": true },
+        "stats": { "morale": 0 }
+      },
+      "nextSceneId": "scene_002"
+    }
+  ]
+}

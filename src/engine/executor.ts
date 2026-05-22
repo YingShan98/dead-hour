@@ -1,5 +1,5 @@
 import type { EffectSet, GameState, StatKey } from './types'
-import statsData from '@/data/zh/stats.json'
+import statsData from '@/data/stats.json'
 
 const STAT_BOUNDS = Object.fromEntries(
   statsData.stats.map((s) => [s.key, { min: s.min, max: s.max }]),
@@ -13,14 +13,6 @@ export function applyEffects(effects: EffectSet | undefined, state: GameState): 
   if (!effects) return state
 
   let newState = { ...state }
-
-  // Apply flag changes
-  if (effects.flags && Object.keys(effects.flags).length > 0) {
-    newState = {
-      ...newState,
-      flags: { ...newState.flags, ...effects.flags },
-    }
-  }
 
   // Apply stat deltas, clamped to valid range
   if (effects.stats && Object.keys(effects.stats).length > 0) {

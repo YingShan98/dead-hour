@@ -7,20 +7,6 @@ import type { ConditionSet, GameState, Choice } from './types'
 export function evaluate(conditions: ConditionSet | undefined, state: GameState): boolean {
   if (!conditions) return true
 
-  // All required flags must be true
-  if (conditions.requiredFlags) {
-    for (const flag of conditions.requiredFlags) {
-      if (!state.flags[flag]) return false
-    }
-  }
-
-  // All blocked flags must be false/absent
-  if (conditions.blockedFlags) {
-    for (const flag of conditions.blockedFlags) {
-      if (state.flags[flag] === true) return false
-    }
-  }
-
   // All stat requirements must pass
   if (conditions.requiredStats) {
     for (const req of conditions.requiredStats) {

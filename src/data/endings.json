@@ -1,0 +1,69 @@
+{
+  "endings": [
+    {
+      "id": "ending_death_health",
+      "title": { "zh": "这座城市带走了你" },
+      "type": "bad",
+      "priority": 1,
+      "conditions": {
+        "requiredStats": [{ "stat": "health", "max": 0 }]
+      },
+      "narrative": [
+        { "zh": "你的身体撑不住了。这座你曾试图拯救的城市，已经不再需要你了。" },
+        { "zh": "但在某个地方，一个陌生人还记得你的名字。" }
+      ],
+      "epilogue": null
+    },
+    {
+      "id": "ending_death_morale",
+      "title": { "zh": "无声的崩塌" },
+      "type": "bad",
+      "priority": 2,
+      "conditions": {
+        "requiredStats": [{ "stat": "morale", "max": 0 }]
+      },
+      "narrative": [
+        { "zh": "最终击垮你的，不是那些死者。" },
+        { "zh": "你只是停下来了。坐了下去，没有再站起来。" },
+        { "zh": "城市在没有你的情况下继续运转。" }
+      ],
+      "epilogue": null
+    },
+    {
+      "id": "ending_solo_survivor",
+      "title": { "zh": "废墟中独行" },
+      "type": "neutral",
+      "priority": 10,
+      "conditions": {
+        "requiredFlags": ["survived_one_year"],
+        "blockedFlags": ["has_group"],
+        "requiredStats": [{ "stat": "health", "min": 1 }]
+      },
+      "narrative": [
+        { "zh": "你活下来了。一个人。" },
+        { "zh": "这座城市现在更安静了——不是平静，只是空旷。" },
+        { "zh": "你不再数日子。这已经不像是活着了。" }
+      ],
+      "epilogue": { "zh": "又过了三个月，你在废墟中翻找物资，偶然捕捉到一段来自海岸的无线电信号。" }
+    },
+    {
+      "id": "ending_community_leader",
+      "title": { "zh": "最后的城市" },
+      "type": "good",
+      "priority": 20,
+      "conditions": {
+        "requiredFlags": ["survived_one_year", "has_group", "built_shelter"],
+        "requiredStats": [
+          { "stat": "leadership", "min": 15 },
+          { "stat": "trust", "min": 12 }
+        ]
+      },
+      "narrative": [
+        { "zh": "你不只是活了下来。你建造了一些东西。" },
+        { "zh": "现在有四十三个人叫这里家。他们为口粮争吵，为值守班次拌嘴，为谁住角落那间房计较。" },
+        { "zh": "普通的问题。人的问题。你从没想到自己会为这些事感到庆幸。" }
+      ],
+      "epilogue": { "zh": "三年后，另一个定居点发来无线电信号。他们已经听说了你的名字。" }
+    }
+  ]
+}

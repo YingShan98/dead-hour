@@ -2,8 +2,8 @@
   "items": [
     {
       "id": "medkit",
-      "label": "急救包",
-      "description": "基础急救用品。恢复 3 点生命值。",
+      "label": { "zh": "急救包" },
+      "description": { "zh": "基础急救用品。恢复 3 点生命值。" },
       "category": "medical",
       "stackable": true,
       "maxStack": 5,
@@ -12,8 +12,8 @@
     },
     {
       "id": "canned_food",
-      "label": "罐头",
-      "description": "耐储存的食物。恢复 1 点士气。",
+      "label": { "zh": "罐头" },
+      "description": { "zh": "耐储存的食物。恢复 1 点士气。" },
       "category": "food",
       "stackable": true,
       "maxStack": 20,
@@ -22,8 +22,8 @@
     },
     {
       "id": "steel_plates",
-      "label": "加厚铁板",
-      "description": "2mm加厚钢板。沉重但极度坚固，加固大门的绝佳材料。",
+      "label": { "zh": "加厚铁板" },
+      "description": { "zh": "2mm加厚钢板。沉重但极度坚固，加固大门的绝佳材料。" },
       "category": "misc",
       "stackable": true,
       "maxStack": 5,
@@ -32,8 +32,8 @@
     },
     {
       "id": "iron_wire",
-      "label": "细铁丝网",
-      "description": "锋利的铁丝，适合用来制作迟滞敌人的陷阱。",
+      "label": { "zh": "细铁丝网" },
+      "description": { "zh": "锋利的铁丝，适合用来制作迟滞敌人的陷阱。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 5,
@@ -42,8 +42,8 @@
     },
     {
       "id": "industrial_glue",
-      "label": "工业强力胶",
-      "description": "粘性极强，用于固定陷阱或紧急修补。",
+      "label": { "zh": "工业强力胶" },
+      "description": { "zh": "粘性极强，用于固定陷阱或紧急修补。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 10,
@@ -52,8 +52,8 @@
     },
     {
       "id": "wide_tape",
-      "label": "灰色宽胶带",
-      "description": "粘性极强，适合紧急修补工具或封死裂缝。",
+      "label": { "zh": "灰色宽胶带" },
+      "description": { "zh": "粘性极强，适合紧急修补工具或封死裂缝。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 10,
@@ -62,8 +62,8 @@
     },
     {
       "id": "modified_grinder",
-      "label": "改装角磨机",
-      "description": "缠绕了铁丝网护手的角磨机。虽然笨重，但杀伤力惊人。",
+      "label": { "zh": "改装角磨机" },
+      "description": { "zh": "缠绕了铁丝网护手的角磨机。虽然笨重，但杀伤力惊人。" },
       "category": "weapon",
       "stackable": false,
       "maxStack": 1,

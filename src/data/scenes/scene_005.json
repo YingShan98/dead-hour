@@ -1,0 +1,64 @@
+{
+  "id": "scene_005",
+  "title": { "zh": "最后十分钟" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": 0 },
+  "narrative": [
+    { "zh": "楼道里的声控灯一盏接一盏亮起。有人在楼下尖叫，有人在用身体撞门，还有什么东西拖着脚步慢慢上楼。" },
+    { "zh": "你把工具摊在地上，听见自己的呼吸压在耳膜上。现在没有完整计划，只有你过去两天留下的东西。" },
+    { "zh": "第一波冲击马上就到。你只能选择一种活下来的方式。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_005_choice_a",
+      "text": { "zh": "【铁板加固】把三张加厚铁板绞在门内侧，守住出租屋。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "steel_plates", "minQuantity": 3 }]
+      },
+      "hint": { "zh": "需要 加厚铁板 x3" },
+      "effects": {},
+      "nextSceneId": "scene_005_fortified"
+    },
+    {
+      "id": "scene_005_choice_b",
+      "text": { "zh": "【走廊陷阱】用铁丝网和强力胶封住楼道转角。" },
+      "conditions": {
+        "requiredItems": [
+          { "itemId": "iron_wire", "minQuantity": 2 },
+          { "itemId": "industrial_glue", "minQuantity": 1 }
+        ]
+      },
+      "hint": { "zh": "需要 细铁丝网 x2，工业强力胶 x1" },
+      "effects": {},
+      "nextSceneId": "scene_005_trapped"
+    },
+    {
+      "id": "scene_005_choice_c",
+      "text": { "zh": "【提前撤离】根据打听来的位置，趁楼道还没堵死时离开。" },
+      "conditions": {
+        "requiredFlags": ["info_knows_details"]
+      },
+      "hint": { "zh": "需要 事件位置线索" },
+      "effects": {},
+      "nextSceneId": "scene_005_scout"
+    },
+    {
+      "id": "scene_005_choice_d",
+      "text": { "zh": "【提前撤离】根据查到的失踪案位置，避开最危险的街区。" },
+      "conditions": {
+        "requiredFlags": ["info_searched_details"]
+      },
+      "hint": { "zh": "需要 失踪案资料" },
+      "effects": {},
+      "nextSceneId": "scene_005_scout"
+    },
+    {
+      "id": "scene_005_choice_e",
+      "text": { "zh": "【简易防线】用衣柜顶住大门，握紧手边能用的一切。" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_005_unprepared"
+    }
+  ]
+}

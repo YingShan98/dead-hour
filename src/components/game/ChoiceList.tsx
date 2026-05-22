@@ -1,6 +1,7 @@
 import type { Choice, GameState } from '@/engine/types'
 import { getAvailableChoices } from '@/engine/evaluator'
-import { useI18nContext } from '@/i18n/i18n-react'
+import { useI18n, interpolate } from '@/i18n/i18n-react'
+import { resolveLocaleString } from '@/i18n/localeString'
 
 interface Props {
   choices: Choice[]
@@ -10,15 +11,15 @@ interface Props {
 }
 
 export default function ChoiceList({ choices, gameState, onSelect, disabled }: Props) {
-  const { LL } = useI18nContext()
+  const { locale, LL } = useI18n()
+
   const available = getAvailableChoices(choices, gameState)
-  const locked = choices.filter((c) => !available.find((a) => a.id === c.id))
+  const locked = choices.filter(c => !available.find(a => a.id === c.id))
 
   return (
     <div className="flex flex-col gap-2 mt-8">
-      <p className="ui-label text-muted mb-2">{LL.yourMove()}</p>
+      <p className="ui-label text-muted mb-2">{LL.game.yourMove}</p>
 
-      {/* Available choices */}
       {available.map((choice, i) => (
         <button
           key={choice.id}
@@ -27,25 +28,36 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
           className="choice-btn animate-slide-up"
           style={{ animationDelay: `${300 + i * 80}ms`, opacity: 0, animationFillMode: 'forwards' }}
         >
-          {choice.text}
+          {resolveLocaleString(choice.text, locale)}
         </button>
       ))}
 
-      {/* Locked choices — shown greyed out with hint */}
-      {locked.map((choice) => (
-        <div
-          key={choice.id}
-          className="w-full px-4 py-3 rounded border border-border
-                     font-body text-muted text-base bg-surface
-                     cursor-not-allowed select-none"
-          title={choice.hint ?? LL.requirementsNotMet()}
-        >
-          <span className="opacity-40">{choice.text}</span>
-          {choice.hint && (
-            <span className="ml-3 ui-label text-xs text-muted opacity-60">[{choice.hint}]</span>
-          )}
-        </div>
-      ))}
+      {locked.map(choice => {
+        const hintText = choice.hint
+          ? interpolate(LL.game.requiresHint, {
+              hint: resolveLocaleString(choice.hint, locale),
+            })
+          : undefined
+
+        return (
+          <div
+            key={choice.id}
+            className="w-full px-4 py-3 rounded border border-border
+                       font-body text-muted text-base bg-surface
+                       cursor-not-allowed select-none"
+            title={hintText}
+          >
+            <span className="opacity-40">
+              {resolveLocaleString(choice.text, locale)}
+            </span>
+            {hintText && (
+              <span className="ml-3 ui-label text-xs text-muted opacity-60">
+                [{hintText}]
+              </span>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

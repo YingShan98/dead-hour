@@ -5,13 +5,11 @@ import SceneDisplay from '@/components/game/SceneDisplay'
 import ChoiceList from '@/components/game/ChoiceList'
 import StatPanel from '@/components/game/StatPanel'
 import InventoryPanel from '@/components/game/InventoryPanel'
-import { useI18nContext } from '@/i18n/i18n-react'
 
 export default function GamePage() {
   const navigate = useNavigate()
   const { currentScene, gameState, triggeredEnding, isLoading, error, selectChoice, dismissError } =
     useGameStore()
-  const { LL } = useI18nContext()
 
   useEffect(() => {
     if (!currentScene && !isLoading) {
@@ -28,7 +26,7 @@ export default function GamePage() {
   if (!currentScene || !gameState) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="ui-label text-muted animate-flicker">{LL.loading()}</p>
+        <p className="ui-label text-muted animate-flicker">Loading...</p>
       </div>
     )
   }
@@ -62,7 +60,7 @@ export default function GamePage() {
             >
               <span>{error}</span>
               <button onClick={dismissError} className="ui-label text-xs text-muted ml-4">
-                {LL.dismiss()}
+                Dismiss
               </button>
             </div>
           )}
@@ -71,7 +69,7 @@ export default function GamePage() {
           {isLoading && (
             <div className="flex items-center gap-2 mb-6">
               <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <p className="ui-label text-muted text-xs">{LL.loadingScene()}</p>
+              <p className="ui-label text-muted text-xs">Loading scene…</p>
             </div>
           )}
 

@@ -5,11 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "i18n": "typesafe-i18n",
-    "sync-flags": "node scripts/sync-flags.mjs",
-    "gen-flags": "node scripts/gen-flag-types.mjs",
-    "flags": "pnpm sync-flags && pnpm gen-flags",
-    "prebuild": "pnpm flags && pnpm validate-scenes",
+    "prebuild": "pnpm validate-scenes",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -19,7 +15,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate-scenes": "node scripts/validate-scenes.mjs"
+    "validate-scenes": "node scripts/validate-scenes.mjs",
+    "i18n:generate": "typesafe-i18n --no-watch"
   },
   "engines": {
     "node": ">=18",

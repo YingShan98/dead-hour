@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
 import { listSaves } from '@/engine/saveManager'
-import { useI18nContext } from '@/i18n/i18n-react'
+import { useI18n, interpolate } from '@/i18n/i18n-react'
 
 export default function TitlePage() {
   const navigate = useNavigate()
   const { startNewGame, loadFromSave, isLoading } = useGameStore()
-  const { LL } = useI18nContext()
+  const { LL, locale, setLocale, supportedLocales, localeLabel } = useI18n()
 
   const saves = listSaves()
-  const hasSave = saves.some((s) => s.exists)
+  const hasSave = saves.some(s => s.exists)
 
   async function handleNewGame() {
     await startNewGame(0)
@@ -17,7 +17,7 @@ export default function TitlePage() {
   }
 
   async function handleContinue() {
-    const latestSave = saves.find((s) => s.exists)
+    const latestSave = saves.find(s => s.exists)
     if (!latestSave) return
     await loadFromSave(latestSave.slot)
     navigate('/game')
@@ -36,12 +36,19 @@ export default function TitlePage() {
       />
 
       <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
+
         {/* Title block */}
         <div className="text-center">
-          <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.tagline()}</p>
-          <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
-          <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
-          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.gameSubtitle()}</p>
+          <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.title.tagline}</p>
+          <h1 className="font-display text-7xl text-text leading-none animate-flicker">
+            DEAD
+          </h1>
+          <h1 className="font-display text-7xl text-accent leading-none">
+            HOUR
+          </h1>
+          <p className="mt-6 font-body text-text-dim text-lg italic">
+            {LL.title.subtitle}
+          </p>
         </div>
 
         {/* Menu */}
@@ -52,7 +59,7 @@ export default function TitlePage() {
             className="choice-btn text-center font-display text-xl tracking-wide py-4
                        border-accent text-accent hover:bg-[#1e0a0a]"
           >
-            {isLoading ? LL.loading() : LL.newGame()}
+            {isLoading ? LL.ui.loading : LL.title.newGame}
           </button>
 
           {hasSave && (
@@ -61,13 +68,32 @@ export default function TitlePage() {
               disabled={isLoading}
               className="choice-btn text-center"
             >
-              {LL.continue()}
+              {LL.title.continue}
             </button>
           )}
         </div>
 
+        {/* Locale switcher */}
+        <div className="flex gap-3">
+          {supportedLocales.map(l => (
+            <button
+              key={l}
+              onClick={() => setLocale(l)}
+              className={`ui-label text-xs px-3 py-1 rounded border transition-colors ${
+                locale === l
+                  ? 'border-accent text-accent'
+                  : 'border-border text-muted hover:border-text-dim'
+              }`}
+            >
+              {localeLabel(l)}
+            </button>
+          ))}
+        </div>
+
         {/* Footer */}
-        <p className="ui-label text-muted text-xs">{LL.versionLabel()}</p>
+        <p className="ui-label text-muted text-xs">
+          {interpolate(LL.title.version, { version: '0.1.0' })}
+        </p>
       </div>
     </div>
   )
