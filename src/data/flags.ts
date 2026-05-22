@@ -100,6 +100,52 @@ export type GameFlag =
   | 'survived_first_winter'
   | 'survived_one_year'
 
+  // ── Act 1 narrative ──────────────────────────────────────────────────────
+  | 'act1_noticed_clues'
+  | 'act1_ignored_clues'
+
+  // ── Act 2 narrative ──────────────────────────────────────────────────────
+  | 'act2_stayed_in_city'
+  | 'act2_started_scavenging'
+  | 'act2_fled_toward_suburbs'
+  | 'draft_act2_frontier'
+
+  // ── Preparation ──────────────────────────────────────────────────────────
+  | 'prep_bought_plates'
+  | 'prep_trap_strategy'
+  | 'prep_door_fortified'
+  | 'prep_hallway_trapped'
+  | 'prep_weak_defense'
+  | 'resource_energy_prepared'
+  | 'resource_check'
+
+  // ── Medical ───────────────────────────────────────────────────────────────
+  | 'medical_disinfected_wound'
+  | 'medical_has_first_aid_training'
+
+  // ── Information gathering ─────────────────────────────────────────────────
+  | 'info_searched_details'
+  | 'info_knows_details'
+  | 'info_knows_city_layout'
+  | 'info_knows_infected_pattern'
+
+  // ── Social ────────────────────────────────────────────────────────────────
+  | 'social_warned_neighbor'
+  | 'social_warned_neighbors'
+  | 'social_checked_on_neighbors'
+
+  // ── Shelter & mobility ────────────────────────────────────────────────────
+  | 'shelter_has_home_base'
+  | 'mobility_left_home_early'
+
+  // ── NPC-specific ─────────────────────────────────────────────────────────
+  | 'npc_pei_warning_received'
+  | 'npc_helped_the_kid'
+
+  // ── Risk / stealth ────────────────────────────────────────────────────────
+  | 'risk_made_noise_at_hour_zero'
+  | 'stealth_sealed_store_door'
+
   // ── Hidden / secret ───────────────────────────────────────────────────────
   | 'wrote_journal'           // enables secret ending
   | 'rested_at_safehouse'

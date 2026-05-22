@@ -1,6 +1,6 @@
 {
   "id": "scene_001",
-  "title": "报纸角落的阴影",
+  "title": { "zh": "报纸角落的阴影" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -48 },
   "narrative": [
