@@ -1,14 +1,15 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
-import { useI18n, interpolate } from '@/i18n/i18n-react'
+import { useI18n } from '@/i18n/useI18n'
+import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
 import type { EndingType } from '@/engine/types'
 
 const TYPE_COLOURS: Record<EndingType, string> = {
-  bad:     'text-danger',
+  bad: 'text-danger',
   neutral: 'text-warning',
-  good:    'text-safe',
-  secret:  'text-accent',
+  good: 'text-safe',
+  secret: 'text-accent',
 }
 
 export default function EndingPage() {
@@ -39,10 +40,7 @@ export default function EndingPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
       <div className="max-w-lg w-full flex flex-col gap-8 animate-fade-in">
-
-        <p className={`ui-label tracking-[0.25em] ${colourClass}`}>
-          — {typeLabel} —
-        </p>
+        <p className={`ui-label tracking-[0.25em] ${colourClass}`}>— {typeLabel} —</p>
 
         <h1 className="font-display text-5xl text-text leading-tight">{title}</h1>
 
@@ -70,8 +68,12 @@ export default function EndingPage() {
 
         {gameState && (
           <div className="flex gap-6 font-ui text-xs text-text-dim">
-            <span>{interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}</span>
-            <span>{interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}</span>
+            <span>
+              {interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}
+            </span>
+            <span>
+              {interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}
+            </span>
           </div>
         )}
 
@@ -82,10 +84,7 @@ export default function EndingPage() {
           >
             {LL.ending.playAgain}
           </button>
-          <button
-            onClick={() => navigate('/')}
-            className="choice-btn text-center"
-          >
+          <button onClick={() => navigate('/')} className="choice-btn text-center">
             {LL.ending.returnToTitle}
           </button>
         </div>

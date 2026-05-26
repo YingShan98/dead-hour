@@ -1,7 +1,8 @@
-import type { Choice, GameState } from '@/engine/types'
 import { getAvailableChoices } from '@/engine/evaluator'
-import { useI18n, interpolate } from '@/i18n/i18n-react'
+import { useI18n } from '@/i18n/useI18n'
+import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString } from '@/i18n/localeString'
+import type { Choice, GameState } from '@/engine/types'
 
 interface Props {
   choices: Choice[]
@@ -14,7 +15,7 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
   const { locale, LL } = useI18n()
 
   const available = getAvailableChoices(choices, gameState)
-  const locked = choices.filter(c => !available.find(a => a.id === c.id))
+  const locked = choices.filter((c) => !available.find((a) => a.id === c.id))
 
   return (
     <div className="flex flex-col gap-2 mt-8">
@@ -32,7 +33,7 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
         </button>
       ))}
 
-      {locked.map(choice => {
+      {locked.map((choice) => {
         const hintText = choice.hint
           ? interpolate(LL.game.requiresHint, {
               hint: resolveLocaleString(choice.hint, locale),
@@ -47,13 +48,9 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
                        cursor-not-allowed select-none"
             title={hintText}
           >
-            <span className="opacity-40">
-              {resolveLocaleString(choice.text, locale)}
-            </span>
+            <span className="opacity-40">{resolveLocaleString(choice.text, locale)}</span>
             {hintText && (
-              <span className="ml-3 ui-label text-xs text-muted opacity-60">
-                [{hintText}]
-              </span>
+              <span className="ml-3 ui-label text-xs text-muted opacity-60">[{hintText}]</span>
             )}
           </div>
         )

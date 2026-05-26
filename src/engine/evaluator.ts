@@ -7,7 +7,19 @@ import type { ConditionSet, GameState, Choice } from './types'
 export function evaluate(conditions: ConditionSet | undefined, state: GameState): boolean {
   if (!conditions) return true
 
-  // All stat requirements must pass
+  // ── Flags ──────────────────────────────────────────────────────────────────
+  if (conditions.requiredFlags) {
+    for (const flag of conditions.requiredFlags) {
+      if (!state.flags[flag]) return false
+    }
+  }
+  if (conditions.blockedFlags) {
+    for (const flag of conditions.blockedFlags) {
+      if (state.flags[flag] === true) return false
+    }
+  }
+
+  // ── Stats ──────────────────────────────────────────────────────────────────
   if (conditions.requiredStats) {
     for (const req of conditions.requiredStats) {
       const value = state.stats[req.stat]
@@ -16,7 +28,7 @@ export function evaluate(conditions: ConditionSet | undefined, state: GameState)
     }
   }
 
-  // All item requirements must pass
+  // ── Items ──────────────────────────────────────────────────────────────────
   if (conditions.requiredItems) {
     for (const req of conditions.requiredItems) {
       const item = state.inventory.find((i) => i.itemId === req.itemId)
@@ -26,12 +38,34 @@ export function evaluate(conditions: ConditionSet | undefined, state: GameState)
     }
   }
 
+  // ── Security ───────────────────────────────────────────────────────────────
+  if (conditions.security) {
+    if (conditions.security.min !== undefined && state.security < conditions.security.min)
+      return false
+    if (conditions.security.max !== undefined && state.security > conditions.security.max)
+      return false
+  }
+
+  // ── Time remaining ─────────────────────────────────────────────────────────
+  if (conditions.timeRemaining) {
+    if (
+      conditions.timeRemaining.min !== undefined &&
+      state.timeRemaining < conditions.timeRemaining.min
+    )
+      return false
+  }
+
   return true
 }
 
 /**
- * Filters a list of choices to only those available to the player right now.
+ * Filters choices to only those the player can currently select.
+ * Choices failing conditions are returned separately for locked display.
  */
 export function getAvailableChoices(choices: Choice[], state: GameState): Choice[] {
   return choices.filter((choice) => evaluate(choice.conditions, state))
+}
+
+export function getLockedChoices(choices: Choice[], state: GameState): Choice[] {
+  return choices.filter((c) => !evaluate(c.conditions, state))
 }

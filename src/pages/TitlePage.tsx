@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
 import { listSaves } from '@/engine/saveManager'
-import { useI18n, interpolate } from '@/i18n/i18n-react'
+import { useI18n } from '@/i18n/useI18n'
+import { interpolate } from '@/i18n/interpolate'
 
 export default function TitlePage() {
   const navigate = useNavigate()
@@ -9,7 +10,7 @@ export default function TitlePage() {
   const { LL, locale, setLocale, supportedLocales, localeLabel } = useI18n()
 
   const saves = listSaves()
-  const hasSave = saves.some(s => s.exists)
+  const hasSave = saves.some((s) => s.exists)
 
   async function handleNewGame() {
     await startNewGame(0)
@@ -17,7 +18,7 @@ export default function TitlePage() {
   }
 
   async function handleContinue() {
-    const latestSave = saves.find(s => s.exists)
+    const latestSave = saves.find((s) => s.exists)
     if (!latestSave) return
     await loadFromSave(latestSave.slot)
     navigate('/game')
@@ -36,19 +37,12 @@ export default function TitlePage() {
       />
 
       <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
-
         {/* Title block */}
         <div className="text-center">
           <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.title.tagline}</p>
-          <h1 className="font-display text-7xl text-text leading-none animate-flicker">
-            DEAD
-          </h1>
-          <h1 className="font-display text-7xl text-accent leading-none">
-            HOUR
-          </h1>
-          <p className="mt-6 font-body text-text-dim text-lg italic">
-            {LL.title.subtitle}
-          </p>
+          <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
+          <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
+          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.title.subtitle}</p>
         </div>
 
         {/* Menu */}
@@ -75,7 +69,7 @@ export default function TitlePage() {
 
         {/* Locale switcher */}
         <div className="flex gap-3">
-          {supportedLocales.map(l => (
+          {supportedLocales.map((l) => (
             <button
               key={l}
               onClick={() => setLocale(l)}

@@ -1,0 +1,62 @@
+{
+  "id": "scene_crisis_arrival",
+  "title": { "zh": "它们到了" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 12 },
+  "onEnter": {
+    "flags": { "survived_first_night": true },
+    "stats": {},
+    "items": []
+  },
+  "narrative": [
+    { "zh": "楼道里传来声音。" },
+    {
+      "zh": "不是脚步声，不是人声——是一种钝的、拖拽的声响，像什么很重的东西正在被沿着楼梯往上拉。"
+    },
+    { "zh": "你看了一眼大门。" },
+    { "zh": "然后看了一眼你花了多少时间加固它。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_crisis_arrival_choice_a",
+      "text": { "zh": "守住。门是死的，你是活的——只要不开门，就还有时间。" },
+      "conditions": {
+        "security": { "min": 40 }
+      },
+      "hint": { "zh": "需要防御指数 40+" },
+      "effects": {
+        "stats": { "will": 2, "morale": -2 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_crisis_arrival_choice_b",
+      "text": { "zh": "窗户。六楼，但有水管。趁它们还没到这层——" },
+      "conditions": {
+        "requiredStats": [{ "stat": "stealth", "min": 2 }]
+      },
+      "hint": { "zh": "需要潜行 2+" },
+      "effects": {
+        "stats": { "health": -2, "will": 1, "stealth": 1 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_crisis_arrival_choice_c",
+      "text": { "zh": "裤兜里的那串钥匙。货车在楼下。现在。" },
+      "conditions": {
+        "requiredFlags": ["truck_key_found"],
+        "requiredItems": [{ "itemId": "truck_key" }]
+      },
+      "hint": { "zh": "需要：货车钥匙" },
+      "effects": {
+        "stats": { "health": -1, "morale": 2 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_110"
+    }
+  ]
+}

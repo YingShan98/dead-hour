@@ -8,7 +8,42 @@
       "stackable": true,
       "maxStack": 5,
       "usable": true,
-      "useEffect": { "stats": { "health": 3, "infection": -1 } }
+      "useEffect": {
+        "stats": {
+          "health": 3,
+          "infection": -1
+        }
+      }
+    },
+    {
+      "id": "antibiotic",
+      "label": { "zh": "抗生素" },
+      "description": { "zh": "压制感染扩散。使用后感染值-2，但不回复生命。" },
+      "category": "medical",
+      "stackable": true,
+      "maxStack": 5,
+      "usable": true,
+      "useEffect": {
+        "stats": {
+          "infection": -2,
+          "morale": 1
+        }
+      }
+    },
+    {
+      "id": "painkillers",
+      "label": { "zh": "止痛药" },
+      "description": { "zh": "缓解疼痛。回复1点生命值和1点士气。" },
+      "category": "medical",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "useEffect": {
+        "stats": {
+          "health": 1,
+          "morale": 1
+        }
+      }
     },
     {
       "id": "canned_food",
@@ -18,12 +53,44 @@
       "stackable": true,
       "maxStack": 20,
       "usable": true,
-      "useEffect": { "stats": { "morale": 1 } }
+      "useEffect": {
+        "stats": {
+          "morale": 1
+        }
+      }
+    },
+    {
+      "id": "high_calorie_food",
+      "label": { "zh": "高能罐头" },
+      "description": { "zh": "高热量应急食品。回复2点生命值和2点士气，意志+1。" },
+      "category": "food",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "useEffect": {
+        "stats": {
+          "health": 2,
+          "morale": 2,
+          "will": 1
+        }
+      }
+    },
+    {
+      "id": "radio",
+      "label": { "zh": "手提收音机" },
+      "description": { "zh": "能接收广播信号。解锁基于无线电的场景选项。" },
+      "category": "tool",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "useEffect": null
     },
     {
       "id": "iron_plate",
       "label": { "zh": "加厚铁板" },
-      "description": { "zh": "2mm厚铁板，约七十乘以百毫米。可用螺丝固定在门扇内侧，大幅提升门的抗冲击能力。" },
+      "description": {
+        "zh": "2mm厚铁板，约七十乘以百毫米。可用螺丝固定在门扇内侧，大幅提升门的抗冲击能力。"
+      },
       "category": "tool",
       "stackable": true,
       "maxStack": 5,
@@ -33,7 +100,7 @@
     {
       "id": "duct_tape",
       "label": { "zh": "宽胶带" },
-      "description": { "zh": "灰色，约公分宽，粘性极好。用途很广。" },
+      "description": { "zh": "灰色，约十公分宽，粘性极好。加固任何东西都有用。" },
       "category": "tool",
       "stackable": true,
       "maxStack": 10,
@@ -41,19 +108,9 @@
       "useEffect": null
     },
     {
-      "id": "painkillers",
-      "label": { "zh": "止疼药" },
-      "description": { "zh": "缓解疼痛。恢复1点生命值和1点士气。" },
-      "category": "medical",
-      "stackable": true,
-      "maxStack": 10,
-      "usable": true,
-      "useEffect": { "stats": { "health": 1, "morale": 1 } }
-    },
-    {
-      "id": "radio",
-      "label": { "zh": "手提收音机" },
-      "description": { "zh": "能接收广播信号。解锁基于无线电的场景选项。" },
+      "id": "insulated_gloves",
+      "label": { "zh": "绝缘厚手套" },
+      "description": { "zh": "电工级绝缘手套。探查危险区域时可防止伤口沾染污血，阻断感染。" },
       "category": "tool",
       "stackable": false,
       "maxStack": 1,
@@ -71,10 +128,30 @@
       "useEffect": null
     },
     {
+      "id": "steel_pipe",
+      "label": { "zh": "长钢管" },
+      "description": { "zh": "一米二，够重。近战选项时保持距离的唯一选择。" },
+      "category": "weapon",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "useEffect": null
+    },
+    {
       "id": "angle_grinder",
       "label": { "zh": "角磨机（改装）" },
       "description": { "zh": "缠了铁丝网护手的改装角磨机。工具，不是武器——但也多用途。" },
       "category": "weapon",
+      "stackable": false,
+      "maxStack": 1,
+      "usable": false,
+      "useEffect": null
+    },
+    {
+      "id": "truck_key",
+      "label": { "zh": "重型货车钥匙" },
+      "description": { "zh": "邻居陈师傅的卡车备用钥匙。车停在楼下。后期解锁「驾车逃生」路线。" },
+      "category": "misc",
       "stackable": false,
       "maxStack": 1,
       "usable": false,

@@ -9,10 +9,7 @@ import type { Locales } from './i18n-types'
  *   const { locale } = useI18n()
  *   const text = resolveLocaleString(scene.title, locale)
  */
-export function resolveLocaleString(
-  value: LocaleString,
-  locale: Locales,
-): string {
+export function resolveLocaleString(value: LocaleString, locale: Locales): string {
   return value[locale] ?? value.zh
 }
 
@@ -20,9 +17,6 @@ export function resolveLocaleString(
  * Resolves an array of LocaleStrings to plain strings.
  * Useful for scene narrative paragraphs.
  */
-export function resolveLocaleStrings(
-  values: LocaleString[],
-  locale: Locales,
-): string[] {
-  return values.map(v => resolveLocaleString(v, locale))
+export function resolveLocaleStrings(values: LocaleString[], locale: Locales): string[] {
+  return values.map((v) => resolveLocaleString(v, locale))
 }

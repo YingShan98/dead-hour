@@ -9,7 +9,7 @@ import {
 
 describe('FLAG_REGISTRY', () => {
   it('has no duplicate keys', () => {
-    const keys = FLAG_REGISTRY.map(f => f.key)
+    const keys = FLAG_REGISTRY.map((f) => f.key)
     const unique = new Set(keys)
     expect(unique.size).toBe(keys.length)
   })
@@ -22,7 +22,7 @@ describe('FLAG_REGISTRY', () => {
 
   it('every achievement has a unique id', () => {
     const achievements = getAllAchievements()
-    const ids = achievements.map(a => a.id)
+    const ids = achievements.map((a) => a.id)
     const unique = new Set(ids)
     expect(unique.size).toBe(ids.length)
   })
@@ -39,14 +39,14 @@ describe('getFlagDefinition()', () => {
 describe('getAchievementFlags()', () => {
   it('returns only flags with achievements attached', () => {
     const flags = getAchievementFlags()
-    expect(flags.every(f => f.achievement !== null)).toBe(true)
+    expect(flags.every((f) => f.achievement !== null)).toBe(true)
   })
 })
 
 describe('getFlagsByCategory()', () => {
   it('returns only flags of the requested category', () => {
     const survival = getFlagsByCategory('survival')
-    expect(survival.every(f => f.category === 'survival')).toBe(true)
+    expect(survival.every((f) => f.category === 'survival')).toBe(true)
     expect(survival.length).toBeGreaterThan(0)
   })
 })

@@ -1,10 +1,18 @@
 import type { GameFlag } from '@/data/flags'
-import { Locales } from '@/i18n/i18n-types'
+import type { Locales } from '@/i18n/i18n-types'
 export type { GameFlag }
 
 // ─── Stat Keys ───────────────────────────────────────────────────────────────
+// Character stats — deltas applied by executor, clamped to min/max
 
-export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust' | 'infection' | 'will'
+export type StatKey =
+  | 'health'
+  | 'morale'
+  | 'leadership'
+  | 'stealth'
+  | 'trust'
+  | 'infection' // 0-10  viral progression — hidden
+  | 'will' // 0-10  psychological resistance — hidden
 
 export type PlayerStats = Record<StatKey, number>
 
@@ -17,6 +25,7 @@ export interface StatDefinition {
   min: number
   max: number
   visible: boolean
+  dangerThreshold?: number // stat value at which UI shows warning colour
 }
 
 // ─── Items ────────────────────────────────────────────────────────────────────
@@ -52,11 +61,22 @@ export interface ItemCondition {
   minQuantity?: number
 }
 
+export interface SecurityCondition {
+  min?: number
+  max?: number
+}
+
+export interface TimeCondition {
+  min?: number // timeRemaining must be >= this
+}
+
 export interface ConditionSet {
   requiredFlags?: GameFlag[]
   blockedFlags?: GameFlag[]
   requiredStats?: StatCondition[]
   requiredItems?: ItemCondition[]
+  security?: SecurityCondition // gate on fortification level
+  timeRemaining?: TimeCondition // gate on remaining countdown
 }
 
 export interface ItemEffect {
@@ -66,8 +86,10 @@ export interface ItemEffect {
 
 export interface EffectSet {
   flags?: Partial<Record<GameFlag, boolean>>
-  stats?: Partial<Record<StatKey, number>> // delta values
+  stats?: Partial<Record<StatKey, number>> // delta values — clamped by executor
   items?: ItemEffect[]
+  security?: number // delta to security index (positive = fortification gained)
+  timeCost?: number // hours consumed from countdown (positive number)
 }
 
 // ─── Localisation ─────────────────────────────────────────────────────────────
@@ -85,7 +107,7 @@ export interface EffectSet {
 export type LocaleString = {
   [L in Locales]?: string
 } & {
-  zh: string    // base locale always required
+  zh: string // base locale always required
 }
 
 // ─── Scenes & Choices ─────────────────────────────────────────────────────────
@@ -103,6 +125,7 @@ export interface Choice {
   effects: EffectSet
   nextSceneId: string
   hint?: LocaleString // shown as a tooltip when choice is locked
+  consequence?: LocaleString[] // shown immediately after selection, before next scene loads
 }
 
 export interface Scene {
@@ -120,12 +143,17 @@ export interface Scene {
 
 export type EndingType = 'bad' | 'neutral' | 'good' | 'secret'
 
+export interface EndingConditionSet extends ConditionSet {
+  securityMin?: number
+  securityMax?: number
+}
+
 export interface Ending {
   id: string
   title: LocaleString
   type: EndingType
   priority: number // lower = checked first; bad endings have higher priority
-  conditions: ConditionSet
+  conditions: EndingConditionSet
   narrative: LocaleString[]
   epilogue: LocaleString | null
 }
@@ -135,6 +163,8 @@ export interface Ending {
 export interface ChoiceRecord {
   sceneId: string
   choiceId: string
+  timeCost: number
+  securityDelta: number
 }
 
 export interface GameState {
@@ -145,6 +175,10 @@ export interface GameState {
   flags: Partial<Record<GameFlag, boolean>>
   visitedScenes: string[]
   choiceHistory: ChoiceRecord[]
+  // ── Hybrid system ───────────────────────────────────────────────────────────
+  security: number // 0-100 fortification level (visible stat)
+  timeRemaining: number // hours before crisis arrives (countdown from 12)
+  // ── Meta ────────────────────────────────────────────────────────────────────
   saveSlot: number
   playthroughId: string
   savedAt?: string

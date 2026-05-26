@@ -1,5 +1,6 @@
 import type { Scene } from '@/engine/types'
-import { useI18n, interpolate } from '@/i18n/i18n-react'
+import { useI18n } from '@/i18n/useI18n'
+import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
 
 interface Props {
@@ -23,9 +24,7 @@ export default function SceneDisplay({ scene }: Props) {
 
   return (
     <div className="animate-fade-in">
-      <p className="ui-label text-muted mb-3">
-        {formatGameTime(scene.gameTime.hoursFromStart)}
-      </p>
+      <p className="ui-label text-muted mb-3">{formatGameTime(scene.gameTime.hoursFromStart)}</p>
 
       <h2 className="scene-title mb-6">{title}</h2>
 

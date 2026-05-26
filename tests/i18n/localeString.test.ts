@@ -21,10 +21,7 @@ describe('resolveLocaleString()', () => {
 
 describe('resolveLocaleStrings()', () => {
   it('resolves an array correctly', () => {
-    const values: LocaleString[] = [
-      { zh: '第一段', en: 'Paragraph one' },
-      { zh: '第二段' },
-    ]
+    const values: LocaleString[] = [{ zh: '第一段', en: 'Paragraph one' }, { zh: '第二段' }]
     const result = resolveLocaleStrings(values, 'en')
     expect(result).toEqual(['Paragraph one', '第二段'])
   })

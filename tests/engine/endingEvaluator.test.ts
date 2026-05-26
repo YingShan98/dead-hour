@@ -11,6 +11,8 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
     flags: {},
     visitedScenes: [],
     choiceHistory: [],
+    security: 0,
+    timeRemaining: 12,
     saveSlot: 0,
     playthroughId: 'test-run',
     ...overrides,
@@ -44,8 +46,16 @@ describe('checkForEnding()', () => {
 
   it('returns the first matching ending by ascending priority', () => {
     const endings = [
-      ending({ id: 'ending_good', priority: 20, conditions: { requiredStats: [{ stat: 'health', min: 1 }] } }),
-      ending({ id: 'ending_bad', priority: 1, conditions: { requiredStats: [{ stat: 'health', min: 1 }] } }),
+      ending({
+        id: 'ending_good',
+        priority: 20,
+        conditions: { requiredStats: [{ stat: 'health', min: 1 }] },
+      }),
+      ending({
+        id: 'ending_bad',
+        priority: 1,
+        conditions: { requiredStats: [{ stat: 'health', min: 1 }] },
+      }),
     ]
 
     const result = checkForEnding(endings, mockState())

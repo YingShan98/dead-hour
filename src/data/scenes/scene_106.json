@@ -4,16 +4,18 @@
   "act": "act1",
   "gameTime": { "hoursFromStart": -8 },
   "narrative": [
-    { "zh": "你从在窗帘缝隙往外看了一会儿——邻楼黑了家风灰色铁皮门被推开了，门框上挂有什么东西，挂红色的，两根断断续续的痕迹从侧边方向来，颜色已经是干燥的深褐色。" },
-    { "zh": "血已经干到这个程度，至少过去一两小时了。" },
-    { "zh": "你放下窗帘，靠在墙壁停了一会儿。脑子里在转：警报，手机无服务。等什么，没有任何人。" },
-    { "zh": "你站起来，走到客厅，看着那台修好的焊机和旁边放出来的一叠加厚铁板。" }
+    {
+      "zh": "你从厨房窗户的窗帘缝往外看了一眼。隔壁老陈家的铁皮门半开着，门框上有一道暗红色的手印，五根手指的痕迹斜着抹下来，颜色是干透的深褐色。"
+    },
+    { "zh": "血干到这个程度，至少过去一两小时了。" },
+    { "zh": "手机无服务。警察叫不来。物业联系不上。" },
+    { "zh": "你站起来，走到客厅中央，打量着那台刚修好的电焊机，和底下垫着的铁板。" }
   ],
   "conditions": {},
   "choices": [
     {
       "id": "scene_106_choice_a",
-      "text": { "zh": "用螺丝和宽胶带把铁板固定在门扇内侧，再用铁链横穿绕过门缝加固。门关上了，没开——整整用力压在最后的铁板上。" },
+      "text": { "zh": "全力加固正门。三张铁板，铁丝，铁链，绞死。" },
       "conditions": {
         "requiredItems": [
           { "itemId": "iron_plate", "minQuantity": 3 },
@@ -22,38 +24,79 @@
       },
       "hint": { "zh": "需要：铁板 ×3，宽胶带 ×1" },
       "effects": {
-        "flags": {
-          "fortified_door": true,
-          "prepped_early": true
-        },
+        "flags": { "fortified_door": true },
         "stats": { "will": 2, "health": -1 },
         "items": [
           { "itemId": "iron_plate", "delta": -3 },
           { "itemId": "duct_tape", "delta": -1 }
-        ]
+        ],
+        "security": 50,
+        "timeCost": 2
       },
+      "consequence": [
+        { "zh": "火花在黑暗里疯狂爆裂。" },
+        { "zh": "你把三张铁板层层重叠，内外用铁丝绞死，用电焊把边缘彻底焊在门框上。" },
+        { "zh": "整扇门敲上去是实心的金属声，像在敲一面墙。" },
+        { "zh": "你退后一步，看着它。" }
+      ],
       "nextSceneId": "scene_107"
     },
     {
       "id": "scene_106_choice_b",
-      "text": { "zh": "把在房间的工具都拿出来，角磨机、钢丝网、美容刮刀、能当武器的在全部挂在身上，然后用椅子顶住大门抵住。" },
-      "conditions": {},
+      "text": { "zh": "一张铁板护住门锁位置，剩余时间用来准备武器和撤退路线。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "iron_plate", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：铁板 ×1" },
       "effects": {
         "flags": { "prepped_early": true },
         "stats": { "will": 1, "stealth": 1 },
-        "items": []
+        "items": [{ "itemId": "iron_plate", "delta": -1 }],
+        "security": 20,
+        "timeCost": 1
       },
+      "consequence": [
+        { "zh": "纯防守太被动了。你把工具都别在身上，角磨机、军刀、羊角锤——能拿的全拿。" },
+        {
+          "zh": "然后你在窗边画了一张简单的平面图：楼道、楼梯间、隔壁、窗外的排水管。出口在哪，死角在哪。"
+        }
+      ],
       "nextSceneId": "scene_107"
     },
     {
       "id": "scene_106_choice_c",
-      "text": { "zh": "门和武器都弄好，然后——肚子忽然叫了一声。你上一回吃饭是早上，现在快到了。翻了翻在房间，找到一包缩缩饼干，开了两包。" },
-      "conditions": {},
-      "effects": {
-        "flags": { "prepped_early": true },
-        "stats": { "will": 1, "health": 1, "morale": 1 },
-        "items": [{ "itemId": "canned_food", "delta": -1 }]
+      "text": { "zh": "加固门，然后——去探查隔壁老陈的情况。他有辆重型货车。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "iron_plate", "minQuantity": 1 }]
       },
+      "hint": { "zh": "需要：铁板 ×1" },
+      "effects": {
+        "stats": { "will": 1 },
+        "items": [{ "itemId": "iron_plate", "delta": -1 }],
+        "security": 20,
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你把铁板固定好，椅子顶住门把手。" },
+        { "zh": "然后看向隔壁那道半开的铁皮门。" }
+      ],
+      "nextSceneId": "scene_106b_neighbor_check"
+    },
+    {
+      "id": "scene_106_choice_d",
+      "text": { "zh": "没有铁板——用工具箱、书箱、行李箱堆在门后。能挡多少是多少。" },
+      "conditions": {
+        "blockedFlags": ["prepped_early"]
+      },
+      "effects": {
+        "stats": { "will": 1 },
+        "security": 8,
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你把储物间所有能搬的东西全堆在门后。旧书箱，坏了腿的折叠椅，装满工具的背包。" },
+        { "zh": "不够。但比什么都没有强一点。" }
+      ],
       "nextSceneId": "scene_107"
     }
   ]

@@ -1,19 +1,24 @@
 {
   "id": "scene_104",
-  "title": { "zh": "五金店与铁板" },
+  "title": { "zh": "五金店" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -34 },
   "narrative": [
-    { "zh": "回到出租屋的路上，你经过那家开了好多年的五金店。门口的货架上摆着一叠灰色加厚铁板——2mm厚板，长宽大约七十乘以百毫米。蒙着层积年的尘，'清仓处理，不再进货'的纸条贴在侧面。" },
-    { "zh": "你慢步顿了顿，低头看了一眼。焊机旁边本来就有同款，废品来已经配置好放着的。" },
-    { "zh": "但你脑子里还在转另一个念头——这种厚度的铁板，用螺丝固定在门扇内侧，能大幅提升门的抗冲击能力。" },
-    { "zh": "是多余的防备，还是正常的备用？" }
+    {
+      "zh": "回小区的路上经过那家开了十多年的五金店。门口折叠桌上摆着一摞加厚铁板——2mm钢，五十乘四十，老板清仓处理，三十块一张。"
+    },
+    {
+      "zh": "你脚步顿了顿。焊机底部本来打算用木板垫，铁的更好处理。但你脑子里有另一个念头：这种厚度的铁板，固定在门板内侧，能大幅提升门的抗冲击能力。"
+    },
+    {
+      "zh": "资金有限，兜里还剩不到两百块。货架上还有绝缘厚手套、工业宽胶带、一根长钢管——都在等你做选择。"
+    }
   ],
   "conditions": {},
   "choices": [
     {
       "id": "scene_104_choice_a",
-      "text": { "zh": "买下一叠铁板回去，顺手拿了两卷宽胶带。多用，可能用得上。" },
+      "text": { "zh": "全买铁板和宽胶带——防御力最大化。三张铁板加两卷胶带，资金归零。" },
       "conditions": {},
       "effects": {
         "flags": { "prepped_early": true },
@@ -21,34 +26,40 @@
         "items": [
           { "itemId": "iron_plate", "delta": 3 },
           { "itemId": "duct_tape", "delta": 2 }
-        ]
+        ],
+        "timeCost": 1
       },
       "nextSceneId": "scene_105"
     },
     {
       "id": "scene_104_choice_b",
-      "text": { "zh": "只买了一块铁板，备着焊机用就行。没多想。" },
+      "text": { "zh": "一张铁板，省下的钱买绝缘手套和长钢管。主动防守比被动防线更重要。" },
       "conditions": {},
       "effects": {
-        "stats": { "morale": 1 },
+        "flags": { "prepped_early": true },
+        "stats": { "stealth": 1 },
         "items": [
-          { "itemId": "iron_plate", "delta": 1 }
-        ]
+          { "itemId": "iron_plate", "delta": 1 },
+          { "itemId": "insulated_gloves", "delta": 1 },
+          { "itemId": "steel_pipe", "delta": 1 }
+        ],
+        "timeCost": 1
       },
       "nextSceneId": "scene_105"
     },
     {
       "id": "scene_104_choice_c",
-      "text": { "zh": "买了三块铁板和两卷胶带，还进超市买了一箱矿泉水和几盒缩缩饼干，一并搬回家。" },
+      "text": { "zh": "铁板、宽胶带、还有顺路超市里的矿泉水和压缩饼干——能搬多少搬多少。" },
       "conditions": {},
       "effects": {
         "flags": { "prepped_early": true },
-        "stats": { "will": 2, "morale": -1 },
+        "stats": { "will": 1, "morale": -1 },
         "items": [
           { "itemId": "iron_plate", "delta": 3 },
           { "itemId": "duct_tape", "delta": 2 },
           { "itemId": "canned_food", "delta": 5 }
-        ]
+        ],
+        "timeCost": 2
       },
       "nextSceneId": "scene_105"
     }

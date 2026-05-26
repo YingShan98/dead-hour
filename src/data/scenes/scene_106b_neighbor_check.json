@@ -1,0 +1,86 @@
+{
+  "id": "scene_106b_neighbor_check",
+  "title": { "zh": "隔壁" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -7 },
+  "narrative": [
+    { "zh": "你打开院门，走到隔壁那扇半开的铁皮门前。" },
+    { "zh": "门缝里透出一片黑。里面的气味很重——铁锈，还有温热的什么。你认识那种气味。" },
+    { "zh": "老陈师傅的货车备用钥匙挂在门边的钉子上。你帮他修过车，你知道。" },
+    { "zh": "进去，就要做好应对的准备。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_106b_choice_a",
+      "text": { "zh": "戴上绝缘手套，握紧工具，推开那扇门进去。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "insulated_gloves", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：绝缘手套" },
+      "effects": {
+        "flags": {
+          "neighbor_explored": true,
+          "truck_key_found": true,
+          "gloves_worn": true,
+          "neighbor_zombie": true
+        },
+        "stats": { "health": -2, "will": 2, "morale": -2 },
+        "items": [
+          { "itemId": "truck_key", "delta": 1 },
+          { "itemId": "antibiotic", "delta": 1 }
+        ],
+        "security": 5,
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你刚推开老陈的门，一个满脸是血、眼球泛白的身影低吼着扑了过来。" },
+        { "zh": "你戴着厚实的绝缘手套，抢先一步用钢管死死抵住他，用力将他逼回门框。" },
+        { "zh": "污血溅在手套上，沿着橡胶纹路往下淌——但你的伤口是完好的。" },
+        { "zh": "你在茶几上找到了那串钥匙。药柜里还有一盒抗生素，你顺手揣进兜里。" }
+      ],
+      "nextSceneId": "scene_107"
+    },
+    {
+      "id": "scene_106b_choice_b",
+      "text": { "zh": "没有手套——徒手进去，从钉子上摘下钥匙，然后撤。" },
+      "conditions": {
+        "blockedFlags": ["gloves_worn"]
+      },
+      "effects": {
+        "flags": {
+          "neighbor_explored": true,
+          "truck_key_found": true,
+          "neighbor_zombie": true
+        },
+        "stats": {
+          "health": -3,
+          "infection": 3,
+          "will": 1,
+          "morale": -3
+        },
+        "items": [{ "itemId": "truck_key", "delta": 1 }],
+        "security": 5,
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你刚推开老陈的门，他已经扑了过来。" },
+        { "zh": "扭打中，你缠着灰色胶带的右手中指直接戳进了他喷涌的黑色污血里。" },
+        { "zh": "一股阴冷的寒流顺着伤口直冲脑门。" },
+        { "zh": "你拿到了钥匙，撤了出来。手指上的胶带已经完全浸透了。" }
+      ],
+      "nextSceneId": "scene_107"
+    },
+    {
+      "id": "scene_106b_choice_c",
+      "text": { "zh": "不值得冒险。回去关上自己的门。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": -1 },
+        "timeCost": 0
+      },
+      "consequence": [{ "zh": "你退后一步，把院门关上，插好插销。" }, { "zh": "不是怕。是判断。" }],
+      "nextSceneId": "scene_107"
+    }
+  ]
+}

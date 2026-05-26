@@ -22,12 +22,12 @@
 // ─── Flag Categories ──────────────────────────────────────────────────────────
 
 export type FlagCategory =
-  | 'narrative'   // story beats and scene decisions
-  | 'npc'         // NPC encounters and relationships
-  | 'faction'     // faction membership and standing
-  | 'survival'    // milestone survival markers
-  | 'world'       // world-state changes
-  | 'hidden'      // hidden/secret flags not shown to the player
+  | 'narrative' // story beats and scene decisions
+  | 'npc' // NPC encounters and relationships
+  | 'faction' // faction membership and standing
+  | 'survival' // milestone survival markers
+  | 'world' // world-state changes
+  | 'hidden' // hidden/secret flags not shown to the player
 
 // ─── Achievement Shape (pre-wired for future use) ────────────────────────────
 
@@ -35,8 +35,8 @@ export interface AchievementDefinition {
   id: string
   title: string
   description: string
-  icon: string          // emoji or asset key
-  secret: boolean       // if true, hidden until unlocked
+  icon: string // emoji or asset key
+  secret: boolean // if true, hidden until unlocked
 }
 
 // ─── Flag Definition ─────────────────────────────────────────────────────────
@@ -63,11 +63,11 @@ export type GameFlag =
   | 'prepped_early'
 
   // ── NPC encounters ────────────────────────────────────────────────────────
-  | 'met_doctor'            // Dr. Lena Marsh
-  | 'met_militia_leader'    // Rook
+  | 'met_doctor' // Dr. Lena Marsh
+  | 'met_militia_leader' // Rook
   | 'met_collective_organizer' // Yusuf
   | 'met_the_kid'
-  | 'met_ghost'             // The Loner
+  | 'met_ghost' // The Loner
 
   // ── NPC outcomes ─────────────────────────────────────────────────────────
   | 'saved_the_kid'
@@ -100,60 +100,67 @@ export type GameFlag =
   | 'survived_first_winter'
   | 'survived_one_year'
 
-  // ── Act 1 narrative ──────────────────────────────────────────────────────
-  | 'act1_noticed_clues'
-  | 'act1_ignored_clues'
-
-  // ── Act 2 narrative ──────────────────────────────────────────────────────
-  | 'act2_stayed_in_city'
-  | 'act2_started_scavenging'
-  | 'act2_fled_toward_suburbs'
-  | 'draft_act2_frontier'
-
-  // ── Preparation ──────────────────────────────────────────────────────────
-  | 'prep_bought_plates'
-  | 'prep_trap_strategy'
-  | 'prep_door_fortified'
-  | 'prep_hallway_trapped'
-  | 'prep_weak_defense'
-  | 'resource_energy_prepared'
-  | 'resource_check'
-
-  // ── Medical ───────────────────────────────────────────────────────────────
-  | 'medical_disinfected_wound'
-  | 'medical_has_first_aid_training'
-
-  // ── Information gathering ─────────────────────────────────────────────────
-  | 'info_searched_details'
-  | 'info_knows_details'
-  | 'info_knows_city_layout'
-  | 'info_knows_infected_pattern'
-
-  // ── Social ────────────────────────────────────────────────────────────────
-  | 'social_warned_neighbor'
-  | 'social_warned_neighbors'
-  | 'social_checked_on_neighbors'
-
-  // ── Shelter & mobility ────────────────────────────────────────────────────
-  | 'shelter_has_home_base'
-  | 'mobility_left_home_early'
-
-  // ── NPC-specific ─────────────────────────────────────────────────────────
-  | 'npc_pei_warning_received'
-  | 'npc_helped_the_kid'
-
-  // ── Risk / stealth ────────────────────────────────────────────────────────
-  | 'risk_made_noise_at_hour_zero'
-  | 'stealth_sealed_store_door'
-
   // ── Hidden / secret ───────────────────────────────────────────────────────
-  | 'wrote_journal'           // enables secret ending
+  | 'wrote_journal' // enables secret ending
   | 'rested_at_safehouse'
+
+  // ── Transformation system (喻城 infection arc) ───────────────────────────
+  | 'finger_cut' // infection entry point — set by scene_101 onEnter
+  | 'wound_cleaned' // player cleaned the wound properly
+  | 'wound_ignored' // player ignored the wound
+  | 'noticed_outbreak_signs' // player connected the news dots early
+  | 'heard_rumor_at_breakfast'
+  | 'fortified_door' // iron plates fixed to door interior
+  | 'gave_in_to_raw_hunger' // zombie path accelerator
+  | 'resisted_primal_urge' // player suppressed an instinct — will +
+  | 'superpower_awakening' // will>=8 AND infection 3-5 — awakening path
+  | 'zombie_turning' // infection>=8 — zombie arc begins
+  | 'full_zombie' // infection=10 — zombie ending
+  | 'neighbor_explored' // player explored neighbour's room
+  | 'truck_key_found' // truck key acquired from neighbour
+  | 'gloves_worn' // player wore insulated gloves during neighbour scene
+  | 'neighbor_zombie' // neighbour has turned — tracked for combat
+
+  // ── 裴嘉应 survival status (mutually exclusive, set in scene_105) ─────────
+  | 'pei_status_hidden' // she hid in the equipment room — stable
+  | 'pei_status_trapped_outside' // she escaped but trapped near hospital
+  | 'pei_status_injured_lost' // she was injured/lost during the call
+
+  // ── 裴嘉应 full companion arc (Phase 2–4) ─────────────────────────────────
+  | 'pei_alive' // she survived and is with the group
+  | 'pei_research_begun' // she started the clinical observation notebook
+  | 'pei_research_complete' // her notebook is a complete document (Phase 3+)
+  | 'pei_knows_infection' // she knows about 喻城's infection
+  | 'pei_confrontation_done' // the infection confrontation scene has played
+
+  // ── Phase 2: base location (mutually exclusive) ───────────────────────────
+  | 'base_factory' // abandoned machinery factory
+  | 'base_bunker' // underground civil defense bunker
+  | 'base_farm' // suburban farm
+
+  // ── Phase 2: NPC recruitment ──────────────────────────────────────────────
+  | 'npc_lao_xu_recruited' // 老许 (factory engineer) recruited
+  | 'npc_lian_yu_recruited' // 连珏 (civil defense officer) recruited
+  | 'npc_a_fu_recruited' // 阿福 (farmer) recruited
+
+  // ── Phase 3: key story gates ──────────────────────────────────────────────
+  | 'scientist_saved' // 郑博士 rescued and joined
+  | 'zombie_signal_received' // ambiguous signal from herd leader
+
+  // ── Phase 3: faction states ───────────────────────────────────────────────
+  | 'factions_hostile' // all human factions hostile
+  | 'factions_allied' // at least one faction alliance established
+
+  // ── Phase 1 moral / event flags ───────────────────────────────────────────
+  | 'helped_stranger' // Day 10: helped injured family at supermarket
+  | 'heard_government_broadcast' // Day 15: radio signal with coordinates received
+
+  // ── Special ending conditions ─────────────────────────────────────────────
+  | 'excessive_exertion' // 18+ consecutive action days without rest → H-2 ending
 
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const FLAG_REGISTRY: FlagDefinition[] = [
-
   // ── Narrative / Early decisions ────────────────────────────────────────────
 
   {
@@ -169,7 +176,7 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     achievement: {
       id: 'achievement_good_samaritan',
       title: 'Good Samaritan',
-      description: 'You warned someone you didn\'t have to.',
+      description: "You warned someone you didn't have to.",
       icon: '🤝',
       secret: false,
     },
@@ -266,7 +273,7 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   },
   {
     key: 'deferred_clinic_offer',
-    description: 'Player did not immediately accept Dr. Marsh\'s offer to join the clinic.',
+    description: "Player did not immediately accept Dr. Marsh's offer to join the clinic.",
     category: 'npc',
     achievement: null,
   },
@@ -281,19 +288,19 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
 
   {
     key: 'joined_clinic',
-    description: 'Player has committed to Dr. Marsh\'s clinic.',
+    description: "Player has committed to Dr. Marsh's clinic.",
     category: 'faction',
     achievement: null,
   },
   {
     key: 'joined_militia',
-    description: 'Player has joined Rook\'s militia.',
+    description: "Player has joined Rook's militia.",
     category: 'faction',
     achievement: null,
   },
   {
     key: 'joined_collective',
-    description: 'Player has joined Yusuf\'s collective.',
+    description: "Player has joined Yusuf's collective.",
     category: 'faction',
     achievement: null,
   },
@@ -388,7 +395,7 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     achievement: {
       id: 'achievement_seven_days',
       title: 'Seven Days',
-      description: 'A week in. Most didn\'t make it this far.',
+      description: "A week in. Most didn't make it this far.",
       icon: '📅',
       secret: false,
     },
@@ -418,7 +425,7 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     achievement: {
       id: 'achievement_one_year',
       title: 'Dead Hour — Anniversary',
-      description: 'A year since it started. You\'re still here.',
+      description: "A year since it started. You're still here.",
       icon: '⏳',
       secret: false,
     },
@@ -428,7 +435,8 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
 
   {
     key: 'wrote_journal',
-    description: 'Player found and maintained a journal throughout the game. Enables the secret ending.',
+    description:
+      'Player found and maintained a journal throughout the game. Enables the secret ending.',
     category: 'hidden',
     achievement: {
       id: 'achievement_the_record',
@@ -444,28 +452,321 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     category: 'hidden',
     achievement: null,
   },
+
+  // ── 裴嘉应 survival status ─────────────────────────────────────────────────
+
+  {
+    key: 'pei_status_hidden',
+    description: '裴嘉应 hid in the hospital equipment room and survived Phase 1 stably.',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'pei_status_trapped_outside',
+    description:
+      '裴嘉应 escaped the hospital but is trapped in the surrounding street, waiting for rescue.',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'pei_status_injured_lost',
+    description: '裴嘉应 was injured or went missing during the phone call. Her status is unknown.',
+    category: 'npc',
+    achievement: null,
+  },
+
+  // ── 裴嘉应 companion arc (Phase 2–4) ──────────────────────────────────────
+
+  {
+    key: 'pei_alive',
+    description: '裴嘉应 survived Phase 1 and is an active companion in the group.',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'pei_research_begun',
+    description: '裴嘉应 has started her clinical observation notebook (「临床观察·样本A」).',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'pei_research_complete',
+    description: 'Her research notebook is complete — a full document usable for science endings.',
+    category: 'npc',
+    achievement: {
+      id: 'achievement_the_notebook',
+      title: 'Clinical Observer',
+      description: 'She wrote everything down. She always did.',
+      icon: '🔬',
+      secret: false,
+    },
+  },
+  {
+    key: 'pei_knows_infection',
+    description:
+      "裴嘉应 knows about 喻城's infection — either told by him or discovered independently.",
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'pei_confrontation_done',
+    description: 'The infection confrontation scene between 喻城 and 裴嘉应 has played out.',
+    category: 'npc',
+    achievement: null,
+  },
+
+  // ── Phase 2: base location ─────────────────────────────────────────────────
+
+  {
+    key: 'base_factory',
+    description: 'Player chose the abandoned machinery factory as the long-term base.',
+    category: 'world',
+    achievement: null,
+  },
+  {
+    key: 'base_bunker',
+    description: 'Player chose the underground civil defense bunker as the long-term base.',
+    category: 'world',
+    achievement: null,
+  },
+  {
+    key: 'base_farm',
+    description: 'Player chose the suburban farm as the long-term base.',
+    category: 'world',
+    achievement: null,
+  },
+
+  // ── Phase 2: NPC recruitment ───────────────────────────────────────────────
+
+  {
+    key: 'npc_lao_xu_recruited',
+    description: '老许 (retired engineer, 58) has been recruited at the factory.',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'npc_lian_yu_recruited',
+    description: '连珏 (former civil defense officer, 35) has been recruited at the bunker.',
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'npc_a_fu_recruited',
+    description: '阿福 (young farmer, 21) has been recruited at the farm.',
+    category: 'npc',
+    achievement: null,
+  },
+
+  // ── Phase 3: key story gates ───────────────────────────────────────────────
+
+  {
+    key: 'scientist_saved',
+    description: '郑博士 (virologist) was found and rescued. His research enables science endings.',
+    category: 'npc',
+    achievement: {
+      id: 'achievement_scientist_saved',
+      title: 'The Last Lab',
+      description: 'His notes were worth the risk.',
+      icon: '🧫',
+      secret: false,
+    },
+  },
+  {
+    key: 'zombie_signal_received',
+    description: 'An ambiguous signal was received from the herd leader. Its meaning is unknown.',
+    category: 'world',
+    achievement: null,
+  },
+
+  // ── Phase 3: faction states ────────────────────────────────────────────────
+
+  {
+    key: 'factions_hostile',
+    description: "All human factions are now hostile to the player's group.",
+    category: 'faction',
+    achievement: null,
+  },
+  {
+    key: 'factions_allied',
+    description: 'At least one formal alliance with a human faction has been established.',
+    category: 'faction',
+    achievement: null,
+  },
+
+  // ── Phase 1 moral / event flags ────────────────────────────────────────────
+
+  {
+    key: 'helped_stranger',
+    description: 'Day 10: player chose to help the injured family at the supermarket.',
+    category: 'narrative',
+    achievement: {
+      id: 'achievement_helped_stranger',
+      title: 'Still Human',
+      description: "You stopped when you didn't have to.",
+      icon: '🫂',
+      secret: false,
+    },
+  },
+  {
+    key: 'heard_government_broadcast',
+    description: 'Day 15: radio signal with government coordinates received. Destination unknown.',
+    category: 'narrative',
+    achievement: null,
+  },
+
+  // ── Special ending conditions ──────────────────────────────────────────────
+
+  {
+    key: 'excessive_exertion',
+    description:
+      'Player worked 18+ consecutive action days without rest — triggers H-2 ending condition.',
+    category: 'hidden',
+    achievement: null,
+  },
+
+  // ── Transformation system — infection arc registry entries ─────────────────
+  // These flags are set by scene onEnter effects and player choices.
+  // They drive the survivor / awakening / zombie path detection.
+
+  {
+    key: 'finger_cut',
+    description:
+      'The infection entry point. Set automatically by scene_101 onEnter. The wound happened before the game opened.',
+    category: 'hidden',
+    achievement: null,
+  },
+  {
+    key: 'wound_cleaned',
+    description:
+      'Player properly cleaned and disinfected the finger wound. Slows infection progression.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'wound_ignored',
+    description: 'Player ignored the wound and kept working. Accelerates infection progression.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'noticed_outbreak_signs',
+    description: 'Player connected the news reports and recognised the outbreak pattern early.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'heard_rumor_at_breakfast',
+    description: 'Player overheard the breakfast-shop rumour about the downtown incident.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'fortified_door',
+    description: 'Player successfully fortified the apartment door with iron plates and wire.',
+    category: 'world',
+    achievement: {
+      id: 'achievement_iron_door',
+      title: 'The Iron Door',
+      description: 'Nothing gets through this.',
+      icon: '🚪',
+      secret: false,
+    },
+  },
+  {
+    key: 'gave_in_to_raw_hunger',
+    description:
+      'Player gave in to an unidentifiable hunger at Hour Zero. Primary zombie-path trigger.',
+    category: 'hidden',
+    achievement: null,
+  },
+  {
+    key: 'resisted_primal_urge',
+    description: 'Player noticed and actively suppressed a primal instinct. Raises will.',
+    category: 'hidden',
+    achievement: {
+      id: 'achievement_still_me',
+      title: 'Still Me',
+      description: "You noticed. You stopped. That's the part that matters.",
+      icon: '◇',
+      secret: false,
+    },
+  },
+  {
+    key: 'superpower_awakening',
+    description:
+      'The virus rewired something. Infection 3–7 with will >= 8. Awakening path is active.',
+    category: 'hidden',
+    achievement: {
+      id: 'achievement_something_changed',
+      title: 'Something Changed',
+      description: 'You can feel the metal.',
+      icon: '⚙️',
+      secret: false,
+    },
+  },
+  {
+    key: 'zombie_turning',
+    description:
+      'Infection >= 8. The transformation arc has begun. The player is not yet fully turned.',
+    category: 'hidden',
+    achievement: null,
+  },
+  {
+    key: 'full_zombie',
+    description:
+      'Infection = 10. Complete transformation. Triggers ending_full_zombie immediately.',
+    category: 'hidden',
+    achievement: null,
+  },
+  {
+    key: 'neighbor_explored',
+    description:
+      "Player explored the neighbour's room. Triggered the encounter with the turned neighbour.",
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'truck_key_found',
+    description:
+      "Player acquired the truck key from the neighbour's apartment. Enables late-game escape route.",
+    category: 'world',
+    achievement: null,
+  },
+  {
+    key: 'gloves_worn',
+    description:
+      'Player wore insulated gloves during the neighbour encounter. Prevented blood contact.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'neighbor_zombie',
+    description: 'The neighbour has turned. Tracked for encounter scene logic.',
+    category: 'hidden',
+    achievement: null,
+  },
 ]
 
 // ─── Lookup Helpers ───────────────────────────────────────────────────────────
 
 /** Get a flag definition by key. Returns undefined if not found. */
 export function getFlagDefinition(key: GameFlag): FlagDefinition | undefined {
-  return FLAG_REGISTRY.find(f => f.key === key)
+  return FLAG_REGISTRY.find((f) => f.key === key)
 }
 
 /** Get all flags that have an achievement attached. */
 export function getAchievementFlags(): FlagDefinition[] {
-  return FLAG_REGISTRY.filter(f => f.achievement !== null)
+  return FLAG_REGISTRY.filter((f) => f.achievement !== null)
 }
 
 /** Get all flags by category. */
 export function getFlagsByCategory(category: FlagCategory): FlagDefinition[] {
-  return FLAG_REGISTRY.filter(f => f.category === category)
+  return FLAG_REGISTRY.filter((f) => f.category === category)
 }
 
 /** Get all achievement definitions (flattened, nulls removed). */
 export function getAllAchievements(): AchievementDefinition[] {
-  return FLAG_REGISTRY
-    .map(f => f.achievement)
-    .filter((a): a is AchievementDefinition => a !== null)
+  return FLAG_REGISTRY.map((f) => f.achievement).filter(
+    (a): a is AchievementDefinition => a !== null,
+  )
 }

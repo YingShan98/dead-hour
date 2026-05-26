@@ -1,0 +1,62 @@
+{
+  "id": "scene_crisis_turning",
+  "title": { "zh": "它们到了·其二" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 12 },
+  "onEnter": {
+    "flags": {},
+    "stats": {},
+    "items": []
+  },
+  "narrative": [
+    { "zh": "楼道里传来声音。" },
+    { "zh": "你听见了。不只是耳朵听见——是皮肤下面某处感知到的，一种频率，一种节奏。" },
+    { "zh": "你知道那是什么在移动。" },
+    { "zh": "然后你意识到，你怎么会知道这个？" }
+  ],
+  "conditions": {
+    "requiredFlags": ["zombie_turning"]
+  },
+  "choices": [
+    {
+      "id": "scene_crisis_turning_choice_a",
+      "text": { "zh": "把那个念头切断。你还是你。守住门。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 5 }]
+      },
+      "hint": { "zh": "需要意志值 5+" },
+      "effects": {
+        "flags": { "resisted_primal_urge": true },
+        "stats": { "will": 2, "infection": -1, "morale": -3 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_crisis_turning_choice_b",
+      "text": { "zh": "那种感知——你用它。楼道里有三个，两个慢，一个快。你开始计算。" },
+      "conditions": {
+        "requiredFlags": ["superpower_awakening"]
+      },
+      "hint": { "zh": "需要：觉醒触发" },
+      "effects": {
+        "stats": { "will": 1, "infection": 1, "stealth": 3 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_110"
+    },
+    {
+      "id": "scene_crisis_turning_choice_c",
+      "text": { "zh": "……你打开了门。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "max": 2 }]
+      },
+      "effects": {
+        "flags": { "full_zombie": true },
+        "stats": { "infection": 3 },
+        "timeCost": 0
+      },
+      "nextSceneId": "scene_109_turning"
+    }
+  ]
+}
