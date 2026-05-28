@@ -19,7 +19,7 @@
     "i18n:generate": "typesafe-i18n --no-watch"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=22.13",
     "pnpm": ">=9"
   },
   "dependencies": {
