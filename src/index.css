@@ -1,6 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0d0d0d;
+  --color-surface: #161616;
+  --color-border: #2a2a2a;
+  --color-muted: #4a4a4a;
+  --color-text: #c8c8b4;
+  --color-text-dim: #7a7a6a;
+  --color-accent: #b03030;
+  --color-accent-hover: #cc3333;
+  --color-safe: #4a7c5f;
+  --color-warning: #b08030;
+  --color-danger: #8b2020;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Crimson Text", Georgia, serif;
+  --font-ui: "Share Tech Mono", monospace;
+
+  --text-narrative: 1.125rem;
+  --text-narrative--line-height: 1.85;
+
+  --animate-fade-in: fadeIn 0.6s ease forwards;
+  --animate-slide-up: slideUp 0.5s ease forwards;
+  --animate-flicker: flicker 4s infinite;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.85; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
 
 @layer base {
   html {
@@ -9,7 +51,6 @@
     font-family: 'Crimson Text', Georgia, serif;
   }
 
-  /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -24,7 +65,6 @@
     background: #4a4a4a;
   }
 
-  /* Selection colour */
   ::selection {
     background-color: #b03030;
     color: #c8c8b4;
@@ -32,22 +72,18 @@
 }
 
 @layer components {
-  /* Narrative text — the main reading experience */
   .narrative-text {
     @apply font-body text-narrative text-text leading-relaxed;
   }
 
-  /* Scene title */
   .scene-title {
     @apply font-display text-2xl text-text tracking-wide;
   }
 
-  /* UI label — stats, numbers, game metadata */
   .ui-label {
     @apply font-ui text-sm text-text-dim tracking-widest uppercase;
   }
 
-  /* Choice button */
   .choice-btn {
     @apply w-full text-left px-4 py-3 rounded
            border border-border
@@ -58,7 +94,6 @@
            disabled:opacity-30 disabled:cursor-not-allowed;
   }
 
-  /* Stat bar */
   .stat-bar {
     @apply h-1.5 rounded-full bg-border overflow-hidden;
   }

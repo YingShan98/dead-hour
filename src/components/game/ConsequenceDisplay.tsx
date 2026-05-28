@@ -30,7 +30,7 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
     // Small delay so the UI doesn't flash
     const t = setTimeout(() => setVisible(true), 80)
     return () => clearTimeout(t)
-  }, [choice])
+  }, [choice, onDone])
 
   if (!choice || !choice.consequence || choice.consequence.length === 0) return null
   if (!visible) return null

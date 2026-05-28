@@ -11,7 +11,7 @@ interface Props {
 
 export default function InventoryPanel({ inventory }: Props) {
   const { LL, locale } = useI18n()
-  const { useItem } = useGameStore()
+  const { useItem: activateItem } = useGameStore()
 
   if (inventory.length === 0) {
     return (
@@ -53,7 +53,7 @@ export default function InventoryPanel({ inventory }: Props) {
               {/* Use button — only for usable items */}
               {def.usable && def.useEffect && (
                 <button
-                  onClick={() => useItem(itemId)}
+                  onClick={() => activateItem(itemId)}
                   className="ml-2 shrink-0 font-ui text-xs px-2 py-0.5 rounded
                              border border-border text-muted
                              hover:border-accent hover:text-accent

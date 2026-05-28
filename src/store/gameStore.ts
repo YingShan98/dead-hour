@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { GameState, Scene, Ending } from '@/engine/types'
+import type { GameState, Scene, Ending, Choice } from '@/engine/types'
 import { applyEffects } from '@/engine/executor'
 import { getAvailableChoices } from '@/engine/evaluator'
 import { loadScene, loadEndings } from '@/engine/loader'
@@ -37,7 +37,7 @@ interface GameStore {
   triggeredEnding: Ending | null
   isLoading: boolean
   error: StoreError | null // typed — UI resolves to string via LL
-  pendingChoice: import('@/engine/types').Choice | null
+  pendingChoice: Choice | null
   pendingNextState: GameState | null
   pendingNextScene: Scene | null
   timeJustExpired: boolean
@@ -55,7 +55,7 @@ interface GameStore {
 
 // ─── Store implementation ─────────────────────────────────────────────────────
 
-export const useGameStore = create<GameStore>((set, get) => ({
+export const useGameStore = create<GameStore>()((set, get) => ({
   gameState: DEFAULT_GAME_STATE,
   currentScene: null,
   availableEndings: [],

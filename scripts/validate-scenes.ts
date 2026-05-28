@@ -12,7 +12,7 @@
  *   [STATS]     All stat keys reference a key declared in stats.json
  *   [ITEMS]     All itemIds reference an id declared in items.json
  *   [GRAPH]     Every nextSceneId resolves to a real scene
- *   [GRAPH]     Every scene is reachable from scene_001
+ *   [GRAPH]     Every scene is reachable from scene_101
  *   [IDS]       scene.id matches filename; no duplicate IDs
  *   [IDS]       No duplicate choice IDs within a scene
  *
@@ -590,21 +590,21 @@ function validateScenes(reg: Registries) {
     }
   }
 
-  // ── Graph: reachability from scene_001 ────────────────────────────────────
-  if (scenes.has('scene_001')) {
-    const reachable = findReachableScenes('scene_001', outgoingLinks)
+  // ── Graph: reachability from scene_101 ────────────────────────────────────
+  if (scenes.has('scene_101')) {
+    const reachable = findReachableScenes('scene_101', outgoingLinks)
     for (const [sceneId, { file }] of scenes.entries()) {
       if (!reachable.has(sceneId)) {
-        addWarning(file, `scene "${sceneId}" is not reachable from scene_001`)
+        addWarning(file, `scene "${sceneId}" is not reachable from scene_101`)
       }
     }
   } else {
-    addError(sceneDir, 'required starting scene "scene_001" was not found')
+    addError(sceneDir, 'required starting scene "scene_101" was not found')
   }
 
   // ── Graph: no-incoming warnings (orphans) ─────────────────────────────────
   for (const [sceneId, count] of incomingCounts.entries()) {
-    if (sceneId !== 'scene_001' && count === 0) {
+    if (sceneId !== 'scene_101' && count === 0) {
       const file = scenes.get(sceneId)?.file ?? sceneDir
       addWarning(file, `scene "${sceneId}" has no incoming links`)
     }
