@@ -1,0 +1,70 @@
+{
+  "id": "scene_day3_night",
+  "title": { "zh": "第三天·深夜" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 72 },
+  "narrative": [
+    { "zh": "第三天夜里，某样东西来到了门外。" },
+    { "zh": "不是风声，不是楼里的管道，不是任何你在之前两个夜晚认识的声音。是另一种东西，有重量的，有方向的，停在你门口不走。" },
+    { "zh": "你在黑暗里坐直了。手放到了最近的工具上。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day3_night_breach",
+      "text": { "zh": "门缝开了一条——用全部力气顶住，那只手在里面抓。" },
+      "conditions": { "security": { "max": 19 } },
+      "effects": {
+        "stats": { "health": -3, "will": 2, "morale": -2 }
+      },
+      "consequence": [
+        { "zh": "门板变形了，缝隙里伸进来一只手——指节朝上，皮肤破了，颜色不对。它在乱抓，没有目标，也没有停下来的意思。" },
+        { "zh": "你把工具插进门缝把那只手逼出去，用身体死死抵住门。不知道过了多久，声音从另一边退走了。" },
+        { "zh": "你没有松开门，一直等到天亮。右手中指在抵门的时候撞到了什么，又开始痛了。" }
+      ],
+      "nextSceneId": "scene_day4_morning"
+    },
+    {
+      "id": "scene_day3_night_scratch",
+      "text": { "zh": "门没有动，但有什么在另一边不停地抓——蹲在门后，等它停。" },
+      "conditions": { "security": { "min": 20, "max": 49 } },
+      "effects": {
+        "stats": { "morale": -2, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "抓挠声持续了很久。有规律，像一个循环——抓几下，停，再抓，再停。" },
+        { "zh": "门没有破。你蹲在那里，手心出汗，等着那个循环终于停下来。" },
+        { "zh": "声音在天亮前两小时消失了。你不知道它是走了还是还在外面。" }
+      ],
+      "nextSceneId": "scene_day4_morning"
+    },
+    {
+      "id": "scene_day3_night_upstairs",
+      "text": { "zh": "门没有动——但楼上突然有什么东西倒了下去，盯着天花板，控制呼吸。" },
+      "conditions": { "security": { "min": 50, "max": 79 } },
+      "effects": {
+        "stats": { "morale": -1, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "门没有被碰，但楼上的声音说明它们去了别处。一声倒地，然后是拖拽，然后是另一层楼更远的东西。" },
+        { "zh": "你盯着天花板，没有动，直到所有声音重新变成安静。" },
+        { "zh": "楼上住的是谁，你想了一会儿，然后把这个念头压回去了。" }
+      ],
+      "nextSceneId": "scene_day4_morning"
+    },
+    {
+      "id": "scene_day3_night_silence",
+      "text": { "zh": "什么声音都没有——等了很久，等到安静本身也开始像一种威胁。" },
+      "conditions": { "security": { "min": 80 } },
+      "effects": {
+        "stats": { "morale": -1, "will": 2 }
+      },
+      "consequence": [
+        { "zh": "门外什么都没有。它们可能来了，又走了；可能根本没来；可能在等你先出声。" },
+        { "zh": "你在黑暗里坐了整个夜晚，工具握在手里，听着这座楼的安静。" },
+        { "zh": "天亮了。什么都没发生。这比发生了什么更难处理。" }
+      ],
+      "nextSceneId": "scene_day4_morning"
+    }
+  ]
+}

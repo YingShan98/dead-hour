@@ -1,0 +1,44 @@
+{
+  "id": "scene_000_prologue",
+  "title": { "zh": "见证者日志" },
+  "act": "prologue",
+  "gameTime": { "hoursFromStart": -48 },
+  "narrative": [
+    { "zh": "（这本笔记本的第一页，用一种刻意工整的笔迹写着：）" },
+    { "zh": "「我不知道有没有人会读到这里。但如果你读到了，说明这本笔记本最终没有和我一起消失。」" },
+    { "zh": "「下面的内容，是我从第一天开始写下的。我尽量写得准确，不夸张，不美化。」" },
+    { "zh": "「感染值这个词是裴嘉应教我的。她说，给它命名，比不给它命名，好控制一点。」" }
+  ],
+  "conditions": {},
+  "ngPlusLegacy": [
+    {
+      "endingFlag": "ending_be2",
+      "text": { "zh": "（第一行被铅笔划掉了，划得很重，但还能辨认：门，其实不用焊得那么死……）" }
+    },
+    {
+      "endingFlag": "ending_be1",
+      "text": { "zh": "（第一行被铅笔划掉了：应该早点去超市的。）" }
+    },
+    {
+      "endingFlag": "ending_full_zombie",
+      "text": { "zh": "（第一行被铅笔划掉了，字迹歪斜：某些选项，不要选。）" }
+    },
+    {
+      "endingFlag": "ending_recorder",
+      "text": { "zh": "（第一行被铅笔划掉了：这本笔记本最后没有和我一起消失。——感谢你。）" }
+    },
+    {
+      "endingFlag": "ending_b2",
+      "text": { "zh": "（第一行被铅笔划掉了：她说信号来自东南方。）" }
+    }
+  ],
+  "choices": [
+    {
+      "id": "scene_000_continue",
+      "text": { "zh": "（翻到下一页）" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_101"
+    }
+  ]
+}

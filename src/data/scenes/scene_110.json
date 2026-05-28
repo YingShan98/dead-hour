@@ -25,7 +25,7 @@
         "stats": { "will": 1, "morale": 1 },
         "timeCost": 1
       },
-      "nextSceneId": "scene_110"
+      "nextSceneId": "scene_day1_morning"
     }
   ]
 }

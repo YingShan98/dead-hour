@@ -34,6 +34,8 @@ const en: Translation = {
     autoSaved: 'Auto-saved',
     crisis: {
       timeExpired: 'Time is up. The sounds outside have changed.',
+      breachImminent: 'The defenses are failing. They are getting in.',
+      baseOverrun: 'The base has been overrun.',
       awakening: "Something has changed. You can't name it yet.",
     },
   },
@@ -65,6 +67,8 @@ const en: Translation = {
       none: 'Undefended',
       basic: 'Basic',
       solid: 'Solid',
+      reinforced: 'Reinforced',
+      secure: 'Secure',
       fortress: 'Fortress',
     },
   },
@@ -77,6 +81,7 @@ const en: Translation = {
         'The feeling under your skin is getting harder to ignore. Not pain. Something else.',
       alarming:
         'Some thoughts arrive in a way that feels unfamiliar. It takes you longer to push them down.',
+      impending: 'The transformation is almost complete. You are losing yourself.',
       critical: "The boundary is blurring. You're no longer sure which thoughts are yours.",
     },
     will: {
@@ -88,6 +93,9 @@ const en: Translation = {
   // ── Stat panel signals ─────────────────────────────────────────────────────
   statSignal: {
     infection: {
+      dormant: 'Dormant',
+      active: 'Active',
+      mutating: 'Mutating',
       spreading: 'Spreading',
       critical: 'Critical',
     },
@@ -113,6 +121,9 @@ const en: Translation = {
     empty: 'Nothing carried.',
     quantity: '×{qty}',
     use: 'Use',
+    workshop: 'Workshop',
+    recipes: 'Recipes',
+    materials: 'Materials',
   },
 
   // ── Ending Page ────────────────────────────────────────────────────────────
@@ -125,6 +136,14 @@ const en: Translation = {
     },
     choicesMade: 'Choices made: {count}',
     scenesVisited: 'Scenes visited: {count}',
+    journal: 'Journal',
+    journalEntries: 'Journal Entries',
+    journalEmpty: 'No entries yet.',
+    peiNotebook: "Pei's Notebook",
+    peiNotebookNewEntry: 'New entry available!',
+    overclock: 'Overclock',
+    depravedInsight: 'Depraved Insight',
+
     playAgain: 'Play Again',
     returnToTitle: 'Return to Title',
     noData: 'No ending data found.',

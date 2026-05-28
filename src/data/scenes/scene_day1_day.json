@@ -1,0 +1,73 @@
+{
+  "id": "scene_day1_day",
+  "title": { "zh": "第三天·白天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 60 },
+  "narrative": [
+    { "zh": "白天的几个小时，是你目前唯一可以主动支配的时间。" },
+    { "zh": "门那边偶尔有声音，但没有靠近的迹象。到目前为止。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day1_day_fortify",
+      "text": { "zh": "【加固】检查所有接缝和窗户锁，用剩余材料堵死每一个薄弱点。" },
+      "conditions": {},
+      "effects": {
+        "security": 10,
+        "stats": { "health": -1, "will": 1 },
+        "timeCost": 4
+      },
+      "consequence": [
+        { "zh": "你花了大半天检查每一道缝隙。窗框，门铰链，墙角的通风格栅。" },
+        { "zh": "防御能力又高了一些。手腕很酸，这是可以接受的交换。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day1_day_rest",
+      "text": { "zh": "【休息】身体比头脑更清楚什么是当务之急。强迫自己睡一觉。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 2, "morale": 1, "will": 1 },
+        "timeCost": 6
+      },
+      "consequence": [
+        { "zh": "你强迫自己躺下，闭上眼。睡着比你想象的快。" },
+        { "zh": "醒来时光已经斜了。脑子比昨天清楚，四肢的酸胀也退了一些。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day1_day_observe",
+      "text": { "zh": "【观察】从窗帘缝里盯着楼下的移动，记它们走哪里、怎么走、有没有规律。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "noticed_patrol_pattern": true },
+        "stats": { "stealth": 1, "will": 1, "morale": -1 },
+        "timeCost": 3
+      },
+      "consequence": [
+        { "zh": "你在窗边蹲了三个小时，把楼下停车场里的移动规律记在备忘录里。" },
+        { "zh": "它们不是随机的。有几个区域被反复经过，有几个死角它们从来不去。你把这些记下来。" },
+        { "zh": "代价是你现在很难把这些画面从脑子里清出去。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day1_day_wound",
+      "text": { "zh": "【检查】把胶带撕开，认真检查右手中指的伤口。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 2, "morale": -2 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你在灯光下仔细看了很久。" },
+        { "zh": "切口已经闭合，但颜色还没回来——不是正常的粉红，而是一种偏暗的、你没有词来描述的色调。皮下有什么感觉，不是疼，是别的。" },
+        { "zh": "你重新缠上胶带。没有跟任何人说这件事，因为现在也没有人可以说。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    }
+  ]
+}

@@ -29,6 +29,8 @@ const zh: BaseTranslation = {
     autoSaved: '已自动存档',
     crisis: {
       timeExpired: '时间到了。外面的声音变了。',
+      breachImminent: '防御正在失效。他们正在渗透进来。',
+      baseOverrun: '基地已被攻陷。',
       awakening: '某些东西改变了。你还说不清楚是什么。',
     },
   },
@@ -60,6 +62,8 @@ const zh: BaseTranslation = {
       none: '不设防',
       basic: '基础加固',
       solid: '相当安全',
+      reinforced: '加固',
+      secure: '安全',
       fortress: '钢铁要塞',
     },
   },
@@ -72,6 +76,7 @@ const zh: BaseTranslation = {
       subtle: '右手中指隐约有些不对劲，说不上来是什么。',
       noticeable: '皮下那种感觉越来越难以忽视。不是疼，是别的什么。',
       alarming: '某些念头出现的方式让你感到陌生。你花了更长时间才把它们压下去。',
+      impending: '转化几乎完成。你正在失去自己。',
       critical: '边界在模糊。你已经不确定，某些念头，是不是你自己的。',
     },
     will: {
@@ -84,6 +89,9 @@ const zh: BaseTranslation = {
   // Shown only when thresholds are crossed; never show numbers.
   statSignal: {
     infection: {
+      dormant: '潜伏中',
+      active: '活跃中',
+      mutating: '变异中',
       spreading: '扩散中',
       critical: '异变临界',
     },
@@ -109,6 +117,9 @@ const zh: BaseTranslation = {
     empty: '身无长物。',
     quantity: '×{qty:number}',
     use: '使用',
+    workshop: '工作台',
+    recipes: '配方',
+    materials: '材料',
   },
 
   // ── Ending Page ────────────────────────────────────────────────────────────
@@ -121,6 +132,14 @@ const zh: BaseTranslation = {
     },
     choicesMade: '选择次数：{count:number}',
     scenesVisited: '访问场景：{count:number}',
+    journal: '日记',
+    journalEntries: '日记条目',
+    journalEmpty: '暂无条目。',
+    peiNotebook: "裴嘉应的笔记本",
+    peiNotebookNewEntry: '有新条目可用！',
+    overclock: '超频',
+    depravedInsight: '道德败坏的见解',
+
     playAgain: '再玩一次',
     returnToTitle: '返回主菜单',
     noData: '未找到结局数据。',

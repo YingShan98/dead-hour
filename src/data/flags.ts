@@ -155,6 +155,9 @@ export type GameFlag =
   | 'helped_stranger' // Day 10: helped injured family at supermarket
   | 'heard_government_broadcast' // Day 15: radio signal with coordinates received
 
+  // ── Phase 1 daily loop observation ───────────────────────────────────────
+  | 'noticed_patrol_pattern' // Day 3: player studied zombie movement routes
+
   // ── Special ending conditions ─────────────────────────────────────────────
   | 'excessive_exertion' // 18+ consecutive action days without rest → H-2 ending
 
@@ -610,6 +613,16 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   {
     key: 'heard_government_broadcast',
     description: 'Day 15: radio signal with government coordinates received. Destination unknown.',
+    category: 'narrative',
+    achievement: null,
+  },
+
+  // ── Phase 1 daily loop observation ────────────────────────────────────────
+
+  {
+    key: 'noticed_patrol_pattern',
+    description:
+      'Day 3: player spent time watching zombie movement routes from the window. Unlocks stealth options.',
     category: 'narrative',
     achievement: null,
   },

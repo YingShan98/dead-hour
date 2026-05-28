@@ -1,0 +1,42 @@
+{
+  "id": "scene_day1_morning",
+  "title": { "zh": "第三天·清晨" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 56 },
+  "narrative": [
+    { "zh": "第三天的光和前两天的光一样，灰白，从窗帘边缘漏进来。" },
+    { "zh": "你把存粮清点了一遍。食物：还够几天。水：更紧张一点，但还在可接受范围内。你把数字记在手机备忘录里，用最简单的格式。" },
+    { "zh": "收音机——如果你有的话——只有静电。偶尔像是有人在说话的频率，切断了，再切断。你调了几次，什么都没出来。" },
+    { "zh": "窗外的城市很安静。不是傍晚的安静，是某种更空旷的东西。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day1_morning_a",
+      "text": { "zh": "把食物和水的精确储量写下来，算出还能支撑多久。数字不好看，但不看更糟。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 1 }
+      },
+      "consequence": [
+        { "zh": "食物：三天。水：两天多，如果节约的话。你把这两个数字写下来，然后把手机扣在桌上。" },
+        { "zh": "这不是绝望的数字，这是工程数字。工程数字有解。" }
+      ],
+      "nextSceneId": "scene_day1_day"
+    },
+    {
+      "id": "scene_day1_morning_b",
+      "text": { "zh": "不算了。知道了也是干着急，能熬到哪天算哪天。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": 1, "will": -1 }
+      },
+      "consequence": [
+        { "zh": "你盯着天花板，听了一会儿窗外的安静。" },
+        { "zh": "某种程度上，安静比喊叫更让人难受。喊叫说明有人，安静说明没有了。" }
+      ],
+      "nextSceneId": "scene_day1_day"
+    }
+  ]
+}

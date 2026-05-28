@@ -112,7 +112,7 @@ export type LocaleString = {
 
 // ─── Scenes & Choices ─────────────────────────────────────────────────────────
 
-export type Act = 'act1' | 'act2' | 'act3' | 'act4'
+export type Act = 'prologue' | 'act1' | 'act2' | 'act3' | 'act4'
 
 export interface GameTime {
   hoursFromStart: number // negative = before outbreak, positive = after
