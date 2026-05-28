@@ -46,7 +46,7 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 ### Prerequisites
 
 - Node.js 18+
-- pnpm 9+
+- pnpm 11.3+
 
 ### Install & Run
 
