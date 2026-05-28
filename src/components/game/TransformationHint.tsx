@@ -22,9 +22,9 @@ export default function TransformationHint({ stats }: Props) {
 
   // Resolve to a single active hint — infection takes priority
   const activeText: string | null = infectionHint
-    ? LL.hint.infection[infectionHint.severity]
+    ? LL.hint.infection[infectionHint.severity]()
     : willHint
-      ? LL.hint.will[willHint.type]
+      ? LL.hint.will[willHint.type]()
       : null
 
   const activeSeverity = infectionHint?.severity ?? null

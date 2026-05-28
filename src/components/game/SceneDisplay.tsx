@@ -18,7 +18,7 @@ export default function SceneDisplay({ scene }: Props) {
       return interpolate(LL.time.beforeOutbreak, { hours: Math.abs(hoursFromStart) })
     }
     const days = Math.floor(hoursFromStart / 24)
-    if (days === 0) return LL.time.dayOne
+    if (days === 0) return LL.time.dayOne()
     return interpolate(LL.time.day, { day: days })
   }
 

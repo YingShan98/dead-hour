@@ -28,14 +28,14 @@ export default function SecurityMeter({ security }: Props) {
   const pct = Math.min(100, security)
 
   // All display strings from LL
-  const levelLabel: string = LL.security.level[level]
+  const levelLabel: string = LL.security.level[level]()
 
   return (
     <div className="flex flex-col gap-1.5">
       {/* Header row */}
       <div className="flex justify-between items-center">
         <span className="font-ui text-xs text-text-dim uppercase tracking-widest">
-          {LL.security.label}
+          {LL.security.label()}
         </span>
         <span className={`font-ui text-xs ${textCls}`}>{security}</span>
       </div>

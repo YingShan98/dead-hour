@@ -64,7 +64,7 @@ export default function StatPanel({ stats }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="ui-label text-muted">{LL.stats.label}</p>
+      <p className="ui-label text-muted">{LL.stats.label()}</p>
 
       {/* Visible character stats */}
       {STAT_ROWS.map(({ key, labelKey, icon, max, barColour }) => {
@@ -74,7 +74,7 @@ export default function StatPanel({ stats }: Props) {
           <div key={key} className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
               <span className="font-ui text-xs text-text-dim">
-                {icon} {LL.stats[labelKey]}
+                {icon} {LL.stats[labelKey]()}
               </span>
               <span
                 className="font-ui text-xs"
@@ -106,7 +106,7 @@ export default function StatPanel({ stats }: Props) {
             className="font-ui text-xs"
             style={{ color: INFECTION_SIGNAL_COLOUR[infectionSignal] }}
           >
-            {LL.statSignal.infection[infectionSignal]}
+            {LL.statSignal.infection[infectionSignal]()}
           </span>
         </div>
       )}
@@ -118,7 +118,7 @@ export default function StatPanel({ stats }: Props) {
             ◇
           </span>
           <span className="font-ui text-xs" style={{ color: WILL_SIGNAL_COLOUR[willSignal] }}>
-            {LL.statSignal.will[willSignal]}
+            {LL.statSignal.will[willSignal]()}
           </span>
         </div>
       )}

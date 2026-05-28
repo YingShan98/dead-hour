@@ -19,7 +19,7 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
 
   return (
     <div className="flex flex-col gap-2 mt-8">
-      <p className="ui-label text-muted mb-2">{LL.game.yourMove}</p>
+      <p className="ui-label text-muted mb-2">{LL.game.yourMove()}</p>
 
       {available.map((choice, i) => (
         <button

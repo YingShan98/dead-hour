@@ -39,10 +39,10 @@ export default function TitlePage() {
       <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
         {/* Title block */}
         <div className="text-center">
-          <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.title.tagline}</p>
+          <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.title.tagline()}</p>
           <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
           <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
-          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.title.subtitle}</p>
+          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.title.subtitle()}</p>
         </div>
 
         {/* Menu */}
@@ -53,7 +53,7 @@ export default function TitlePage() {
             className="choice-btn text-center font-display text-xl tracking-wide py-4
                        border-accent text-accent hover:bg-[#1e0a0a]"
           >
-            {isLoading ? LL.ui.loading : LL.title.newGame}
+            {isLoading ? LL.ui.loading() : LL.title.newGame()}
           </button>
 
           {hasSave && (
@@ -62,7 +62,7 @@ export default function TitlePage() {
               disabled={isLoading}
               className="choice-btn text-center"
             >
-              {LL.title.continue}
+              {LL.title.continue()}
             </button>
           )}
         </div>

@@ -16,15 +16,15 @@ export default function InventoryPanel({ inventory }: Props) {
   if (inventory.length === 0) {
     return (
       <div className="flex flex-col gap-3">
-        <p className="ui-label text-muted">{LL.inventory.label}</p>
-        <p className="font-body text-text-dim text-sm italic">{LL.inventory.empty}</p>
+        <p className="ui-label text-muted">{LL.inventory.label()}</p>
+        <p className="font-body text-text-dim text-sm italic">{LL.inventory.empty()}</p>
       </div>
     )
   }
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="ui-label text-muted">{LL.inventory.label}</p>
+      <p className="ui-label text-muted">{LL.inventory.label()}</p>
       <div className="flex flex-col gap-1.5">
         {inventory.map(({ itemId, quantity }) => {
           const def = getItemDef(itemId)
@@ -60,7 +60,7 @@ export default function InventoryPanel({ inventory }: Props) {
                              transition-colors"
                   title={resolveLocaleString(def.description, locale)}
                 >
-                  {LL.inventory.use}
+                  {LL.inventory.use()}
                 </button>
               )}
             </div>

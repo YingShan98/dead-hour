@@ -21,16 +21,16 @@ export default function EndingPage() {
   if (!triggeredEnding || triggeredEnding.id !== endingId) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-6">
-        <p className="font-body text-text-dim">{LL.ending.noData}</p>
+        <p className="font-body text-text-dim">{LL.ending.noData()}</p>
         <button onClick={() => navigate('/')} className="choice-btn max-w-xs">
-          {LL.ending.returnToTitle}
+          {LL.ending.returnToTitle()}
         </button>
       </div>
     )
   }
 
   const colourClass = TYPE_COLOURS[triggeredEnding.type]
-  const typeLabel = LL.ending.type[triggeredEnding.type]
+  const typeLabel = LL.ending.type[triggeredEnding.type]()
   const title = resolveLocaleString(triggeredEnding.title, locale)
   const paragraphs = resolveLocaleStrings(triggeredEnding.narrative, locale)
   const epilogue = triggeredEnding.epilogue
@@ -82,10 +82,10 @@ export default function EndingPage() {
             onClick={() => navigate('/')}
             className="choice-btn text-center border-accent text-accent hover:bg-[#1e0a0a]"
           >
-            {LL.ending.playAgain}
+            {LL.ending.playAgain()}
           </button>
           <button onClick={() => navigate('/')} className="choice-btn text-center">
-            {LL.ending.returnToTitle}
+            {LL.ending.returnToTitle()}
           </button>
         </div>
       </div>

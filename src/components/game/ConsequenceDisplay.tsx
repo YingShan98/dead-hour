@@ -70,7 +70,7 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
           animationFillMode: 'forwards',
         }}
       >
-        {isLoading ? LL.ui.loading : LL.ui.continue}
+        {isLoading ? LL.ui.loading() : LL.ui.continue()}
       </button>
     </div>
   )

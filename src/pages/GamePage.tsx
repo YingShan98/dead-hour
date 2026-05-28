@@ -19,13 +19,8 @@ import { useI18n } from '@/i18n/useI18n'
 type LLErrors = ReturnType<typeof useI18n>['LL']['errors']
 
 function resolveError(error: StoreError, errors: LLErrors): string {
-  const template = errors[error.key]
-  if (typeof template === 'function') {
-    return (template as unknown as (args: Record<string, string | number>) => string)(
-      error.params ?? {},
-    )
-  }
-  return template
+  const fn = errors[error.key] as (args: Record<string, string | number>) => string
+  return fn(error.params ?? {})
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -70,7 +65,7 @@ export default function GamePage() {
   if (!currentScene || !gameState) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="ui-label text-muted animate-flicker">{LL.ui.loading}</p>
+        <p className="ui-label text-muted animate-flicker">{LL.ui.loading()}</p>
       </div>
     )
   }
@@ -105,12 +100,12 @@ export default function GamePage() {
           {/* Crisis banners */}
           {timeJustExpired && (
             <div className="mb-6 px-4 py-3 rounded border border-danger bg-[#1e0808] animate-fade-in">
-              <p className="font-body text-sm text-danger">{LL.game.crisis.timeExpired}</p>
+              <p className="font-body text-sm text-danger">{LL.game.crisis.timeExpired()}</p>
             </div>
           )}
           {awakeningJustTriggered && (
             <div className="mb-6 px-4 py-3 rounded border border-border bg-[#080c1e] animate-fade-in">
-              <p className="font-body text-sm text-text-dim italic">{LL.game.crisis.awakening}</p>
+              <p className="font-body text-sm text-text-dim italic">{LL.game.crisis.awakening()}</p>
             </div>
           )}
 
@@ -121,7 +116,7 @@ export default function GamePage() {
                 {resolveError(error, LL.errors)}
               </span>
               <button onClick={dismissError} className="ui-label text-xs text-muted ml-4">
-                {LL.ui.dismiss}
+                {LL.ui.dismiss()}
               </button>
             </div>
           )}
@@ -130,7 +125,7 @@ export default function GamePage() {
           {isLoading && (
             <div className="flex items-center gap-2 mb-6">
               <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              <p className="ui-label text-muted text-xs">{LL.game.loadingScene}</p>
+              <p className="ui-label text-muted text-xs">{LL.game.loadingScene()}</p>
             </div>
           )}
 

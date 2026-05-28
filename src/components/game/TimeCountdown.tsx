@@ -32,17 +32,17 @@ export default function TimeCountdown({ timeRemaining }: Props) {
   // Resolved display strings — all from LL, none hardcoded
   const displayTime: string =
     urgency === 'expired'
-      ? LL.countdown.expired
+      ? LL.countdown.expired()
       : interpolate(LL.countdown.hours, { hours: timeRemaining })
 
-  const urgencyLabel: string = LL.countdown.urgency[urgency]
+  const urgencyLabel: string = LL.countdown.urgency[urgency]()
 
   return (
     <div className="flex flex-col gap-1.5">
       {/* Header row */}
       <div className="flex justify-between items-center">
         <span className="font-ui text-xs text-text-dim uppercase tracking-widest">
-          {LL.countdown.label}
+          {LL.countdown.label()}
         </span>
         <span className={`font-ui text-xs ${textCls}`}>{displayTime}</span>
       </div>

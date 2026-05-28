@@ -1,4 +1,5 @@
 import type { Scene, Ending, ItemDefinition } from './types'
+import { getAllItemDefs } from '../data/itemRegistry'
 
 const sceneCache = new Map<string, Scene>()
 
@@ -44,6 +45,5 @@ export async function loadEndings(): Promise<Ending[]> {
 }
 
 export async function loadItems(): Promise<ItemDefinition[]> {
-  const module = await import('../data/items.json')
-  return (module.default as { items: ItemDefinition[] }).items
+  return getAllItemDefs()
 }
