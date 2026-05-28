@@ -129,7 +129,12 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
 }
 
-function requireString(file: string, obj: Record<string, unknown>, key: string, context: string): boolean {
+function requireString(
+  file: string,
+  obj: Record<string, unknown>,
+  key: string,
+  context: string,
+): boolean {
   if (typeof obj[key] !== 'string' || (obj[key] as string).trim() === '') {
     addError(file, `${context}.${key} must be a non-empty string`)
     return false
@@ -137,7 +142,12 @@ function requireString(file: string, obj: Record<string, unknown>, key: string, 
   return true
 }
 
-function requireNumber(file: string, obj: Record<string, unknown>, key: string, context: string): boolean {
+function requireNumber(
+  file: string,
+  obj: Record<string, unknown>,
+  key: string,
+  context: string,
+): boolean {
   if (typeof obj[key] !== 'number' || Number.isNaN(obj[key])) {
     addError(file, `${context}.${key} must be a number`)
     return false
@@ -145,7 +155,12 @@ function requireNumber(file: string, obj: Record<string, unknown>, key: string, 
   return true
 }
 
-function requireBoolean(file: string, obj: Record<string, unknown>, key: string, context: string): boolean {
+function requireBoolean(
+  file: string,
+  obj: Record<string, unknown>,
+  key: string,
+  context: string,
+): boolean {
   if (typeof obj[key] !== 'boolean') {
     addError(file, `${context}.${key} must be a boolean`)
     return false
@@ -153,7 +168,12 @@ function requireBoolean(file: string, obj: Record<string, unknown>, key: string,
   return true
 }
 
-function requireLocaleString(file: string, obj: Record<string, unknown>, key: string, context: string): boolean {
+function requireLocaleString(
+  file: string,
+  obj: Record<string, unknown>,
+  key: string,
+  context: string,
+): boolean {
   const value = obj[key]
   if (!isObject(value)) {
     addError(file, `${context}.${key} must be a LocaleString object, got ${typeof value}`)
@@ -194,12 +214,7 @@ function collectFiles(dir: string, predicate: (f: string) => boolean): string[] 
 
 // ─── Condition / Effect set validators ───────────────────────────────────────
 
-function validateConditionSet(
-  file: string,
-  conditions: unknown,
-  context: string,
-  reg: Registries,
-) {
+function validateConditionSet(file: string, conditions: unknown, context: string, reg: Registries) {
   if (conditions === undefined) return
   if (!isObject(conditions)) {
     addError(file, `${context} must be an object`)
@@ -240,7 +255,10 @@ function validateConditionSet(
     } else {
       ;(conditions.requiredStats as unknown[]).forEach((cond, i) => {
         const ctx = `${context}.requiredStats[${i}]`
-        if (!isObject(cond)) { addError(file, `${ctx} must be an object`); return }
+        if (!isObject(cond)) {
+          addError(file, `${ctx} must be an object`)
+          return
+        }
         if (!reg.statKeys.has(cond.stat as string)) {
           addError(file, `${ctx}.stat references unknown stat "${cond.stat}"`)
         }
@@ -264,13 +282,16 @@ function validateConditionSet(
       ;(conditions.requiredItems as unknown[]).forEach((cond, i) => {
         const ctx = `${context}.requiredItems[${i}]`
         if (!isObject(cond) || typeof cond.itemId !== 'string') {
-          addError(file, `${ctx} must have an itemId string`); return
+          addError(file, `${ctx} must have an itemId string`)
+          return
         }
         if (!reg.itemIds.has(cond.itemId)) {
           addError(file, `${ctx}.itemId references unknown item "${cond.itemId}"`)
         }
-        if (cond.minQuantity !== undefined &&
-            (!Number.isInteger(cond.minQuantity) || (cond.minQuantity as number) < 1)) {
+        if (
+          cond.minQuantity !== undefined &&
+          (!Number.isInteger(cond.minQuantity) || (cond.minQuantity as number) < 1)
+        ) {
           addError(file, `${ctx}.minQuantity must be a positive integer`)
         }
       })
@@ -278,12 +299,7 @@ function validateConditionSet(
   }
 }
 
-function validateEffectSet(
-  file: string,
-  effects: unknown,
-  context: string,
-  reg: Registries,
-) {
+function validateEffectSet(file: string, effects: unknown, context: string, reg: Registries) {
   if (effects === undefined || effects === null) return
   if (!isObject(effects)) {
     addError(file, `${context} must be an object`)
@@ -326,9 +342,13 @@ function validateEffectSet(
     } else {
       ;(effects.items as unknown[]).forEach((item, i) => {
         const ctx = `${context}.items[${i}]`
-        if (!isObject(item)) { addError(file, `${ctx} must be an object`); return }
+        if (!isObject(item)) {
+          addError(file, `${ctx} must be an object`)
+          return
+        }
         if (typeof item.itemId !== 'string') {
-          addError(file, `${ctx}.itemId must be a string`); return
+          addError(file, `${ctx}.itemId must be a string`)
+          return
         }
         if (!reg.itemIds.has(item.itemId)) {
           addError(file, `${ctx}.itemId references unknown item "${item.itemId}"`)
@@ -354,7 +374,7 @@ function loadValidFlags(): Set<string> {
   // Collect until the next top-level export or end of file
   const nextExport = src.indexOf('\nexport ', start + 1)
   const section = src.slice(start, nextExport > -1 ? nextExport : undefined)
-  const flags = [...section.matchAll(/\|\s*'([\w_]+)'/g)].map(m => m[1])
+  const flags = [...section.matchAll(/\|\s*'([\w_]+)'/g)].map((m) => m[1])
   return new Set(flags)
 }
 
@@ -371,7 +391,10 @@ function validateStats(): Set<string> {
 
   ;(data.stats as unknown[]).forEach((stat, i) => {
     const context = `stats[${i}]`
-    if (!isObject(stat)) { addError(file, `${context} must be an object`); return }
+    if (!isObject(stat)) {
+      addError(file, `${context} must be an object`)
+      return
+    }
 
     if (requireString(file, stat, 'key', context)) {
       if (statKeys.has(stat.key as string)) addError(file, `duplicate stat key "${stat.key}"`)
@@ -415,7 +438,10 @@ function validateItems(reg: Registries): Set<string> {
 
   ;(data.items as unknown[]).forEach((item, i) => {
     const context = `items[${i}]`
-    if (!isObject(item)) { addError(file, `${context} must be an object`); return }
+    if (!isObject(item)) {
+      addError(file, `${context} must be an object`)
+      return
+    }
 
     if (requireString(file, item, 'id', context)) {
       if (itemIds.has(item.id as string)) addError(file, `duplicate item id "${item.id}"`)
@@ -455,7 +481,10 @@ function validateEndings(reg: Registries) {
 
   ;(data.endings as unknown[]).forEach((ending, i) => {
     const context = `endings[${i}]`
-    if (!isObject(ending)) { addError(file, `${context} must be an object`); return }
+    if (!isObject(ending)) {
+      addError(file, `${context} must be an object`)
+      return
+    }
 
     if (requireString(file, ending, 'id', context)) {
       if (endingIds.has(ending.id as string)) addError(file, `duplicate ending id "${ending.id}"`)
@@ -487,7 +516,7 @@ function validateEndings(reg: Registries) {
 
 function validateScenes(reg: Registries) {
   const sceneDir = path.join(DATA_DIR, 'scenes')
-  const sceneFiles = collectFiles(sceneDir, f => f.endsWith('.json'))
+  const sceneFiles = collectFiles(sceneDir, (f) => f.endsWith('.json'))
 
   if (sceneFiles.length === 0) {
     addError(sceneDir, 'no scene JSON files found')
@@ -504,11 +533,17 @@ function validateScenes(reg: Registries) {
     if (!raw) continue
     const context = 'scene'
 
-    if (!isObject(raw)) { addError(file, 'scene file must contain an object'); continue }
+    if (!isObject(raw)) {
+      addError(file, 'scene file must contain an object')
+      continue
+    }
 
     if (requireString(file, raw, 'id', context)) {
       if (scenes.has(raw.id as string)) {
-        addError(file, `duplicate scene id "${raw.id}" also found in ${relative(scenes.get(raw.id as string)!.file)}`)
+        addError(
+          file,
+          `duplicate scene id "${raw.id}" also found in ${relative(scenes.get(raw.id as string)!.file)}`,
+        )
       }
       const expectedId = path.basename(file, '.json')
       if (raw.id !== expectedId) {
@@ -527,7 +562,12 @@ function validateScenes(reg: Registries) {
     if (!isObject(raw.gameTime)) {
       addError(file, `${context}.gameTime must be an object`)
     } else {
-      requireNumber(file, raw.gameTime as Record<string, unknown>, 'hoursFromStart', `${context}.gameTime`)
+      requireNumber(
+        file,
+        raw.gameTime as Record<string, unknown>,
+        'hoursFromStart',
+        `${context}.gameTime`,
+      )
     }
 
     if (!Array.isArray(raw.narrative) || (raw.narrative as unknown[]).length === 0) {
@@ -555,7 +595,10 @@ function validateScenes(reg: Registries) {
 
     ;(raw.choices as unknown[]).forEach((choice, i) => {
       const choiceCtx = `${context}.choices[${i}]`
-      if (!isObject(choice)) { addError(file, `${choiceCtx} must be an object`); return }
+      if (!isObject(choice)) {
+        addError(file, `${choiceCtx} must be an object`)
+        return
+      }
 
       if (requireString(file, choice, 'id', choiceCtx)) {
         if (choiceIds.has(choice.id as string)) addError(file, `duplicate choice id "${choice.id}"`)
