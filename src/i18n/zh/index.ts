@@ -135,7 +135,7 @@ const zh: BaseTranslation = {
     journal: '日记',
     journalEntries: '日记条目',
     journalEmpty: '暂无条目。',
-    peiNotebook: "裴嘉应的笔记本",
+    peiNotebook: '裴嘉应的笔记本',
     peiNotebookNewEntry: '有新条目可用！',
     overclock: '超频',
     depravedInsight: '异化视角',
