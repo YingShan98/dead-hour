@@ -138,7 +138,7 @@ const zh: BaseTranslation = {
     peiNotebook: "裴嘉应的笔记本",
     peiNotebookNewEntry: '有新条目可用！',
     overclock: '超频',
-    depravedInsight: '道德败坏的见解',
+    depravedInsight: '异化视角',
 
     playAgain: '再玩一次',
     returnToTitle: '返回主菜单',
