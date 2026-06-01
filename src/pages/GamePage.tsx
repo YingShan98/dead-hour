@@ -130,7 +130,7 @@ export default function GamePage() {
           )}
 
           {/* Scene */}
-          <SceneDisplay scene={currentScene} />
+          <SceneDisplay scene={currentScene} state={gameState} />
 
           {/* Transformation hint */}
           <TransformationHint stats={gameState.stats} />

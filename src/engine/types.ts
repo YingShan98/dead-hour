@@ -128,12 +128,17 @@ export interface Choice {
   consequence?: LocaleString[] // shown immediately after selection, before next scene loads
 }
 
+export type ConditionalNarrativeParagraph = LocaleString & {
+  conditions: ConditionSet
+}
+
 export interface Scene {
   id: string
   title: LocaleString
   act: Act
   gameTime: GameTime
   narrative: LocaleString[] // array of paragraphs
+  conditionalNarrative?: ConditionalNarrativeParagraph[] // prepended when conditions pass
   conditions: ConditionSet
   choices: Choice[]
   onEnter?: EffectSet // effects applied automatically on scene entry

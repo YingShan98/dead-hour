@@ -48,7 +48,7 @@
       "effects": {
         "flags": {
           "wound_cleaned": true,
-          "noticed_outbreak_signs": true
+          "noticed_wound_color": true
         },
         "stats": { "infection": -1, "will": 3, "morale": -2 },
         "items": []

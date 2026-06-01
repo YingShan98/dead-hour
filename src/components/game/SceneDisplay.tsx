@@ -1,17 +1,22 @@
-import type { Scene } from '@/engine/types'
+import type { Scene, GameState } from '@/engine/types'
+import { evaluate } from '@/engine/evaluator'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
 
 interface Props {
   scene: Scene
+  state: GameState
 }
 
-export default function SceneDisplay({ scene }: Props) {
+export default function SceneDisplay({ scene, state }: Props) {
   const { locale, LL } = useI18n()
 
   const title = resolveLocaleString(scene.title, locale)
-  const paragraphs = resolveLocaleStrings(scene.narrative, locale)
+  const conditional = (scene.conditionalNarrative ?? [])
+    .filter((p) => evaluate(p.conditions, state))
+    .map((p) => resolveLocaleString(p, locale))
+  const paragraphs = [...conditional, ...resolveLocaleStrings(scene.narrative, locale)]
 
   function formatGameTime(hoursFromStart: number): string {
     if (hoursFromStart < 0) {

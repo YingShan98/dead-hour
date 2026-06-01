@@ -109,6 +109,7 @@ export type GameFlag =
   | 'wound_cleaned' // player cleaned the wound properly
   | 'wound_ignored' // player ignored the wound
   | 'noticed_outbreak_signs' // player connected the news dots early
+  | 'noticed_wound_color' // player noticed the wound's abnormal discolouration
   | 'heard_rumor_at_breakfast'
   | 'fortified_door' // iron plates fixed to door interior
   | 'gave_in_to_raw_hunger' // zombie path accelerator
@@ -665,6 +666,13 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     key: 'noticed_outbreak_signs',
     description: 'Player connected the news reports and recognised the outbreak pattern early.',
     category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'noticed_wound_color',
+    description:
+      'Player looked closely at the wound and registered the abnormal discolouration. A separate observation from connecting the outbreak news — this is about the body, not the world.',
+    category: 'hidden',
     achievement: null,
   },
   {
