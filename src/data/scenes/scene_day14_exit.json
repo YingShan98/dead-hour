@@ -1,0 +1,54 @@
+{
+  "id": "scene_day14_exit",
+  "title": { "zh": "第十四天·出门" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 336 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第八天。什么都没发生，记了一下。\n第九天。食物见底了，喝水省着。第十天。今天外面有声音，持续了很久。第十一天。不能再等了，但还是等了。\n第十二天。裂缝里进了风。第十三天。没写，不知道写什么。第十四天——今天。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "又是七天。喻城把它们一天一天地度过，没有记录，只是等。他不确定自己在等什么，可能只是在等某一天他能确定今天是那个时候了。第十四天，他确定了。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第十四天。" },
+    { "zh": "食物已经见底了。门还在，防御还在，但没有食物的防御只是一个好看的牢笼。" },
+    { "zh": "你拿起工具，看了最后一眼这个你住了两个多星期的地方，然后准备离开。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day14_exit_truck",
+      "text": { "zh": "货车——如果还能发动，就开出去。" },
+      "conditions": {
+        "requiredFlags": ["truck_key_found"]
+      },
+      "hint": { "zh": "需要：货车钥匙" },
+      "effects": {
+        "flags": { "left_apartment": true, "has_vehicle": true },
+        "stats": { "will": 2 }
+      },
+      "consequence": [
+        { "zh": "发动机还活着。你深吸一口气，踩油门，开出去。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day14_exit_walk",
+      "text": { "zh": "步行出去。就这样，推开门，走。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "left_apartment": true },
+        "stats": { "health": -3, "will": 2 }
+      },
+      "consequence": [
+        { "zh": "你推开楼道的门，走下楼梯，推开大门，走进城市里。" },
+        { "zh": "十四天后，第一次，外面的空气。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    }
+  ]
+}

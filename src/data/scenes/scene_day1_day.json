@@ -3,9 +3,27 @@
   "title": { "zh": "第三天·白天" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 60 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_status_trapped_outside"] },
+      "position": "prefix",
+      "zh": "裴嘉应在面包房里。你在脑子里把这件事压住——压住，不是压没——然后看眼前。"
+    },
+    {
+      "conditions": { "requiredFlags": ["neighbor_zombie"] },
+      "position": "prefix",
+      "zh": "老陈那边没有任何动静了。你没有过去看。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指今天有一种说不清楚的感觉——不是疼，是皮下某个过程在悄悄继续。你弯了几次，然后把手收回来，先做眼前的事。"
+    }
+  ],
   "narrative": [
-    { "zh": "白天的几个小时，是你目前唯一可以主动支配的时间。" },
-    { "zh": "门那边偶尔有声音，但没有靠近的迹象。到目前为止。" }
+    { "zh": "第三天。窗外的城市已经安静了两天，不是傍晚的那种安静，是某个更空旷的东西——城市本来的声音被抽走了，剩下的是它的形状。" },
+    { "zh": "门那边偶尔有移动的声音，但没有靠近的迹象。到目前为止。" },
+    { "zh": "白天的这几个小时，是你目前唯一可以主动支配的时间窗口。" }
   ],
   "conditions": {},
   "choices": [
@@ -66,6 +84,40 @@
         { "zh": "你在灯光下仔细看了很久。" },
         { "zh": "切口已经闭合，但颜色还没回来——不是正常的粉红，而是一种偏暗的、你没有词来描述的色调。皮下有什么感觉，不是疼，是别的。" },
         { "zh": "你重新缠上胶带。没有跟任何人说这件事，因为现在也没有人可以说。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day1_day_search",
+      "text": { "zh": "【搜查·楼内】去隔壁或上层的空置单元找食物和物资——门虚掩的，或者能开的。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": -1, "will": 1 },
+        "items": [
+          { "itemId": "canned_food", "delta": 2 },
+          { "itemId": "duct_tape", "delta": 1 }
+        ],
+        "timeCost": 3
+      },
+      "consequence": [
+        { "zh": "你在楼道里走了两层，轻手轻脚，停下来听，走，再停。两个单元虚掩着，里面没有人，也没有那种东西。" },
+        { "zh": "找到了两罐压缩食品，一卷宽胶带，还有一瓶没喝完的矿泉水。你把能带的都带走了。" },
+        { "zh": "插好插销，背靠着门站了一秒。手心有汗，但身体稳着。那种稳是做了一件有用的事之后才有的感觉。" }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day1_day_journal",
+      "text": { "zh": "【记录】把这两天的事系统地写下来——时间线，观察到的规律，需要解决的问题。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 },
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你在备忘录里写了很长，比预想的要长。写完之后，页面上有三栏：确定的，不确定的，需要搞清楚的。" },
+        { "zh": "不确定那栏最长。但你现在知道自己不确定什么了，而不只是一片模糊的害怕。这是两件不一样的事。" }
       ],
       "nextSceneId": "scene_day3_night"
     }

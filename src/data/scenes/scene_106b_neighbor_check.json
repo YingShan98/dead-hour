@@ -44,9 +44,7 @@
     {
       "id": "scene_106b_choice_b",
       "text": { "zh": "没有手套——徒手进去，从钉子上摘下钥匙，然后撤。" },
-      "conditions": {
-        "blockedFlags": ["gloves_worn"]
-      },
+      "conditions": {},
       "effects": {
         "flags": {
           "neighbor_explored": true,

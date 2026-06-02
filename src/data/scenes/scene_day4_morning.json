@@ -1,0 +1,80 @@
+{
+  "id": "scene_day4_morning",
+  "title": { "zh": "第四天·清晨" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 96 },
+  "conditionalNarrative": [
+    {
+      "conditions": {
+        "requiredFlags": ["pei_status_trapped_outside", "truck_key_found"]
+      },
+      "position": "prefix",
+      "zh": "货车钥匙在桌上。你昨晚睁开眼睛的时候看见过它两次。"
+    },
+    {
+      "conditions": {
+        "requiredFlags": ["pei_status_trapped_outside"],
+        "blockedFlags": ["truck_key_found"]
+      },
+      "position": "prefix",
+      "zh": "裴嘉应在面包房里第三夜了。腿扭伤，不知道那扇门撑不撑得住，不知道她还有多少东西可以吃。你没有去找她的办法。你把这件事压在脑子里一整个夜晚，它还在那里。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "你弯了几次右手中指。皮下有什么感觉，说不清楚，不是疼，是别的——像是某个过程在你不注意的时候继续进行。你把手收回来，先做眼前的事。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第四天的光和前三天一样，先是窗帘边缘的一线灰，慢慢变白。" },
+    { "zh": "你不确定自己什么时候睡着的，或者有没有真正睡着。脑子里有一段时间是空的，但那不一定是睡眠。" },
+    { "zh": "门外没有声音。昨晚在你门口徘徊的那个东西不知道去了哪里。你已经学会了：没有声音只是没有声音，不等于没有东西。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day4_morning_eat",
+      "text": { "zh": "先吃点东西。不管想不想吃，都要吃。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "canned_food", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：食物 ×1" },
+      "effects": {
+        "stats": { "health": 1, "morale": 1 },
+        "items": [{ "itemId": "canned_food", "delta": -1 }]
+      },
+      "consequence": [
+        { "zh": "食物没什么味道，但吃完之后手脚重新有了温度，脑子比刚才稳了一些。" },
+        { "zh": "你把空罐头推到一边，起身。" }
+      ],
+      "nextSceneId": "scene_day4_day"
+    },
+    {
+      "id": "scene_day4_morning_log",
+      "text": { "zh": "把昨晚的事写下来，在备忘录里。字迹不需要好看，只要准确。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2 }
+      },
+      "consequence": [
+        { "zh": "你写下了：时间，声音的类型，持续了多久，门的状态，你的反应，最后的结果。" },
+        { "zh": "读了一遍。写下来之后，它变成了一件可以分析的事，而不只是一件让人头皮发麻的事。这大概就是你写它的原因。" }
+      ],
+      "nextSceneId": "scene_day4_day"
+    },
+    {
+      "id": "scene_day4_morning_door",
+      "text": { "zh": "先把门检查一遍，确认没有松动，没有被撑出新的缝隙。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": 1 }
+      },
+      "consequence": [
+        { "zh": "你用手逐寸检查了整个门框的接合处。没有松动，没有昨晚造成的破坏痕迹。" },
+        { "zh": "你退后一步，看着这扇门。昨晚它撑住了。" }
+      ],
+      "nextSceneId": "scene_day4_day"
+    }
+  ]
+}

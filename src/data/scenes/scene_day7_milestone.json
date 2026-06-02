@@ -1,0 +1,104 @@
+{
+  "id": "scene_day7_milestone",
+  "title": { "zh": "第七天·出门" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 168 },
+  "onEnter": {
+    "flags": { "survived_first_week": true },
+    "stats": {},
+    "items": []
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应站在你身边，踝关节好了一些但还没彻底好。她说：「我能走。慢一点，但能走。」你没有说别的，只是把工具递给她一件。"
+    },
+    {
+      "conditions": {
+        "requiredFlags": ["pei_status_trapped_outside"],
+        "blockedFlags": ["pei_alive"]
+      },
+      "position": "prefix",
+      "zh": "她已经在面包房里第七夜了。你没有货车钥匙，或者之前试过但街上走不通。无论如何，如果你今天出去，出去的方向会经过那里。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第七天。" },
+    { "zh": "食物两天内会见底，除非今天出去找。水也快了。门的加固做到这个程度，继续做已经是递减回报——能做的大部分已经做完了。" },
+    { "zh": "你站在门边，工具全带在身上，看着这扇门。" },
+    { "zh": "出去是必然的。问题只是怎么出去。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day7_front_door",
+      "text": { "zh": "【正门直闯】开门，推开挡路的，往前走。没有更多准备了。" },
+      "conditions": {
+        "blockedFlags": ["has_vehicle"]
+      },
+      "effects": {
+        "flags": { "left_apartment": true },
+        "stats": { "health": -4, "stealth": -1, "will": 2 }
+      },
+      "consequence": [
+        { "zh": "你推开门，走进楼道。第一层，第二层，你没有停。楼道里有什么东西——你没有看它，用肩膀把它顶开，继续走。" },
+        { "zh": "推开楼门的那一刻，光刺进来，你眯了一下眼睛。" },
+        { "zh": "城市在你面前，第一次，是真实的样子。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day7_window",
+      "text": { "zh": "【窗口攀水管】从厨房窗户翻出去，沿排水管滑到院子，绕开正门。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "stealth", "min": 2 }],
+        "blockedFlags": ["has_vehicle"]
+      },
+      "hint": { "zh": "需要：潜行 2+" },
+      "effects": {
+        "flags": { "left_apartment": true },
+        "stats": { "health": -2, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "你从厨房窗户翻出去，抓住那根已经生了一层锈的排水管，一节一节往下挪。" },
+        { "zh": "从这个角度看城市和从窗户里看是完全不同的。建筑物的侧面，后巷，院子之间的连接——你在下滑的过程中一一看了一遍，把它们记进脑子。" },
+        { "zh": "落地，拍了拍手。院子里有风，是冬天的风，很冷。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day7_truck",
+      "text": { "zh": "【驾货车出发】发动老陈的HOWO，从停车棚直接开出去。" },
+      "conditions": {
+        "requiredFlags": ["truck_key_found"]
+      },
+      "hint": { "zh": "需要：货车钥匙" },
+      "effects": {
+        "flags": { "left_apartment": true, "has_vehicle": true },
+        "stats": { "will": 2, "morale": 1 }
+      },
+      "consequence": [
+        { "zh": "发动机第一声就着了。你把座椅调好，两手扶着方向盘，深吸一口气。" },
+        { "zh": "停车棚的卷帘门升起来，光漫进来，你踩油门，开出去。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day7_wait",
+      "text": { "zh": "【再撑一周】门还在，物资还有一点——再等等，等形势更清楚一些。" },
+      "conditions": {
+        "security": { "min": 60 }
+      },
+      "hint": { "zh": "需要：防御指数 60+" },
+      "effects": {
+        "stats": { "morale": -2, "will": -1 }
+      },
+      "consequence": [
+        { "zh": "你把决定推迟了七天。" },
+        { "zh": "有时候「还不是时候」是一个真实的判断，不是借口。门还在，你还在，这就够了——今天。" }
+      ],
+      "nextSceneId": "scene_day14_exit"
+    }
+  ]
+}

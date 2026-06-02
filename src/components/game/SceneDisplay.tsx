@@ -13,10 +13,10 @@ export default function SceneDisplay({ scene, state }: Props) {
   const { locale, LL } = useI18n()
 
   const title = resolveLocaleString(scene.title, locale)
-  const conditional = (scene.conditionalNarrative ?? [])
-    .filter((p) => evaluate(p.conditions, state))
-    .map((p) => resolveLocaleString(p, locale))
-  const paragraphs = [...conditional, ...resolveLocaleStrings(scene.narrative, locale)]
+  const passed = (scene.conditionalNarrative ?? []).filter((p) => evaluate(p.conditions, state))
+  const prefix = passed.filter((p) => !p.position || p.position === 'prefix').map((p) => resolveLocaleString(p, locale))
+  const suffix = passed.filter((p) => p.position === 'suffix').map((p) => resolveLocaleString(p, locale))
+  const paragraphs = [...prefix, ...resolveLocaleStrings(scene.narrative, locale), ...suffix]
 
   function formatGameTime(hoursFromStart: number): string {
     if (hoursFromStart < 0) {

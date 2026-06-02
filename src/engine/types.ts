@@ -130,6 +130,7 @@ export interface Choice {
 
 export type ConditionalNarrativeParagraph = LocaleString & {
   conditions: ConditionSet
+  position?: 'prefix' | 'suffix' // defaults to 'prefix'
 }
 
 export interface Scene {

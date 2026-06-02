@@ -3,6 +3,13 @@
   "title": { "zh": "加固" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -8 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_status_trapped_outside"] },
+      "position": "suffix",
+      "zh": "裴嘉应还在面包房里，腿受了伤。你在脑子里把这件事压住，先看眼前这扇门。"
+    }
+  ],
   "narrative": [
     {
       "zh": "你从厨房窗户的窗帘缝往外看了一眼。隔壁老陈家的铁皮门半开着，门框上有一道暗红色的手印，五根手指的痕迹斜着抹下来，颜色是干透的深褐色。"

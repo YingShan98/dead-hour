@@ -3,34 +3,68 @@
   "title": { "zh": "早餐店的谣言" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -36 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["researched_outbreak_early"] },
+      "zh": "昨晚裴嘉应说的那个词还压在你胸口。咬伤。你没睡好。"
+    },
+    {
+      "conditions": {
+        "requiredFlags": ["noticed_outbreak_signs"],
+        "blockedFlags": ["researched_outbreak_early"]
+      },
+      "zh": "11天，7天，4天。你在半梦半醒之间把那串数字又过了一遍。"
+    },
+    {
+      "conditions": { "blockedFlags": ["noticed_outbreak_signs", "researched_outbreak_early"] },
+      "zh": "你睡得还算踏实。"
+    },
+    {
+      "conditions": { "requiredFlags": ["researched_outbreak_early"] },
+      "position": "suffix",
+      "zh": "还有昨晚她亲口说的：咬伤。你放下豆浆杯。这不是谣言了。"
+    },
+    {
+      "conditions": {
+        "requiredFlags": ["noticed_outbreak_signs"],
+        "blockedFlags": ["researched_outbreak_early"]
+      },
+      "position": "suffix",
+      "zh": "还有那串间隔在缩短的数字。你放下豆浆杯。"
+    }
+  ],
   "narrative": [
     {
-      "zh": "在周六上午九点多，你被窗帘缝隙漏进来的光声驱醒。手机上有一条昨晚未读消息——裴嘉应发，'好哦，你那边没事吧？来了个未知的人，觉得不太对，你注意安全。'"
+      "zh": "周六上午九点多，你被窗帘缝隙漏进来的光声驱醒。手机上有一条昨晚未读消息——裴嘉应发的：「来了个未知的人，觉得不太对，你注意安全。」"
     },
-    { "zh": "你简单回复了句'大概没事，注意点'，出门买早饭。" },
-    { "zh": "早餐店靠近门口的两个中年大叔边吃花卷边聊天，说话声音很大；" },
+    { "zh": "你简单回复了句「大概没事，注意点」，出门买早饭。" },
+    { "zh": "早餐店靠近门口的两个中年大叔边吃花卷边聊天，声音很大。" },
     {
-      "zh": "'你看了没，朋友圈都在转，说昨晚那边有人被'咬伤'了。'另一个，'我说这个谣，说的就是谣。'第一个压低声音，'我说的不一样，我说最近被转的是——尸体咬人。'"
+      "zh": "「你看了没，朋友圈都在转，说昨晚那边有人被'咬伤'了。」另一个：「我说这个谣，说的就是谣。」第一个压低声音：「我说的不一样，我说最近被转的是——尸体咬人。」"
     },
     { "zh": "你端起豆浆杯愣了一会。热气从笼屉里散出来，桌面油亮，一切看起来如此正常。" },
-    { "zh": "但是。报纸上的'啃咬声'，裴嘉应的'未知的人'，大叔说的'尸体咬人'——" }
+    { "zh": "但是。报纸上的「啃咬声」，裴嘉应的「未知的人」，大叔说的「尸体咬人」——" }
   ],
   "conditions": {},
   "choices": [
     {
       "id": "scene_103_choice_a",
-      "text": { "zh": "算了，中年大叔就爱传微信谣言。这周，回家。" },
+      "text": { "zh": "算了，中年大叔就爱传微信谣言。这周末，回家。" },
       "conditions": {},
       "effects": {
         "stats": { "morale": 1, "will": -1 },
         "flags": {},
         "items": []
       },
+      "consequence": [
+        { "zh": "你把豆浆喝完，把碗筷推到一边。外面阳光很好，街上有人遛狗，有人买菜。" },
+        { "zh": "你骑车回家了。" }
+      ],
       "nextSceneId": "scene_104"
     },
     {
       "id": "scene_103_choice_b",
-      "text": { "zh": "掏出手机，把这件事在心里过了三个线，查了一条本地新闻。" },
+      "text": { "zh": "掏出手机，把这件事在心里过了三条线，查了一条本地新闻。" },
       "conditions": {},
       "effects": {
         "flags": {
@@ -40,21 +74,36 @@
         "stats": { "will": 1, "morale": -1 },
         "items": []
       },
+      "consequence": [
+        {
+          "zh": "本地论坛有一个帖子，发帖时间是凌晨两点，内容被删了，只剩一行系统提示：「该内容已被管理员移除。」"
+        },
+        {
+          "zh": "你盯着那行字看了一会儿。被删，说明有人看见了。有人看见了，说明帖子里有什么东西是真的。"
+        }
+      ],
       "nextSceneId": "scene_104"
     },
     {
       "id": "scene_103_choice_c",
-      "text": { "zh": "直接走过去问那个大叔，那边发生的视频还在放吗，能不能给我看一眼。" },
+      "text": { "zh": "直接走过去问那个大叔：那边发生的视频还在放吗，能不能给我看一眼。" },
       "conditions": {},
       "effects": {
         "flags": {
           "noticed_outbreak_signs": true,
           "heard_rumor_at_breakfast": true,
-          "went_to_city_hall_early": true
+          "watched_deleted_video": true
         },
         "stats": { "will": 2, "leadership": 1 },
         "items": []
       },
+      "consequence": [
+        {
+          "zh": "大叔愣了一下，看了你一眼，把手机递过来。视频很短，十几秒，画面抖得厉害，但你看清楚了——一个人趴在地上，动作不像是受伤，更像是在——"
+        },
+        { "zh": "视频在最关键的地方卡住了，转圈，然后提示「该视频已被删除」。" },
+        { "zh": "大叔把手机收回去，低声说：「你看，我就说不是谣言。」" }
+      ],
       "nextSceneId": "scene_104"
     }
   ]

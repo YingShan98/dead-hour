@@ -1,0 +1,74 @@
+{
+  "id": "scene_day8_outside",
+  "title": { "zh": "城市" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 176 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["has_vehicle"] },
+      "position": "prefix",
+      "zh": "从货车驾驶室看出去，城市比站在街上看更小，也更真实。你能看见更远的地方，但更远的地方也能看见你。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应在副驾驶，或者跟在你右后方一步。她没有说什么，但你注意到她在记——用眼睛记，扫过每一个路口，每一道没关严的门。她已经在这座城市里活了一个星期，但这是她第一次从外面看它。"
+    }
+  ],
+  "narrative": [
+    { "zh": "七天。" },
+    { "zh": "你在公寓里待了七天，脑子里的城市是窗户里的城市——窗帘缝隙，有限的视角，有限的声音。现在你站在外面，或者坐在货车里看着外面，城市是另一个东西了。" },
+    { "zh": "不是废墟。废墟是已经倒下去的东西，而这座城市还站着。建筑物还在，路还在，路边的灯柱还在，超市的玻璃橱窗有一扇还完好地反着光。城市站着，但里面已经空了——或者不是空了，是变成了另一种东西在活动。" },
+    { "zh": "你把这一切看了一遍，没有做任何结论，只是看了一遍。然后你决定下一步去哪里。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day8_outside_supermarket",
+      "text": { "zh": "先找物资。城南的那家大型超市，够大，能找到够多的东西。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你知道那家超市在哪里。你之前路过过，一直觉得某天会用到。" },
+        { "zh": "某天是今天。" }
+      ],
+      "nextSceneId": "scene_day10_supermarket"
+    },
+    {
+      "id": "scene_day8_outside_recon",
+      "text": { "zh": "先绕一圈看看——不拿东西，只是看。城市里有什么，在哪里，密度多高。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "knows_city_layout": true },
+        "stats": { "stealth": 1, "will": 1, "morale": -1 },
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你花了两个小时走了三条街，没有进任何建筑，只是走，看，记。" },
+        { "zh": "城市的密度不是均匀的。医院附近最高，商业街次之，居民区相对稀疏——但也只是相对。" },
+        { "zh": "你在备忘录里画了一张草图，把这些区域标出来。这张图不准确，但它是一个开始。" }
+      ],
+      "nextSceneId": "scene_day10_supermarket"
+    },
+    {
+      "id": "scene_day8_outside_hospital",
+      "text": { "zh": "去医院那个方向看看——如果裴嘉应还在里面，或者有任何药品物资，值得冒险。" },
+      "conditions": {
+        "blockedFlags": ["pei_alive"]
+      },
+      "effects": {
+        "stats": { "health": -2, "will": 1, "morale": -1 },
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "医院的方向，密度明显更高。你没有接近到能看清楚内部的距离。" },
+        { "zh": "但你经过了医院对面的面包房。玻璃橱窗上有一条划痕——是钥匙划的，歪歪斜斜的几个字，只有靠近才能看清：我在三楼找到了人，往西走，不要等。" },
+        { "zh": "字是她写的，你认识她写字的方式。日期在字的边上，是第三天。" }
+      ],
+      "nextSceneId": "scene_day10_supermarket"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "scene_105b",
+  "title": { "zh": "楼道" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -9 },
+  "conditions": {
+    "requiredFlags": ["pei_status_trapped_outside"]
+  },
+  "narrative": [
+    { "zh": "你抓起钥匙，把最重的工具别在腰上，准备出门。" },
+    { "zh": "然后楼道里传来了声音。" },
+    { "zh": "不是脚步声——是一种沉重的、不规则的拖拽，从上方慢慢向楼梯口移动。你贴着门听了很久。那个声音没有停，没有加速，就那样在楼道里漫无目的地响着。" },
+    { "zh": "你在脑子里过了一遍：裴嘉应说她腿扭伤了，躲在医院对面的面包房。从这里骑车也不过十分钟——但问题不是距离，是那两条主街。街上是什么样子，楼道里那个声音已经告诉你了。" }
+  ],
+  "choices": [
+    {
+      "id": "scene_105b_choice_a",
+      "text": { "zh": "先把这扇门封死。活着才能去找她。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 2, "morale": -2 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你把椅子抵住门把手，退回室内。" },
+        { "zh": "裴嘉应在面包房。这是你现在知道的最重要的事。" }
+      ],
+      "nextSceneId": "scene_106"
+    },
+    {
+      "id": "scene_105b_choice_b",
+      "text": { "zh": "管他的。现在就出去。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 7 }]
+      },
+      "hint": { "zh": "需要意志值 7+" },
+      "effects": {
+        "stats": { "health": -3, "will": 1, "infection": 1, "morale": -1 },
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你冲进楼道，下两层楼，推开大门，站到了街上。" },
+        { "zh": "三秒后，你关上门，回去了。" },
+        { "zh": "街上的情况不允许你走到面包房。你已经知道这一点，但你需要亲眼看一次。" },
+        { "zh": "你回到室内，把工具摆在桌上，开始想下一步。" }
+      ],
+      "nextSceneId": "scene_106"
+    }
+  ]
+}

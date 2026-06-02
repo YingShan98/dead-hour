@@ -55,11 +55,8 @@ export interface FlagDefinition {
 
 export type GameFlag =
   // ── Narrative / Early decisions ──────────────────────────────────────────
-  | 'saw_patient_zero_video'
-  | 'warned_a_stranger'
-  | 'warned_neighbors'
   | 'researched_outbreak_early'
-  | 'went_to_city_hall_early'
+  | 'watched_deleted_video'
   | 'prepped_early'
 
   // ── NPC encounters ────────────────────────────────────────────────────────
@@ -102,7 +99,6 @@ export type GameFlag =
 
   // ── Hidden / secret ───────────────────────────────────────────────────────
   | 'wrote_journal' // enables secret ending
-  | 'rested_at_safehouse'
 
   // ── Transformation system (喻城 infection arc) ───────────────────────────
   | 'finger_cut' // infection entry point — set by scene_101 onEnter
@@ -159,6 +155,10 @@ export type GameFlag =
   // ── Phase 1 daily loop observation ───────────────────────────────────────
   | 'noticed_patrol_pattern' // Day 3: player studied zombie movement routes
 
+  // ── Phase 1 exit & rescue milestones ─────────────────────────────────────
+  | 'left_apartment' // player has exited the apartment for the first time
+  | 'pei_ankle_injured' // 裴嘉应 has a twisted ankle from her bakery escape
+
   // ── Special ending conditions ─────────────────────────────────────────────
   | 'excessive_exertion' // 18+ consecutive action days without rest → H-2 ending
 
@@ -168,50 +168,29 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   // ── Narrative / Early decisions ────────────────────────────────────────────
 
   {
-    key: 'saw_patient_zero_video',
-    description: 'Player saw the viral video of the first attack before the outbreak.',
-    category: 'narrative',
-    achievement: null,
-  },
-  {
-    key: 'warned_a_stranger',
-    description: 'Player showed the outbreak video to a stranger on the subway.',
-    category: 'narrative',
-    achievement: {
-      id: 'achievement_good_samaritan',
-      title: 'Good Samaritan',
-      description: "You warned someone you didn't have to.",
-      icon: '🤝',
-      secret: false,
-    },
-  },
-  {
-    key: 'warned_neighbors',
-    description: 'Player warned their neighbours before the outbreak escalated.',
-    category: 'narrative',
-    achievement: null,
-  },
-  {
     key: 'researched_outbreak_early',
-    description: 'Player researched the downtown situation before it became public knowledge.',
+    description:
+      'Player called 裴嘉应 from a back alley before Hour Zero and learned that the hospital was already receiving bite victims. First confirmed intelligence — not rumour, not inference, a witness report.',
     category: 'narrative',
     achievement: null,
   },
   {
-    key: 'went_to_city_hall_early',
-    description: 'Player physically went to the outbreak site before Hour Zero.',
+    key: 'watched_deleted_video',
+    description:
+      'Player approached a stranger at the breakfast shop and watched a partial social media clip — someone crawling, movement wrong, not injured — before the video was deleted mid-watch. Visual evidence, half-confirmed, unverifiable.',
     category: 'narrative',
     achievement: {
       id: 'achievement_first_responder',
       title: 'First Responder',
-      description: 'You went toward the danger when everyone else looked away.',
+      description: 'You looked directly at it when everyone else said it was a rumor.',
       icon: '🚨',
       secret: false,
     },
   },
   {
     key: 'prepped_early',
-    description: 'Player gathered supplies before the outbreak was confirmed.',
+    description:
+      'Player bought defensive supplies (iron plates, duct tape, weapons) before the outbreak was publicly confirmed.',
     category: 'narrative',
     achievement: null,
   },
@@ -450,13 +429,6 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
       secret: true,
     },
   },
-  {
-    key: 'rested_at_safehouse',
-    description: 'Player rested at the safehouse.',
-    category: 'hidden',
-    achievement: null,
-  },
-
   // ── 裴嘉应 survival status ─────────────────────────────────────────────────
 
   {
@@ -627,6 +599,26 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     category: 'narrative',
     achievement: null,
   },
+  {
+    key: 'left_apartment',
+    description:
+      'Player has left their apartment for the first time since the outbreak. Set at Day 7 milestone exit.',
+    category: 'survival',
+    achievement: {
+      id: 'achievement_first_step',
+      title: 'First Step',
+      description: 'The door opened both ways.',
+      icon: '🚪',
+      secret: false,
+    },
+  },
+  {
+    key: 'pei_ankle_injured',
+    description:
+      '裴嘉应 twisted her ankle escaping the hospital bakery. Carries a health penalty for ~30 days after rescue.',
+    category: 'npc',
+    achievement: null,
+  },
 
   // ── Special ending conditions ──────────────────────────────────────────────
 
@@ -728,14 +720,14 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   {
     key: 'zombie_turning',
     description:
-      'Infection >= 8. The transformation arc has begun. The player is not yet fully turned.',
+      'Set by scene_109_turning onEnter — reached when the player gave in to raw hunger at Hour Zero. The transformation arc is active. Read by scene_109_awakening (blocked) and scene_crisis_turning (required).',
     category: 'hidden',
     achievement: null,
   },
   {
     key: 'full_zombie',
     description:
-      'Infection = 10. Complete transformation. Triggers ending_full_zombie immediately.',
+      'Set in scene_crisis_turning when will is too low to resist opening the door. Marks complete loss of agency. Note: ending_full_zombie triggers on infection stat >= 10, not this flag — this flag is for in-scene logic downstream.',
     category: 'hidden',
     achievement: null,
   },

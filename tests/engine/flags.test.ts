@@ -30,7 +30,7 @@ describe('FLAG_REGISTRY', () => {
 
 describe('getFlagDefinition()', () => {
   it('returns the correct definition for a known flag', () => {
-    const def = getFlagDefinition('saw_patient_zero_video')
+    const def = getFlagDefinition('watched_deleted_video')
     expect(def).toBeDefined()
     expect(def?.category).toBe('narrative')
   })

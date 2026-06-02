@@ -1,0 +1,59 @@
+{
+  "id": "scene_day4_night",
+  "title": { "zh": "第四天·深夜" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 112 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应坐在靠墙的角落，腿伸直，踝关节用宽胶带裹着。她已经两个小时没说话了，但眼睛是张开的。你们两个都不睡。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第四天的深夜比第三天安静一些。或者你已经开始习惯这种安静了——不确定哪一个更准确。" },
+    { "zh": "工具握在手里，背靠着墙，你在黑暗里等。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day4_night_scratch",
+      "text": { "zh": "门另一边有什么在走动，停停走走——等它离开。" },
+      "conditions": { "security": { "max": 49 } },
+      "effects": {
+        "stats": { "morale": -2, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "声音没有规律，走几步停几步，在门的另一边绕了很久。你一直等到声音彻底消失，估计过了一个多小时。" },
+        { "zh": "然后又等了半小时，确认它真的走了，才稍微松开了手里的力道。" }
+      ],
+      "nextSceneId": "scene_day5_6_skip"
+    },
+    {
+      "id": "scene_day4_night_upstairs",
+      "text": { "zh": "楼上有重物倒下的声音，偶尔有拖拽——盯着天花板，控制呼吸。" },
+      "conditions": { "security": { "min": 50, "max": 79 } },
+      "effects": {
+        "stats": { "morale": -1, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "你没有动，也没有出声，就那样坐着，听头顶的声音来来去去。" },
+        { "zh": "楼上住的是谁，你想了一会儿，然后把这个念头压回去了。活着的人现在更重要。" }
+      ],
+      "nextSceneId": "scene_day5_6_skip"
+    },
+    {
+      "id": "scene_day4_night_silence",
+      "text": { "zh": "什么声音都没有——在黑暗里坐了整夜，等到天亮。" },
+      "conditions": { "security": { "min": 80 } },
+      "effects": {
+        "stats": { "morale": -1, "will": 2 }
+      },
+      "consequence": [
+        { "zh": "门外什么都没有。一整夜。" },
+        { "zh": "天亮了，什么都没发生。你发现「什么都没发生」是一种需要时间才能接受的消息——它不是安全，它只是今晚。" }
+      ],
+      "nextSceneId": "scene_day5_6_skip"
+    }
+  ]
+}

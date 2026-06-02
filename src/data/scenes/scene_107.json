@@ -3,6 +3,12 @@
   "title": { "zh": "门外的声音" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -6 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["neighbor_zombie"] },
+      "zh": "你把老陈那扇门关上的时候，双手还在抖。那是老陈——也不是老陈了。你把这件事压在脑子的某个角落，先看眼前。"
+    }
+  ],
   "narrative": [
     { "zh": "门外传来一声拖拽——好像是什么重物砸了下来，或者撞了什么墙。" },
     { "zh": "你蹲在位置顿住，身体绷紧。第二声没来。" },

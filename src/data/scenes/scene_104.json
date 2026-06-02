@@ -3,6 +3,12 @@
   "title": { "zh": "五金店" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -34 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["watched_deleted_video"] },
+      "zh": "你在货架前停了一下。那个视频里趴在地上的身影——动作不像是受伤。你现在知道那个动作像什么了，但你没在想这个。你在数铁板。"
+    }
+  ],
   "narrative": [
     {
       "zh": "回小区的路上经过那家开了十多年的五金店。门口折叠桌上摆着一摞加厚铁板——2mm钢，五十乘四十，老板清仓处理，三十块一张。"
@@ -29,6 +35,9 @@
         ],
         "timeCost": 1
       },
+      "consequence": [
+        { "zh": "你把三张铁板都搬上了自行车后架，用宽胶带捆死。老板多看了你一眼，没说话。" }
+      ],
       "nextSceneId": "scene_105"
     },
     {
@@ -45,6 +54,11 @@
         ],
         "timeCost": 1
       },
+      "consequence": [
+        {
+          "zh": "铁板护门，手套隔离，钢管应急——你在货架前盘算了一会儿，每一件都有它的用处。你付完钱，在店门口停了一秒，然后骑车回家。"
+        }
+      ],
       "nextSceneId": "scene_105"
     },
     {
@@ -61,6 +75,11 @@
         ],
         "timeCost": 2
       },
+      "consequence": [
+        {
+          "zh": "你在超市多停了半小时，把所有矿泉水和压缩饼干摆上自行车。那辆车歪歪斜斜地驮着你回到了小区门口。"
+        }
+      ],
       "nextSceneId": "scene_105"
     }
   ]
