@@ -28,12 +28,15 @@ export default function SceneDisplay({ scene, state }: Props) {
   }
 
   return (
-    <div className="animate-fade-in">
-      <p className="ui-label text-muted mb-3">{formatGameTime(scene.gameTime.hoursFromStart)}</p>
+    <article className="animate-fade-in">
+      <p className="ui-label text-muted mb-3 inline-flex items-center gap-2">
+        <span className="w-1 h-1 rounded-full bg-accent/60" aria-hidden />
+        {formatGameTime(scene.gameTime.hoursFromStart)}
+      </p>
 
-      <h2 className="scene-title mb-6">{title}</h2>
+      <h2 className="scene-title mb-6 pb-4 border-b border-border-subtle">{title}</h2>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         {paragraphs.map((paragraph, i) => (
           <p
             key={i}
@@ -44,6 +47,6 @@ export default function SceneDisplay({ scene, state }: Props) {
           </p>
         ))}
       </div>
-    </div>
+    </article>
   )
 }

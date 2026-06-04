@@ -32,14 +32,15 @@ export default function TransformationHint({ stats }: Props) {
   if (!activeText) return null
 
   return (
-    <div className="mt-8 pt-4 border-t border-border">
+    <aside className="mt-8 panel-card border-accent/20">
+      <p className="ui-label text-muted text-xs mb-2">◆</p>
       <p
-        className={`font-body text-sm ${
+        className={`font-body text-sm leading-relaxed ${
           activeSeverity ? SEVERITY_STYLE[activeSeverity] : 'text-text-dim italic'
         }`}
       >
         {activeText}
       </p>
-    </div>
+    </aside>
   )
 }

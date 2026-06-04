@@ -45,7 +45,7 @@
       "conditions": {
         "requiredItems": [{ "itemId": "medkit", "minQuantity": 1 }]
       },
-      "hint": { "zh": "需要：急救箱" },
+      "hint": { "zh": "急救箱" },
       "effects": {
         "flags": { "wound_cleaned": true },
         "stats": { "infection": -1, "will": 1 },

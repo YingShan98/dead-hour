@@ -272,6 +272,10 @@ type RootTranslation = {
 		 */
 		stealth: string
 		/**
+		 * 资​金
+		 */
+		money: string
+		/**
 		 * 信​任
 		 */
 		trust: string
@@ -361,7 +365,7 @@ type RootTranslation = {
 		 */
 		overclock: string
 		/**
-		 * 道​德​败​坏​的​见​解
+		 * 异​化​视​角
 		 */
 		depravedInsight: string
 		/**
@@ -684,6 +688,10 @@ export type TranslationFunctions = {
 		 */
 		stealth: () => LocalizedString
 		/**
+		 * 资金
+		 */
+		money: () => LocalizedString
+		/**
 		 * 信任
 		 */
 		trust: () => LocalizedString
@@ -770,7 +778,7 @@ export type TranslationFunctions = {
 		 */
 		overclock: () => LocalizedString
 		/**
-		 * 道德败坏的见解
+		 * 异化视角
 		 */
 		depravedInsight: () => LocalizedString
 		/**

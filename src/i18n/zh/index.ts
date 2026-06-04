@@ -108,6 +108,7 @@ const zh: BaseTranslation = {
     morale: '士气',
     leadership: '领导力',
     stealth: '潜行',
+    money: '资金',
     trust: '信任',
   },
 

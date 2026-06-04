@@ -11,6 +11,7 @@ export type StatKey =
   | 'leadership'
   | 'stealth'
   | 'trust'
+  | 'money' // 0-200  yuan remaining — visible
   | 'infection' // 0-10  viral progression — hidden
   | 'will' // 0-10  psychological resistance — hidden
 

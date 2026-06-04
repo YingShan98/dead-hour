@@ -6,7 +6,7 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
   return {
     currentSceneId: 'scene_001',
     gameTime: { hoursFromStart: -48 },
-    stats: { health: 10, morale: 10, leadership: 0, stealth: 0, trust: 5, infection: 0, will: 5 },
+    stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     inventory: [],
     flags: {},
     visitedScenes: [],

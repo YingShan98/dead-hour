@@ -3,6 +3,7 @@ import { useGameStore } from '@/store/gameStore'
 import { listSaves } from '@/engine/saveManager'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
+import AmbientOverlay from '@/components/ui/AmbientOverlay'
 
 export default function TitlePage() {
   const navigate = useNavigate()
@@ -25,39 +26,37 @@ export default function TitlePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6">
-      {/* Grain overlay */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '128px',
-        }}
-      />
+    <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-12">
+      <AmbientOverlay />
 
-      <div className="relative z-10 flex flex-col items-center gap-12 animate-fade-in max-w-md w-full">
-        {/* Title block */}
-        <div className="text-center">
+      <div className="relative z-10 flex flex-col items-center gap-10 sm:gap-12 animate-fade-in max-w-md w-full">
+        <div className="text-center w-full">
           <p className="ui-label text-muted mb-4 tracking-[0.3em]">{LL.title.tagline()}</p>
-          <h1 className="font-display text-7xl text-text leading-none animate-flicker">DEAD</h1>
-          <h1 className="font-display text-7xl text-accent leading-none">HOUR</h1>
-          <p className="mt-6 font-body text-text-dim text-lg italic">{LL.title.subtitle()}</p>
+          <h1 className="font-display text-6xl sm:text-7xl text-text leading-none animate-flicker">
+            DEAD
+          </h1>
+          <h1 className="font-display text-6xl sm:text-7xl text-accent leading-none">HOUR</h1>
+          <div className="divider-ornament mt-8 max-w-xs mx-auto">
+            <span className="font-ui text-muted text-xs">◆</span>
+          </div>
+          <p className="mt-4 font-body text-text-dim text-lg italic leading-relaxed">
+            {LL.title.subtitle()}
+          </p>
         </div>
 
-        {/* Menu */}
         <div className="flex flex-col gap-3 w-full">
           <button
+            type="button"
             onClick={handleNewGame}
             disabled={isLoading}
-            className="choice-btn text-center font-display text-xl tracking-wide py-4
-                       border-accent text-accent hover:bg-[#1e0a0a]"
+            className="choice-btn choice-btn-primary text-center font-display text-xl tracking-wide py-4"
           >
             {isLoading ? LL.ui.loading() : LL.title.newGame()}
           </button>
 
           {hasSave && (
             <button
+              type="button"
               onClick={handleContinue}
               disabled={isLoading}
               className="choice-btn text-center"
@@ -67,16 +66,16 @@ export default function TitlePage() {
           )}
         </div>
 
-        {/* Locale switcher */}
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-wrap justify-center" role="group" aria-label="Language">
           {supportedLocales.map((l) => (
             <button
               key={l}
+              type="button"
               onClick={() => setLocale(l)}
-              className={`ui-label text-xs px-3 py-1 rounded border transition-colors ${
+              className={`ui-label text-xs px-3 py-1.5 rounded-md border transition-colors ${
                 locale === l
-                  ? 'border-accent text-accent'
-                  : 'border-border text-muted hover:border-text-dim'
+                  ? 'border-accent text-accent bg-[#1a0c0c]'
+                  : 'border-border text-muted hover:border-text-dim hover:text-text-dim'
               }`}
             >
               {localeLabel(l)}
@@ -84,7 +83,6 @@ export default function TitlePage() {
           ))}
         </div>
 
-        {/* Footer */}
         <p className="ui-label text-muted text-xs">
           {interpolate(LL.title.version, { version: '0.1.0' })}
         </p>

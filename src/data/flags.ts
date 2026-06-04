@@ -58,6 +58,8 @@ export type GameFlag =
   | 'researched_outbreak_early'
   | 'watched_deleted_video'
   | 'prepped_early'
+  | 'bought_gloves'
+  | 'bought_pipe'
 
   // ── NPC encounters ────────────────────────────────────────────────────────
   | 'met_doctor' // Dr. Lena Marsh
@@ -191,6 +193,19 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     key: 'prepped_early',
     description:
       'Player bought defensive supplies (iron plates, duct tape, weapons) before the outbreak was publicly confirmed.',
+    category: 'narrative',
+    achievement: null,
+  },
+
+  {
+    key: 'bought_gloves',
+    description: 'Purchased insulated gloves at the hardware store.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'bought_pipe',
+    description: 'Purchased steel pipe at the hardware store.',
     category: 'narrative',
     achievement: null,
   },

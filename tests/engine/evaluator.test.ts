@@ -13,6 +13,7 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
       morale: 10,
       leadership: 0,
       stealth: 0,
+      money: 0,
       trust: 5,
       infection: 0,
       will: 5,
@@ -42,28 +43,28 @@ describe('evaluate()', () => {
 
   it('passes stat minimum check', () => {
     const state = mockState({
-      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5, infection: 0, will: 5 },
+      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(true)
   })
 
   it('fails stat minimum check when below threshold', () => {
     const state = mockState({
-      stats: { health: 10, morale: 10, leadership: 3, stealth: 0, trust: 5, infection: 0, will: 5 },
+      stats: { health: 10, morale: 10, leadership: 3, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(false)
   })
 
   it('passes stat maximum check', () => {
     const state = mockState({
-      stats: { health: 0, morale: 10, leadership: 0, stealth: 0, trust: 5, infection: 0, will: 5 },
+      stats: { health: 0, morale: 10, leadership: 0, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(true)
   })
 
   it('fails stat maximum check when above threshold', () => {
     const state = mockState({
-      stats: { health: 5, morale: 10, leadership: 0, stealth: 0, trust: 5, infection: 0, will: 5 },
+      stats: { health: 5, morale: 10, leadership: 0, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(false)
   })
@@ -76,6 +77,20 @@ describe('evaluate()', () => {
   it('fails item check when item is absent', () => {
     const state = mockState({ inventory: [] })
     expect(evaluate({ requiredItems: [{ itemId: 'medkit' }] }, state)).toBe(false)
+  })
+
+  it('passes money minimum check', () => {
+    const state = mockState({
+      stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 30, trust: 5, infection: 0, will: 5 },
+    })
+    expect(evaluate({ requiredStats: [{ stat: 'money', min: 30 }] }, state)).toBe(true)
+  })
+
+  it('fails money minimum check when below threshold', () => {
+    const state = mockState({
+      stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 20, trust: 5, infection: 0, will: 5 },
+    })
+    expect(evaluate({ requiredStats: [{ stat: 'money', min: 30 }] }, state)).toBe(false)
   })
 })
 
@@ -108,7 +123,7 @@ describe('getAvailableChoices()', () => {
 
   it('returns all choices when all conditions are met', () => {
     const state = mockState({
-      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, trust: 5, infection: 0, will: 5 },
+      stats: { health: 10, morale: 10, leadership: 5, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
     })
     const available = getAvailableChoices(choices, state)
     expect(available).toHaveLength(2)

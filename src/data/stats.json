@@ -41,6 +41,16 @@
       "visible": true
     },
     {
+      "key": "money",
+      "label": { "zh": "资金" },
+      "description": { "zh": "你手头剩余的现金。" },
+      "icon": "¥",
+      "default": 0,
+      "min": 0,
+      "max": 200,
+      "visible": true
+    },
+    {
       "key": "trust",
       "label": { "zh": "信任度" },
       "description": { "zh": "身边幸存者对你的认可程度。" },

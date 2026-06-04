@@ -53,10 +53,11 @@ export default function InventoryPanel({ inventory }: Props) {
               {/* Use button — only for usable items */}
               {def.usable && def.useEffect && (
                 <button
+                  type="button"
                   onClick={() => activateItem(itemId)}
-                  className="ml-2 shrink-0 font-ui text-xs px-2 py-0.5 rounded
+                  className="ml-2 shrink-0 font-ui text-xs px-2.5 py-1 rounded-md
                              border border-border text-muted
-                             hover:border-accent hover:text-accent
+                             hover:border-accent hover:text-accent hover:bg-[#1a1010]
                              transition-colors"
                   title={resolveLocaleString(def.description, locale)}
                 >

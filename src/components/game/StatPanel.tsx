@@ -4,7 +4,7 @@ import { getInfectionSignal, getWillSignal } from '@/engine/timeManager'
 
 interface StatRow {
   key: keyof PlayerStats
-  labelKey: 'health' | 'morale' | 'leadership' | 'stealth'
+  labelKey: 'health' | 'morale' | 'leadership' | 'stealth' | 'money'
   icon: string
   max: number
   barColour: (value: number) => string
@@ -39,6 +39,13 @@ const STAT_ROWS: StatRow[] = [
     max: 20,
     barColour: () => '#4a6a8b',
   },
+  {
+    key: 'money',
+    labelKey: 'money',
+    icon: '¥',
+    max: 200,
+    barColour: (v) => (v <= 30 ? '#8b2020' : '#b08030'),
+  },
 ]
 
 // Colour for hidden-stat signals
@@ -69,6 +76,8 @@ export default function StatPanel({ stats }: Props) {
       {/* Visible character stats */}
       {STAT_ROWS.map(({ key, labelKey, icon, max, barColour }) => {
         const value = stats[key]
+        // Hide money row until the player actually has money
+        if (key === 'money' && value <= 0) return null
         const pct = Math.round((value / max) * 100)
         return (
           <div key={key} className="flex flex-col gap-1">

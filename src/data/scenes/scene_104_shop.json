@@ -1,0 +1,127 @@
+{
+  "id": "scene_104_shop",
+  "title": { "zh": "五金店 — 货架" },
+  "act": "act1",
+  "gameTime": { "hoursFromStart": -34 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredStats": [{ "stat": "money", "min": 100 }] },
+      "zh": "钱包里还算宽裕，可以多挑几样。"
+    },
+    {
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 30, "max": 99 }]
+      },
+      "zh": "钱不多了，得精打细算。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "money", "max": 29 }] },
+      "zh": "兜里快见底了。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "你站在货架前，目光扫过一排排标着价签的物品。老板坐在门口的折叠椅上看手机，没理你。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_104_shop_iron_plate",
+      "text": { "zh": "加厚铁板（¥30）——固定在门板内侧能大幅提升防护。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 30 }]
+      },
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "money": -30 },
+        "items": [{ "itemId": "iron_plate", "delta": 1 }]
+      },
+      "hint": { "zh": "资金不足" },
+      "consequence": [
+        { "zh": "你把一张铁板从货架上抽出来，掂了掂分量——够沉。老板抬头看了你一眼，收了钱。" }
+      ],
+      "nextSceneId": "scene_104_shop"
+    },
+    {
+      "id": "scene_104_shop_duct_tape",
+      "text": { "zh": "宽胶带（¥10）——粘性极好，加固什么都用得上。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 10 }]
+      },
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "money": -10 },
+        "items": [{ "itemId": "duct_tape", "delta": 1 }]
+      },
+      "hint": { "zh": "资金不足" },
+      "consequence": [
+        { "zh": "灰色的工业胶带，十公分宽，手感厚实。你拿了一卷。" }
+      ],
+      "nextSceneId": "scene_104_shop"
+    },
+    {
+      "id": "scene_104_shop_gloves",
+      "text": { "zh": "绝缘厚手套（¥25）——电工级，能隔绝一切接触。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 25 }],
+        "blockedFlags": ["bought_gloves"]
+      },
+      "effects": {
+        "flags": { "prepped_early": true, "bought_gloves": true },
+        "stats": { "money": -25 },
+        "items": [{ "itemId": "insulated_gloves", "delta": 1 }]
+      },
+      "hint": { "zh": "资金不足或已购买" },
+      "consequence": [
+        { "zh": "橡胶手套很厚，戴上后手指灵活度会降低，但什么都不怕沾。你试了试大小，刚好。" }
+      ],
+      "nextSceneId": "scene_104_shop"
+    },
+    {
+      "id": "scene_104_shop_pipe",
+      "text": { "zh": "长钢管（¥20）——一米二，够重，近战保持距离的选择。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 20 }],
+        "blockedFlags": ["bought_pipe"]
+      },
+      "effects": {
+        "flags": { "prepped_early": true, "bought_pipe": true },
+        "stats": { "money": -20 },
+        "items": [{ "itemId": "steel_pipe", "delta": 1 }]
+      },
+      "hint": { "zh": "资金不足或已购买" },
+      "consequence": [
+        { "zh": "钢管靠在墙角，拿起来的时候发出金属碰撞声。老板看了你一眼，什么都没问。" }
+      ],
+      "nextSceneId": "scene_104_shop"
+    },
+    {
+      "id": "scene_104_shop_canned_food",
+      "text": { "zh": "罐头食品（¥8）——耐储存，总会用上。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "money", "min": 8 }]
+      },
+      "effects": {
+        "flags": { "prepped_early": true },
+        "stats": { "money": -8 },
+        "items": [{ "itemId": "canned_food", "delta": 1 }]
+      },
+      "hint": { "zh": "资金不足" },
+      "consequence": [
+        { "zh": "你从旁边的货架上拿了一罐午餐肉。保质期还有两年。" }
+      ],
+      "nextSceneId": "scene_104_shop"
+    },
+    {
+      "id": "scene_104_shop_leave",
+      "text": { "zh": "不买了，骑车回家。" },
+      "conditions": {},
+      "effects": {},
+      "consequence": [
+        { "zh": "你把东西捆上自行车后架，推车出了店门。老板在身后喊了句「慢走」，你没回头。" }
+      ],
+      "nextSceneId": "scene_105"
+    }
+  ]
+}

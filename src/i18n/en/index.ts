@@ -112,6 +112,7 @@ const en: Translation = {
     morale: 'Morale',
     leadership: 'Leadership',
     stealth: 'Stealth',
+    money: 'Money',
     trust: 'Trust',
   },
 

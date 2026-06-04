@@ -4,18 +4,11 @@ import { useI18n } from '@/i18n/useI18n'
 import { resolveLocaleStrings } from '@/i18n/localeString'
 
 interface Props {
-  choice: Choice | null // the choice just made
-  onDone: () => void // called when player taps to continue
+  choice: Choice | null
+  onDone: () => void
   isLoading: boolean
 }
 
-/**
- * ConsequenceDisplay — shown immediately after a choice is selected,
- * before the next scene loads. Renders the choice's `consequence` text
- * as a full-screen overlay moment.
- *
- * If the choice has no consequence text, calls onDone immediately.
- */
 export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props) {
   const { locale, LL } = useI18n()
   const [visible, setVisible] = useState(false)
@@ -23,11 +16,9 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
   useEffect(() => {
     if (!choice) return
     if (!choice.consequence || choice.consequence.length === 0) {
-      // No consequence text — skip straight through
       onDone()
       return
     }
-    // Small delay so the UI doesn't flash
     const t = setTimeout(() => setVisible(true), 80)
     return () => clearTimeout(t)
   }, [choice, onDone])
@@ -36,18 +27,38 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
   if (!visible) return null
 
   const paragraphs = resolveLocaleStrings(choice.consequence, locale)
+  const continueDelay = paragraphs.length * 120 + 600
+
+  function handleContinue() {
+    if (!isLoading) onDone()
+  }
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center px-8"
-      style={{ animation: 'fadeIn 0.4s ease forwards' }}
+      className="fixed inset-0 z-50 bg-background/97 backdrop-blur-[2px] flex flex-col items-center justify-center px-6 sm:px-10 animate-fade-in"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consequence-heading"
+      onClick={handleContinue}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleContinue()
+        }
+      }}
     >
-      {/* Consequence text */}
-      <div className="max-w-xl w-full flex flex-col gap-5">
+      <p id="consequence-heading" className="sr-only">
+        {LL.ui.continue()}
+      </p>
+
+      <div
+        className="max-w-xl w-full flex flex-col gap-5 pointer-events-none"
+        onClick={(e) => e.stopPropagation()}
+      >
         {paragraphs.map((para, i) => (
           <p
             key={i}
-            className="narrative-text animate-slide-up"
+            className="narrative-text animate-slide-up text-lg sm:text-xl"
             style={{
               animationDelay: `${i * 120}ms`,
               opacity: 0,
@@ -59,13 +70,16 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
         ))}
       </div>
 
-      {/* Continue prompt */}
       <button
-        onClick={onDone}
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation()
+          handleContinue()
+        }}
         disabled={isLoading}
-        className="mt-14 ui-label text-xs text-muted hover:text-text transition-colors"
+        className="mt-14 choice-btn max-w-xs text-center ui-label tracking-widest pointer-events-auto"
         style={{
-          animation: `fadeIn 0.6s ease ${paragraphs.length * 120 + 600}ms forwards`,
+          animation: `fadeIn 0.6s ease ${continueDelay}ms forwards`,
           opacity: 0,
           animationFillMode: 'forwards',
         }}

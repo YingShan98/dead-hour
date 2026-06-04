@@ -3,6 +3,7 @@ import { useGameStore } from '@/store/gameStore'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
+import AmbientOverlay from '@/components/ui/AmbientOverlay'
 import type { EndingType } from '@/engine/types'
 
 const TYPE_COLOURS: Record<EndingType, string> = {
@@ -12,17 +13,34 @@ const TYPE_COLOURS: Record<EndingType, string> = {
   secret: 'text-accent',
 }
 
+const TYPE_BORDER: Record<EndingType, string> = {
+  bad: 'border-danger/40',
+  neutral: 'border-warning/40',
+  good: 'border-safe/40',
+  secret: 'border-accent/40',
+}
+
 export default function EndingPage() {
   const { endingId } = useParams<{ endingId: string }>()
   const navigate = useNavigate()
-  const { triggeredEnding, gameState } = useGameStore()
+  const { triggeredEnding, gameState, startNewGame, isLoading } = useGameStore()
   const { LL, locale } = useI18n()
+
+  async function handlePlayAgain() {
+    await startNewGame(0)
+    navigate('/game')
+  }
 
   if (!triggeredEnding || triggeredEnding.id !== endingId) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-6">
-        <p className="font-body text-text-dim">{LL.ending.noData()}</p>
-        <button onClick={() => navigate('/')} className="choice-btn max-w-xs">
+      <div className="relative min-h-screen bg-background flex flex-col items-center justify-center gap-6 px-6">
+        <AmbientOverlay />
+        <p className="font-body text-text-dim relative z-10">{LL.ending.noData()}</p>
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="choice-btn max-w-xs relative z-10"
+        >
           {LL.ending.returnToTitle()}
         </button>
       </div>
@@ -30,6 +48,7 @@ export default function EndingPage() {
   }
 
   const colourClass = TYPE_COLOURS[triggeredEnding.type]
+  const borderClass = TYPE_BORDER[triggeredEnding.type]
   const typeLabel = LL.ending.type[triggeredEnding.type]()
   const title = resolveLocaleString(triggeredEnding.title, locale)
   const paragraphs = resolveLocaleStrings(triggeredEnding.narrative, locale)
@@ -38,11 +57,17 @@ export default function EndingPage() {
     : null
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
-      <div className="max-w-lg w-full flex flex-col gap-8 animate-fade-in">
-        <p className={`ui-label tracking-[0.25em] ${colourClass}`}>— {typeLabel} —</p>
+    <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
+      <AmbientOverlay />
 
-        <h1 className="font-display text-5xl text-text leading-tight">{title}</h1>
+      <div
+        className={`relative z-10 max-w-lg w-full flex flex-col gap-8 animate-fade-in panel-card border-2 ${borderClass}`}
+      >
+        <p className={`ui-label tracking-[0.25em] text-center ${colourClass}`}>— {typeLabel} —</p>
+
+        <h1 className="font-display text-4xl sm:text-5xl text-text leading-tight text-center">
+          {title}
+        </h1>
 
         <hr className="border-border" />
 
@@ -59,32 +84,38 @@ export default function EndingPage() {
         </div>
 
         {epilogue && (
-          <p className="font-body text-text-dim italic text-base border-l-2 border-border pl-4">
+          <blockquote className="font-body text-text-dim italic text-base border-l-2 border-accent/40 pl-4">
             {epilogue}
-          </p>
+          </blockquote>
         )}
 
         <hr className="border-border" />
 
         {gameState && (
-          <div className="flex gap-6 font-ui text-xs text-text-dim">
-            <span>
+          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center font-ui text-xs text-text-dim">
+            <span className="panel-card py-2 px-3">
               {interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}
             </span>
-            <span>
+            <span className="panel-card py-2 px-3">
               {interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}
             </span>
           </div>
         )}
 
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="flex flex-col gap-3 mt-2">
           <button
-            onClick={() => navigate('/')}
-            className="choice-btn text-center border-accent text-accent hover:bg-[#1e0a0a]"
+            type="button"
+            onClick={handlePlayAgain}
+            disabled={isLoading}
+            className="choice-btn choice-btn-primary text-center"
           >
-            {LL.ending.playAgain()}
+            {isLoading ? LL.ui.loading() : LL.ending.playAgain()}
           </button>
-          <button onClick={() => navigate('/')} className="choice-btn text-center">
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="choice-btn text-center"
+          >
             {LL.ending.returnToTitle()}
           </button>
         </div>

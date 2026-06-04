@@ -45,6 +45,7 @@
     { "zh": "你端起豆浆杯愣了一会。热气从笼屉里散出来，桌面油亮，一切看起来如此正常。" },
     { "zh": "但是。报纸上的「啃咬声」，裴嘉应的「未知的人」，大叔说的「尸体咬人」——" }
   ],
+  "onEnter": { "stats": { "money": 200 } },
   "conditions": {},
   "choices": [
     {
@@ -52,7 +53,7 @@
       "text": { "zh": "算了，中年大叔就爱传微信谣言。这周末，回家。" },
       "conditions": {},
       "effects": {
-        "stats": { "morale": 1, "will": -1 },
+        "stats": { "morale": 1, "will": -1, "money": -15 },
         "flags": {},
         "items": []
       },
@@ -71,7 +72,7 @@
           "noticed_outbreak_signs": true,
           "heard_rumor_at_breakfast": true
         },
-        "stats": { "will": 1, "morale": -1 },
+        "stats": { "will": 1, "morale": -1, "money": -15 },
         "items": []
       },
       "consequence": [
@@ -94,7 +95,7 @@
           "heard_rumor_at_breakfast": true,
           "watched_deleted_video": true
         },
-        "stats": { "will": 2, "leadership": 1 },
+        "stats": { "will": 2, "leadership": 1, "money": -15 },
         "items": []
       },
       "consequence": [

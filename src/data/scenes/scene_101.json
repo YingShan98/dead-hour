@@ -6,7 +6,7 @@
   "onEnter": {
     "flags": { "finger_cut": true },
     "stats": { "infection": 1 },
-    "items": []
+    "items": [{ "itemId": "medkit", "delta": 1 }]
   },
   "narrative": [
     {
