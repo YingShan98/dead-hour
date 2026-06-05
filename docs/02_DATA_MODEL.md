@@ -160,61 +160,41 @@ export interface ItemEffect {
 
 ### JSON File: `stats.json`
 
-Defines all stats, their starting values, valid range, and display labels.
+Defines all stats, their starting values, valid range, and display labels. There are 9 stats total — 4 visible, 3 signal-only (hidden from the stat bar, shown via UI hints), 1 obsolete (money), and 1 pending (hunger).
+
+**Display rules:**
+- `visible: true` — shown as a numeric bar in StatPanel
+- `visible: false` with signal logic in `timeManager.ts` — shown as a coloured icon/label when a threshold is crossed (infection, will, trust, leadership)
+- `visible: false` with no signal — tracked internally only (hunger)
+
+| Key | Default | Max | Visible | Notes |
+|---|---|---|---|---|
+| `health` | **15** | 20 | Bar | See note below |
+| `morale` | 10 | 20 | Bar | |
+| `leadership` | 0 | 20 | Signal only | Signal at ≥10/15/20 |
+| `stealth` | 0 | 20 | Bar | |
+| `money` | 200 | 200 | Bar (hidden once `money_obsolete` flag set) | |
+| `trust` | 5 | 20 | Signal only | Signal at ≤4 (unstable) / ≤2 (critical) |
+| `infection` | 0 | 10 | Signal only | Signal at ≥5/≥8 |
+| `will` | **6** | 10 | Signal only | Signal at ≥8 (awakening) / ≤2 (collapse) |
+| `hunger` | 0 | 10 | Hidden | Passive daily tick active: auto-consumes 1 food/day, penalties at ≥6/8/10 via `hungerManager.ts` |
+
+**Note — health default (15 vs. GDD's 10):** The GDD specifies health default 10, which is the right long-term value once passive cold and hunger damage are implemented. In the current build (Phase 2, Days 1–14 content only), the worst-case explicit damage chain totals 9 (Day 3 night breach −3, Day 7 front door −4, Day 8 hospital scout −2). At health=10 that leaves the player at 1 with no meaningful content remaining to reach. 15 is the interim buffer — revisit when the cold/hunger drain system is built.
+
+**Note — will default (6 vs. GDD's 5):** One-point buffer. The awakening threshold is will≥8 AND infection≥3; infection only reaches 3 several scenes in regardless, so the difference is inert in current content.
 
 ```json
 {
   "stats": [
-    {
-      "key": "health",
-      "label": "Health",
-      "description": "Physical wellbeing. Reaches 0 = game over.",
-      "icon": "❤️",
-      "default": 10,
-      "min": 0,
-      "max": 20,
-      "visible": true
-    },
-    {
-      "key": "morale",
-      "label": "Morale",
-      "description": "Mental fortitude. Low morale closes options and attracts trouble.",
-      "icon": "🧠",
-      "default": 10,
-      "min": 0,
-      "max": 20,
-      "visible": true
-    },
-    {
-      "key": "leadership",
-      "label": "Leadership",
-      "description": "Your ability to rally others. Opens group-based choices.",
-      "icon": "📢",
-      "default": 0,
-      "min": 0,
-      "max": 20,
-      "visible": true
-    },
-    {
-      "key": "stealth",
-      "label": "Stealth",
-      "description": "Your ability to move unseen. Opens avoidance-based choices.",
-      "icon": "🌑",
-      "default": 0,
-      "min": 0,
-      "max": 20,
-      "visible": true
-    },
-    {
-      "key": "trust",
-      "label": "Community Trust",
-      "description": "How much survivors in your group trust you. Hidden from display.",
-      "icon": "🤝",
-      "default": 5,
-      "min": 0,
-      "max": 20,
-      "visible": false
-    }
+    { "key": "health",     "default": 15, "min": 0,   "max": 20,  "visible": true  },
+    { "key": "morale",     "default": 10, "min": 0,   "max": 20,  "visible": true  },
+    { "key": "leadership", "default": 0,  "min": 0,   "max": 20,  "visible": true  },
+    { "key": "stealth",    "default": 0,  "min": 0,   "max": 20,  "visible": true  },
+    { "key": "money",      "default": 200,"min": 0,   "max": 200, "visible": true  },
+    { "key": "trust",      "default": 5,  "min": 0,   "max": 20,  "visible": false },
+    { "key": "infection",  "default": 0,  "min": 0,   "max": 10,  "visible": false },
+    { "key": "will",       "default": 6,  "min": 0,   "max": 10,  "visible": false },
+    { "key": "hunger",     "default": 0,  "min": 0,   "max": 10,  "visible": false }
   ]
 }
 ```
@@ -222,17 +202,19 @@ Defines all stats, their starting values, valid range, and display labels.
 ### TypeScript Interface
 
 ```typescript
-export type StatKey = 'health' | 'morale' | 'leadership' | 'stealth' | 'trust'
+export type StatKey =
+  | 'health' | 'morale' | 'leadership' | 'stealth' | 'money'
+  | 'trust' | 'infection' | 'will' | 'hunger'
 
 export interface StatDefinition {
   key: StatKey
-  label: string
-  description: string
+  label: LocaleString
+  description: LocaleString
   icon: string
   default: number
   min: number
   max: number
-  visible: boolean // whether to show in UI
+  visible: boolean
 }
 
 export type PlayerStats = Record<StatKey, number>

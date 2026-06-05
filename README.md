@@ -17,11 +17,16 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 ## Features
 
 - Branching narrative with real, lasting consequences
-- Stats system — Health, Morale, Leadership, Stealth, Trust
-- Inventory and resource management
-- Flag-based narrative memory (choices made in Hour -48 echo into Month 6)
-- Multiple endings — good, bad, neutral, and secret
+- 9-stat system — Health, Morale, Leadership, Stealth (visible bars); Trust, Infection, Will (signal-only UI hints); Money (obsoletes after outbreak); Hunger (tracked, passive drain pending)
+- Infection transformation arc — survivor / awakening / turning / zombie paths
+- Depraved Insight: conditional scene text that shifts with infection level (3 tiers)
+- Trust & Leadership signal system: threshold-triggered UI indicators instead of raw numbers
+- Journal log panel: contextual first-person entries, persists to ending screen
+- Inventory and resource management — 14 item types across medical, food, tool, weapon, misc
+- 50+ narrative flags driving scene branching and ending eligibility
+- 8 endings implemented (17 planned) — bad, neutral, good, and secret
 - Auto-save with 3 save slots (localStorage)
+- i18n architecture: base locale `zh` (Chinese), `en` keys defined but not yet authored
 - No server required — runs entirely client-side
 
 ---
@@ -45,8 +50,8 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 11.3+
+- Node.js >= 22.13
+- pnpm >= 11.3.0
 
 ### Install & Run
 
@@ -89,72 +94,86 @@ pnpm run validate-scenes
 
 ```
 src/
-├── engine/         # Core game logic — pure TypeScript, no React
-│   ├── evaluator.ts        # Evaluates conditions against game state
-│   ├── executor.ts         # Applies choice effects to game state
-│   ├── loader.ts           # Loads and caches scene JSON files
-│   ├── endingEvaluator.ts  # Checks ending conditions after each scene
-│   ├── saveManager.ts      # localStorage save/load
-│   └── types.ts            # All shared TypeScript interfaces
-├── store/          # Zustand global game state
+├── engine/               # Core game logic — pure TypeScript, no React
+│   ├── evaluator.ts      # Evaluates conditions (flags, stats, items, security, time)
+│   ├── executor.ts       # Applies choice effects immutably, clamps stats to min/max
+│   ├── loader.ts         # Lazy-loads and caches scene JSON per act
+│   ├── endingEvaluator.ts# Checks endings in priority order after each scene transition
+│   ├── saveManager.ts    # localStorage persistence (3 slots, key: dead-hour:save:{slot})
+│   ├── journalGenerator.ts # Generates contextual journal entries from game state
+│   ├── timeManager.ts    # Crisis state, transformation path, stat signal keys
+│   ├── defaults.ts       # DEFAULT_GAME_STATE and numeric thresholds
+│   └── types.ts          # All shared TypeScript interfaces
+├── store/                # Zustand global game state (thin orchestration layer)
 │   └── gameStore.ts
-├── data/           # Story content (JSON — no TypeScript)
-│   ├── scenes/
-│   │   ├── act1_hour-48/
-│   │   ├── act2_outbreak/
-│   │   ├── act3_survival/
-│   │   └── act4_year-mark/
-│   ├── items.json
-│   ├── stats.json
-│   └── endings.json
-├── components/     # React UI components
-├── pages/          # TitlePage, GamePage, EndingPage
-└── hooks/          # useGame, useSave
+├── data/                 # Story content (JSON — no TypeScript)
+│   ├── scenes/           # All scene files in a flat directory (prefixed by phase/day)
+│   │   ├── scene_101.json, scene_102.json ...  (pre-outbreak, T−48h)
+│   │   ├── scene_day3_*.json, scene_day4_*.json ...  (Days 3–14)
+│   │   └── scene_crisis_*.json  (crisis branch scenes)
+│   ├── flags.ts          # GameFlag union type + FLAG_REGISTRY with descriptions
+│   ├── items.json        # 14 item definitions
+│   ├── stats.json        # 9 stat definitions with defaults, min/max, visibility
+│   └── endings.json      # 8 endings (17 planned)
+├── components/           # React UI components
+│   └── game/             # SceneDisplay, StatPanel, InventoryPanel, JournalPanel, ...
+├── pages/                # TitlePage, GamePage, EndingPage
+├── i18n/                 # typesafe-i18n locale files
+│   ├── zh/index.ts       # Base locale (Chinese) — required
+│   └── en/index.ts       # English locale — defined, not yet authored
+└── hooks/                # useGame, useSave
 ```
 
 ---
 
 ## Story Overview
 
-| Act                    | In-Game Time       | Description                  |
-| ---------------------- | ------------------ | ---------------------------- |
-| Act 1: The Warning     | Hour −48 to Hour 0 | Life before the outbreak     |
-| Act 2: The Fall        | Day 1–30           | The city collapses           |
-| Act 3: The Long Winter | Day 31–180         | Factions, scarcity, identity |
-| Act 4: The Year Mark   | Day 181–365        | Convergence and endings      |
+| Phase | In-Game Time | GDD Name | Description | Status |
+|---|---|---|---|---|
+| Phase 1 | T−48h → Day 90 | 血色之冬 (Crimson Winter) | Outbreak, first survival week, Pei rescue, establish base | Days 1–14 playable |
+| Phase 2 | Day 91–180 | 铁血之春 (Iron Spring) | Base building, NPC recruitment, infection arc, faction foreshadowing | Not started |
+| Phase 3 | Day 181–270 | 瘟疫之夏 (Plague Summer) | Three-front pressure: plague, intelligent horde, human factions | Not started |
+| Phase 4 | Day 271–365 | 审判之秋 (Judgment Autumn) | Siege, convergence, endings | Not started |
 
-A single playthrough covers roughly 40–60 scenes out of 120–150 total. No two runs are the same.
+Protagonist: 喻城 (Yù Chéng), 23-year-old vocational school mechanic. Companion: 裴嘉应 (Péi Jiā-yīng), trainee nurse. The game is written in Chinese (base locale `zh`).
+
+A single playthrough covers roughly 40–60 scenes out of 120–150 total. Infection level, will, trust, and the choices made in Hour −48 all echo through to the ending.
 
 ---
 
 ## Authoring Story Content
 
-All story content lives in locale-specific JSON folders such as `src/data/zh/scenes/`. The engine code never needs to change when you add new scenes.
+All scene files live in `src/data/scenes/`. All user-facing text uses `LocaleString` — a map keyed by locale code. Base locale `zh` is always required; `en` is optional.
 
 A minimal scene looks like this:
 
 ```json
 {
-  "id": "scene_001",
-  "title": "The Morning Commute",
-  "act": "act1",
-  "gameTime": { "hoursFromStart": -48 },
+  "id": "scene_example",
+  "title": { "zh": "某个场景" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 48 },
   "narrative": [
-    "The subway is running late again.",
-    "On your phone, a blurry video is trending. A man biting a police officer outside City Hall."
+    { "zh": "街角的药店还没有人来过。" }
   ],
   "conditions": {},
   "choices": [
     {
-      "id": "scene_001_choice_a",
-      "text": "Keep scrolling. Probably nothing.",
+      "id": "scene_example_enter",
+      "text": { "zh": "推开玻璃门，进去。" },
       "conditions": {},
-      "effects": { "flags": { "saw_patient_zero_video": true } },
-      "nextSceneId": "scene_002_office"
+      "effects": {
+        "flags": { "scavenged_pharmacy": true },
+        "items": [{ "itemId": "medkit", "delta": 1 }]
+      },
+      "consequence": [{ "zh": "货架已经被翻过了，但抽屉里还有一盒急救包。" }],
+      "nextSceneId": "scene_day8_outside"
     }
   ]
 }
 ```
+
+Scenes also support `onEnter` effects (auto-applied on arrival), `conditionalNarrative` (extra text shown only when conditions are met), and `hint` text on locked choices.
 
 See [`docs/06_CONTENT_AUTHORING_GUIDE.md`](docs/06_CONTENT_AUTHORING_GUIDE.md) for the full authoring reference.
 
@@ -178,15 +197,17 @@ Full project documentation lives in `/docs`:
 
 ## Development Status
 
-| Phase                       | Status              |
-| --------------------------- | ------------------- |
-| Phase 0 — Project setup     | ✅ Mostly complete  |
-| Phase 1 — Engine core       | ✅ Core implemented |
-| Phase 2 — Act 1 playable    | 🟨 In progress      |
-| Phase 3 — Act 2 + branching | ⬜ Not started      |
-| Phase 4 — Act 3 + factions  | ⬜ Not started      |
-| Phase 5 — Act 4 + endings   | ⬜ Not started      |
-| Phase 6 — Polish + release  | ⬜ Not started      |
+| Phase                       | Status              | Notes |
+| --------------------------- | ------------------- | ----- |
+| Phase 0 — Project setup     | ✅ Complete         | Vite + React + TS + Tailwind + Vitest configured |
+| Phase 1 — Engine core       | ✅ Complete         | evaluator, executor, loader, saveManager, endingEvaluator, timeManager all implemented and tested |
+| Phase 2 — Act 1 playable    | 🟨 In progress      | UI complete; scene content covers T−48h through Day 14 (out of 90-day Act 1); game cannot yet be completed end-to-end |
+| Phase 3 — Act 2 + branching | ⬜ Not started      | Requires Day 15–Day 90 scenes, base selection, NPC recruitment |
+| Phase 4 — Act 3 + factions  | ⬜ Not started      | Faction system, plague mechanics, Pei kidnapping arc |
+| Phase 5 — Act 4 + endings   | ⬜ Not started      | Siege mechanics, 9 remaining endings, NG+ |
+| Phase 6 — Polish + release  | ⬜ Not started      | |
+
+**Content scope:** ~32 scene JSON files implemented, covering the pre-outbreak period and the first two weeks of survival. The planned full game spans 365 in-game days across ~120–150 scenes. Passive mechanics (daily food/water consumption, cold damage, infection passive escalation) and deferred systems (crafting, overclocking, Pei's notebook) are not yet implemented.
 
 ---
 

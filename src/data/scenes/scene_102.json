@@ -46,13 +46,13 @@
       "id": "scene_102_choice_b",
       "text": { "zh": "用急救箱里的碘伏把伤口重新处理一遍，缠上干净纱布。" },
       "conditions": {
-        "requiredItems": [{ "itemId": "medkit", "minQuantity": 1 }]
+        "requiredItems": [{ "itemId": "iodine_kit", "minQuantity": 1 }]
       },
-      "hint": { "zh": "急救箱" },
+      "hint": { "zh": "碘伏急救包" },
       "effects": {
         "flags": { "wound_cleaned": true },
         "stats": { "infection": -1, "will": 1 },
-        "items": [{ "itemId": "medkit", "delta": -1 }],
+        "items": [{ "itemId": "iodine_kit", "delta": -1 }],
         "timeCost": 1
       },
       "consequence": [
