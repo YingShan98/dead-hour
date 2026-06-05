@@ -8,7 +8,7 @@ export const DEFAULT_GAME_STATE: GameState = {
     morale: 10,
     leadership: 0,
     stealth: 0,
-    money: 0,
+    money: 200,
     trust: 5,
     infection: 0, // rises to 1 via scene_101 onEnter (the wound)
     will: 5,

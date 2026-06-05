@@ -60,6 +60,11 @@ export type GameFlag =
   | 'prepped_early'
   | 'bought_gloves'
   | 'bought_pipe'
+  | 'money_obsolete' // cash no longer matters — UI hides money stat
+  | 'delayed_exit_week' // player waited until day 14 before leaving apartment
+  | 'visited_supermarket' // player completed scene_day10_supermarket
+  | 'day8_returned_home' // brief return to apartment from scene_day8 hub
+  | 'scavenged_pharmacy' // completed scene_day8_pharmacy
 
   // ── NPC encounters ────────────────────────────────────────────────────────
   | 'met_doctor' // Dr. Lena Marsh
@@ -206,6 +211,38 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   {
     key: 'bought_pipe',
     description: 'Purchased steel pipe at the hardware store.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'money_obsolete',
+    description:
+      'Outbreak confirmed — paper money no longer has purchasing power. Hides the money stat in the UI (set by scene_105 onEnter).',
+    category: 'world',
+    achievement: null,
+  },
+  {
+    key: 'delayed_exit_week',
+    description:
+      'Player chose to wait an extra week before leaving (scene_day7_wait → scene_day14_exit). Used for alternate scene_day8 narrative.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'visited_supermarket',
+    description: 'Player has completed the day-10 supermarket scene at least once.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'day8_returned_home',
+    description: 'Player returned to the apartment once from the day-8 city hub.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'scavenged_pharmacy',
+    description: 'Player looted the corner pharmacy (scene_day8_pharmacy).',
     category: 'narrative',
     achievement: null,
   },

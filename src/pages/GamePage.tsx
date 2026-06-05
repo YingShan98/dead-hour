@@ -27,7 +27,7 @@ function GameStatusPanels() {
   return (
     <>
       <div className="panel-card">
-        <StatPanel stats={gameState.stats} />
+        <StatPanel stats={gameState.stats} flags={gameState.flags} />
       </div>
       <div className="panel-card">
         <InventoryPanel inventory={gameState.inventory} />

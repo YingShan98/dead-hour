@@ -5,6 +5,23 @@
   "gameTime": { "hoursFromStart": 176 },
   "conditionalNarrative": [
     {
+      "conditions": { "requiredFlags": ["delayed_exit_week"] },
+      "zh": "第十四天。你在门后又守了整整七天，把「还不是时候」说了一遍又一遍，直到食物见底，再也说不出口。"
+    },
+    {
+      "conditions": { "blockedFlags": ["delayed_exit_week"] },
+      "zh": "第七天。你在公寓里待了七天，脑子里的城市是窗户里的城市——窗帘缝隙，有限的视角，有限的声音。"
+    },
+    {
+      "conditions": { "requiredFlags": ["delayed_exit_week"] },
+      "zh": "你在公寓里待了两个星期。窗户里的城市，和街道上的城市，从来不是同一种东西。"
+    },
+    {
+      "conditions": { "requiredFlags": ["visited_supermarket"] },
+      "position": "prefix",
+      "zh": "背包比来时沉。街还是那条街，风还是那种空荡荡的风——城里还有别处要去，或者该回去了。"
+    },
+    {
       "conditions": { "requiredFlags": ["has_vehicle"] },
       "position": "prefix",
       "zh": "从货车驾驶室看出去，城市比站在街上看更小，也更真实。你能看见更远的地方，但更远的地方也能看见你。"
@@ -16,21 +33,21 @@
     }
   ],
   "narrative": [
-    { "zh": "七天。" },
     {
-      "zh": "你在公寓里待了七天，脑子里的城市是窗户里的城市——窗帘缝隙，有限的视角，有限的声音。现在你站在外面，或者坐在货车里看着外面，城市是另一个东西了。"
+      "zh": "现在你站在外面，或者坐在货车里看着外面，城市是另一个东西了。不是废墟——废墟是已经倒下去的东西，而这座城市还站着。建筑物还在，路还在，路边的灯柱还在，超市的玻璃橱窗有一扇还完好地反着光。城市站着，但里面已经空了——或者不是空了，是变成了另一种东西在活动。"
     },
     {
-      "zh": "不是废墟。废墟是已经倒下去的东西，而这座城市还站着。建筑物还在，路还在，路边的灯柱还在，超市的玻璃橱窗有一扇还完好地反着光。城市站着，但里面已经空了——或者不是空了，是变成了另一种东西在活动。"
-    },
-    { "zh": "你把这一切看了一遍，没有做任何结论，只是看了一遍。然后你决定下一步去哪里。" }
+      "zh": "你把这一切看了一遍，没有做任何结论，只是看了一遍。风里带着方向——物资、药、或者先回去确认那扇门。"
+    }
   ],
   "conditions": {},
   "choices": [
     {
       "id": "scene_day8_outside_supermarket",
       "text": { "zh": "先找物资。城南的那家大型超市，够大，能找到够多的东西。" },
-      "conditions": {},
+      "conditions": {
+        "blockedFlags": ["visited_supermarket"]
+      },
       "effects": {
         "stats": { "will": 1 },
         "timeCost": 1
@@ -42,9 +59,58 @@
       "nextSceneId": "scene_day10_supermarket"
     },
     {
+      "id": "scene_day8_outside_supermarket_retry",
+      "text": { "zh": "再去超市看看——也许还有漏掉的货架。" },
+      "conditions": {
+        "requiredFlags": ["visited_supermarket"]
+      },
+      "effects": {
+        "stats": { "morale": -1, "will": 1 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "侧门被人从里面顶上了杂物，卷帘半落，里面传来脚步声——不是一个人的。" },
+        { "zh": "你没有硬闯，退回到街上。来过了，就够了。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day8_outside_pharmacy",
+      "text": { "zh": "街角那家药店——抽屉也许还没被翻干净。" },
+      "conditions": {
+        "blockedFlags": ["scavenged_pharmacy"]
+      },
+      "effects": {
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你贴着墙根过去，尽量不走开阔处。" },
+        { "zh": "药店的招牌在风里晃，发出空荡荡的响声。" }
+      ],
+      "nextSceneId": "scene_day8_pharmacy"
+    },
+    {
+      "id": "scene_day8_outside_return",
+      "text": { "zh": "先回公寓歇一脚——确认门还在，整理背包。" },
+      "conditions": {
+        "blockedFlags": ["day8_returned_home"]
+      },
+      "hint": { "zh": "今天已经回去过" },
+      "effects": {
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你绕开后巷，从熟悉的楼道上去。钥匙在锁孔里转动的声音，比街上任何声音都安心。" }
+      ],
+      "nextSceneId": "scene_day8_return_apartment"
+    },
+    {
       "id": "scene_day8_outside_recon",
       "text": { "zh": "先绕一圈看看——不拿东西，只是看。城市里有什么，在哪里，密度多高。" },
-      "conditions": {},
+      "conditions": {
+        "blockedFlags": ["knows_city_layout"]
+      },
+      "hint": { "zh": "已绘制城区草图" },
       "effects": {
         "flags": { "knows_city_layout": true },
         "stats": { "stealth": 1, "will": 1, "morale": -1 },

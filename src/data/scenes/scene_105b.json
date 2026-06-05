@@ -33,7 +33,7 @@
     },
     {
       "id": "scene_105b_choice_b",
-      "text": { "zh": "管他的。现在就出去。" },
+      "text": { "zh": "顾不上了。现在就出去。" },
       "conditions": {
         "requiredStats": [{ "stat": "will", "min": 7 }]
       },

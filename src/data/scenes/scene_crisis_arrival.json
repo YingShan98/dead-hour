@@ -8,16 +8,42 @@
     "stats": {},
     "items": []
   },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["fortified_door"] },
+      "zh": "十二小时的倒计时走完了。门外的拖拽声在铁板上蹭过，留下一串让人牙酸的摩擦声——门还在。"
+    },
+    {
+      "conditions": { "requiredFlags": ["prepped_early"], "blockedFlags": ["fortified_door"] },
+      "zh": "十二小时的倒计时走完了。你听见楼梯上的声音，又看了一眼门后那堆纸箱和工具箱——心里清楚，这不够。"
+    }
+  ],
   "narrative": [
     { "zh": "楼道里传来声音。" },
     {
       "zh": "不是脚步声，不是人声——是一种钝的、拖拽的声响，像什么很重的东西正在被沿着楼梯往上拉。"
     },
-    { "zh": "你看了一眼大门。" },
-    { "zh": "然后看了一眼你花了多少时间加固它。" }
+    { "zh": "你看了一眼大门，又看了一眼你为它花掉的时间。" }
   ],
   "conditions": {},
   "choices": [
+    {
+      "id": "scene_crisis_arrival_desperate",
+      "text": { "zh": "门还不够结实——用身体、椅子和所有能顶的东西抵住。" },
+      "conditions": {
+        "security": { "max": 39 }
+      },
+      "effects": {
+        "stats": { "health": -4, "will": 1, "morale": -3 },
+        "timeCost": 0
+      },
+      "consequence": [
+        { "zh": "门缝在撞击下变形，木屑和灰从铰链处落下来。" },
+        { "zh": "你不知道撑了多久。声音退去时，你才发现后背的衣服全湿了。" },
+        { "zh": "门还在。你活过了这一夜。" }
+      ],
+      "nextSceneId": "scene_110"
+    },
     {
       "id": "scene_crisis_arrival_choice_a",
       "text": { "zh": "守住。门是死的，你是活的——只要不开门，就还有时间。" },
@@ -29,6 +55,10 @@
         "stats": { "will": 2, "morale": -2 },
         "timeCost": 0
       },
+      "consequence": [
+        { "zh": "你没有开门。拖拽声在门外停了很久，又慢慢远去。" },
+        { "zh": "天亮时，门板上多了一道新的划痕。你活过了这一夜。" }
+      ],
       "nextSceneId": "scene_110"
     },
     {
@@ -42,6 +72,10 @@
         "stats": { "health": -2, "will": 1, "stealth": 1 },
         "timeCost": 0
       },
+      "consequence": [
+        { "zh": "你从厨房窗户翻下去，水管硌得掌心发麻。" },
+        { "zh": "院子里没有人。你贴着墙根回到门口，门还在，屋里还在。" }
+      ],
       "nextSceneId": "scene_110"
     },
     {
@@ -56,6 +90,10 @@
         "stats": { "health": -1, "morale": 2 },
         "timeCost": 0
       },
+      "consequence": [
+        { "zh": "你冲下楼，发动货车，在院子里掉头。" },
+        { "zh": "卷帘门升起，光涌进来。你没有往街上开——只是确认：车能走，路还在。" }
+      ],
       "nextSceneId": "scene_110"
     }
   ]

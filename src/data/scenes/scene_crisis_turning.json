@@ -8,11 +8,21 @@
     "stats": {},
     "items": []
   },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["gave_in_to_raw_hunger"] },
+      "zh": "零时那阵饿意又回来了——不是胃，是更深的地方，在门板另一侧拖行的节奏里，你居然听出了一丝……熟悉。"
+    },
+    {
+      "conditions": { "requiredFlags": ["fortified_door"] },
+      "zh": "铁板还在。你听见拖拽声在门外停了一下，又挪开了——它们试过，但没进来。"
+    }
+  ],
   "narrative": [
     { "zh": "楼道里传来声音。" },
-    { "zh": "你听见了。不只是耳朵听见——是皮肤下面某处感知到的，一种频率，一种节奏。" },
+    { "zh": "你听见了。不只是耳朵——是皮肤下面某处先知道，然后耳朵才跟上。一种频率，一种节奏。" },
     { "zh": "你知道那是什么在移动。" },
-    { "zh": "然后你意识到，你怎么会知道这个？" }
+    { "zh": "然后你意识到：你怎么会知道？" }
   ],
   "conditions": {
     "requiredFlags": ["zombie_turning"]
@@ -30,6 +40,10 @@
         "stats": { "will": 2, "infection": -1, "morale": -3 },
         "timeCost": 0
       },
+      "consequence": [
+        { "zh": "你把门顶死了。外面的节奏在门板上传来，又远去。" },
+        { "zh": "你没有开。天亮时，你还坐在原来的位置。" }
+      ],
       "nextSceneId": "scene_110"
     },
     {
@@ -43,6 +57,10 @@
         "stats": { "will": 1, "infection": 1, "stealth": 3 },
         "timeCost": 0
       },
+      "consequence": [
+        { "zh": "三个。两个慢，一个快。你在脑子里标出位置，没有出声。" },
+        { "zh": "它们没有停在这层。你等到安静，才慢慢松开工具。" }
+      ],
       "nextSceneId": "scene_110"
     },
     {
@@ -53,10 +71,13 @@
       },
       "effects": {
         "flags": { "full_zombie": true },
-        "stats": { "infection": 3 },
         "timeCost": 0
       },
-      "nextSceneId": "scene_109_turning"
+      "consequence": [
+        { "zh": "你想关门，但手已经握在门把上。" },
+        { "zh": "外面那种节奏忽然变得很近，很近——像是在应和你。" }
+      ],
+      "nextSceneId": "scene_crisis_door_opened"
     }
   ]
 }

@@ -1,0 +1,70 @@
+{
+  "id": "scene_day8_pharmacy",
+  "title": { "zh": "路边药店" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 184 },
+  "onEnter": { "flags": { "scavenged_pharmacy": true } },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["knows_city_layout"] },
+      "position": "prefix",
+      "zh": "你绕到后巷——草图上标过，这条路的动静比主街少。"
+    }
+  ],
+  "narrative": [
+    { "zh": "街角那家二十四小时药店，卷帘门被撬开过，里面黑漆漆的。" },
+    {
+      "zh": "玻璃渣在脚底下响。你贴着墙进去，手电光扫过倒空的货架——大部分已经被搬空，但收银台后面的抽屉还锁着。"
+    },
+    {
+      "zh": "你用螺丝刀撬开。里面躺着两盒药、一卷绷带，还有一本被血渍弄脏的登记册。你只看了一眼就合上了。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day8_pharmacy_take_med",
+      "text": { "zh": "拿抗生素和绷带，立刻离开。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": 1 },
+        "items": [
+          { "itemId": "antibiotic", "delta": 1 },
+          { "itemId": "medkit", "delta": 1 }
+        ],
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "你把药塞进背包最里层，拉上拉链。" },
+        { "zh": "后巷尽头有人影晃了一下，你没有追，也没有停，直接拐回主街。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day8_pharmacy_quick",
+      "text": { "zh": "只拿抗生素，少待一秒是一秒。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "stealth": 1 },
+        "items": [{ "itemId": "antibiotic", "delta": 1 }],
+        "timeCost": 1
+      },
+      "consequence": [{ "zh": "你抓起药盒，转身出门。卷帘门在你身后晃了一下，没有追出来。" }],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day8_pharmacy_skip_drawer",
+      "text": { "zh": "抽屉里的东西不对劲——空手离开。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 2, "morale": -1 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "登记册上的手印还是湿的。你把螺丝刀收回去，从原路撤出。" },
+        { "zh": "什么都没拿，但你知道自己做了对的判断。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    }
+  ]
+}

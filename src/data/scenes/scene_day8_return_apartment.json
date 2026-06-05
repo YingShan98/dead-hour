@@ -1,0 +1,68 @@
+{
+  "id": "scene_day8_return_apartment",
+  "title": { "zh": "回程·门还在" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 178 },
+  "onEnter": { "flags": { "day8_returned_home": true } },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "zh": "裴嘉应先上楼检查拐角，对你点了点头。门上的铁板还在，焊痕没有裂开。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "回公寓不是逃跑。街上不能久留，门内也不能久待——但你需要一分钟，确认那扇门还在，确认你还知道怎么回来。"
+    },
+    { "zh": "屋里比外面安静。安静得几乎像从前。你听见自己的呼吸，听见背包带子蹭过肩膀的声音。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day8_return_eat",
+      "text": { "zh": "吃一点东西，喝几口水，把背包重新系紧。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "canned_food", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：罐头食品" },
+      "effects": {
+        "stats": { "health": 1, "morale": 2 },
+        "items": [{ "itemId": "canned_food", "delta": -1 }],
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "罐头没什么味道，但胃里有了重量，手指不再发飘。" },
+        { "zh": "你擦干嘴角，把空罐扔进塑料袋，扎紧袋口。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day8_return_door",
+      "text": { "zh": "检查大门和窗户，确认没有被动过。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1 },
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "门框、铰链、铁板接合处——你都摸了一遍。" },
+        { "zh": "没有新划痕。你退后一步，点了点头。这扇门还能用。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day8_return_leave",
+      "text": { "zh": "歇够了。锁好门，回到街上。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": 1 },
+        "timeCost": 0
+      },
+      "consequence": [
+        { "zh": "你最后看了一眼客厅——电焊机还在桌上，像某种锚。" },
+        { "zh": "然后你下楼，重新走进风里。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    }
+  ]
+}

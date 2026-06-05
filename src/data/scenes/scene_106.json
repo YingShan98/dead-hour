@@ -7,7 +7,7 @@
     {
       "conditions": { "requiredFlags": ["pei_status_trapped_outside"] },
       "position": "suffix",
-      "zh": "裴嘉应还在面包房里，腿受了伤。你在脑子里把这件事压住，先看眼前这扇门。"
+      "zh": "裴嘉应还在面包房里。你记住那个方向，然后看向眼前这扇还不够结实的门。"
     }
   ],
   "narrative": [

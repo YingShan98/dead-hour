@@ -98,6 +98,7 @@
       },
       "hint": { "zh": "需要：防御指数 60+" },
       "effects": {
+        "flags": { "delayed_exit_week": true },
         "stats": { "morale": -2, "will": -1 }
       },
       "consequence": [

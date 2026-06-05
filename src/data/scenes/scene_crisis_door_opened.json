@@ -1,0 +1,29 @@
+{
+  "id": "scene_crisis_door_opened",
+  "title": { "zh": "门开了" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 12 },
+  "narrative": [
+    { "zh": "你的手比意志先动了。" },
+    {
+      "zh": "插销拉开的声音很轻，轻到你自己都愣了一下。门缝敞开，楼道里的气味涌进来——温的，腥的，带着某种饥饿的节奏。"
+    },
+    { "zh": "你看见它们了。不是新闻里的，不是视频里卡掉的那几秒——是贴在你门上的，伸进你家里的。" },
+    { "zh": "最后一个还像你的念头，是裴嘉应的名字。然后那个念头也被撕碎了。" }
+  ],
+  "conditions": {
+    "requiredFlags": ["full_zombie"]
+  },
+  "choices": [
+    {
+      "id": "scene_crisis_door_opened_end",
+      "text": { "zh": "……" },
+      "conditions": {},
+      "effects": {
+        "stats": { "infection": 10 }
+      },
+      "consequence": [],
+      "nextSceneId": "scene_110"
+    }
+  ]
+}

@@ -61,9 +61,10 @@ const WILL_SIGNAL_COLOUR: Record<'awakening' | 'collapse', string> = {
 
 interface Props {
   stats: PlayerStats
+  flags: Record<string, boolean>
 }
 
-export default function StatPanel({ stats }: Props) {
+export default function StatPanel({ stats, flags }: Props) {
   const { LL } = useI18n()
 
   const infectionSignal = getInfectionSignal(stats.infection)
@@ -76,8 +77,7 @@ export default function StatPanel({ stats }: Props) {
       {/* Visible character stats */}
       {STAT_ROWS.map(({ key, labelKey, icon, max, barColour }) => {
         const value = stats[key]
-        // Hide money row until the player actually has money
-        if (key === 'money' && value <= 0) return null
+        if (key === 'money' && flags.money_obsolete) return null
         const pct = Math.round((value / max) * 100)
         return (
           <div key={key} className="flex flex-col gap-1">
