@@ -15,6 +15,7 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
       trust: 5,
       infection: 0,
       will: 5,
+      hunger: 0,
     },
     inventory: [],
     flags: {},
@@ -23,6 +24,8 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
     journalLog: [],
     security: 0,
     timeRemaining: 12,
+    lastProcessedDay: -2,
+    timeCostToday: 0,
     saveSlot: 0,
     playthroughId: 'test-run',
     ...overrides,
@@ -95,6 +98,7 @@ describe('applyEffects()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     const result = applyEffects({ stats: { money: -30 } }, state)
@@ -112,6 +116,7 @@ describe('applyEffects()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     const result = applyEffects({ stats: { money: -999 } }, state)

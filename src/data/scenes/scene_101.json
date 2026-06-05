@@ -5,8 +5,7 @@
   "gameTime": { "hoursFromStart": -48 },
   "onEnter": {
     "flags": { "finger_cut": true },
-    "stats": { "infection": 1 },
-    "items": [{ "itemId": "medkit", "delta": 1 }]
+    "stats": { "infection": 1 }
   },
   "narrative": [
     {

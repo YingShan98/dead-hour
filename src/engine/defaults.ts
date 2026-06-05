@@ -4,16 +4,21 @@ export const DEFAULT_GAME_STATE: GameState = {
   currentSceneId: 'scene_101',
   gameTime: { hoursFromStart: -48 },
   stats: {
-    health: 10,
+    health: 15,
     morale: 10,
     leadership: 0,
     stealth: 0,
     money: 200,
     trust: 5,
     infection: 0, // rises to 1 via scene_101 onEnter (the wound)
-    will: 5,
+    will: 6,
+    hunger: 0,
   },
-  inventory: [],
+  inventory: [
+    { itemId: 'canned_food', quantity: 2 },
+    { itemId: 'iodine_kit', quantity: 1 },
+    { itemId: 'painkillers', quantity: 1 },
+  ],
   flags: {},
   visitedScenes: [],
   choiceHistory: [],
@@ -22,6 +27,10 @@ export const DEFAULT_GAME_STATE: GameState = {
   // ── Hybrid system ────────────────────────────────────────────────────────────
   security: 0, // fortification level — player builds this up
   timeRemaining: 12, // 12 hours before the infected reach the building
+
+  // ── Hunger tracking ──────────────────────────────────────────────────────────
+  lastProcessedDay: -2, // scene_101 starts at hoursFromStart -48 = day -2
+  timeCostToday: 0,
 
   // ── Meta ─────────────────────────────────────────────────────────────────────
   saveSlot: 0,

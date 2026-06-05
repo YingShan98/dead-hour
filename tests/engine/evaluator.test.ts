@@ -17,6 +17,7 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
       trust: 5,
       infection: 0,
       will: 5,
+      hunger: 0,
     },
     inventory: [],
     flags: {},
@@ -25,6 +26,8 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
     journalLog: [],
     security: 0,
     timeRemaining: 12,
+    lastProcessedDay: -2,
+    timeCostToday: 0,
     saveSlot: 0,
     playthroughId: 'test-run',
     ...overrides,
@@ -53,6 +56,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(true)
@@ -69,6 +73,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'leadership', min: 5 }] }, state)).toBe(false)
@@ -85,6 +90,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(true)
@@ -101,6 +107,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'health', max: 0 }] }, state)).toBe(false)
@@ -127,6 +134,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'money', min: 30 }] }, state)).toBe(true)
@@ -143,6 +151,7 @@ describe('evaluate()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     expect(evaluate({ requiredStats: [{ stat: 'money', min: 30 }] }, state)).toBe(false)
@@ -187,6 +196,7 @@ describe('getAvailableChoices()', () => {
         trust: 5,
         infection: 0,
         will: 5,
+        hunger: 0,
       },
     })
     const available = getAvailableChoices(choices, state)

@@ -5,6 +5,7 @@ import { getAvailableChoices } from '@/engine/evaluator'
 import { loadScene, loadEndings } from '@/engine/loader'
 import { checkForEnding, getTimeExpiredSceneId } from '@/engine/endingEvaluator'
 import { checkCrisisState } from '@/engine/timeManager'
+import { applyDailyHungerTick } from '@/engine/hungerManager'
 import { saveGame, loadGame } from '@/engine/saveManager'
 import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import { getItemDef } from '@/data/itemRegistry'
@@ -126,15 +127,17 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       // 1. Apply choice effects (stats, flags, items, security, timeCost)
       let newState = applyEffects(choice.effects, gameState)
 
-      // 2. Record choice in history
+      // 2. Record choice in history and accumulate daily energy cost
+      const choiceTimeCost = choice.effects.timeCost ?? 0
       newState = {
         ...newState,
+        timeCostToday: newState.timeCostToday + choiceTimeCost,
         choiceHistory: [
           ...newState.choiceHistory,
           {
             sceneId: currentScene.id,
             choiceId,
-            timeCost: choice.effects.timeCost ?? 0,
+            timeCost: choiceTimeCost,
             securityDelta: choice.effects.security ?? 0,
           },
         ],
@@ -181,6 +184,9 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         gameTime: nextScene.gameTime,
         visitedScenes: [...newState.visitedScenes, nextScene.id],
       }
+
+      // 9a. Apply daily hunger tick if calendar day has advanced
+      newState = applyDailyHungerTick(newState)
 
       // 10. Check for triggered ending
       const triggered = checkForEnding(availableEndings, newState)

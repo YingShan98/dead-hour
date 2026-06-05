@@ -14,6 +14,7 @@ export type StatKey =
   | 'money' // 0-200  yuan remaining — visible
   | 'infection' // 0-10  viral progression — hidden
   | 'will' // 0-10  psychological resistance — hidden
+  | 'hunger' // 0-10  daily starvation pressure — hidden
 
 export type PlayerStats = Record<StatKey, number>
 
@@ -192,6 +193,9 @@ export interface GameState {
   // ── Hybrid system ───────────────────────────────────────────────────────────
   security: number // 0-100 fortification level (visible stat)
   timeRemaining: number // hours before crisis arrives (countdown from 12)
+  // ── Hunger tracking ──────────────────────────────────────────────────────────
+  lastProcessedDay: number // last calendar day (floor(hoursFromStart/24)) hunger was ticked
+  timeCostToday: number // hours of timeCost spent since lastProcessedDay — energy modifier
   // ── Meta ────────────────────────────────────────────────────────────────────
   saveSlot: number
   playthroughId: string

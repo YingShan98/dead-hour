@@ -5,7 +5,7 @@
       "label": { "zh": "生命值" },
       "description": { "zh": "你的身体状况。降至 0 则意味着你在城市的角落悄然消逝。" },
       "icon": "❤️",
-      "default": 10,
+      "default": 15,
       "min": 0,
       "max": 20,
       "visible": true
@@ -75,7 +75,17 @@
       "label": { "zh": "意志力" },
       "description": { "zh": "心理上对生命的抵抗力——对身体的控制。" },
       "icon": "✦",
-      "default": 5,
+      "default": 6,
+      "min": 0,
+      "max": 10,
+      "visible": false
+    },
+    {
+      "key": "hunger",
+      "label": { "zh": "饥饿值" },
+      "description": { "zh": "身体对食物的渴求程度。长期饥饿会削弱体力与意志。" },
+      "icon": "🍽",
+      "default": 0,
       "min": 0,
       "max": 10,
       "visible": false

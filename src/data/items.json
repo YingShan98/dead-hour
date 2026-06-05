@@ -1,6 +1,21 @@
 {
   "items": [
     {
+      "id": "iodine_kit",
+      "label": { "zh": "碘伏急救包" },
+      "description": { "zh": "碘伏棉棒与纱布。处理小伤口用的，不是真正的急救。" },
+      "category": "medical",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "useEffect": {
+        "stats": {
+          "health": 1,
+          "infection": -1
+        }
+      }
+    },
+    {
       "id": "medkit",
       "label": { "zh": "急救箱" },
       "description": { "zh": "基础急救用品。使用后恢复3点生命值，感染值-1。" },
