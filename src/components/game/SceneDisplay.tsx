@@ -14,8 +14,12 @@ export default function SceneDisplay({ scene, state }: Props) {
 
   const title = resolveLocaleString(scene.title, locale)
   const passed = (scene.conditionalNarrative ?? []).filter((p) => evaluate(p.conditions, state))
-  const prefix = passed.filter((p) => !p.position || p.position === 'prefix').map((p) => resolveLocaleString(p, locale))
-  const suffix = passed.filter((p) => p.position === 'suffix').map((p) => resolveLocaleString(p, locale))
+  const prefix = passed
+    .filter((p) => !p.position || p.position === 'prefix')
+    .map((p) => resolveLocaleString(p, locale))
+  const suffix = passed
+    .filter((p) => p.position === 'suffix')
+    .map((p) => resolveLocaleString(p, locale))
   const paragraphs = [...prefix, ...resolveLocaleStrings(scene.narrative, locale), ...suffix]
 
   function formatGameTime(hoursFromStart: number): string {

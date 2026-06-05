@@ -1,0 +1,88 @@
+{
+  "id": "scene_day10_supermarket",
+  "title": { "zh": "第十天·超市" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 240 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["knows_city_layout"] },
+      "position": "prefix",
+      "zh": "你绕到了侧门——备忘录里的草图是对的，这条路的感染者密度确实低一些。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应守在门口，没有进来。她说：「我帮你看着外面。」"
+    }
+  ],
+  "narrative": [
+    { "zh": "第十天。" },
+    {
+      "zh": "超市比你想象的大，也比想象的空。货架倒了几排，地上有踩过的脚印——不是一个人的。冷藏柜早就停了，空气里有一种甜腐的气味。"
+    },
+    {
+      "zh": "你在罐头区找到了还算完好的物资。正要把东西装进背包，身后传来一声很轻的咳嗽。"
+    },
+    {
+      "zh": "一家三口缩在收银台后面。男人腿上有绷带，渗了血；女人抱着一个孩子，大概五六岁，脸色发白。他们看见了你，也看见了你手里的东西。"
+    },
+    { "zh": "没有人说话。超市的日光灯管有一根还在闪。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day10_supermarket_help",
+      "text": { "zh": "把一部分罐头和水推过去。「够你们撑几天。我也需要。」" },
+      "conditions": {},
+      "effects": {
+        "flags": { "helped_stranger": true },
+        "stats": { "morale": 2, "leadership": 1, "will": 1 },
+        "items": [{ "itemId": "canned_food", "delta": 3 }, { "itemId": "high_calorie_food", "delta": 1 }],
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "男人愣了一下，然后点了点头。女人说了声谢谢，声音很轻。" },
+        { "zh": "你分出去的东西不算多，但够体面。离开的时候，那个孩子对你挥了挥手。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day10_supermarket_take",
+      "text": { "zh": "趁他们还没反应过来，把货架上最好的东西拿走，从侧门离开。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": -2, "will": -1 },
+        "items": [
+          { "itemId": "canned_food", "delta": 4 },
+          { "itemId": "high_calorie_food", "delta": 2 },
+          { "itemId": "medkit", "delta": 1 }
+        ],
+        "timeCost": 1
+      },
+      "consequence": [
+        { "zh": "你没有回头。脚步声在身后停住了，然后是一声压抑的抽气。" },
+        { "zh": "背包沉了很多。你告诉自己：这不是偷，是生存。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
+      "id": "scene_day10_supermarket_trade",
+      "text": { "zh": "停下来，问他们有没有药品或情报——可以换食物。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "leadership", "min": 2 }]
+      },
+      "hint": { "zh": "需要：领导力 2+" },
+      "effects": {
+        "flags": { "helped_stranger": true },
+        "stats": { "leadership": 1, "trust": 1 },
+        "items": [{ "itemId": "canned_food", "delta": 3 }, { "itemId": "antibiotic", "delta": 1 }],
+        "timeCost": 2
+      },
+      "consequence": [
+        { "zh": "男人说他们在医院方向看见过车队——军绿色的，没有停。女人补了一句：「往南，大概第十二天。」" },
+        { "zh": "你分了一些食物过去，换到了抗生素和一条可能有用也可能没用的情报。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    }
+  ]
+}

@@ -31,9 +31,7 @@
         "flags": { "left_apartment": true, "has_vehicle": true },
         "stats": { "will": 2 }
       },
-      "consequence": [
-        { "zh": "发动机还活着。你深吸一口气，踩油门，开出去。" }
-      ],
+      "consequence": [{ "zh": "发动机还活着。你深吸一口气，踩油门，开出去。" }],
       "nextSceneId": "scene_day8_outside"
     },
     {

@@ -55,9 +55,7 @@
         "items": [{ "itemId": "duct_tape", "delta": 1 }]
       },
       "hint": { "zh": "资金不足" },
-      "consequence": [
-        { "zh": "灰色的工业胶带，十公分宽，手感厚实。你拿了一卷。" }
-      ],
+      "consequence": [{ "zh": "灰色的工业胶带，十公分宽，手感厚实。你拿了一卷。" }],
       "nextSceneId": "scene_104_shop"
     },
     {
@@ -108,9 +106,7 @@
         "items": [{ "itemId": "canned_food", "delta": 1 }]
       },
       "hint": { "zh": "资金不足" },
-      "consequence": [
-        { "zh": "你从旁边的货架上拿了一罐午餐肉。保质期还有两年。" }
-      ],
+      "consequence": [{ "zh": "你从旁边的货架上拿了一罐午餐肉。保质期还有两年。" }],
       "nextSceneId": "scene_104_shop"
     },
     {

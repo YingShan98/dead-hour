@@ -41,6 +41,7 @@ Data (JSON files — src/data/)
 ```
 
 **Engine** (`src/engine/`) is pure TypeScript with no React dependency. Functions take state + input, return new state. This is where all game logic lives and where tests focus:
+
 - `types.ts` — all TypeScript interfaces (GameState, Scene, Choice, ConditionSet, EffectSet, etc.)
 - `evaluator.ts` — checks if conditions are met (flags, stats, items, security, time)
 - `executor.ts` — applies effects immutably (stat deltas clamped to min/max)

@@ -31,7 +31,15 @@ const DATA_DIR = path.join(ROOT, 'src', 'data')
 
 const VALID_ITEM_CATEGORIES = new Set(['medical', 'food', 'tool', 'weapon', 'misc'])
 const VALID_ENDING_TYPES = new Set(['bad', 'neutral', 'good', 'secret'])
-const VALID_ACTS = new Set(['act1', 'act2', 'act3', 'act4'])
+const VALID_ACTS = new Set(['prologue', 'act1', 'act2', 'act3', 'act4'])
+
+// Scenes reached outside the choice graph — game start, NG+ prologue, time-expiry routing.
+const ENTRY_POINT_SCENES = new Set([
+  'scene_101',
+  'scene_000_prologue',
+  'scene_crisis_arrival',
+  'scene_crisis_turning',
+])
 const BASE_LOCALE = 'zh'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -633,12 +641,18 @@ function validateScenes(reg: Registries) {
     }
   }
 
-  // ── Graph: reachability from scene_101 ────────────────────────────────────
+  // ── Graph: reachability from all entry points ─────────────────────────────
   if (scenes.has('scene_101')) {
-    const reachable = findReachableScenes('scene_101', outgoingLinks)
+    const reachable = new Set<string>()
+    for (const entryId of ENTRY_POINT_SCENES) {
+      if (!scenes.has(entryId)) continue
+      for (const id of findReachableScenes(entryId, outgoingLinks)) {
+        reachable.add(id)
+      }
+    }
     for (const [sceneId, { file }] of scenes.entries()) {
       if (!reachable.has(sceneId)) {
-        addWarning(file, `scene "${sceneId}" is not reachable from scene_101`)
+        addWarning(file, `scene "${sceneId}" is not reachable from any entry point`)
       }
     }
   } else {
@@ -647,7 +661,7 @@ function validateScenes(reg: Registries) {
 
   // ── Graph: no-incoming warnings (orphans) ─────────────────────────────────
   for (const [sceneId, count] of incomingCounts.entries()) {
-    if (sceneId !== 'scene_101' && count === 0) {
+    if (!ENTRY_POINT_SCENES.has(sceneId) && count === 0) {
       const file = scenes.get(sceneId)?.file ?? sceneDir
       addWarning(file, `scene "${sceneId}" has no incoming links`)
     }

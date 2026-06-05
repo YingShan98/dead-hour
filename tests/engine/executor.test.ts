@@ -6,7 +6,16 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
   return {
     currentSceneId: 'scene_001',
     gameTime: { hoursFromStart: -48 },
-    stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 0, trust: 5, infection: 0, will: 5 },
+    stats: {
+      health: 10,
+      morale: 10,
+      leadership: 0,
+      stealth: 0,
+      money: 0,
+      trust: 5,
+      infection: 0,
+      will: 5,
+    },
     inventory: [],
     flags: {},
     visitedScenes: [],
@@ -76,7 +85,16 @@ describe('applyEffects()', () => {
 
   it('applies money deduction', () => {
     const state = mockState({
-      stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 185, trust: 5, infection: 0, will: 5 },
+      stats: {
+        health: 10,
+        morale: 10,
+        leadership: 0,
+        stealth: 0,
+        money: 185,
+        trust: 5,
+        infection: 0,
+        will: 5,
+      },
     })
     const result = applyEffects({ stats: { money: -30 } }, state)
     expect(result.stats.money).toBe(155)
@@ -84,7 +102,16 @@ describe('applyEffects()', () => {
 
   it('clamps money at minimum (0)', () => {
     const state = mockState({
-      stats: { health: 10, morale: 10, leadership: 0, stealth: 0, money: 10, trust: 5, infection: 0, will: 5 },
+      stats: {
+        health: 10,
+        morale: 10,
+        leadership: 0,
+        stealth: 0,
+        money: 10,
+        trust: 5,
+        infection: 0,
+        will: 5,
+      },
     })
     const result = applyEffects({ stats: { money: -999 } }, state)
     expect(result.stats.money).toBe(0)

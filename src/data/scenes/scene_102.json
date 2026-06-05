@@ -9,7 +9,10 @@
       "zh": "裴嘉应说的那个词一直在你脑子里转。咬伤。你试着不去想它，但手边的焊机提醒着你——你今天也受伤了，在废品站，被一台来路不明的旧机器。"
     },
     {
-      "conditions": { "requiredFlags": ["noticed_outbreak_signs"], "blockedFlags": ["researched_outbreak_early"] },
+      "conditions": {
+        "requiredFlags": ["noticed_outbreak_signs"],
+        "blockedFlags": ["researched_outbreak_early"]
+      },
       "zh": "11天，7天，4天。间隔还在缩短。你坐在桌前，没有动工具箱。"
     }
   ],

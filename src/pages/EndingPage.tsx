@@ -111,11 +111,7 @@ export default function EndingPage() {
           >
             {isLoading ? LL.ui.loading() : LL.ending.playAgain()}
           </button>
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="choice-btn text-center"
-          >
+          <button type="button" onClick={() => navigate('/')} className="choice-btn text-center">
             {LL.ending.returnToTitle()}
           </button>
         </div>
