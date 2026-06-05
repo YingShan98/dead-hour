@@ -128,12 +128,12 @@ src/
 
 ## Story Overview
 
-| Phase | In-Game Time | GDD Name | Description | Status |
-|---|---|---|---|---|
-| Phase 1 | T−48h → Day 90 | 血色之冬 (Crimson Winter) | Outbreak, first survival week, Pei rescue, establish base | Days 1–14 playable |
-| Phase 2 | Day 91–180 | 铁血之春 (Iron Spring) | Base building, NPC recruitment, infection arc, faction foreshadowing | Not started |
-| Phase 3 | Day 181–270 | 瘟疫之夏 (Plague Summer) | Three-front pressure: plague, intelligent horde, human factions | Not started |
-| Phase 4 | Day 271–365 | 审判之秋 (Judgment Autumn) | Siege, convergence, endings | Not started |
+| Phase   | In-Game Time   | GDD Name                   | Description                                                          | Status             |
+| ------- | -------------- | -------------------------- | -------------------------------------------------------------------- | ------------------ |
+| Phase 1 | T−48h → Day 90 | 血色之冬 (Crimson Winter)  | Outbreak, first survival week, Pei rescue, establish base            | Days 1–14 playable |
+| Phase 2 | Day 91–180     | 铁血之春 (Iron Spring)     | Base building, NPC recruitment, infection arc, faction foreshadowing | Not started        |
+| Phase 3 | Day 181–270    | 瘟疫之夏 (Plague Summer)   | Three-front pressure: plague, intelligent horde, human factions      | Not started        |
+| Phase 4 | Day 271–365    | 审判之秋 (Judgment Autumn) | Siege, convergence, endings                                          | Not started        |
 
 Protagonist: 喻城 (Yù Chéng), 23-year-old vocational school mechanic. Companion: 裴嘉应 (Péi Jiā-yīng), trainee nurse. The game is written in Chinese (base locale `zh`).
 
@@ -153,9 +153,7 @@ A minimal scene looks like this:
   "title": { "zh": "某个场景" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 48 },
-  "narrative": [
-    { "zh": "街角的药店还没有人来过。" }
-  ],
+  "narrative": [{ "zh": "街角的药店还没有人来过。" }],
   "conditions": {},
   "choices": [
     {
@@ -197,15 +195,15 @@ Full project documentation lives in `/docs`:
 
 ## Development Status
 
-| Phase                       | Status              | Notes |
-| --------------------------- | ------------------- | ----- |
-| Phase 0 — Project setup     | ✅ Complete         | Vite + React + TS + Tailwind + Vitest configured |
-| Phase 1 — Engine core       | ✅ Complete         | evaluator, executor, loader, saveManager, endingEvaluator, timeManager all implemented and tested |
-| Phase 2 — Act 1 playable    | 🟨 In progress      | UI complete; scene content covers T−48h through Day 14 (out of 90-day Act 1); game cannot yet be completed end-to-end |
-| Phase 3 — Act 2 + branching | ⬜ Not started      | Requires Day 15–Day 90 scenes, base selection, NPC recruitment |
-| Phase 4 — Act 3 + factions  | ⬜ Not started      | Faction system, plague mechanics, Pei kidnapping arc |
-| Phase 5 — Act 4 + endings   | ⬜ Not started      | Siege mechanics, 9 remaining endings, NG+ |
-| Phase 6 — Polish + release  | ⬜ Not started      | |
+| Phase                       | Status         | Notes                                                                                                                 |
+| --------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Phase 0 — Project setup     | ✅ Complete    | Vite + React + TS + Tailwind + Vitest configured                                                                      |
+| Phase 1 — Engine core       | ✅ Complete    | evaluator, executor, loader, saveManager, endingEvaluator, timeManager all implemented and tested                     |
+| Phase 2 — Act 1 playable    | 🟨 In progress | UI complete; scene content covers T−48h through Day 14 (out of 90-day Act 1); game cannot yet be completed end-to-end |
+| Phase 3 — Act 2 + branching | ⬜ Not started | Requires Day 15–Day 90 scenes, base selection, NPC recruitment                                                        |
+| Phase 4 — Act 3 + factions  | ⬜ Not started | Faction system, plague mechanics, Pei kidnapping arc                                                                  |
+| Phase 5 — Act 4 + endings   | ⬜ Not started | Siege mechanics, 9 remaining endings, NG+                                                                             |
+| Phase 6 — Polish + release  | ⬜ Not started |                                                                                                                       |
 
 **Content scope:** ~32 scene JSON files implemented, covering the pre-outbreak period and the first two weeks of survival. The planned full game spans 365 in-game days across ~120–150 scenes. Passive mechanics (daily food/water consumption, cold damage, infection passive escalation) and deferred systems (crafting, overclocking, Pei's notebook) are not yet implemented.
 
