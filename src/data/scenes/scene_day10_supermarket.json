@@ -37,7 +37,10 @@
       "effects": {
         "flags": { "helped_stranger": true },
         "stats": { "morale": 2, "leadership": 1, "will": 1 },
-        "items": [{ "itemId": "canned_food", "delta": 3 }, { "itemId": "high_calorie_food", "delta": 1 }],
+        "items": [
+          { "itemId": "canned_food", "delta": 3 },
+          { "itemId": "high_calorie_food", "delta": 1 }
+        ],
         "timeCost": 1
       },
       "consequence": [
@@ -75,11 +78,16 @@
       "effects": {
         "flags": { "helped_stranger": true },
         "stats": { "leadership": 1, "trust": 1 },
-        "items": [{ "itemId": "canned_food", "delta": 3 }, { "itemId": "antibiotic", "delta": 1 }],
+        "items": [
+          { "itemId": "canned_food", "delta": 3 },
+          { "itemId": "antibiotic", "delta": 1 }
+        ],
         "timeCost": 2
       },
       "consequence": [
-        { "zh": "男人说他们在医院方向看见过车队——军绿色的，没有停。女人补了一句：「往南，大概第十二天。」" },
+        {
+          "zh": "男人说他们在医院方向看见过车队——军绿色的，没有停。女人补了一句：「往南，大概第十二天。」"
+        },
         { "zh": "你分了一些食物过去，换到了抗生素和一条可能有用也可能没用的情报。" }
       ],
       "nextSceneId": "scene_day8_outside"
