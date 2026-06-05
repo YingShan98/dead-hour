@@ -64,6 +64,25 @@
       "nextSceneId": "scene_110"
     },
     {
+      "id": "scene_crisis_turning_choice_d",
+      "text": { "zh": "抓住门框，靠恐惧撑着。不是意志，是某种更原始的拒绝。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 3, "max": 4 }]
+      },
+      "hint": { "zh": "在边缘——意志值 3-4" },
+      "effects": {
+        "stats": { "infection": 1, "health": -2, "morale": -3, "will": -1 },
+        "timeCost": 0
+      },
+      "consequence": [
+        {
+          "zh": "你没有开门。不是因为你够强——是因为某种更深处的东西拒绝松手，像一只受伤的动物蜷缩在角落。"
+        },
+        { "zh": "天亮了。你还在门这边。感染又深了一些，但你还在这边。" }
+      ],
+      "nextSceneId": "scene_110"
+    },
+    {
       "id": "scene_crisis_turning_choice_c",
       "text": { "zh": "……你打开了门。" },
       "conditions": {

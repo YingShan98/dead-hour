@@ -6,17 +6,17 @@
   "conditionalNarrative": [
     {
       "conditions": { "requiredStats": [{ "stat": "money", "min": 100 }] },
-      "zh": "钱包里还算宽裕，可以多挑几样。"
+      "zh": "余额还够，不用太取舍，多拿几样也行。"
     },
     {
       "conditions": {
         "requiredStats": [{ "stat": "money", "min": 30, "max": 99 }]
       },
-      "zh": "钱不多了，得精打细算。"
+      "zh": "钱快见底了，得想清楚再动手。"
     },
     {
       "conditions": { "requiredStats": [{ "stat": "money", "max": 29 }] },
-      "zh": "兜里快见底了。"
+      "zh": "兜里就剩这点，只够挑最要紧的一样。"
     }
   ],
   "narrative": [
@@ -114,12 +114,7 @@
       "text": { "zh": "不买了，骑车回家。" },
       "conditions": {},
       "effects": {},
-      "consequence": [
-        { "zh": "你推车出了店门。老板在身后喊了句「慢走」，你没回头。" },
-        {
-          "zh": "回家路上你又买了些吃的喝的，把纸箱一件件码进储物间。你以为还有时间慢慢整理——直到手机再次震动。"
-        }
-      ],
+      "consequence": [{ "zh": "你推车出了店门。老板在身后喊了句「慢走」，你没回头。" }],
       "nextSceneId": "scene_105"
     }
   ]

@@ -46,7 +46,7 @@
     },
     {
       "id": "scene_109_awakening_choice_b",
-      "text": { "zh": "试了一下——握紧拳头，集中想着楼道里的动静。和昨天不一样。" },
+      "text": { "zh": "握紧拳头，集中想着楼道里的动静——试试那种感知还在不在。" },
       "conditions": {
         "requiredFlags": ["superpower_awakening"]
       },

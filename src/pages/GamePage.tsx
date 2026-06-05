@@ -190,7 +190,7 @@ export default function GamePage() {
             choices={currentScene.choices}
             gameState={gameState}
             onSelect={selectChoice}
-            disabled={isLoading}
+            disabled={isLoading || !!pendingChoice}
           />
         </main>
       </div>

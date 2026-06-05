@@ -101,6 +101,7 @@ interface Scene {
 
 interface Registries {
   statKeys: Set<string>
+  statBounds: Map<string, { min: number; max: number }>
   itemIds: Set<string>
   validFlags: Set<string>
 }
@@ -386,15 +387,19 @@ function loadValidFlags(): Set<string> {
   return new Set(flags)
 }
 
-function validateStats(): Set<string> {
+function validateStats(): {
+  statKeys: Set<string>
+  statBounds: Map<string, { min: number; max: number }>
+} {
   const file = path.join(DATA_DIR, 'stats.json')
   const data = readJson(file)
   const statKeys = new Set<string>()
+  const statBounds = new Map<string, { min: number; max: number }>()
 
-  if (!data) return statKeys
+  if (!data) return { statKeys, statBounds }
   if (!isObject(data) || !Array.isArray(data.stats)) {
     addError(file, 'stats must be an array at root key "stats"')
-    return statKeys
+    return { statKeys, statBounds }
   }
 
   ;(data.stats as unknown[]).forEach((stat, i) => {
@@ -428,9 +433,17 @@ function validateStats(): Set<string> {
     ) {
       addError(file, `${context}.default must be between min and max`)
     }
+
+    if (
+      typeof stat.key === 'string' &&
+      typeof stat.min === 'number' &&
+      typeof stat.max === 'number'
+    ) {
+      statBounds.set(stat.key, { min: stat.min as number, max: stat.max as number })
+    }
   })
 
-  return statKeys
+  return { statKeys, statBounds }
 }
 
 function validateItems(reg: Registries): Set<string> {
@@ -601,6 +614,7 @@ function validateScenes(reg: Registries) {
       addWarning(file, 'scene has no choices')
     }
 
+    checkAllChoicesGated(file, raw as unknown as Scene, reg.statBounds)
     ;(raw.choices as unknown[]).forEach((choice, i) => {
       const choiceCtx = `${context}.choices[${i}]`
       if (!isObject(choice)) {
@@ -668,6 +682,146 @@ function validateScenes(reg: Registries) {
   }
 }
 
+// ─── Design checks ────────────────────────────────────────────────────────────
+
+/**
+ * Checks whether a scene's choices could collectively lock the player out.
+ * Emits a [DESIGN] warning when every choice has at least one condition
+ * and the conditions don't provably cover all reachable states.
+ *
+ * Three safe-coverage patterns are recognised and suppress the warning:
+ *   1. Security subset  — a subset of security-only choices covers [0, 100]
+ *   2. Single-stat subset — a subset of single-stat choices covers that stat's full domain
+ *   3. Complementary flag pair — one choice requires flag F, another blocks F (no other conditions)
+ */
+function checkAllChoicesGated(
+  file: string,
+  scene: Scene,
+  statBounds: Map<string, { min: number; max: number }>,
+) {
+  if (scene.choices.length === 0) return
+
+  const condLen = (arr: unknown[] | undefined) => arr?.length ?? 0
+
+  const hasConditions = (c: Choice): boolean => {
+    const cond = c.conditions
+    return (
+      condLen(cond.requiredFlags as unknown[]) > 0 ||
+      condLen(cond.blockedFlags as unknown[]) > 0 ||
+      condLen(cond.requiredStats as unknown[]) > 0 ||
+      condLen(cond.requiredItems as unknown[]) > 0 ||
+      cond.security !== undefined ||
+      cond.timeRemaining !== undefined
+    )
+  }
+
+  if (!scene.choices.every(hasConditions)) return // at least one unconditional choice — safe
+
+  // Helper: does a sorted list of ranges cover [domainMin, domainMax] without gaps?
+  function rangesExhaustive(
+    ranges: { min: number; max: number }[],
+    domainMin: number,
+    domainMax: number,
+  ): boolean {
+    const sorted = [...ranges].sort((a, b) => a.min - b.min)
+    if (sorted[0].min > domainMin) return false
+    let covered = sorted[0].max
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[i].min > covered + 1) return false
+      covered = Math.max(covered, sorted[i].max)
+    }
+    return covered >= domainMax
+  }
+
+  // 1. Security subset: any subset of security-only choices covering [0, 100]?
+  const secOnly = (c: Choice) => {
+    const cond = c.conditions
+    return (
+      condLen(cond.requiredFlags as unknown[]) === 0 &&
+      condLen(cond.blockedFlags as unknown[]) === 0 &&
+      condLen(cond.requiredStats as unknown[]) === 0 &&
+      condLen(cond.requiredItems as unknown[]) === 0 &&
+      cond.timeRemaining === undefined &&
+      cond.security !== undefined
+    )
+  }
+  const secChoices = scene.choices.filter(secOnly)
+  if (secChoices.length > 0) {
+    const secRanges = secChoices.map((c) => ({
+      min: (c.conditions.security as { min?: number; max?: number }).min ?? 0,
+      max: (c.conditions.security as { min?: number; max?: number }).max ?? 100,
+    }))
+    if (rangesExhaustive(secRanges, 0, 100)) return
+  }
+
+  // 2. Single-stat subset: any stat where single-stat-only choices cover its full domain?
+  const singleStatOnly = (c: Choice) => {
+    const cond = c.conditions
+    return (
+      condLen(cond.requiredFlags as unknown[]) === 0 &&
+      condLen(cond.blockedFlags as unknown[]) === 0 &&
+      condLen(cond.requiredStats as unknown[]) === 1 &&
+      condLen(cond.requiredItems as unknown[]) === 0 &&
+      cond.security === undefined &&
+      cond.timeRemaining === undefined
+    )
+  }
+  const statChoices = scene.choices.filter(singleStatOnly)
+  if (statChoices.length > 0) {
+    const byStat = new Map<string, Choice[]>()
+    for (const c of statChoices) {
+      const stat = (c.conditions.requiredStats as StatCondition[])[0].stat
+      const bucket = byStat.get(stat) ?? []
+      bucket.push(c)
+      byStat.set(stat, bucket)
+    }
+    for (const [stat, choices] of byStat.entries()) {
+      const bounds = statBounds.get(stat)
+      if (!bounds) continue
+      const ranges = choices.map((c) => {
+        const req = (c.conditions.requiredStats as StatCondition[])[0]
+        return { min: req.min ?? bounds.min, max: req.max ?? bounds.max }
+      })
+      if (rangesExhaustive(ranges, bounds.min, bounds.max)) return
+    }
+  }
+
+  // 3. Complementary flag pair: one choice requires [F] only, another blocks [F] only?
+  const soloRequired = new Set<string>()
+  const soloBlocked = new Set<string>()
+  for (const c of scene.choices) {
+    const cond = c.conditions
+    const noOtherConds =
+      condLen(cond.requiredStats as unknown[]) === 0 &&
+      condLen(cond.requiredItems as unknown[]) === 0 &&
+      cond.security === undefined &&
+      cond.timeRemaining === undefined
+
+    if (
+      noOtherConds &&
+      condLen(cond.requiredFlags as unknown[]) === 1 &&
+      condLen(cond.blockedFlags as unknown[]) === 0
+    ) {
+      soloRequired.add((cond.requiredFlags as string[])[0])
+    }
+    if (
+      noOtherConds &&
+      condLen(cond.blockedFlags as unknown[]) === 1 &&
+      condLen(cond.requiredFlags as unknown[]) === 0
+    ) {
+      soloBlocked.add((cond.blockedFlags as string[])[0])
+    }
+  }
+  for (const flag of soloRequired) {
+    if (soloBlocked.has(flag)) return // complementary pair covers both states of this flag
+  }
+
+  addWarning(
+    file,
+    `[DESIGN] all ${scene.choices.length} choice(s) have conditions — player could be locked out if none apply`,
+  )
+}
+
 function findReachableScenes(startId: string, outgoingLinks: Map<string, string[]>): Set<string> {
   const reachable = new Set<string>()
   const stack = [startId]
@@ -691,8 +845,8 @@ function main() {
     addError(DATA_DIR, 'data directory does not exist')
   } else {
     const validFlags = loadValidFlags()
-    const statKeys = validateStats()
-    const reg: Registries = { statKeys, itemIds: new Set(), validFlags }
+    const { statKeys, statBounds } = validateStats()
+    const reg: Registries = { statKeys, statBounds, itemIds: new Set(), validFlags }
     reg.itemIds = validateItems(reg)
     validateEndings(reg)
     validateScenes(reg)
