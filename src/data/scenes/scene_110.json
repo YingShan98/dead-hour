@@ -32,7 +32,7 @@
         { "zh": "你把罐头、水、胶带和工具一件件摆开，重新记账。" },
         { "zh": "数字不好看，但至少你知道自己还能撑多久。" }
       ],
-      "nextSceneId": "scene_day1_morning"
+      "nextSceneId": "scene_day3_morning"
     }
   ]
 }

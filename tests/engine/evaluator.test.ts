@@ -22,6 +22,7 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
     flags: {},
     visitedScenes: [],
     choiceHistory: [],
+    journalLog: [],
     security: 0,
     timeRemaining: 12,
     saveSlot: 0,

@@ -50,8 +50,10 @@ const en: Translation = {
   // ── Countdown widget ───────────────────────────────────────────────────────
   countdown: {
     label: 'Time Remaining',
+    labelElapsed: 'Time Elapsed',
     hours: '{hours}h',
     expired: '——',
+    day: 'Day {day}',
     urgency: {
       safe: '',
       warning: 'Running low',
@@ -103,6 +105,15 @@ const en: Translation = {
       awakening: 'Awakening',
       collapse: 'Collapsing',
     },
+    trust: {
+      unstable: 'Trust · Wavering',
+      critical: 'Trust · Collapse Imminent',
+    },
+    leadership: {
+      established: 'Leadership · Respected',
+      pillar: 'Leadership · Cornerstone',
+      indispensable: 'Leadership · Indispensable',
+    },
   },
 
   // ── Stats ──────────────────────────────────────────────────────────────────
@@ -125,6 +136,14 @@ const en: Translation = {
     workshop: 'Workshop',
     recipes: 'Recipes',
     materials: 'Materials',
+  },
+
+  // ── Journal panel ─────────────────────────────────────────────────────────
+  journal: {
+    label: 'Journal',
+    day: 'Day {day}',
+    empty: "You haven't written anything yet.",
+    toggle: 'Expand',
   },
 
   // ── Ending Page ────────────────────────────────────────────────────────────

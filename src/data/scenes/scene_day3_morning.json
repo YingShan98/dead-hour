@@ -1,5 +1,5 @@
 {
-  "id": "scene_day1_morning",
+  "id": "scene_day3_morning",
   "title": { "zh": "第三天·清晨" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 56 },
@@ -16,7 +16,7 @@
   "conditions": {},
   "choices": [
     {
-      "id": "scene_day1_morning_a",
+      "id": "scene_day3_morning_a",
       "text": { "zh": "把食物和水的精确储量写下来，算出还能支撑多久。数字不好看，但不看更糟。" },
       "conditions": {},
       "effects": {
@@ -29,10 +29,10 @@
         },
         { "zh": "这不是绝望的数字，这是工程数字。工程数字有解。" }
       ],
-      "nextSceneId": "scene_day1_day"
+      "nextSceneId": "scene_day3_day"
     },
     {
-      "id": "scene_day1_morning_b",
+      "id": "scene_day3_morning_b",
       "text": { "zh": "不算了。知道了也是干着急，能熬到哪天算哪天。" },
       "conditions": {},
       "effects": {
@@ -42,7 +42,7 @@
         { "zh": "你盯着天花板，听了一会儿窗外的安静。" },
         { "zh": "某种程度上，安静比喊叫更让人难受。喊叫说明有人，安静说明没有了。" }
       ],
-      "nextSceneId": "scene_day1_day"
+      "nextSceneId": "scene_day3_day"
     }
   ]
 }

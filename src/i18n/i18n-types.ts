@@ -128,6 +128,10 @@ type RootTranslation = {
      */
     label: string
     /**
+     * 幸​存​时​长
+     */
+    labelElapsed: string
+    /**
      * {​h​o​u​r​s​}​小​时
      * @param {number} hours
      */
@@ -136,6 +140,11 @@ type RootTranslation = {
      * —​—
      */
     expired: string
+    /**
+     * 第​{​d​a​y​}​天
+     * @param {number} day
+     */
+    day: RequiredParams<'day'>
     urgency: {
       safe: string
       /**
@@ -251,6 +260,30 @@ type RootTranslation = {
        */
       collapse: string
     }
+    trust: {
+      /**
+       * 信​任​·​不​稳​定
+       */
+      unstable: string
+      /**
+       * 信​任​·​崩​溃​临​界
+       */
+      critical: string
+    }
+    leadership: {
+      /**
+       * 领​导​力​·​初​具​威​信
+       */
+      established: string
+      /**
+       * 领​导​力​·​核​心​支​柱
+       */
+      pillar: string
+      /**
+       * 领​导​力​·​不​可​或​缺
+       */
+      indispensable: string
+    }
   }
   stats: {
     /**
@@ -312,6 +345,25 @@ type RootTranslation = {
      * 材​料
      */
     materials: string
+  }
+  journal: {
+    /**
+     * 日​记
+     */
+    label: string
+    /**
+     * 第​{​d​a​y​}​天
+     * @param {number} day
+     */
+    day: RequiredParams<'day'>
+    /**
+     * 你​还​没​有​写​下​任​何​东​西​。
+     */
+    empty: string
+    /**
+     * 展​开
+     */
+    toggle: string
   }
   ending: {
     type: {
@@ -545,6 +597,10 @@ export type TranslationFunctions = {
      */
     label: () => LocalizedString
     /**
+     * 幸存时长
+     */
+    labelElapsed: () => LocalizedString
+    /**
      * {hours}小时
      */
     hours: (arg: { hours: number }) => LocalizedString
@@ -552,6 +608,10 @@ export type TranslationFunctions = {
      * ——
      */
     expired: () => LocalizedString
+    /**
+     * 第{day}天
+     */
+    day: (arg: { day: number }) => LocalizedString
     urgency: {
       safe: () => LocalizedString
       /**
@@ -667,6 +727,30 @@ export type TranslationFunctions = {
        */
       collapse: () => LocalizedString
     }
+    trust: {
+      /**
+       * 信任·不稳定
+       */
+      unstable: () => LocalizedString
+      /**
+       * 信任·崩溃临界
+       */
+      critical: () => LocalizedString
+    }
+    leadership: {
+      /**
+       * 领导力·初具威信
+       */
+      established: () => LocalizedString
+      /**
+       * 领导力·核心支柱
+       */
+      pillar: () => LocalizedString
+      /**
+       * 领导力·不可或缺
+       */
+      indispensable: () => LocalizedString
+    }
   }
   stats: {
     /**
@@ -727,6 +811,24 @@ export type TranslationFunctions = {
      * 材料
      */
     materials: () => LocalizedString
+  }
+  journal: {
+    /**
+     * 日记
+     */
+    label: () => LocalizedString
+    /**
+     * 第{day}天
+     */
+    day: (arg: { day: number }) => LocalizedString
+    /**
+     * 你还没有写下任何东西。
+     */
+    empty: () => LocalizedString
+    /**
+     * 展开
+     */
+    toggle: () => LocalizedString
   }
   ending: {
     type: {

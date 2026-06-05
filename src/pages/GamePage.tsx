@@ -6,6 +6,7 @@ import SceneDisplay from '@/components/game/SceneDisplay'
 import ChoiceList from '@/components/game/ChoiceList'
 import StatPanel from '@/components/game/StatPanel'
 import InventoryPanel from '@/components/game/InventoryPanel'
+import JournalPanel from '@/components/game/JournalPanel'
 import TimeCountdown from '@/components/game/TimeCountdown'
 import SecurityMeter from '@/components/game/SecurityMeter'
 import TransformationHint from '@/components/game/TransformationHint'
@@ -32,6 +33,7 @@ function GameStatusPanels() {
       <div className="panel-card">
         <InventoryPanel inventory={gameState.inventory} />
       </div>
+      <JournalPanel entries={gameState.journalLog} />
     </>
   )
 }
@@ -99,7 +101,10 @@ export default function GamePage() {
           </div>
           <div className="px-4 pb-3 grid grid-cols-2 gap-3">
             <div className="panel-card py-3">
-              <TimeCountdown timeRemaining={gameState.timeRemaining} />
+              <TimeCountdown
+                timeRemaining={gameState.timeRemaining}
+                hoursFromStart={gameState.gameTime.hoursFromStart}
+              />
             </div>
             <div className="panel-card py-3">
               <SecurityMeter security={gameState.security} />
@@ -131,7 +136,10 @@ export default function GamePage() {
           </button>
 
           <div className="panel-card">
-            <TimeCountdown timeRemaining={gameState.timeRemaining} />
+            <TimeCountdown
+              timeRemaining={gameState.timeRemaining}
+              hoursFromStart={gameState.gameTime.hoursFromStart}
+            />
           </div>
           <div className="panel-card">
             <SecurityMeter security={gameState.security} />

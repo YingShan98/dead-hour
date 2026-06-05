@@ -21,6 +21,21 @@
       },
       "position": "prefix",
       "zh": "她已经在面包房里第七夜了。你没有货车钥匙，或者之前试过但街上走不通。无论如何，如果你今天出去，出去的方向会经过那里。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在门边有一种细微的反应——不像是准备战斗的肾上腺素，是另一种更安静的感知，好像皮下的某样东西在侦听外面。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 5 }] },
+      "position": "suffix",
+      "zh": "你在门口站了一秒，感受到了外面密度的变化。不是风，不是气味——是某种你没有名字的感知，它们在哪、多少、往哪走。不准确，但不是猜测。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 7 }] },
+      "position": "suffix",
+      "zh": "你知道外面有几个，大概在哪里。这种知道是皮下来的，不是眼睛或耳朵。你用了几秒钟把这件事推到脑子的一个角落，才能继续做接下来要做的事。"
     }
   ],
   "narrative": [

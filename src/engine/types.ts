@@ -174,6 +174,11 @@ export interface ChoiceRecord {
   securityDelta: number
 }
 
+export interface JournalEntry {
+  day: number // game day number (1-indexed)
+  text: LocaleString
+}
+
 export interface GameState {
   currentSceneId: string
   gameTime: GameTime
@@ -182,6 +187,8 @@ export interface GameState {
   flags: Partial<Record<GameFlag, boolean>>
   visitedScenes: string[]
   choiceHistory: ChoiceRecord[]
+  // ── Journal ─────────────────────────────────────────────────────────────────
+  journalLog: JournalEntry[] // written when wrote_journal = true
   // ── Hybrid system ───────────────────────────────────────────────────────────
   security: number // 0-100 fortification level (visible stat)
   timeRemaining: number // hours before crisis arrives (countdown from 12)

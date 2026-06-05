@@ -45,8 +45,10 @@ const zh: BaseTranslation = {
   // ── Countdown widget ───────────────────────────────────────────────────────
   countdown: {
     label: '剩余时间',
+    labelElapsed: '幸存时长',
     hours: '{hours:number}小时',
     expired: '——',
+    day: '第{day:number}天',
     urgency: {
       safe: '',
       warning: '时间不多',
@@ -99,6 +101,15 @@ const zh: BaseTranslation = {
       awakening: '觉醒临界',
       collapse: '濒临崩溃',
     },
+    trust: {
+      unstable: '信任·不稳定',
+      critical: '信任·崩溃临界',
+    },
+    leadership: {
+      established: '领导力·初具威信',
+      pillar: '领导力·核心支柱',
+      indispensable: '领导力·不可或缺',
+    },
   },
 
   // ── Stats ──────────────────────────────────────────────────────────────────
@@ -121,6 +132,14 @@ const zh: BaseTranslation = {
     workshop: '工作台',
     recipes: '配方',
     materials: '材料',
+  },
+
+  // ── Journal panel ─────────────────────────────────────────────────────────
+  journal: {
+    label: '日记',
+    day: '第{day:number}天',
+    empty: '你还没有写下任何东西。',
+    toggle: '展开',
   },
 
   // ── Ending Page ────────────────────────────────────────────────────────────

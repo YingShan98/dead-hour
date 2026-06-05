@@ -1,10 +1,15 @@
 import { useI18n } from '@/i18n/useI18n'
 import type { PlayerStats } from '@/engine/types'
-import { getInfectionSignal, getWillSignal } from '@/engine/timeManager'
+import {
+  getInfectionSignal,
+  getWillSignal,
+  getTrustSignal,
+  getLeadershipSignal,
+} from '@/engine/timeManager'
 
 interface StatRow {
   key: keyof PlayerStats
-  labelKey: 'health' | 'morale' | 'leadership' | 'stealth' | 'money'
+  labelKey: 'health' | 'morale' | 'stealth' | 'money'
   icon: string
   max: number
   barColour: (value: number) => string
@@ -26,13 +31,6 @@ const STAT_ROWS: StatRow[] = [
     barColour: (v) => (v <= 4 ? '#8b2020' : '#b08030'),
   },
   {
-    key: 'leadership',
-    labelKey: 'leadership',
-    icon: '▲',
-    max: 20,
-    barColour: () => '#4a7c5f',
-  },
-  {
     key: 'stealth',
     labelKey: 'stealth',
     icon: '◉',
@@ -48,7 +46,7 @@ const STAT_ROWS: StatRow[] = [
   },
 ]
 
-// Colour for hidden-stat signals
+// Colour maps for hidden-stat signals
 const INFECTION_SIGNAL_COLOUR: Record<'spreading' | 'critical', string> = {
   spreading: '#b08030',
   critical: '#b03030',
@@ -57,6 +55,17 @@ const INFECTION_SIGNAL_COLOUR: Record<'spreading' | 'critical', string> = {
 const WILL_SIGNAL_COLOUR: Record<'awakening' | 'collapse', string> = {
   awakening: '#4a6a8b',
   collapse: '#b03030',
+}
+
+const TRUST_SIGNAL_COLOUR: Record<'unstable' | 'critical', string> = {
+  unstable: '#b08030',
+  critical: '#b03030',
+}
+
+const LEADERSHIP_SIGNAL_COLOUR: Record<'established' | 'pillar' | 'indispensable', string> = {
+  established: '#4a7c5f',
+  pillar: '#4a6a8b',
+  indispensable: '#7a5f8b',
 }
 
 interface Props {
@@ -69,6 +78,8 @@ export default function StatPanel({ stats, flags }: Props) {
 
   const infectionSignal = getInfectionSignal(stats.infection)
   const willSignal = getWillSignal(stats.will)
+  const trustSignal = getTrustSignal(stats.trust)
+  const leadershipSignal = getLeadershipSignal(stats.leadership)
 
   return (
     <div className="flex flex-col gap-4">
@@ -128,6 +139,36 @@ export default function StatPanel({ stats, flags }: Props) {
           </span>
           <span className="font-ui text-xs" style={{ color: WILL_SIGNAL_COLOUR[willSignal] }}>
             {LL.statSignal.will[willSignal]()}
+          </span>
+        </div>
+      )}
+
+      {/* Trust signal — only shown when trust falls to warning thresholds */}
+      {trustSignal && (
+        <div className="flex items-center justify-between pt-1 border-t border-border">
+          <span className="font-ui text-xs" style={{ color: TRUST_SIGNAL_COLOUR[trustSignal] }}>
+            ◎
+          </span>
+          <span className="font-ui text-xs" style={{ color: TRUST_SIGNAL_COLOUR[trustSignal] }}>
+            {LL.statSignal.trust[trustSignal]()}
+          </span>
+        </div>
+      )}
+
+      {/* Leadership signal — only shown when leadership reaches milestone thresholds */}
+      {leadershipSignal && (
+        <div className="flex items-center justify-between pt-1 border-t border-border">
+          <span
+            className="font-ui text-xs"
+            style={{ color: LEADERSHIP_SIGNAL_COLOUR[leadershipSignal] }}
+          >
+            ▲
+          </span>
+          <span
+            className="font-ui text-xs"
+            style={{ color: LEADERSHIP_SIGNAL_COLOUR[leadershipSignal] }}
+          >
+            {LL.statSignal.leadership[leadershipSignal]()}
           </span>
         </div>
       )}

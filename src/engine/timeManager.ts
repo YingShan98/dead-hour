@@ -106,6 +106,23 @@ export function getWillSignal(will: number): WillSignalKey | null {
   return null
 }
 
+export type TrustSignalKey = 'unstable' | 'critical'
+
+export function getTrustSignal(trust: number): TrustSignalKey | null {
+  if (trust <= 2) return 'critical'
+  if (trust <= 4) return 'unstable'
+  return null
+}
+
+export type LeadershipSignalKey = 'established' | 'pillar' | 'indispensable'
+
+export function getLeadershipSignal(leadership: number): LeadershipSignalKey | null {
+  if (leadership >= 20) return 'indispensable'
+  if (leadership >= 15) return 'pillar'
+  if (leadership >= 10) return 'established'
+  return null
+}
+
 // ── Crisis state ──────────────────────────────────────────────────────────────
 // No strings — pure boolean flags for the store.
 

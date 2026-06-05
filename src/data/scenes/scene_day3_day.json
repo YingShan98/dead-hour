@@ -1,5 +1,5 @@
 {
-  "id": "scene_day1_day",
+  "id": "scene_day3_day",
   "title": { "zh": "第三天·白天" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 60 },
@@ -27,7 +27,7 @@
   "conditions": {},
   "choices": [
     {
-      "id": "scene_day1_day_fortify",
+      "id": "scene_day3_day_fortify",
       "text": { "zh": "【加固】检查所有接缝和窗户锁，用剩余材料堵死每一个薄弱点。" },
       "conditions": {},
       "effects": {
@@ -42,7 +42,7 @@
       "nextSceneId": "scene_day3_night"
     },
     {
-      "id": "scene_day1_day_rest",
+      "id": "scene_day3_day_rest",
       "text": { "zh": "【休息】身体比头脑更清楚什么是当务之急。强迫自己睡一觉。" },
       "conditions": {},
       "effects": {
@@ -56,7 +56,7 @@
       "nextSceneId": "scene_day3_night"
     },
     {
-      "id": "scene_day1_day_observe",
+      "id": "scene_day3_day_observe",
       "text": { "zh": "【观察】从窗帘缝里盯着楼下的移动，记它们走哪里、怎么走、有没有规律。" },
       "conditions": {},
       "effects": {
@@ -72,7 +72,7 @@
       "nextSceneId": "scene_day3_night"
     },
     {
-      "id": "scene_day1_day_wound",
+      "id": "scene_day3_day_wound",
       "text": { "zh": "【检查】把胶带撕开，认真检查右手中指的伤口。" },
       "conditions": {},
       "effects": {
@@ -89,7 +89,7 @@
       "nextSceneId": "scene_day3_night"
     },
     {
-      "id": "scene_day1_day_search",
+      "id": "scene_day3_day_search",
       "text": { "zh": "【搜查·楼内】去隔壁或上层的空置单元找食物和物资——门虚掩的，或者能开的。" },
       "conditions": {},
       "effects": {
@@ -112,7 +112,7 @@
       "nextSceneId": "scene_day3_night"
     },
     {
-      "id": "scene_day1_day_journal",
+      "id": "scene_day3_day_journal",
       "text": { "zh": "【记录】把这两天的事系统地写下来——时间线，观察到的规律，需要解决的问题。" },
       "conditions": {},
       "effects": {

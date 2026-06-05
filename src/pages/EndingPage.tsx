@@ -5,6 +5,7 @@ import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
 import type { EndingType } from '@/engine/types'
+import JournalPanel from '@/components/game/JournalPanel'
 
 const TYPE_COLOURS: Record<EndingType, string> = {
   bad: 'text-danger',
@@ -92,14 +93,17 @@ export default function EndingPage() {
         <hr className="border-border" />
 
         {gameState && (
-          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center font-ui text-xs text-text-dim">
-            <span className="panel-card py-2 px-3">
-              {interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}
-            </span>
-            <span className="panel-card py-2 px-3">
-              {interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}
-            </span>
-          </div>
+          <>
+            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center font-ui text-xs text-text-dim">
+              <span className="panel-card py-2 px-3">
+                {interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}
+              </span>
+              <span className="panel-card py-2 px-3">
+                {interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}
+              </span>
+            </div>
+            {gameState.journalLog.length > 0 && <JournalPanel entries={gameState.journalLog} />}
+          </>
         )}
 
         <div className="flex flex-col gap-3 mt-2">

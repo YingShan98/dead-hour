@@ -3,6 +3,23 @@
   "title": { "zh": "第三天·深夜" },
   "act": "act2",
   "gameTime": { "hoursFromStart": 72 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在黑暗里有一种钝钝的感知——不是伤口的疼，是皮下某个过程在无声运作。你不去想它，先把眼前的事做完。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 5 }] },
+      "position": "suffix",
+      "zh": "门外那样东西停在那里的时候，你感觉到了——不是听到，是别的什么感知到。你不知道那是侦测，还是识别。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 7 }] },
+      "position": "suffix",
+      "zh": "它靠近的时候，皮下有什么在回应。这种共鸣不是你想要的，但它就在那里。你花了一点时间，才把注意力重新拉回到门和工具上。"
+    }
+  ],
   "narrative": [
     { "zh": "第三天夜里，某样东西来到了门外。" },
     {

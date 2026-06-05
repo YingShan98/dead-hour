@@ -17,6 +17,7 @@ export const DEFAULT_GAME_STATE: GameState = {
   flags: {},
   visitedScenes: [],
   choiceHistory: [],
+  journalLog: [],
 
   // ── Hybrid system ────────────────────────────────────────────────────────────
   security: 0, // fortification level — player builds this up

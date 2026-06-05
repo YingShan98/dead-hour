@@ -1,4 +1,5 @@
 import type { GameState } from './types'
+import { DEFAULT_GAME_STATE } from './defaults'
 
 const SAVE_KEY_PREFIX = 'dead-hour:save:'
 const SLOT_COUNT = 3
@@ -24,7 +25,9 @@ export function loadGame(slot: number): GameState | null {
   const raw = localStorage.getItem(key)
   if (!raw) return null
   try {
-    return JSON.parse(raw) as GameState
+    const parsed = JSON.parse(raw) as GameState
+    // Merge with defaults so saves written before new fields were added still load cleanly.
+    return { ...DEFAULT_GAME_STATE, ...parsed }
   } catch {
     console.error(`[saveManager] Failed to parse save slot ${slot}`)
     return null

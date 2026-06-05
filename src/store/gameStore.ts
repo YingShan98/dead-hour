@@ -8,6 +8,7 @@ import { checkCrisisState } from '@/engine/timeManager'
 import { saveGame, loadGame } from '@/engine/saveManager'
 import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import { getItemDef } from '@/data/itemRegistry'
+import { generateJournalEntry } from '@/engine/journalGenerator'
 
 // ─── Typed error system ───────────────────────────────────────────────────────
 //
@@ -157,6 +158,12 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       // 6. Auto-set superpower_awakening when conditions met
       if (postCrisis.awakeningReady && !newState.flags.superpower_awakening) {
         newState = applyEffects({ flags: { superpower_awakening: true } }, newState)
+      }
+
+      // 7. Append journal entry the first time wrote_journal is set
+      if (!gameState.flags.wrote_journal && newState.flags.wrote_journal) {
+        const entry = generateJournalEntry(newState)
+        newState = { ...newState, journalLog: [...newState.journalLog, entry] }
       }
 
       // 7. Load next scene
