@@ -1,12 +1,12 @@
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import { getTimeUrgency, type TimeUrgency } from '@/engine/timeManager'
-import { TIME_START } from '@/engine/defaults'
+import { CRISIS_ARRIVAL_HOUR } from '@/engine/defaults'
 
-const ELAPSED_MAX_HOURS = 14 * 24 // 14-day milestone
+// Total prep span from game start (h=-48) to outbreak (h=0) = 48 hours
+const TOTAL_SPAN = CRISIS_ARRIVAL_HOUR - -48
 
 interface Props {
-  timeRemaining: number
   hoursFromStart: number
 }
 
@@ -24,22 +24,23 @@ const URGENCY_TEXT_COLOUR: Record<TimeUrgency, string> = {
   expired: 'text-danger',
 }
 
-export default function TimeCountdown({ timeRemaining, hoursFromStart }: Props) {
+export default function TimeCountdown({ hoursFromStart }: Props) {
   const { LL } = useI18n()
 
-  const urgency = getTimeUrgency(timeRemaining)
+  const urgency = getTimeUrgency(hoursFromStart)
   const isElapsed = urgency === 'expired'
 
   const label = isElapsed ? LL.countdown.labelElapsed() : LL.countdown.label()
 
+  const remaining = CRISIS_ARRIVAL_HOUR - hoursFromStart
   const day = Math.ceil(Math.max(0, hoursFromStart) / 24)
   const displayTime: string = isElapsed
     ? LL.countdown.day({ day })
-    : interpolate(LL.countdown.hours, { hours: timeRemaining })
+    : interpolate(LL.countdown.hours, { hours: remaining })
 
   const pct = isElapsed
-    ? Math.min(100, (Math.max(0, hoursFromStart) / ELAPSED_MAX_HOURS) * 100)
-    : Math.max(0, (timeRemaining / TIME_START) * 100)
+    ? Math.min(100, (Math.max(0, hoursFromStart) / (14 * 24)) * 100)
+    : Math.max(0, (remaining / TOTAL_SPAN) * 100)
 
   const barCls = isElapsed ? 'bg-safe' : URGENCY_BAR_COLOUR[urgency]
   const textCls = isElapsed ? 'text-safe' : URGENCY_TEXT_COLOUR[urgency]

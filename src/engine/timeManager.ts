@@ -10,6 +10,7 @@
 
 import type { GameState } from './types'
 import {
+  CRISIS_ARRIVAL_HOUR,
   TIME_WARNING_THRESHOLD,
   TIME_CRITICAL_THRESHOLD,
   INFECTION_THRESHOLD_TURNING,
@@ -23,10 +24,11 @@ import {
 
 export type TimeUrgency = 'safe' | 'warning' | 'critical' | 'expired'
 
-export function getTimeUrgency(timeRemaining: number): TimeUrgency {
-  if (timeRemaining <= 0) return 'expired'
-  if (timeRemaining <= TIME_CRITICAL_THRESHOLD) return 'critical'
-  if (timeRemaining <= TIME_WARNING_THRESHOLD) return 'warning'
+export function getTimeUrgency(hoursFromStart: number): TimeUrgency {
+  const remaining = CRISIS_ARRIVAL_HOUR - hoursFromStart
+  if (remaining <= 0) return 'expired'
+  if (remaining <= TIME_CRITICAL_THRESHOLD) return 'critical'
+  if (remaining <= TIME_WARNING_THRESHOLD) return 'warning'
   return 'safe'
 }
 
@@ -138,7 +140,7 @@ export function checkCrisisState(state: GameState): CrisisState {
   const path = detectTransformationPath(state)
 
   return {
-    timeExpired: state.timeRemaining <= 0,
+    timeExpired: state.gameTime.hoursFromStart >= CRISIS_ARRIVAL_HOUR,
     zombieTriggered: infection >= INFECTION_THRESHOLD_TURNING,
     awakeningReady: path === 'awakening',
     fortressIrony:

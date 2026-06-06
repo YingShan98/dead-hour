@@ -72,7 +72,8 @@
           "heard_rumor_at_breakfast": true
         },
         "stats": { "will": 1, "morale": -1, "money": -15 },
-        "items": []
+        "items": [],
+        "timeCost": 1
       },
       "consequence": [
         {
@@ -93,10 +94,12 @@
         "flags": {
           "noticed_outbreak_signs": true,
           "heard_rumor_at_breakfast": true,
-          "watched_deleted_video": true
+          "watched_deleted_video": true,
+          "late_from_breakfast": true
         },
         "stats": { "will": 2, "leadership": 1, "money": -15 },
-        "items": []
+        "items": [],
+        "timeCost": 3
       },
       "consequence": [
         {

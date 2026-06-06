@@ -5,6 +5,12 @@
   "gameTime": { "hoursFromStart": -8 },
   "conditionalNarrative": [
     {
+      "conditions": {
+        "requiredItems": [{ "itemId": "iron_plate", "minQuantity": 3 }]
+      },
+      "zh": "工具箱旁边，三张加厚铁板整齐地叠着——你之前搬进来的。这时候刚好。"
+    },
+    {
       "conditions": { "requiredFlags": ["pei_status_trapped_outside"] },
       "position": "suffix",
       "zh": "裴嘉应还在面包房里。你记住那个方向，然后看向眼前这扇还不够结实的门。"

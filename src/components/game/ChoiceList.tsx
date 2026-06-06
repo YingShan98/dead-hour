@@ -40,22 +40,32 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
     <nav className="flex flex-col gap-2 mt-10" aria-label={LL.game.yourMove()}>
       <p className="ui-label text-muted mb-1">{LL.game.yourMove()}</p>
 
-      {available.map((choice, i) => (
-        <button
-          key={choice.id}
-          type="button"
-          onClick={() => onSelect(choice.id)}
-          disabled={disabled}
-          className="choice-btn animate-slide-up flex items-center gap-3"
-          style={{ animationDelay: `${300 + i * 80}ms`, opacity: 0, animationFillMode: 'forwards' }}
-          aria-keyshortcuts={`${i + 1}`}
-        >
-          <span className="choice-index" aria-hidden>
-            {i + 1}
-          </span>
-          <span className="flex-1">{resolveLocaleString(choice.text, locale)}</span>
-        </button>
-      ))}
+      {available.map((choice, i) => {
+        const timeCost = choice.effects.timeCost
+        return (
+          <button
+            key={choice.id}
+            type="button"
+            onClick={() => onSelect(choice.id)}
+            disabled={disabled}
+            className="choice-btn animate-slide-up flex items-center gap-3"
+            style={{
+              animationDelay: `${300 + i * 80}ms`,
+              opacity: 0,
+              animationFillMode: 'forwards',
+            }}
+            aria-keyshortcuts={`${i + 1}`}
+          >
+            <span className="choice-index" aria-hidden>
+              {i + 1}
+            </span>
+            <span className="flex-1">{resolveLocaleString(choice.text, locale)}</span>
+            {timeCost != null && timeCost > 0 && (
+              <span className="ui-label text-xs text-muted shrink-0">⏱ {timeCost}h</span>
+            )}
+          </button>
+        )
+      })}
 
       {locked.map((choice) => {
         const hintText = choice.hint

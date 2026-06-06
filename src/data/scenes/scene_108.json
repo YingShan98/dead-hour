@@ -2,7 +2,18 @@
   "id": "scene_108",
   "title": { "zh": "零时" },
   "act": "act1",
-  "gameTime": { "hoursFromStart": 0 },
+  "gameTime": { "hoursFromStart": -1 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["fortified_door"] },
+      "zh": "那扇焊死的门让整个夜晚安静了很多。你知道那东西能挡住什么。"
+    },
+    {
+      "conditions": { "blockedFlags": ["fortified_door"] },
+      "position": "suffix",
+      "zh": "你看了眼那扇门。你知道它不够结实。"
+    }
+  ],
   "narrative": [
     { "zh": "凌晨。你不知道几点，在半睡半醒之间。" },
     {

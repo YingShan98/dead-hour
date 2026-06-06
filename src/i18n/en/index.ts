@@ -49,7 +49,7 @@ const en: Translation = {
 
   // ── Countdown widget ───────────────────────────────────────────────────────
   countdown: {
-    label: 'Time Remaining',
+    label: 'Until Outbreak',
     labelElapsed: 'Time Elapsed',
     hours: '{hours}h',
     expired: '——',

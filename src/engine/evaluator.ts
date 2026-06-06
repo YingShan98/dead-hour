@@ -46,15 +46,6 @@ export function evaluate(conditions: ConditionSet | undefined, state: GameState)
       return false
   }
 
-  // ── Time remaining ─────────────────────────────────────────────────────────
-  if (conditions.timeRemaining) {
-    if (
-      conditions.timeRemaining.min !== undefined &&
-      state.timeRemaining < conditions.timeRemaining.min
-    )
-      return false
-  }
-
   return true
 }
 

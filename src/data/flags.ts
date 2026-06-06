@@ -98,6 +98,7 @@ export type GameFlag =
   | 'noticed_outbreak_signs' // player connected the news dots early
   | 'noticed_wound_color' // player noticed the wound's abnormal discolouration
   | 'heard_rumor_at_breakfast'
+  | 'late_from_breakfast' // spent 3h+ investigating at the breakfast shop — iron plates sold out by arrival
   | 'fortified_door' // iron plates fixed to door interior
   | 'gave_in_to_raw_hunger' // zombie path accelerator
   | 'resisted_primal_urge' // player suppressed an instinct — will +
@@ -619,6 +620,13 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   {
     key: 'heard_rumor_at_breakfast',
     description: 'Player overheard the breakfast-shop rumour about the downtown incident.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'late_from_breakfast',
+    description:
+      'Player spent 3+ hours investigating at the breakfast shop (watched the deleted video). Arrived at the hardware store after the clearance sale ended — iron plates sold out.',
     category: 'narrative',
     achievement: null,
   },

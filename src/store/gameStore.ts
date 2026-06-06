@@ -178,10 +178,17 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       }
 
       // 9. Update scene tracking and game time
+      // Scene JSON provides a narrative floor — never go backwards in time,
+      // but preserve any timeCost accumulation that pushed us past the anchor.
       newState = {
         ...newState,
         currentSceneId: nextScene.id,
-        gameTime: nextScene.gameTime,
+        gameTime: {
+          hoursFromStart: Math.max(
+            newState.gameTime.hoursFromStart,
+            nextScene.gameTime.hoursFromStart,
+          ),
+        },
         visitedScenes: [...newState.visitedScenes, nextScene.id],
       }
 

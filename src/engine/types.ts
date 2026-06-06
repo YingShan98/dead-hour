@@ -68,17 +68,12 @@ export interface SecurityCondition {
   max?: number
 }
 
-export interface TimeCondition {
-  min?: number // timeRemaining must be >= this
-}
-
 export interface ConditionSet {
   requiredFlags?: GameFlag[]
   blockedFlags?: GameFlag[]
   requiredStats?: StatCondition[]
   requiredItems?: ItemCondition[]
   security?: SecurityCondition // gate on fortification level
-  timeRemaining?: TimeCondition // gate on remaining countdown
 }
 
 export interface ItemEffect {
@@ -190,9 +185,8 @@ export interface GameState {
   choiceHistory: ChoiceRecord[]
   // ── Journal ─────────────────────────────────────────────────────────────────
   journalLog: JournalEntry[] // written when wrote_journal = true
-  // ── Hybrid system ───────────────────────────────────────────────────────────
+  // ── Fortification ───────────────────────────────────────────────────────────
   security: number // 0-100 fortification level (visible stat)
-  timeRemaining: number // hours before crisis arrives (countdown from 12)
   // ── Hunger tracking ──────────────────────────────────────────────────────────
   lastProcessedDay: number // last calendar day (floor(hoursFromStart/24)) hunger was ticked
   timeCostToday: number // hours of timeCost spent since lastProcessedDay — energy modifier

@@ -23,7 +23,6 @@ function mockState(overrides: Partial<GameState> = {}): GameState {
     choiceHistory: [],
     journalLog: [],
     security: 0,
-    timeRemaining: 12,
     lastProcessedDay: -2,
     timeCostToday: 0,
     saveSlot: 0,
@@ -127,5 +126,17 @@ describe('applyEffects()', () => {
     const state = mockState()
     const result = applyEffects({ stats: { money: 999 } }, state)
     expect(result.stats.money).toBe(200)
+  })
+
+  it('timeCost advances hoursFromStart', () => {
+    const state = mockState({ gameTime: { hoursFromStart: -36 } })
+    const result = applyEffects({ timeCost: 2 }, state)
+    expect(result.gameTime.hoursFromStart).toBe(-34)
+  })
+
+  it('timeCost zero does not change hoursFromStart', () => {
+    const state = mockState({ gameTime: { hoursFromStart: -36 } })
+    const result = applyEffects({ timeCost: 0 }, state)
+    expect(result.gameTime.hoursFromStart).toBe(-36)
   })
 })

@@ -44,7 +44,7 @@ const zh: BaseTranslation = {
 
   // ── Countdown widget ───────────────────────────────────────────────────────
   countdown: {
-    label: '剩余时间',
+    label: '距爆发',
     labelElapsed: '幸存时长',
     hours: '{hours:number}小时',
     expired: '——',

@@ -24,9 +24,8 @@ export const DEFAULT_GAME_STATE: GameState = {
   choiceHistory: [],
   journalLog: [],
 
-  // ── Hybrid system ────────────────────────────────────────────────────────────
+  // ── Fortification ────────────────────────────────────────────────────────────
   security: 0, // fortification level — player builds this up
-  timeRemaining: 12, // 12 hours before the infected reach the building
 
   // ── Hunger tracking ──────────────────────────────────────────────────────────
   lastProcessedDay: -2, // scene_101 starts at hoursFromStart -48 = day -2
@@ -39,7 +38,8 @@ export const DEFAULT_GAME_STATE: GameState = {
 
 // ── Constants used across engine and UI ──────────────────────────────────────
 
-export const TIME_START = 12 // total hours at game start
+// The outbreak (hoursFromStart = 0) is when the infected arrive — matches "爆发前" scene label
+export const CRISIS_ARRIVAL_HOUR = 0
 export const SECURITY_MAX = 100
 export const INFECTION_MAX = 10
 export const WILL_MAX = 10

@@ -7,6 +7,11 @@
     {
       "conditions": { "requiredFlags": ["watched_deleted_video"] },
       "zh": "骑车回来的路上，那段视频里的画面一直没散——趴在地上的人，头歪向一侧，手指一下一下往前扒着地面，像是在找什么。不像是受伤的人该有的动作。你摇了摇头，想把这念头甩开。"
+    },
+    {
+      "conditions": { "requiredFlags": ["late_from_breakfast"] },
+      "position": "suffix",
+      "zh": "你到的时候已经快下午了。折叠桌上的铁板只剩两三张，老板正往里搬：「清仓价就到中午，你来晚了。」"
     }
   ],
   "narrative": [

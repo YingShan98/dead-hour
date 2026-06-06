@@ -31,7 +31,8 @@
           "resisted_primal_urge": true
         },
         "stats": { "infection": -1, "will": 2 },
-        "items": []
+        "items": [],
+        "timeCost": 1
       },
       "consequence": [
         { "zh": "你撕开胶带，重新冲洗，缠得更紧。" },
@@ -46,7 +47,8 @@
       "effects": {
         "flags": { "wound_ignored": true },
         "stats": { "infection": 1, "will": 1, "stealth": 1 },
-        "items": []
+        "items": [],
+        "timeCost": 1
       },
       "consequence": [
         { "zh": "你没有低头。工具握在手里，耳朵贴着门板，等第二个声音。" },
@@ -66,7 +68,8 @@
           "noticed_wound_color": true
         },
         "stats": { "infection": -1, "will": 3, "morale": -2 },
-        "items": []
+        "items": [],
+        "timeCost": 2
       },
       "consequence": [
         { "zh": "你盯着伤口看了很久，重新缠上胶带。" },

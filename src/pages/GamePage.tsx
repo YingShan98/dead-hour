@@ -101,10 +101,7 @@ export default function GamePage() {
           </div>
           <div className="px-4 pb-3 grid grid-cols-2 gap-3">
             <div className="panel-card py-3">
-              <TimeCountdown
-                timeRemaining={gameState.timeRemaining}
-                hoursFromStart={gameState.gameTime.hoursFromStart}
-              />
+              <TimeCountdown hoursFromStart={gameState.gameTime.hoursFromStart} />
             </div>
             <div className="panel-card py-3">
               <SecurityMeter security={gameState.security} />
@@ -136,10 +133,7 @@ export default function GamePage() {
           </button>
 
           <div className="panel-card">
-            <TimeCountdown
-              timeRemaining={gameState.timeRemaining}
-              hoursFromStart={gameState.gameTime.hoursFromStart}
-            />
+            <TimeCountdown hoursFromStart={gameState.gameTime.hoursFromStart} />
           </div>
           <div className="panel-card">
             <SecurityMeter security={gameState.security} />

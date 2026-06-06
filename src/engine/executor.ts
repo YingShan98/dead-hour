@@ -60,11 +60,11 @@ export function applyEffects(effects: EffectSet | undefined, state: GameState): 
     }
   }
 
-  // ── Time cost ──────────────────────────────────────────────────────────────
+  // ── Time cost — advances the unified game clock ────────────────────────────
   if (effects.timeCost !== undefined && effects.timeCost > 0) {
     next = {
       ...next,
-      timeRemaining: Math.max(0, next.timeRemaining - effects.timeCost),
+      gameTime: { hoursFromStart: next.gameTime.hoursFromStart + effects.timeCost },
     }
   }
 

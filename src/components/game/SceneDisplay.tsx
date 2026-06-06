@@ -35,7 +35,7 @@ export default function SceneDisplay({ scene, state }: Props) {
     <article className="animate-fade-in">
       <p className="ui-label text-muted mb-3 inline-flex items-center gap-2">
         <span className="w-1 h-1 rounded-full bg-accent/60" aria-hidden />
-        {formatGameTime(scene.gameTime.hoursFromStart)}
+        {formatGameTime(state.gameTime.hoursFromStart)}
       </p>
 
       <h2 className="scene-title mb-6 pb-4 border-b border-border-subtle">{title}</h2>
