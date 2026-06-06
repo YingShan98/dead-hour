@@ -19,6 +19,30 @@ function hungerPenalty(hunger: number): Partial<Record<StatKey, number>> {
 }
 
 /**
+ * Applies one day of hunger logic. Exported for the daily tick orchestrator.
+ * isLastDay controls whether the energy modifier from timeCostToday applies.
+ */
+export function applyHungerDay(state: GameState, isLastDay: boolean): GameState {
+  const energyMod = isLastDay ? Math.floor(state.timeCostToday * 0.25) : 0
+  const hungerGain = 1 + energyMod
+
+  let hunger = Math.min(10, state.stats.hunger + hungerGain)
+
+  const { state: afterFood, consumed } = autoConsumeFood(state)
+  let next = consumed ? afterFood : state
+  if (consumed) hunger = Math.max(0, hunger - 2)
+
+  next = { ...next, stats: { ...next.stats, hunger } }
+
+  const penalty = hungerPenalty(hunger)
+  if (Object.keys(penalty).length > 0) {
+    next = applyEffects({ stats: penalty }, next)
+  }
+
+  return next
+}
+
+/**
  * Applies one or more daily hunger ticks when the game day advances.
  * Called in the store after gameTime is updated to the next scene's time.
  */
@@ -30,28 +54,7 @@ export function applyDailyHungerTick(state: GameState): GameState {
   let next = { ...state }
 
   for (let d = 0; d < daysElapsed; d++) {
-    // Energy modifier only on the last day (uses timeCostToday from current session)
-    const isLastDay = d === daysElapsed - 1
-    const energyMod = isLastDay ? Math.floor(next.timeCostToday * 0.25) : 0
-    const hungerGain = 1 + energyMod
-
-    let hunger = Math.min(10, next.stats.hunger + hungerGain)
-
-    // Auto-consume 1 food item if available — eating reduces hunger by 2
-    const { state: afterFood, consumed } = autoConsumeFood(next)
-    if (consumed) {
-      next = afterFood
-      hunger = Math.max(0, hunger - 2)
-    }
-
-    // Apply hunger level to stats
-    next = { ...next, stats: { ...next.stats, hunger } }
-
-    // Apply daily penalties from sustained hunger
-    const penalty = hungerPenalty(hunger)
-    if (Object.keys(penalty).length > 0) {
-      next = applyEffects({ stats: penalty }, next)
-    }
+    next = applyHungerDay(next, d === daysElapsed - 1)
   }
 
   return {

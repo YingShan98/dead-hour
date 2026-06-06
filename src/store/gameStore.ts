@@ -5,7 +5,7 @@ import { getAvailableChoices } from '@/engine/evaluator'
 import { loadScene, loadEndings } from '@/engine/loader'
 import { checkForEnding, getTimeExpiredSceneId } from '@/engine/endingEvaluator'
 import { checkCrisisState } from '@/engine/timeManager'
-import { applyDailyHungerTick } from '@/engine/hungerManager'
+import { applyDailyTicks } from '@/engine/dailyTick'
 import { saveGame, loadGame } from '@/engine/saveManager'
 import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import { getItemDef } from '@/data/itemRegistry'
@@ -192,8 +192,8 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         visitedScenes: [...newState.visitedScenes, nextScene.id],
       }
 
-      // 9a. Apply daily hunger tick if calendar day has advanced
-      newState = applyDailyHungerTick(newState)
+      // 9a. Apply daily ticks (hunger, cold, infection) if calendar day has advanced
+      newState = applyDailyTicks(newState)
 
       // 10. Check for triggered ending
       const triggered = checkForEnding(availableEndings, newState)
