@@ -2,7 +2,7 @@
   "id": "scene_day4_night",
   "title": { "zh": "第四天·深夜" },
   "act": "act2",
-  "gameTime": { "hoursFromStart": 112 },
+  "gameTime": { "hoursFromStart": 94 },
   "conditionalNarrative": [
     {
       "conditions": { "requiredFlags": ["pei_alive"] },

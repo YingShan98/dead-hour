@@ -121,6 +121,20 @@
         { "zh": "有时候「还不是时候」是一个真实的判断，不是借口。门还在，你还在，这就够了——今天。" }
       ],
       "nextSceneId": "scene_day14_exit"
+    },
+    {
+      "id": "scene_day7_just_go",
+      "text": { "zh": "【直接出去】没有更好的方法了。推开门，走。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "left_apartment": true },
+        "stats": { "health": -3, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "你推开门，走进楼道，走下楼梯，推开大门。" },
+        { "zh": "外面的光刺眼，空气里有你之前不知道的气味。城市在你面前。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
     }
   ]
 }

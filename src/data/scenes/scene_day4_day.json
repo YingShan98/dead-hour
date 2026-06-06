@@ -2,7 +2,7 @@
   "id": "scene_day4_day",
   "title": { "zh": "第四天·白天" },
   "act": "act2",
-  "gameTime": { "hoursFromStart": 100 },
+  "gameTime": { "hoursFromStart": 88 },
   "conditionalNarrative": [
     {
       "conditions": {

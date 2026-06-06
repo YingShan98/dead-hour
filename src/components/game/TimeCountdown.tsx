@@ -32,7 +32,7 @@ export default function TimeCountdown({ timeRemaining, hoursFromStart }: Props) 
 
   const label = isElapsed ? LL.countdown.labelElapsed() : LL.countdown.label()
 
-  const day = Math.floor(Math.max(0, hoursFromStart) / 24) + 1
+  const day = Math.ceil(Math.max(0, hoursFromStart) / 24)
   const displayTime: string = isElapsed
     ? LL.countdown.day({ day })
     : interpolate(LL.countdown.hours, { hours: timeRemaining })

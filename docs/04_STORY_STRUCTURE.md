@@ -82,21 +82,18 @@ Both branches converge at Act 3 but with very different stats, inventory, and fl
 
 Six months. This is where the game breathes and the player's identity solidifies.
 
-**Purpose:** Faction dynamics, NPC relationships, moral complexity. Who do you become when survival requires compromise?
+**Purpose:** Base establishment, NPC recruitment, moral complexity. Who do you become when survival requires compromise?
 
-**Key factions introduced:**
+**Base selection (around Day 95):** The player chooses a long-term base. Each locks in a different NPC and resource dynamic:
 
-- **The Militia** — armed, organized, ruthless. Can protect you or turn on you.
-- **The Clinic** — a doctor running a small medical refuge. Trust-based.
-- **The Collective** — a group of survivors building something together. Leadership-heavy.
-- **The Loner** — not a faction, but a recurring NPC who reflects the player's path
+- **机械厂 (Factory)** — industrial scavenging range via truck; 老许 recruited Days 95–110
+- **防空洞 (Bunker)** — military discipline and barter network; 连珏 is already inside at Day 92
+- **农场 (Farm)** — most sustainable food output; 阿福 recruited Day 98
 
-**Key flags:** `joined_militia`, `joined_clinic`, `joined_collective`, `stayed_alone`
-
-You can only truly belong to one. Attempting to play all sides lowers the `trust` stat with all of them.
+**Key flags:** `base_factory`, `base_bunker`, `base_farm`, `npc_lao_xu_recruited`, `npc_lian_yu_recruited`, `npc_a_fu_recruited`, `has_group`
 
 **The second major branch (around Day 90):**
-Centered on a moral choice — do you sacrifice someone vulnerable to protect your group, or do you risk everything to save them? This choice is heavily weighted in ending evaluation.
+Centered on base selection and companion arc choices — whether 裴嘉应's research notebook continues, and whether the infection secret is shared or concealed.
 
 ---
 
@@ -151,13 +148,13 @@ Some choices should feel heavier than others. Use these signals:
 
 Key recurring characters across all acts:
 
-| NPC                | Role                           | First Appears     | Fate Affected By                |
-| ------------------ | ------------------------------ | ----------------- | ------------------------------- |
-| **Dr. Lena Marsh** | Clinic leader, moral anchor    | Act 2, Day 5      | Trust stat, `joined_clinic`     |
-| **Rook**           | Militia captain, pragmatist    | Act 2, Day 3      | Stealth, `betrayed_militia`     |
-| **Yusuf**          | Collective organizer, idealist | Act 2, Day 10     | Leadership, `joined_collective` |
-| **The Kid**        | Unnamed child, ~10 yrs old     | Act 1, last scene | Morale, `saved_the_kid`         |
-| **Ghost**          | The Loner, mirrors player      | Act 3, Day 60     | Mirrors player's dominant stat  |
+| NPC             | Role                               | First Appears        | Fate Affected By                                   |
+| --------------- | ---------------------------------- | -------------------- | -------------------------------------------------- |
+| **裴嘉应**      | Companion, intern nurse            | Act 2, Day 1 (call)  | `pei_status_*`, `pei_alive`, infection disclosure  |
+| **老许**        | Factory engineer, tech support     | Act 3, Day 95–110    | `npc_lao_xu_recruited`, security threshold Day 225 |
+| **连珏**        | Civil defense officer, discipline  | Act 3, Day 92        | `npc_lian_yu_recruited`, `has_group`, trust < 8    |
+| **阿福**        | Young farmer, morale anchor        | Act 3, Day 98        | `npc_a_fu_recruited`, medical supplies Phase 3     |
+| **郑博士**      | Virologist, science ending key     | Act 3, Day 195–210   | `scientist_saved`, leadership ≥ 10 or awakening    |
 
 ---
 

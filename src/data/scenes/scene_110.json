@@ -2,7 +2,7 @@
   "id": "scene_110",
   "title": { "zh": "第二天" },
   "act": "act2",
-  "gameTime": { "hoursFromStart": 24 },
+  "gameTime": { "hoursFromStart": 25 },
   "narrative": [
     { "zh": "第一天过去了。" },
     {

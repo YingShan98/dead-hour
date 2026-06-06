@@ -59,6 +59,22 @@
       "nextSceneId": "scene_day10_supermarket"
     },
     {
+      "id": "scene_day8_outside_move_on",
+      "text": { "zh": "够了。是时候找一个能撑更久的地方了。" },
+      "conditions": {
+        "requiredFlags": ["visited_supermarket", "left_apartment"]
+      },
+      "effects": {
+        "flags": { "left_apartment": true },
+        "stats": {}
+      },
+      "consequence": [
+        { "zh": "你在街上站了一会儿，看了一遍这几天走过的地方。" },
+        { "zh": "这里能给你的已经给完了。往前走。" }
+      ],
+      "nextSceneId": "scene_day15_morning"
+    },
+    {
       "id": "scene_day8_outside_supermarket_retry",
       "text": { "zh": "再去超市看看——也许还有漏掉的货架。" },
       "conditions": {

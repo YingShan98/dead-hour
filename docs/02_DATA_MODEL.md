@@ -10,19 +10,19 @@ All story content is stored as JSON. This document defines the exact shape of ev
 
 A **scene** is a single narrative moment — a location, a conversation, a crisis. It contains the text the player reads and the choices available to them.
 
-### JSON File: `scene_001.json`
+### JSON File: `scene_101.json`
 
 ```json
 {
-  "id": "scene_001",
-  "title": "The Morning Commute",
+  "id": "scene_101",
+  "title": { "zh": "早班地铁" },
   "act": "act1",
   "gameTime": { "hoursFromStart": -48 },
 
   "narrative": [
-    "The subway is running late again. You check your phone — a blurry video trending on social media shows a man biting a police officer outside City Hall.",
-    "People around you scroll past it with mild disgust. Nobody seems alarmed.",
-    "Your stop is coming up. You have a meeting in 20 minutes."
+    { "zh": "地铁又晚点了。你看了一眼手机——社交媒体上有一段模糊的视频在传，市政厅附近，一个人咬了一个警察。" },
+    { "zh": "周围的人划过去，表情介于恶心和无聊之间。没有人显得警惕。" },
+    { "zh": "你的站快到了，会议还有二十分钟。" }
   ],
 
   "conditions": {
@@ -34,45 +34,39 @@ A **scene** is a single narrative moment — a location, a conversation, a crisi
 
   "choices": [
     {
-      "id": "choice_001a",
-      "text": "Save the video and keep scrolling. It's probably nothing.",
+      "id": "choice_101a",
+      "text": { "zh": "截图保存，继续刷。大概没什么事。" },
       "conditions": {},
       "effects": {
-        "flags": { "saw_patient_zero_video": true },
+        "flags": { "noticed_outbreak_signs": true },
         "stats": { "morale": 0 },
         "items": []
       },
-      "nextSceneId": "scene_002_office"
+      "nextSceneId": "scene_102"
     },
     {
-      "id": "choice_001b",
-      "text": "Show the video to the person beside you and say something.",
+      "id": "choice_101b",
+      "text": { "zh": "把视频给旁边的人看，说了一句。" },
       "conditions": {},
       "effects": {
-        "flags": {
-          "saw_patient_zero_video": true,
-          "warned_a_stranger": true
-        },
+        "flags": { "noticed_outbreak_signs": true },
         "stats": { "leadership": 1 },
         "items": []
       },
-      "nextSceneId": "scene_002_office"
+      "nextSceneId": "scene_102"
     },
     {
-      "id": "choice_001c",
-      "text": "Get off at the next stop and head toward City Hall to see for yourself.",
+      "id": "choice_101c",
+      "text": { "zh": "下一站下车，去市政厅方向看看。" },
       "conditions": {
         "requiredStats": [{ "stat": "morale", "min": 5 }]
       },
       "effects": {
-        "flags": {
-          "saw_patient_zero_video": true,
-          "went_to_city_hall_early": true
-        },
+        "flags": { "researched_outbreak_early": true },
         "stats": { "leadership": 2, "health": -1 },
         "items": []
       },
-      "nextSceneId": "scene_003_city_hall"
+      "nextSceneId": "scene_103"
     }
   ],
 
@@ -89,14 +83,21 @@ A **scene** is a single narrative moment — a location, a conversation, a crisi
 ```typescript
 // src/engine/types.ts
 
+// All user-facing text uses LocaleString. The base locale 'zh' is always required;
+// 'en' is optional and falls back to 'zh' when absent.
+export type LocaleString = { zh: string; en?: string }
+
 export interface Scene {
   id: string
-  title: string
+  title: LocaleString
   act: Act
   gameTime: { hoursFromStart: number }
 
   // Array of paragraphs — rendered sequentially
-  narrative: string[]
+  narrative: LocaleString[]
+
+  // Conditional paragraphs prepended/appended when their conditions pass
+  conditionalNarrative?: ConditionalNarrativeParagraph[]
 
   // Conditions the player must meet to even enter this scene
   conditions: ConditionSet
@@ -107,9 +108,14 @@ export interface Scene {
   onEnter?: EffectSet
 }
 
+export type ConditionalNarrativeParagraph = LocaleString & {
+  conditions: ConditionSet
+  position?: 'prefix' | 'suffix' // defaults to 'prefix'
+}
+
 export interface Choice {
   id: string
-  text: string
+  text: LocaleString
 
   // Conditions the player must meet for this choice to appear
   conditions: ConditionSet
@@ -120,15 +126,19 @@ export interface Choice {
   // Where this choice leads
   nextSceneId: string
 
-  // Optional: flavour hint shown before committing (e.g. "Requires Morale 5+")
-  hint?: string
+  // Shown as a tooltip when the choice is locked
+  hint?: LocaleString
+
+  // Shown immediately after selection, before the next scene loads
+  consequence?: LocaleString[]
 }
 
 export interface ConditionSet {
-  requiredFlags?: string[]
-  blockedFlags?: string[]
+  requiredFlags?: GameFlag[]
+  blockedFlags?: GameFlag[]
   requiredStats?: StatCondition[]
   requiredItems?: ItemCondition[]
+  security?: { min?: number; max?: number } // gate on fortification level
 }
 
 export interface StatCondition {
@@ -143,9 +153,11 @@ export interface ItemCondition {
 }
 
 export interface EffectSet {
-  flags?: Record<string, boolean>
-  stats?: Partial<Record<StatKey, number>> // delta values (positive or negative)
+  flags?: Partial<Record<GameFlag, boolean>>
+  stats?: Partial<Record<StatKey, number>> // delta values — clamped by executor
   items?: ItemEffect[]
+  security?: number // delta to fortification index
+  timeCost?: number // hours consumed from countdown
 }
 
 export interface ItemEffect {
@@ -241,18 +253,18 @@ Master registry of all items that can exist in the game.
   "items": [
     {
       "id": "medkit",
-      "label": "Medical Kit",
-      "description": "A basic first aid kit. Restores 3 health when used.",
+      "label": { "zh": "急救箱" },
+      "description": { "zh": "基础急救用品。使用后恢复3点生命值，感染值-1。" },
       "category": "medical",
       "stackable": true,
       "maxStack": 5,
       "usable": true,
-      "useEffect": { "stats": { "health": 3 } }
+      "useEffect": { "stats": { "health": 3, "infection": -1 } }
     },
     {
       "id": "canned_food",
-      "label": "Canned Food",
-      "description": "Non-perishable. Keeps morale from dropping during rest.",
+      "label": { "zh": "罐头食品" },
+      "description": { "zh": "耐储存食物。食用后恢复1点士气。" },
       "category": "food",
       "stackable": true,
       "maxStack": 20,
@@ -261,8 +273,8 @@ Master registry of all items that can exist in the game.
     },
     {
       "id": "radio",
-      "label": "Emergency Radio",
-      "description": "Lets you tune in to broadcasts. Unlocks radio-based scene options.",
+      "label": { "zh": "手提收音机" },
+      "description": { "zh": "能接收广播信号。解锁基于无线电的场景选项。" },
       "category": "tool",
       "stackable": false,
       "maxStack": 1,
@@ -271,8 +283,8 @@ Master registry of all items that can exist in the game.
     },
     {
       "id": "knife",
-      "label": "Hunting Knife",
-      "description": "Better than nothing. Enables certain confrontation choices.",
+      "label": { "zh": "多功能折叠刀" },
+      "description": { "zh": "轻巧多用。解锁部分近身对抗选项。" },
       "category": "weapon",
       "stackable": false,
       "maxStack": 1,
@@ -288,8 +300,8 @@ Master registry of all items that can exist in the game.
 ```typescript
 export interface ItemDefinition {
   id: string
-  label: string
-  description: string
+  label: LocaleString
+  description: LocaleString
   category: 'medical' | 'food' | 'tool' | 'weapon' | 'misc'
   stackable: boolean
   maxStack: number
@@ -316,21 +328,21 @@ Each ending has a set of conditions that trigger it. Endings are evaluated **aft
   "endings": [
     {
       "id": "ending_death_health",
-      "title": "The City Took You",
+      "title": { "zh": "城市吞噬了你" },
       "type": "bad",
       "priority": 1,
       "conditions": {
         "requiredStats": [{ "stat": "health", "max": 0 }]
       },
       "narrative": [
-        "Your body gave out. The city you tried to save had no more use for you.",
-        "But somewhere, a stranger remembered your name."
+        { "zh": "身体撑不住了。你试图守住的这座城市不再需要你了。" },
+        { "zh": "但在某个地方，有人记得你的名字。" }
       ],
       "epilogue": null
     },
     {
       "id": "ending_solo_survivor",
-      "title": "Alone in the Ruins",
+      "title": { "zh": "废墟中的独行者" },
       "type": "neutral",
       "priority": 10,
       "conditions": {
@@ -339,14 +351,14 @@ Each ending has a set of conditions that trigger it. Endings are evaluated **aft
         "requiredStats": [{ "stat": "health", "min": 1 }]
       },
       "narrative": [
-        "You made it. Alone. The city is quieter now — not peaceful, just empty.",
-        "You stop counting the days. It doesn't feel like surviving anymore."
+        { "zh": "你活下来了。一个人。城市现在安静多了——不是平静，是空了。" },
+        { "zh": "你停止了数日子。这种感觉不像是活下来，只是还没有死。" }
       ],
-      "epilogue": "You scavenge the ruins for another three months before finding a radio signal from the coast."
+      "epilogue": { "zh": "又过了三个月，你在废墟里搜刮时，收音机里出现了一段来自海岸线的信号。" }
     },
     {
       "id": "ending_community_leader",
-      "title": "The Last City",
+      "title": { "zh": "最后的城市" },
       "type": "good",
       "priority": 20,
       "conditions": {
@@ -357,11 +369,11 @@ Each ending has a set of conditions that trigger it. Endings are evaluated **aft
         ]
       },
       "narrative": [
-        "You didn't just survive. You built something.",
-        "Forty-three people call this place home now. They argue about rations and watch schedules and who gets the corner room.",
-        "Normal problems. Human problems. You never thought you'd be grateful for those."
+        { "zh": "你不只是活下来了。你建了一些东西。" },
+        { "zh": "四十三个人现在管这里叫家。他们争论口粮、轮班表和谁睡角落的那张床。" },
+        { "zh": "普通的问题。人类的问题。你以前从没想过自己会为这种事感到感激。" }
       ],
-      "epilogue": "Three years later, another settlement sends a radio signal. They've heard about you."
+      "epilogue": { "zh": "三年后，另一个定居点发来了无线电信号。他们听说过你。" }
     }
   ]
 }
@@ -372,12 +384,12 @@ Each ending has a set of conditions that trigger it. Endings are evaluated **aft
 ```typescript
 export interface Ending {
   id: string
-  title: string
+  title: LocaleString
   type: 'bad' | 'neutral' | 'good' | 'secret'
-  priority: number // Higher = checked last; good endings should have higher priority
+  priority: number // lower = checked first; bad endings have higher priority
   conditions: ConditionSet
-  narrative: string[]
-  epilogue: string | null
+  narrative: LocaleString[]
+  epilogue: LocaleString | null
 }
 ```
 

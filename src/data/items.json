@@ -61,6 +61,16 @@
       }
     },
     {
+      "id": "water_bottle",
+      "label": { "zh": "饮用水" },
+      "description": { "zh": "一瓶矿泉水。解渴用，不能替代食物。" },
+      "category": "food",
+      "stackable": true,
+      "maxStack": 10,
+      "usable": true,
+      "useEffect": { "stats": { "morale": 1 } }
+    },
+    {
       "id": "canned_food",
       "label": { "zh": "罐头食品" },
       "description": { "zh": "耐储存食物。食用后恢复1点士气。" },

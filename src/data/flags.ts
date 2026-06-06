@@ -66,24 +66,11 @@ export type GameFlag =
   | 'day8_returned_home' // brief return to apartment from scene_day8 hub
   | 'scavenged_pharmacy' // completed scene_day8_pharmacy
 
-  // ── NPC encounters ────────────────────────────────────────────────────────
-  | 'met_doctor' // Dr. Lena Marsh
-  | 'met_militia_leader' // Rook
-  | 'met_collective_organizer' // Yusuf
-  | 'met_the_kid'
-  | 'met_ghost' // The Loner
-
   // ── NPC outcomes ─────────────────────────────────────────────────────────
   | 'saved_the_kid'
-  | 'betrayed_militia'
-  | 'betrayed_collective'
-  | 'deferred_clinic_offer'
   | 'intervened_at_pharmacy'
 
   // ── Faction membership ────────────────────────────────────────────────────
-  | 'joined_clinic'
-  | 'joined_militia'
-  | 'joined_collective'
   | 'has_group'
 
   // ── World state ───────────────────────────────────────────────────────────
@@ -93,9 +80,6 @@ export type GameFlag =
   | 'has_first_aid_training'
   | 'has_family_nearby'
   | 'knows_city_layout'
-  | 'knows_westfield_name'
-  | 'located_westfield_signal'
-  | 'knows_westfield_location'
 
   // ── Survival milestones ───────────────────────────────────────────────────
   | 'survived_first_night'
@@ -247,39 +231,6 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     achievement: null,
   },
 
-  // ── NPC encounters ─────────────────────────────────────────────────────────
-
-  {
-    key: 'met_doctor',
-    description: 'Player has met Dr. Lena Marsh.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'met_militia_leader',
-    description: 'Player has met Rook, the militia captain.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'met_collective_organizer',
-    description: 'Player has met Yusuf, the collective organiser.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'met_the_kid',
-    description: 'Player has encountered the unnamed child.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'met_ghost',
-    description: 'Player has encountered Ghost, the Loner.',
-    category: 'npc',
-    achievement: null,
-  },
-
   // ── NPC outcomes ───────────────────────────────────────────────────────────
 
   {
@@ -295,24 +246,6 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     },
   },
   {
-    key: 'betrayed_militia',
-    description: 'Player betrayed the militia, burning that alliance permanently.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'betrayed_collective',
-    description: 'Player betrayed the collective.',
-    category: 'npc',
-    achievement: null,
-  },
-  {
-    key: 'deferred_clinic_offer',
-    description: "Player did not immediately accept Dr. Marsh's offer to join the clinic.",
-    category: 'npc',
-    achievement: null,
-  },
-  {
     key: 'intervened_at_pharmacy',
     description: 'Player stepped in during the pharmacy confrontation.',
     category: 'narrative',
@@ -321,24 +254,6 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
 
   // ── Faction membership ─────────────────────────────────────────────────────
 
-  {
-    key: 'joined_clinic',
-    description: "Player has committed to Dr. Marsh's clinic.",
-    category: 'faction',
-    achievement: null,
-  },
-  {
-    key: 'joined_militia',
-    description: "Player has joined Rook's militia.",
-    category: 'faction',
-    achievement: null,
-  },
-  {
-    key: 'joined_collective',
-    description: "Player has joined Yusuf's collective.",
-    category: 'faction',
-    achievement: null,
-  },
   {
     key: 'has_group',
     description: 'Player is part of an organised survivor group of any kind.',
@@ -387,24 +302,6 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
   {
     key: 'knows_city_layout',
     description: 'Player knows the city well enough to navigate by memory.',
-    category: 'world',
-    achievement: null,
-  },
-  {
-    key: 'knows_westfield_name',
-    description: 'Player heard the name "Westfield Community Centre" as a potential safe zone.',
-    category: 'world',
-    achievement: null,
-  },
-  {
-    key: 'located_westfield_signal',
-    description: 'Player located the Westfield broadcast frequency using a radio.',
-    category: 'world',
-    achievement: null,
-  },
-  {
-    key: 'knows_westfield_location',
-    description: 'Player knows the exact location of Westfield.',
     category: 'world',
     achievement: null,
   },

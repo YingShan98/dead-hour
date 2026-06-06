@@ -1,0 +1,46 @@
+{
+  "id": "scene_day15_morning",
+  "title": { "zh": "第十五天·清晨" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 360 },
+  "onEnter": {
+    "flags": { "heard_government_broadcast": true },
+    "stats": {},
+    "items": []
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应在你旁边。踝关节好了一些，但她还是走得慢。你们没有讨论去哪里——只是往有信号的方向走。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第十五天。" },
+    {
+      "zh": "你在一栋废弃商铺的二楼过夜，窗户用纸板挡着，勉强挡住了风。凌晨四点醒来，不是因为声音，是因为广播——某个政府频道，断断续续，正在播报某种集合令。"
+    },
+    {
+      "zh": "「……请市民有序前往……指定安置点……政府军已控制……」声音切断，静电。然后又一段，换了一个声音，更年轻，更紧张，说的是完全相反的事情。"
+    },
+    {
+      "zh": "你把收音机音量调小，靠在墙上听了很久。两个声音都在广播，都说自己是权威，都叫你去不同的地方。你现在需要决定，听哪一个——或者都不听。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day15_morning_continue",
+      "text": { "zh": "先把眼前的事做完。广播的事之后再说。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1 }
+      },
+      "consequence": [
+        { "zh": "你关掉收音机，收拾好背包。" },
+        { "zh": "广播还在脑子里转，但现在不是做决定的时候——先把今天过完。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    }
+  ]
+}
