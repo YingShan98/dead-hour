@@ -46,7 +46,7 @@
         },
         { "zh": "插好插销，背靠门板站了一秒。手心有汗，但那是做完一件有用的事之后才会有的。" }
       ],
-      "nextSceneId": "scene_day4_night"
+      "nextSceneId": "scene_day4_dusk"
     },
     {
       "id": "scene_day4_day_fortify",
@@ -63,7 +63,7 @@
         },
         { "zh": "防御指数又高了一点。手腕很酸。这是可以接受的交换。" }
       ],
-      "nextSceneId": "scene_day4_night"
+      "nextSceneId": "scene_day4_dusk"
     },
     {
       "id": "scene_day4_day_rescue",
@@ -95,7 +95,7 @@
           "zh": "醒来的时候光已经斜了，脑子比睡前清楚，四肢的酸胀退了一大半。这是这几天里睡得最踏实的一次。"
         }
       ],
-      "nextSceneId": "scene_day4_night"
+      "nextSceneId": "scene_day4_dusk"
     },
     {
       "id": "scene_day4_day_journal",
@@ -116,7 +116,7 @@
           "zh": "「需要知道的」比「已知的」还长。不过清单在纸上，就不只是在脑子里打转。"
         }
       ],
-      "nextSceneId": "scene_day4_night"
+      "nextSceneId": "scene_day4_dusk"
     }
   ]
 }

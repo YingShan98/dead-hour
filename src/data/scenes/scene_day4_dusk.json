@@ -1,0 +1,136 @@
+{
+  "id": "scene_day4_dusk",
+  "title": { "zh": "第四天·黄昏" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 92 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应坐在靠墙的角落，腿伸直，踝关节用宽胶带裹着。她拿着你的备忘录翻了几页，没有问可不可以翻，但翻完之后把它放回了原来的位置。"
+    },
+    {
+      "conditions": {
+        "blockedFlags": ["pei_alive"],
+        "requiredFlags": ["pei_status_trapped_outside"]
+      },
+      "position": "prefix",
+      "zh": "裴嘉应在面包房里第四夜了。两条街，现在一样远，也一样近。你把这个想法压下去，专注于眼前的事。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在光线变暗时有一种皮下的感觉，和昨天一样，说不清楚——但它越来越容易被注意到了。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "第四天的黄昏来得比第三天晚一点——或者只是你今天更忙，没注意到时间在过。"
+    },
+    {
+      "zh": "食物的存量又少了一天。水也是。这是一个线性的、清楚的问题，它会在某一天彻底清楚。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day4_dusk_pei_talk",
+      "text": { "zh": "坐到裴嘉应旁边，问她怎么样了——不是出于礼貌，是真的问。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": 1, "will": 1, "morale": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "她说踝关节好一点了，能试着走动，但现在没必要试。"
+        },
+        {
+          "zh": "你问她在面包房里是怎么过的。她沉默了几秒。"
+        },
+        {
+          "zh": "「还好，」她说。「数了很多东西。面包房里有很多值得数的东西。」"
+        },
+        {
+          "zh": "你没有继续问。有些事说出来之前，需要时间先在里面压一压。"
+        }
+      ],
+      "nextSceneId": "scene_day4_night"
+    },
+    {
+      "id": "scene_day4_dusk_pei_notebook",
+      "text": { "zh": "她在写东西——走近，看她在记什么。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": -1, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "她感觉到你靠近，侧了一下身，把那本东西合上。"
+        },
+        {
+          "zh": "「在记病历，」她说，语气很平。「格式要对。就算现在也是。」"
+        },
+        {
+          "zh": "你没有追问。但你注意到她用左手压着那本东西，直到你走开。"
+        }
+      ],
+      "nextSceneId": "scene_day4_night"
+    },
+    {
+      "id": "scene_day4_dusk_ration",
+      "text": { "zh": "把今天剩下的食物和水重新分配一遍，按最严格的标准算。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你把所有存量列了一遍。按这个消耗速度，食物还有两天，水还有一天半。"
+        },
+        {
+          "zh": "你把数字收起来。不看不等于不存在。现在知道了，总比到那天才发现好。"
+        }
+      ],
+      "nextSceneId": "scene_day4_night"
+    },
+    {
+      "id": "scene_day4_dusk_fix",
+      "text": { "zh": "趁还有最后一点光，把白天没处理完的一道缝隙补掉。" },
+      "conditions": {},
+      "effects": {
+        "security": 5,
+        "stats": { "will": 1, "health": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "那道接缝比你以为的麻烦，用了半小时才弄好。手腕更酸了。"
+        },
+        {
+          "zh": "但弄好了。你用手指划过那道缝，确认没有松动，然后停下来。"
+        },
+        {
+          "zh": "天彻底黑了。"
+        }
+      ],
+      "nextSceneId": "scene_day4_night"
+    },
+    {
+      "id": "scene_day4_dusk_journal",
+      "text": { "zh": "把今天的事写下来，完整地——包括不知道怎么归类的那部分。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你写了很久。今天发生了太多，很多事压在心里，写出来之后才变成了可以面对的东西。"
+        },
+        {
+          "zh": "最后一行你写的是：「不知道接下来还会发生什么。这大概是现在最准确的一句话。」"
+        }
+      ],
+      "nextSceneId": "scene_day4_night"
+    }
+  ]
+}

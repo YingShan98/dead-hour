@@ -20,7 +20,9 @@ A **scene** is a single narrative moment — a location, a conversation, a crisi
   "gameTime": { "hoursFromStart": -48 },
 
   "narrative": [
-    { "zh": "地铁又晚点了。你看了一眼手机——社交媒体上有一段模糊的视频在传，市政厅附近，一个人咬了一个警察。" },
+    {
+      "zh": "地铁又晚点了。你看了一眼手机——社交媒体上有一段模糊的视频在传，市政厅附近，一个人咬了一个警察。"
+    },
     { "zh": "周围的人划过去，表情介于恶心和无聊之间。没有人显得警惕。" },
     { "zh": "你的站快到了，会议还有二十分钟。" }
   ],

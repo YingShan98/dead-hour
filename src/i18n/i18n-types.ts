@@ -124,7 +124,7 @@ type RootTranslation = {
   }
   countdown: {
     /**
-     * 剩​余​时​间
+     * 距​爆​发
      */
     label: string
     /**
@@ -593,7 +593,7 @@ export type TranslationFunctions = {
   }
   countdown: {
     /**
-     * 剩余时间
+     * 距爆发
      */
     label: () => LocalizedString
     /**

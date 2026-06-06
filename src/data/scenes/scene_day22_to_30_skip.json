@@ -1,0 +1,74 @@
+{
+  "id": "scene_day22_to_30_skip",
+  "title": { "zh": "第二十三天 · 第二十九天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 552 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第二十三天。那辆车的事我还在想，说不清楚是什么感觉——不是害怕，是另一种东西。\n第二十五天。在废弃服装店门口看见了一把刀形的涂鸦，漆是红的，笔触很粗，下面有几个字：「再往里，自己想清楚。」不是艺术。\n第二十七天。往医院外围走了一圈。密度比我想的高，但不是不可能进去，是需要计划。\n第二十九天。明天去。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "你把这七天用来靠近那件你还没有准备好靠近的事。不是正对着它走，是一圈一圈地缩小，先了解周围，再了解外围，再了解入口。还有那幅涂鸦——一把刀，红漆，指向你来的方向——你在两条街上看见了同样的图案，它们不是随机的。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应没有问你要去哪里。第七天，你发现她已经在草图的某个角落画了一个小方块——医院的大概位置。她比你先想到了，或者，她一直知道你迟早要去。"
+    }
+  ],
+  "narrative": [{ "zh": "第二十三天到第二十九天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day22_to_30_skip_recon",
+      "text": { "zh": "这几天主要在侦查——医院的外围，军车的路线，那些涂鸦在哪里。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "knows_city_layout": true },
+        "stats": { "stealth": 1, "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你把城区草图更新了两遍。医院周围的感染密度，军车的大概路线，还有那些地盘标记——哪些是新的，哪些更旧。"
+        },
+        { "zh": "信息不完整，但比七天前完整了很多。" }
+      ],
+      "nextSceneId": "scene_day30_hospital"
+    },
+    {
+      "id": "scene_day22_to_30_skip_supply",
+      "text": { "zh": "这几天主要在备货——为进医院做准备，能找到的医疗物资先尽量找。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": -1 },
+        "items": [
+          { "itemId": "medkit", "delta": 1 },
+          { "itemId": "antibiotic", "delta": 1 }
+        ]
+      },
+      "consequence": [
+        {
+          "zh": "你把周边几家诊所和小药店都过了一遍。找到的东西不多，但进医院之前有这些比什么都没有好。"
+        }
+      ],
+      "nextSceneId": "scene_day30_hospital"
+    },
+    {
+      "id": "scene_day22_to_30_skip_fortify",
+      "text": { "zh": "这几天主要在加固落脚点——先把根扎稳，再去更远的地方。" },
+      "conditions": {},
+      "effects": {
+        "security": 10,
+        "stats": { "will": 1, "health": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "落脚点现在更结实了。出门知道有地方能回来，进入医院的时候，至少不用担心退路。"
+        }
+      ],
+      "nextSceneId": "scene_day30_hospital"
+    }
+  ]
+}

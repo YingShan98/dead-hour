@@ -1,0 +1,93 @@
+{
+  "id": "scene_day60_to_75_skip",
+  "title": { "zh": "第六十一天 · 第七十四天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1464 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第六十一天。第一个完整的夜晚，在这里，有门，有锁。我没有睡得很好，但我睡了。\n第六十五天。出去找水的时候看到了另一辆卡车——不是军方的，是改装过的民用卡车，侧面有人用白漆写了几个字，太远，没有看清楚。\n第七十天。抗生素用完了。这是一个具体的问题，我需要解决它。\n第七十四天。收音机里有东西，但信号一直不稳，断了三次。明天继续试。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "这十四天你在避难所里建立了某种节奏：早上清点，白天出去，傍晚回来，夜里守着。节奏不好听，但它是可以维持的，这就够了。抗生素用完了，这是一个问题。收音机偶尔有信号，但断断续续，没有完整的内容。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应在第六十七天开始了某样东西——她在用那本线圈本写东西，不是日记的样子，是更系统的格式：日期，观察，结论，问号。你没有问她在写什么，她也没有主动说。那本本子越来越厚了。"
+    }
+  ],
+  "narrative": [{ "zh": "第六十一天到第七十四天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day60_to_75_maintain",
+      "text": { "zh": "这段时间主要在维护和改进避难所——让它能撑整个冬天。" },
+      "conditions": {},
+      "effects": {
+        "security": 15,
+        "stats": { "health": -1, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你把这十四天的重心放在让这个地方更结实上。新增了一处隔热层，加固了通风系统，修好了一扇一直不顺手的门锁。"
+        }
+      ],
+      "nextSceneId": "scene_day75_broadcast"
+    },
+    {
+      "id": "scene_day60_to_75_supply",
+      "text": { "zh": "这段时间主要在补充物资缺口——尤其是药品，不能让它们见底。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": -1, "morale": 1 },
+        "items": [
+          { "itemId": "antibiotic", "delta": 1 },
+          { "itemId": "medkit", "delta": 1 }
+        ]
+      },
+      "consequence": [
+        {
+          "zh": "你把附近能找的地方都过了一遍，又往外推了一圈。抗生素找到了一些，勉强够用，但它告诉你：再往后，要么找到更好的来源，要么开始省着用。"
+        }
+      ],
+      "nextSceneId": "scene_day75_broadcast"
+    },
+    {
+      "id": "scene_day60_to_75_pei_talk",
+      "text": { "zh": "这段时间主要在和裴嘉应深谈——把这两个月她一直没有说出来的事，问出来。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "hint": { "zh": "需要：裴嘉应存活" },
+      "effects": {
+        "stats": { "trust": 2, "will": 2, "morale": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你们谈了几次，每次都只谈了一部分，因为另一部分还没有准备好。"
+        },
+        {
+          "zh": "但到第七十四天，你大概知道了她是什么样的人，她大概也知道了你是什么样的人。这不是一件小事。"
+        }
+      ],
+      "nextSceneId": "scene_day75_broadcast"
+    },
+    {
+      "id": "scene_day60_to_75_journal",
+      "text": {
+        "zh": "这段时间主要在记录——把这段相对稳定的时间好好地写下来，因为稳定本身也值得被记录。"
+      },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你写了很多，比之前任何一段时间都多，因为现在有时间写了。你发现稳定是一种会骗人的感觉——它让你以为某些问题消失了，但只是悬在那里没动。"
+        }
+      ],
+      "nextSceneId": "scene_day75_broadcast"
+    }
+  ]
+}

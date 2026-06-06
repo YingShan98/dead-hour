@@ -1,0 +1,98 @@
+{
+  "id": "scene_day16_skip",
+  "title": { "zh": "第十六天 · 第二十一天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 384 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第十六天。广播的事我还在想。两个声音，说两件不同的事，我不知道该信哪个，或者都不信。今天没有再听到。\n第十八天。往南边那条街走了一趟，摸清了一条新的路线。感染密度比我想的低，可能还能再推进一点。\n第二十天。在废弃文具店找到了一本空白线圈本。我没有立刻开始用它。\n第二十一天。往医院方向走了，没有靠近，只是看了一眼。明天去？后天去？总是要去的。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "你把这六天用来做具体的事：早上看城市，白天出去，傍晚回来，夜里等。没有什么大事，但每一件小事都是你没有出错的证明。广播还在，两个声音说两件矛盾的事，你决定先不处理这个矛盾。医院方向的问题还压在那里，迟早要面对。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应踝关节好多了，开始跟着你出门了。她比你安静，也比你细心——她注意到了你没有注意到的一扇窗，一条人走过的痕迹，一道你以为是随机的划痕。你们没有讨论过这种分工，它自己就形成了。"
+    },
+    {
+      "conditions": { "requiredFlags": ["trusts_official_government"] },
+      "position": "suffix",
+      "zh": "你往广播说的方向走过一次，走到一半退回来了——路封着，不知道封了多久。广播里的坐标是真实的，但那个方向现在进不去。你把这件事记下来，暂时搁在那里。"
+    },
+    {
+      "conditions": { "requiredFlags": ["trusts_alternative_broadcast"] },
+      "position": "suffix",
+      "zh": "你在第十八天晚上又收到了那个替代频率。不是广播，是断续的，像是有人在用手动的方式发信号。它重复了三次，然后没了。你不知道对方是谁，但他们还在。"
+    }
+  ],
+  "narrative": [{ "zh": "第十六天到第二十一天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day16_skip_scavenge",
+      "text": { "zh": "这几天主要往外扩——把能搜刮的地方都摸一遍。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": -1, "morale": 1 },
+        "items": [
+          { "itemId": "canned_food", "delta": 3 },
+          { "itemId": "duct_tape", "delta": 1 }
+        ]
+      },
+      "consequence": [
+        {
+          "zh": "能找到的东西越来越少，但你摸清了三条路线：哪条安全，哪条不要走，什么时间段可以过。"
+        }
+      ],
+      "nextSceneId": "scene_day22_truck"
+    },
+    {
+      "id": "scene_day16_skip_fortify",
+      "text": { "zh": "这几天主要往里做——把落脚的地方打理得更结实。" },
+      "conditions": {},
+      "effects": {
+        "security": 15,
+        "stats": { "health": -1, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你花了大量时间在防御上，加固、调整、测试。它现在比一个星期前结实太多了。代价是你还不够了解外面的情况。"
+        }
+      ],
+      "nextSceneId": "scene_day22_truck"
+    },
+    {
+      "id": "scene_day16_skip_observe",
+      "text": { "zh": "这几天主要在看——记路线，把那些广播和车队代表什么摸出来。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "noticed_patrol_pattern": true, "knows_city_layout": true },
+        "stats": { "stealth": 1, "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你没有想清楚广播的问题，但你知道了更多关于这座城市的事。有些规律你之前没有注意到的，现在注意到了。"
+        }
+      ],
+      "nextSceneId": "scene_day22_truck"
+    },
+    {
+      "id": "scene_day16_skip_journal",
+      "text": { "zh": "这几天主要在记——把能写的都写下来，把看见的都记清楚。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "六天的记录，写满了大半本。写完之后，这些事就不只在脑子里转，而是在纸上摆着，可以看，可以对照，可以改。"
+        }
+      ],
+      "nextSceneId": "scene_day22_truck"
+    }
+  ]
+}

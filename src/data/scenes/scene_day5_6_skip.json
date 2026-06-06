@@ -56,6 +56,24 @@
         }
       ],
       "nextSceneId": "scene_day7_milestone"
+    },
+    {
+      "id": "scene_day5_6_journal",
+      "text": { "zh": "这两天，把能记录的都记下来——事件、数字、那些说不清楚是什么感觉的感觉。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "第五天的记录比第六天的长。第六天大部分时间你在窗边发呆，没有把那叫做休息，但它可能是。"
+        },
+        {
+          "zh": "写下来的东西在你不需要反复去想它。这大概就是你写的原因。"
+        }
+      ],
+      "nextSceneId": "scene_day7_milestone"
     }
   ]
 }

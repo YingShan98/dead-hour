@@ -1,0 +1,117 @@
+{
+  "id": "scene_day30_hospital",
+  "title": { "zh": "第三十天·医院入口" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 720 },
+  "onEnter": {
+    "flags": { "survived_first_month": true }
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应在这里停下来了。不是停下来不走——是那种用脚站住、两手收着、往前看的方式停住了。你们在急诊楼门口站了将近一分钟，她没有说话，你也没有。最后她先动了，往右移了一步，看了看建筑侧面的紧急出口。她没有说她在找什么，你也没有问。"
+    },
+    {
+      "conditions": {
+        "requiredFlags": ["pei_status_trapped_outside"],
+        "blockedFlags": ["pei_alive"]
+      },
+      "position": "prefix",
+      "zh": "她在这里对面的面包房里待了七天。你现在站在医院门口，她不在，也没有办法不想到这件事。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在靠近医院的时候有一种细微的反应——不像是地点，更像是密度。某种东西在门里面集中的方式，皮下感知到了。你花了一秒把这件事推到脑子的角落，继续考虑眼前的门。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 5 }] },
+      "position": "suffix",
+      "zh": "门里面有几个，你大概知道位置。这种知道是皮下来的，不准确，但不是猜测。你用了几秒把这个信息整合进来，继续考虑怎么进去。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第三十天。医院。" },
+    {
+      "zh": "你站在急诊楼入口的台阶下，把这座建筑从上到下看了一遍。玻璃门有一扇已经碎了，另一扇关着，里面黑漆漆的，手电光照不进去。墙面上有一些新的痕迹——划的，涂的，有几个字你认得：「不要进去」。"
+    },
+    {
+      "zh": "但是有药，有物资，也许有更多你不知道的东西。进去是今天的计划。问题只是怎么进。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day30_hospital_front",
+      "text": { "zh": "【正门直入】推开那扇关着的门，走进去，快进快出。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "entered_hospital": true },
+        "stats": { "health": -3, "will": 2, "morale": 1 }
+      },
+      "consequence": [
+        { "zh": "你推开门，走进去。" },
+        {
+          "zh": "里面比外面暗，空气有一种你之后很长时间都不会忘记的气味。你没有停下来辨认它，直接往药剂室方向走。"
+        },
+        {
+          "zh": "出了几次险，但你出来了。背包里有药，有绷带，还有一本你在护士站翻到的、封面有血渍的工作手册——你不知道为什么，把它也带出来了。"
+        }
+      ],
+      "nextSceneId": "scene_day30_to_45_skip"
+    },
+    {
+      "id": "scene_day30_hospital_pipe",
+      "text": { "zh": "【维修管道】绕到建筑背面，从通风管道检修口进去——避开正面。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "stealth", "min": 3 }]
+      },
+      "hint": { "zh": "需要：潜行 3+" },
+      "effects": {
+        "flags": { "entered_hospital": true },
+        "stats": { "health": -1, "stealth": 1 },
+        "items": [
+          { "itemId": "medkit", "delta": 2 },
+          { "itemId": "antibiotic", "delta": 1 }
+        ]
+      },
+      "consequence": [
+        {
+          "zh": "管道比你想象的窄，也比想象的长。你在里面爬了大约十分钟，肘部和膝盖都磨破了皮。"
+        },
+        {
+          "zh": "从实验室储藏室的一个检修口爬出来，里面比急诊区干净很多，也空很多。货架上有还没有被搬走的物资——不是因为人们不知道，是因为来不及。"
+        },
+        {
+          "zh": "你把背包装满了，从原路爬回去。出来之后在墙边坐了一会儿，等手停止发抖。"
+        }
+      ],
+      "nextSceneId": "scene_day30_to_45_skip"
+    },
+    {
+      "id": "scene_day30_hospital_observe",
+      "text": { "zh": "【先观察】在外面等一个小时，看里面的移动规律，再决定怎么进。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "will", "min": 5 }]
+      },
+      "hint": { "zh": "需要：意志 5+" },
+      "effects": {
+        "flags": { "entered_hospital": true },
+        "stats": { "stealth": 1, "health": -1, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你在一个视角好的位置蹲了将近一个小时。里面的移动是有规律的——不是随机的，是巡回的，一定时间段内某个区域会空出来。"
+        },
+        {
+          "zh": "你等到那个窗口，进去，在时间用完之前出来。没有正面接触，没有出险。"
+        },
+        {
+          "zh": "背包里的东西比正面强攻少，但你进去了，完成了计划，出来了，这是今天最重要的事。"
+        }
+      ],
+      "nextSceneId": "scene_day30_to_45_skip"
+    }
+  ]
+}

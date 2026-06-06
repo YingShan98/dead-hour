@@ -1,0 +1,112 @@
+{
+  "id": "scene_day3_dusk",
+  "title": { "zh": "第三天·黄昏" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 68 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在光线变暗的时候有一种皮下的感觉。你把手攥一下，放开，攥一下，放开。那种感觉不随之消失。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "光变了。不是黑，是那种在黑之前的灰橘色，从窗户斜进来，把屋子切成两半。"
+    },
+    {
+      "zh": "白天的事已经做完——或者已经能做的都做了。接下来这几个小时，在天彻底黑之前，不够出门，不够做大的改动，但够用来做一件小的事。"
+    },
+    {
+      "zh": "你环顾了一下这个屋子。食物，水，伤口，门。有几件事压在那里。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day3_dusk_supplies",
+      "text": { "zh": "把存粮和水清点一遍，用精确的数字——不是大概，是准确数字。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "食物：三天，如果每天只吃一顿完整的。水：两天，如果不洗漱。"
+        },
+        {
+          "zh": "你把这两个数字写下来，然后把手机扣在桌上。"
+        },
+        {
+          "zh": "工程数字。工程数字有解，哪怕解很难看。"
+        }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day3_dusk_wound",
+      "text": { "zh": "坐到灯下，把右手中指的胶带慢慢撕开，认真看一次。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 2, "morale": -2 }
+      },
+      "consequence": [
+        {
+          "zh": "伤口已经闭合了。颜色不对——不是正常愈合那种粉红，是偏暗的、你没有词来描述的色调。"
+        },
+        {
+          "zh": "你用手指轻轻压了一下。皮下有感觉，不是疼，是别的。"
+        },
+        {
+          "zh": "你重新缠上胶带。没有跟任何人说这件事，因为现在也没有人可以说。"
+        }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day3_dusk_iodine",
+      "text": { "zh": "拿出碘伏棉片，重新处理一次中指的伤口——不管它现在感觉如何。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "iodine_kit", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：碘伏急救包" },
+      "effects": {
+        "stats": { "health": 1, "will": 1 },
+        "items": [{ "itemId": "iodine_kit", "delta": -1 }]
+      },
+      "consequence": [
+        {
+          "zh": "消毒液在伤口上刺了一下，很轻，比你预想的轻。"
+        },
+        {
+          "zh": "你重新包扎好，活动了几下手指。感觉上没有更坏——这大概是目前最好的结果了。"
+        },
+        {
+          "zh": "你把用完的棉片扔掉，开始准备过夜。"
+        }
+      ],
+      "nextSceneId": "scene_day3_night"
+    },
+    {
+      "id": "scene_day3_dusk_window",
+      "text": { "zh": "站到窗边，趁最后一段自然光把楼下的格局再看一遍。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "stealth": 1, "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "黄昏时移动的数量比白天少，但方式不一样——更慢，更随机，偶尔在某个地方停很久，没有原因。"
+        },
+        {
+          "zh": "你把新的观察加进备忘录里。城市的格局在脑子里又清晰了一点点。"
+        },
+        {
+          "zh": "天彻底黑了。你离开窗边，把手电调暗，找到门后最结实的那个位置，坐下来。"
+        }
+      ],
+      "nextSceneId": "scene_day3_night"
+    }
+  ]
+}

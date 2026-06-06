@@ -148,13 +148,13 @@ Some choices should feel heavier than others. Use these signals:
 
 Key recurring characters across all acts:
 
-| NPC             | Role                               | First Appears        | Fate Affected By                                   |
-| --------------- | ---------------------------------- | -------------------- | -------------------------------------------------- |
-| **裴嘉应**      | Companion, intern nurse            | Act 2, Day 1 (call)  | `pei_status_*`, `pei_alive`, infection disclosure  |
-| **老许**        | Factory engineer, tech support     | Act 3, Day 95–110    | `npc_lao_xu_recruited`, security threshold Day 225 |
-| **连珏**        | Civil defense officer, discipline  | Act 3, Day 92        | `npc_lian_yu_recruited`, `has_group`, trust < 8    |
-| **阿福**        | Young farmer, morale anchor        | Act 3, Day 98        | `npc_a_fu_recruited`, medical supplies Phase 3     |
-| **郑博士**      | Virologist, science ending key     | Act 3, Day 195–210   | `scientist_saved`, leadership ≥ 10 or awakening    |
+| NPC        | Role                              | First Appears       | Fate Affected By                                   |
+| ---------- | --------------------------------- | ------------------- | -------------------------------------------------- |
+| **裴嘉应** | Companion, intern nurse           | Act 2, Day 1 (call) | `pei_status_*`, `pei_alive`, infection disclosure  |
+| **老许**   | Factory engineer, tech support    | Act 3, Day 95–110   | `npc_lao_xu_recruited`, security threshold Day 225 |
+| **连珏**   | Civil defense officer, discipline | Act 3, Day 92       | `npc_lian_yu_recruited`, `has_group`, trust < 8    |
+| **阿福**   | Young farmer, morale anchor       | Act 3, Day 98       | `npc_a_fu_recruited`, medical supplies Phase 3     |
+| **郑博士** | Virologist, science ending key    | Act 3, Day 195–210  | `scientist_saved`, leadership ≥ 10 or awakening    |
 
 ---
 

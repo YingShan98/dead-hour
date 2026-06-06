@@ -1,0 +1,89 @@
+{
+  "id": "scene_day45_to_60_skip",
+  "title": { "zh": "第四十六天 · 第五十九天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1104 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第四十六天。那个问题还压在脑子里，但我没有继续想它，因为想也没用。现在能做的只有把眼前的事做好。\n第五十天。天气越来越冷了，不是那种凉快的冷，是那种会让人生病的冷。我开始认真考虑怎么过冬。\n第五十五天。在收音机里听到了一段东西，很短，断断续续，像是军方的频率，但信号太弱，只听清楚了几个字。我记了下来，但没有弄清楚那几个字代表什么。\n第五十九天。差不多了，该找一个真正能过冬的地方了。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "这十四天，你把它们用在了准备上。不是准备什么特别的事，只是准备「还会有更多天」这件事。天气在变冷，物资在减少，你知道某种调整是必要的，你在慢慢地做。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "她没有再问那个问题，你也没有主动提它。但某天你们在搬东西的时候，她说：「如果找到够好的地方，我想在里面划一块区域出来，专门放医疗物资。要有标签，有分类，要在第一时间能找到。」你说：「可以。」她说：「谢谢。」这是这段时间你们最长的一次对话。"
+    }
+  ],
+  "narrative": [{ "zh": "第四十六天到第五十九天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day45_to_60_winter_prep",
+      "text": { "zh": "这段时间主要在找越冬的物资——保暖材料，足够的储粮，一个真正能待的地方。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 1, "morale": 1, "will": 1 },
+        "items": [{ "itemId": "canned_food", "delta": 3 }]
+      },
+      "consequence": [
+        {
+          "zh": "你把这十四天的重心放在了实际的准备上，而不是继续往外探。到第五十九天，你有了足够多的东西，和一个方向。"
+        }
+      ],
+      "nextSceneId": "scene_day60_shelter"
+    },
+    {
+      "id": "scene_day45_to_60_pei_build",
+      "text": {
+        "zh": "这段时间主要在和裴嘉应一起整理——把分工做得更清楚，让两个人的效率加起来比两倍更多。"
+      },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "hint": { "zh": "需要：裴嘉应存活" },
+      "effects": {
+        "stats": { "trust": 2, "morale": 2, "leadership": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你们开始有了默认的分工：她负责医疗和观察，你负责防御和物资。没有讨论过，只是慢慢就这样了。"
+        },
+        { "zh": "两个人比一个人多出来的，不只是两倍的劳动力。" }
+      ],
+      "nextSceneId": "scene_day60_shelter"
+    },
+    {
+      "id": "scene_day45_to_60_fortify",
+      "text": { "zh": "这段时间主要在加固——把目前的落脚点改造成真正能过冬的避难所。" },
+      "conditions": {},
+      "effects": {
+        "security": 20,
+        "stats": { "health": -1, "will": 2 },
+        "flags": { "built_shelter": true }
+      },
+      "consequence": [
+        {
+          "zh": "你把大量时间花在了让这个地方更厚实上。窗户，门，通风，隔热。第五十九天，它已经是一个可以在里面度过整个冬天的地方了——只要物资跟上。"
+        }
+      ],
+      "nextSceneId": "scene_day60_shelter"
+    },
+    {
+      "id": "scene_day45_to_60_journal",
+      "text": { "zh": "这段时间主要在记录——把这一个半月发生的事系统地整理一遍。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "整理是一种审计。你发现你做了很多对的事，也发现你做了几件当时觉得合理、现在觉得有点说不通的事。那几件事，你写下来了，但没有结论。"
+        }
+      ],
+      "nextSceneId": "scene_day60_shelter"
+    }
+  ]
+}

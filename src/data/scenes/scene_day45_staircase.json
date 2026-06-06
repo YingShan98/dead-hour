@@ -1,0 +1,162 @@
+{
+  "id": "scene_day45_staircase",
+  "title": { "zh": "第四十五天·台阶" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1080 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "你们来到这里没有讨论过——或者讨论过，但不是用语言讨论的。某一天早上出发，走着走着，你发现你们走的方向是这里。她也没有说话，只是跟着走，或者，她先走，你跟着她。"
+    },
+    {
+      "conditions": {
+        "blockedFlags": ["pei_alive"]
+      },
+      "position": "prefix",
+      "zh": "你一个人走到这里。你不确定为什么今天非要来，只是走着走着就来了。城市的某个地方，台阶，风。这里没有什么特别的东西，但你站着不走了。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指今天没有那种皮下的感觉。你注意到了这件事——不是好消息，也不是坏消息，只是一种变化，不知道代表什么。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "某栋楼的台阶。不是你们第一次来，也不是最后一次——但今天不一样，说不清楚哪里不一样。"
+    },
+    {
+      "zh": "裴嘉应坐在你旁边，腿伸直，两手放在膝盖上。她没有说话，但你知道她在看——她总是在看，用那种职业性的、安静的方式看，记录。"
+    },
+    {
+      "zh": "然后她看了一眼你的右手。"
+    },
+    {
+      "zh": "就是看了一眼。她没有问。"
+    },
+    {
+      "zh": "你们后来去了二楼，从一扇破掉的窗户往外看。城市在你们下面，还是那副样子，灰的，冷的，但今天光打下来的角度不一样，有些地方亮，有些地方更暗了。"
+    },
+    {
+      "zh": "你们站了很久，没有说话。然后她说："
+    },
+    {
+      "zh": "「我们去哪里？」"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day45_staircase_practical",
+      "text": { "zh": "「找一个能撑下去的地方。」说的是事实，不是方向。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": 1, "morale": 1, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "她点了点头，没有再问什么。" },
+        {
+          "zh": "你们在窗口站了一会儿，然后她从包里拿出一个本子，翻开一页空白的，开始写什么。你没有去看。"
+        },
+        { "zh": "下楼的时候，她走在前面。步子很稳。" }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    },
+    {
+      "id": "scene_day45_staircase_honest",
+      "text": { "zh": "「不知道。」这是真实的回答。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": 2, "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "她没有说「我知道」，也没有说「那我们想一想」。她只是看了你一眼，然后把目光移回窗外。"
+        },
+        { "zh": "「我也不知道，」她说，过了一会儿。「但我觉得问出来比不问好。」" },
+        {
+          "zh": "你没有回答这句话，因为你觉得它不需要回答。"
+        }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    },
+    {
+      "id": "scene_day45_staircase_deflect",
+      "text": { "zh": "「你先说。」" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": 1, "morale": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "她想了一下。「我想去一个有够多窗户的地方，」她说，「这样我能看清楚外面什么情况。」"
+        },
+        { "zh": "「其次是，」她继续，「储量够三个月的地方。」" },
+        {
+          "zh": "「先这两个，」她说，把本子翻开，开始写。「其他的之后再说。」"
+        }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    },
+    {
+      "id": "scene_day45_staircase_action",
+      "text": { "zh": "「先把眼前的事做完。」转身，准备下楼。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "will": 2, "trust": -1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "她没有动。你走了两步，回头，她还站在窗口，看着外面。"
+        },
+        {
+          "zh": "「好，」她说，声音很平。「我问了，你回答了。这就够了。」"
+        },
+        { "zh": "下楼的时候，你走在前面。" }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    },
+    {
+      "id": "scene_day45_staircase_solo",
+      "text": { "zh": "站在这里，什么都没有——这也是一种答案。" },
+      "conditions": { "blockedFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "will": 2, "morale": -2 }
+      },
+      "consequence": [
+        {
+          "zh": "你一个人站在这里，站了很久。"
+        },
+        {
+          "zh": "没有人问你去哪里，所以你不需要回答。但问题还是有的，只是现在，没有人说出来。"
+        },
+        {
+          "zh": "你在窗口看了一会儿外面的城市，然后转身，下楼，继续。"
+        }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    },
+    {
+      "id": "scene_day45_staircase_wound",
+      "text": { "zh": "「你刚才看了我的手。」" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "flags": { "pei_noticed_wound": true },
+        "stats": { "trust": 3, "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "她没有否认，也没有解释。「我看了，」她说，「我没有问。」"
+        },
+        { "zh": "「为什么没有问？」" },
+        {
+          "zh": "「因为，」她说，把本子收起来，「如果你想告诉我，你会告诉我的。」"
+        },
+        { "zh": "你们在窗口又站了一会儿，然后她先转身，下楼了。" },
+        { "zh": "你站了一秒，然后跟上去。" }
+      ],
+      "nextSceneId": "scene_day45_to_60_skip"
+    }
+  ]
+}

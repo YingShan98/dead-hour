@@ -1,0 +1,99 @@
+{
+  "id": "scene_day75_broadcast",
+  "title": { "zh": "第七十五天·军方频道" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1800 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应在你旁边听的。听到一半，她把本子拿出来了，开始写，不是完整的句子，是关键词，日期，括号里带问号的东西。你在播报的时候看了她一眼，她没有抬头。"
+    },
+    {
+      "conditions": { "requiredFlags": ["spotted_military_convoy"] },
+      "position": "suffix",
+      "zh": "第二十二天那辆车。「军事管理委员会」。你现在知道那辆车侧面漆掉的是什么了——是它原来的徽章，被换成了红十字，但里面坐着的不是医疗队。它们一直都是同一件事。"
+    }
+  ],
+  "narrative": [
+    {
+      "zh": "收音机突然收到了一个清晰的信号——比你之前接收到的任何信号都清晰，包括第十五天那次。"
+    },
+    {
+      "zh": "「……奉军事管理委员会命令，城东及城南居民区实施统一管辖。所有幸存平民须于规定时间内完成人口登记，否则将被视为……」"
+    },
+    {
+      "zh": "信号断了。你把旋钮往两边各转了一遍，什么都没有了。"
+    },
+    {
+      "zh": "军事管理委员会。"
+    },
+    {
+      "zh": "在这种时候，有人还在设立委员会。"
+    },
+    {
+      "zh": "你不知道这是好事还是坏事——但你知道这不是中立的事。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day75_broadcast_record",
+      "text": { "zh": "把听到的内容一字不差地写下来，包括你记得的每一个字。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "received_military_broadcast": true, "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "「军事管理委员会」，「城东及城南」，「人口登记」，「否则将被视为」——最后这几个字后面信号断了，你不知道后面是什么。"
+        },
+        {
+          "zh": "你把这些写下来，然后在旁边写了一行：「它们在管理，不是在救援。」"
+        },
+        { "zh": "然后你合上本子，把收音机的音量调到最小，继续等。" }
+      ],
+      "nextSceneId": "scene_day75_to_90_skip"
+    },
+    {
+      "id": "scene_day75_broadcast_scan",
+      "text": { "zh": "把旋钮继续转，看还有没有其他频道，其他声音。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "radio", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：收音机" },
+      "effects": {
+        "flags": { "received_military_broadcast": true },
+        "stats": { "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你把整个频段扫了两遍。除了那个频率，还有一段更短的信号，很弱，断断续续，像是民间的，说的是某个地点的名字，你没有听清楚。"
+        },
+        {
+          "zh": "收音机里有比一个声音更多的声音。这不让你感到安心，但它让这件事更复杂了，而复杂的事，至少是真实的。"
+        }
+      ],
+      "nextSceneId": "scene_day75_to_90_skip"
+    },
+    {
+      "id": "scene_day75_broadcast_sit",
+      "text": { "zh": "把收音机关掉，坐在那里想这件事的意义。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "received_military_broadcast": true },
+        "stats": { "will": 1, "morale": -2 }
+      },
+      "consequence": [
+        {
+          "zh": "你想了很久。「登记，否则将被视为」——你脑子里把各种可能性都过了一遍。每一种都不是好消息，只是不同方式的不好。"
+        },
+        {
+          "zh": "最后你得出了一个结论，不是关于军方的，是关于你自己的：你现在还不准备登记。不是因为你确定那是错的，是因为你不确定那是对的，而不确定的时候，你默认等着。"
+        }
+      ],
+      "nextSceneId": "scene_day75_to_90_skip"
+    }
+  ]
+}

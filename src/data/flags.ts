@@ -143,6 +143,8 @@ export type GameFlag =
   // ── Phase 1 moral / event flags ───────────────────────────────────────────
   | 'helped_stranger' // Day 10: helped injured family at supermarket
   | 'heard_government_broadcast' // Day 15: radio signal with coordinates received
+  | 'trusts_official_government' // Day 15: player chose to follow the official broadcast direction
+  | 'trusts_alternative_broadcast' // Day 15: player chose to follow the alternative broadcast direction
 
   // ── Phase 1 daily loop observation ───────────────────────────────────────
   | 'noticed_patrol_pattern' // Day 3: player studied zombie movement routes
@@ -150,6 +152,13 @@ export type GameFlag =
   // ── Phase 1 exit & rescue milestones ─────────────────────────────────────
   | 'left_apartment' // player has exited the apartment for the first time
   | 'pei_ankle_injured' // 裴嘉应 has a twisted ankle from her bakery escape
+
+  // ── Phase 1 faction foreshadowing ────────────────────────────────────────
+  | 'spotted_military_convoy' // Day 22: saw the military truck pass without stopping
+  | 'entered_hospital' // Day 30: physically entered the hospital
+  | 'pei_noticed_wound' // Day 45: 裴嘉应 glanced at the right hand — she noticed
+  | 'winter_shelter_established' // Day 60: stable winter shelter confirmed and settled
+  | 'received_military_broadcast' // Day 75: heard the Military Management Committee broadcast in full
 
   // ── Special ending conditions ─────────────────────────────────────────────
   | 'excessive_exertion' // 18+ consecutive action days without rest → H-2 ending
@@ -539,6 +548,20 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     category: 'narrative',
     achievement: null,
   },
+  {
+    key: 'trusts_official_government',
+    description:
+      'Day 15: player decided to follow the official government broadcast direction. Gates Phase 2 faction alignment toward the Military Management Committee.',
+    category: 'faction',
+    achievement: null,
+  },
+  {
+    key: 'trusts_alternative_broadcast',
+    description:
+      'Day 15: player chose to follow the alternative broadcast over the official channel. Gates Phase 2 faction alignment toward civilian resistance.',
+    category: 'faction',
+    achievement: null,
+  },
 
   // ── Phase 1 daily loop observation ────────────────────────────────────────
 
@@ -567,6 +590,50 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
     description:
       '裴嘉应 twisted her ankle escaping the hospital bakery. Carries a health penalty for ~30 days after rescue.',
     category: 'npc',
+    achievement: null,
+  },
+
+  // ── Phase 1 faction foreshadowing ─────────────────────────────────────────
+
+  {
+    key: 'spotted_military_convoy',
+    description:
+      'Day 22: player witnessed a military truck pass through the city without stopping. First proof that organized military exists but is not helping civilians. Gates Day 75 broadcast recognition and Phase 3 faction options.',
+    category: 'faction',
+    achievement: null,
+  },
+  {
+    key: 'entered_hospital',
+    description:
+      'Day 30: player physically entered the hospital building. Affects Phase 2 medical options and 裴嘉应 research completeness.',
+    category: 'narrative',
+    achievement: null,
+  },
+  {
+    key: 'pei_noticed_wound',
+    description:
+      "Day 45: 裴嘉应 glanced at 喻城's right hand without asking about it. She noticed. She chose not to ask. Gates Phase 2 confrontation arc timing — if set, the confrontation window opens earlier.",
+    category: 'npc',
+    achievement: null,
+  },
+  {
+    key: 'winter_shelter_established',
+    description:
+      'Day 60: stable winter shelter has been confirmed and settled into. Affects Phase 2 starting security and morale baselines.',
+    category: 'survival',
+    achievement: {
+      id: 'achievement_winter_shelter',
+      title: 'Against the Cold',
+      description: 'You built something that could last a season.',
+      icon: '🏚️',
+      secret: false,
+    },
+  },
+  {
+    key: 'received_military_broadcast',
+    description:
+      "Day 75: player heard the Military Management Committee's full broadcast. The tone was administrative, not desperate. Prerequisite for recognising the faction in Phase 3.",
+    category: 'faction',
     achievement: null,
   },
 

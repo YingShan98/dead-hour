@@ -1,0 +1,92 @@
+{
+  "id": "scene_day90_thaw",
+  "title": { "zh": "第九十天·雪化了" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 2160 },
+  "onEnter": {
+    "flags": { "survived_first_winter": true }
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "position": "prefix",
+      "zh": "第九十天。雪化了。我在窗边站了很长时间。这是一条日记的开头，但我不知道接下来应该写什么，所以我只是站着。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "右手中指在今天这种光线下看起来和左手不一样，不是明显的，是那种需要对比才能看出来的差别。颜色，纹路，皮下的走向。你把两只手并排放了一下，然后把右手收起来了。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第九十天。" },
+    { "zh": "你站在窗边，看着雪融化。" },
+    {
+      "zh": "不是突然的融化，是那种一点一点的，从屋檐开始，然后是窗框，然后是下面的地面，你看见的时间里它一直在动，但你说不出来它具体在哪一秒变成了另一个样子。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day90_thaw_acknowledge",
+      "text": { "zh": "「嗯。」" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "will": 1, "trust": 1 }
+      },
+      "consequence": [
+        { "zh": "她说：「你的手指好了。」" },
+        { "zh": "你说：「嗯。」" },
+        { "zh": "她说：「太快了。」" },
+        { "zh": "你说：「嗯。」" },
+        { "zh": "两人都沉默了一会儿，看着窗外的雪。" },
+        {
+          "zh": "她先转身，走回房间里。你在窗边再站了一会儿，然后也转身。"
+        },
+        {
+          "zh": "三个月。冬天结束了。接下来是另一件事了。"
+        }
+      ],
+      "nextSceneId": "scene_phase2_intro"
+    },
+    {
+      "id": "scene_day90_thaw_solo",
+      "text": { "zh": "站在窗边，看着雪化完，没有人说什么。" },
+      "conditions": { "blockedFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "雪化了。你一个人看着它化。"
+        },
+        {
+          "zh": "没有人说「你的手指好了」，所以那句话也不需要被回应，不需要被否认，不需要在两个人之间的沉默里悬着。它只是一件你一个人知道的事。"
+        },
+        {
+          "zh": "三个月。冬天结束了。接下来是另一件事。"
+        }
+      ],
+      "nextSceneId": "scene_phase2_intro"
+    },
+    {
+      "id": "scene_day90_thaw_deflect",
+      "text": { "zh": "「不用在意。」把话题转开。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "effects": {
+        "stats": { "trust": -1, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "她说：「你的手指好了。」" },
+        { "zh": "你说：「不用在意。」" },
+        {
+          "zh": "她没有说「太快了」。她只是看了你一眼，然后点了点头，像是接受了一个信息，但不是你说的那个信息。"
+        },
+        {
+          "zh": "你们都看着窗外的雪，没有再说什么。三个月。冬天结束了。"
+        }
+      ],
+      "nextSceneId": "scene_phase2_intro"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "scene_phase2_intro",
+  "title": { "zh": "第二阶段·铁血之春" },
+  "act": "act3",
+  "gameTime": { "hoursFromStart": 2184 },
+  "narrative": [
+    { "zh": "春天来了。" },
+    {
+      "zh": "三个月过去了。你活下来了——不只是活着，是建造了什么，维持了什么，在这座城市的某个角落站稳了脚。"
+    },
+    {
+      "zh": "接下来是另一件事。不是生存，是选择怎么生存。"
+    },
+    {
+      "zh": "（第二阶段内容建设中）"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_phase2_intro_continue",
+      "text": { "zh": "继续。" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_phase2_intro"
+    }
+  ]
+}

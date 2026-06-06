@@ -30,17 +30,45 @@
   "conditions": {},
   "choices": [
     {
+      "id": "scene_day15_morning_trust_official",
+      "text": { "zh": "官方频道更清晰，坐标也更具体。先去那个方向——政府还在运作，比自己乱闯强。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "trusts_official_government": true },
+        "stats": { "morale": 2, "will": -1 }
+      },
+      "consequence": [
+        { "zh": "你在备忘录里记下了坐标方向。至少有一件事明确了。" },
+        { "zh": "另一个声音还在脑子里晃，但你选择了。选择之后就只有往前走。" }
+      ],
+      "nextSceneId": "scene_day16_skip"
+    },
+    {
+      "id": "scene_day15_morning_trust_alternative",
+      "text": { "zh": "官方说的话太整齐了，太像在控制。另一个声音更真实。先往它说的方向查一查。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "trusts_alternative_broadcast": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        { "zh": "你把替代频率的位置记在备忘录里，把收音机装回背包。" },
+        { "zh": "也许你错了。但你不相信那个太干净的声音。这是你自己做的判断。" }
+      ],
+      "nextSceneId": "scene_day16_skip"
+    },
+    {
       "id": "scene_day15_morning_continue",
-      "text": { "zh": "先把眼前的事做完。广播的事之后再说。" },
+      "text": { "zh": "两个都别信。先把眼前的事做完，再说广播的事。" },
       "conditions": {},
       "effects": {
         "stats": { "will": 1 }
       },
       "consequence": [
         { "zh": "你关掉收音机，收拾好背包。" },
-        { "zh": "广播还在脑子里转，但现在不是做决定的时候——先把今天过完。" }
+        { "zh": "两个声音都在，都有可能是对的，都有可能是错的。暂时不处理这个矛盾。" }
       ],
-      "nextSceneId": "scene_day8_outside"
+      "nextSceneId": "scene_day16_skip"
     }
   ]
 }

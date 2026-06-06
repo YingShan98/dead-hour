@@ -1,0 +1,77 @@
+{
+  "id": "scene_day75_to_90_skip",
+  "title": { "zh": "第七十六天 · 第八十九天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1824 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第七十六天。那个广播的事还压在脑子里，但没有新的信号。也许我听错了某些字，也许我没有。\n第八十天。雪化了一点，又冻上了。中指今天有一种说不清楚的感觉，比几天前更容易注意到了——但不是疼，从来都不是疼，是别的。\n第八十五天。收音机今天完全没有信号，连杂音都少了。城市越来越安静，不确定这代表什么。\n第八十九天。九十天。差不多是一个可以停下来算一次总账的数字了。明天。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "这十四天，你把它们一天一天地度过，没有什么大事，但中指的感觉在悄悄变化——不是疼，是别的，越来越难以忽视。雪有一段时间化了，又冻上了。广播没有再出现。某种意义上这是这两个月来最安静的两个星期，你不确定那是好事还是坏事。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应的本子明显更厚了。你没有偷看。但第八十八天，她在整理的时候没有合上，你扫到了一行字：「右手中指——观察中。」下面是几个数据，你没有来得及看清楚她就合上了。她没有说什么，你也没有说什么。"
+    }
+  ],
+  "narrative": [{ "zh": "第七十六天到第八十九天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day75_to_90_broadcast",
+      "text": { "zh": "这段时间主要在监听——每天定时扫描收音机频段，看还有没有信号。" },
+      "conditions": {
+        "requiredItems": [{ "itemId": "radio", "minQuantity": 1 }]
+      },
+      "hint": { "zh": "需要：收音机" },
+      "effects": {
+        "stats": { "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你没有再完整地接收到那个频道，但偶尔有几秒的碎片：一句话的中间，一个数字，一段机械嗡嗡声后面的停顿。"
+        },
+        {
+          "zh": "不够拼出任何结论，但你记下了它们。也许在以后的某一天，它们会和别的什么拼在一起，变成一件可以理解的事。"
+        }
+      ],
+      "nextSceneId": "scene_day90_thaw"
+    },
+    {
+      "id": "scene_day75_to_90_prepare",
+      "text": { "zh": "这段时间主要在整理——把这三个月学到的、积累的，做一次系统的清点。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 2, "leadership": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你把物资、路线、观察、规律，全部重新整理了一遍。到第八十九天，你对自己的处境比三个月前清楚太多了。"
+        },
+        { "zh": "清楚不等于容易，但容易从来不是选项。" }
+      ],
+      "nextSceneId": "scene_day90_thaw"
+    },
+    {
+      "id": "scene_day75_to_90_rest",
+      "text": { "zh": "这段时间主要在恢复——让身体喘一口气，不拼消耗。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 2, "morale": 2, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你没有停止出门，但减少了频率，减少了风险。身体在这段时间里恢复了一些你没有注意到已经损耗的东西。"
+        },
+        {
+          "zh": "第八十九天，你发现你的手比上个月稳了一些。这大概是一件好事。"
+        }
+      ],
+      "nextSceneId": "scene_day90_thaw"
+    }
+  ]
+}

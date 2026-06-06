@@ -39,7 +39,7 @@
         { "zh": "你花了大半天检查每一道缝隙。窗框，门铰链，墙角的通风格栅。" },
         { "zh": "防御能力又高了一些。手腕很酸，这是可以接受的交换。" }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     },
     {
       "id": "scene_day3_day_rest",
@@ -53,7 +53,7 @@
         { "zh": "你强迫自己躺下，闭上眼。睡着比你想象的快。" },
         { "zh": "醒来时光已经斜了。脑子比昨天清楚，四肢的酸胀也退了一些。" }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     },
     {
       "id": "scene_day3_day_observe",
@@ -69,7 +69,7 @@
         { "zh": "它们不是随机的。有几个区域被反复经过，有几个死角它们从来不去。你把这些记下来。" },
         { "zh": "代价是你现在很难把这些画面从脑子里清出去。" }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     },
     {
       "id": "scene_day3_day_wound",
@@ -86,7 +86,7 @@
         },
         { "zh": "你重新缠上胶带。没有跟任何人说这件事，因为现在也没有人可以说。" }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     },
     {
       "id": "scene_day3_day_search",
@@ -109,7 +109,7 @@
           "zh": "插好插销，背靠着门站了一秒。手心有汗，但身体稳着。那种稳是做了一件有用的事之后才有的感觉。"
         }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     },
     {
       "id": "scene_day3_day_journal",
@@ -128,7 +128,7 @@
           "zh": "「不确定」那栏最长。但至少你知道自己在不确定什么——这比一团模糊的害怕好处理。"
         }
       ],
-      "nextSceneId": "scene_day3_night"
+      "nextSceneId": "scene_day3_dusk"
     }
   ]
 }

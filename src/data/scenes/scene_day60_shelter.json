@@ -1,0 +1,93 @@
+{
+  "id": "scene_day60_shelter",
+  "title": { "zh": "第六十天·冬日避难所" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 1440 },
+  "onEnter": {
+    "flags": {
+      "winter_shelter_established": true,
+      "has_shelter": true,
+      "survived_first_month": true
+    }
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应把她的那部分东西搬进来了，不多，一个背包，一个装着瓶瓶罐罐的棉布袋。她在靠窗的位置铺开，把那个棉布袋放在最容易拿到的角落。「这里，」她说，「这一块放医疗的。」你说好。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "你在新落脚点的墙上划了一道——不是日期，不是名字，只是一道划痕，确认今天发生的事是真的。右手中指在抵住墙的时候有一种皮下的感觉。你停了一下，然后继续划。"
+    }
+  ],
+  "narrative": [
+    { "zh": "第六十天。" },
+    {
+      "zh": "你站在这个地方的中间，把它从墙角到天花板看了一遍。不大，但够用。两个出口，一个可以封死，一个保留。窗户两扇，都能从里面锁。地板是混凝土的，不会吱嘎响，这很重要。"
+    },
+    {
+      "zh": "这是避难所。不是公寓，不是临时落脚点，不是「暂时在这里」。是避难所。"
+    },
+    { "zh": "你在外面度过了两个月，今天，你有了一个地方。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day60_shelter_secure",
+      "text": { "zh": "先把两个出口和所有窗户全部检查一遍，确认没有漏洞。" },
+      "conditions": {},
+      "effects": {
+        "security": 15,
+        "stats": { "will": 2 }
+      },
+      "consequence": [
+        {
+          "zh": "你花了大半天在每一道接缝和锁扣上仔细检查。三处需要加固，你加固了。一处通风口太大，你用铁网处理了。"
+        },
+        { "zh": "这个地方现在比你进来的时候安全太多了。" },
+        { "zh": "你退后一步，把它再看了一遍。这是你的地方了。" }
+      ],
+      "nextSceneId": "scene_day60_to_75_skip"
+    },
+    {
+      "id": "scene_day60_shelter_organize",
+      "text": { "zh": "把所有物资按类型整理，搞清楚有什么、还缺什么、能撑多久。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "食物：还有三周左右，如果节约的话。水：两周，需要找到补充来源。药：基础够，抗生素告急。工具：够用。"
+        },
+        {
+          "zh": "你把这些写下来，贴在墙上，每天能看到。问题摆在那里比问题藏在脑子里容易处理——这是你这两个月学会的事情之一。"
+        }
+      ],
+      "nextSceneId": "scene_day60_to_75_skip"
+    },
+    {
+      "id": "scene_day60_shelter_rest",
+      "text": { "zh": "什么都不做，先在这里待着，让身体知道它有了一个地方。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": 2, "morale": 3, "will": 2 }
+      },
+      "consequence": [
+        {
+          "zh": "你坐在地板上，背靠着墙，什么都不做，就坐着。"
+        },
+        {
+          "zh": "你不记得上一次这样坐着是什么时候了。两个月前？还是更早？"
+        },
+        {
+          "zh": "外面有风，但这里没有风。这一点点区别，今天感觉很大。"
+        }
+      ],
+      "nextSceneId": "scene_day60_to_75_skip"
+    }
+  ]
+}

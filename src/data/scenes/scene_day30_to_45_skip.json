@@ -1,0 +1,89 @@
+{
+  "id": "scene_day30_to_45_skip",
+  "title": { "zh": "第三十一天 · 第四十四天" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 744 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["wrote_journal"] },
+      "zh": "第三十一天。出来了。这是今天最重要的一句话。\n第三十五天。在废弃楼梯间看见了另一幅那种涂鸦——刀形，红漆，旁边这次有一行数字，像日期，或者坐标。我记了下来，因为这件事很重要，就算我不知道它为什么重要。\n第四十天。医疗物资快用完了，但今天裴嘉应用剩下的东西处理了一个陌生人的伤口，他活下来了。我记了一下，因为我知道我以后会忘掉它。\n第四十三天。明天去那个地方。我不知道为什么，只是觉得该去了。"
+    },
+    {
+      "conditions": { "blockedFlags": ["wrote_journal"] },
+      "zh": "十五天。你把它们一天一天地度过，没有一件大事，但每一件小事都积累成了你现在站着的地方。医院的物资用了一部分，还剩一部分。城市对你来说不再那么陌生了——你知道哪条街可以走，哪个角落不要靠近。某一天在废弃的楼里又看见了那种刀形涂鸦，你不知道那代表什么，但你记了下来。"
+    },
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "suffix",
+      "zh": "裴嘉应踝关节完全好了。她现在走路和你一样快，有时候比你快，因为她走路更轻。她开始做一些你没有叫她做的事——记医疗品的库存，在你们回来的时候把门查一遍。你没有说谢谢，她也没有要你说。这种分工自己就成立了。"
+    }
+  ],
+  "narrative": [{ "zh": "第三十一天到第四十四天。" }],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day30_to_45_medical",
+      "text": { "zh": "这段时间主要在整理医疗物资，学着处理各种伤口。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "hint": { "zh": "需要：裴嘉应存活" },
+      "effects": {
+        "stats": { "trust": 1, "health": 1, "morale": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "她没有系统地教你，是一边做一边说，你一边听一边记。到第四十四天，你知道怎么判断伤口的感染程度，知道什么时候该用抗生素，什么时候不该用。"
+        }
+      ],
+      "nextSceneId": "scene_day45_staircase"
+    },
+    {
+      "id": "scene_day30_to_45_scavenge",
+      "text": { "zh": "这段时间主要在扩大搜刮——趁物资还找得到，多囤积。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "health": -2, "morale": 1 },
+        "items": [
+          { "itemId": "canned_food", "delta": 4 },
+          { "itemId": "duct_tape", "delta": 2 }
+        ]
+      },
+      "consequence": [
+        {
+          "zh": "你把活动范围往外推了差不多三倍，代价是你回来的时候总是很累，有一次差点迷路。存量多了，这是可以接受的交换。"
+        }
+      ],
+      "nextSceneId": "scene_day45_staircase"
+    },
+    {
+      "id": "scene_day30_to_45_fortify",
+      "text": { "zh": "这段时间主要在加固——把落脚点做成真正能长期住的地方。" },
+      "conditions": {},
+      "effects": {
+        "security": 20,
+        "flags": { "built_shelter": true },
+        "stats": { "health": -2, "will": 1 }
+      },
+      "consequence": [
+        {
+          "zh": "你在里面装了两道门，堵死了三个不必要的进出口，加了通风过滤层。十五天的劳动，换来了一个你可以在里面直腰站着的地方。"
+        }
+      ],
+      "nextSceneId": "scene_day45_staircase"
+    },
+    {
+      "id": "scene_day30_to_45_journal",
+      "text": { "zh": "这段时间主要在记录——每一天，每一件事，每一个无法归类的细节。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "wrote_journal": true },
+        "stats": { "will": 2, "morale": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "本子用了一半。你回头翻了一页第七天写的内容，发现当时你描述「安静」的方式和现在不一样了——不是用词不一样，是你觉得安静这件事本身变成了别的东西。"
+        }
+      ],
+      "nextSceneId": "scene_day45_staircase"
+    }
+  ]
+}

@@ -140,6 +140,29 @@
       "nextSceneId": "scene_day10_supermarket"
     },
     {
+      "id": "scene_day8_outside_week_reflect",
+      "text": {
+        "zh": "站在街上，把这一周做了什么、学到了什么，在脑子里过一遍。不是为了什么，只是过一遍。"
+      },
+      "conditions": {
+        "blockedFlags": ["knows_city_layout"]
+      },
+      "effects": {
+        "stats": { "will": 2, "morale": 1 },
+        "timeCost": 1
+      },
+      "consequence": [
+        {
+          "zh": "七天。伤口愈合了，或者在愈合。门还撑着，或者撑过了。每天都有一件事做成了，即使只是一件。"
+        },
+        {
+          "zh": "你不知道接下来是什么，但你知道自己走到这里靠的是什么——不是运气，是每次做了那个稍难一点点的选择。"
+        },
+        { "zh": "这种清楚的感觉维持不了太久，但它现在在。" }
+      ],
+      "nextSceneId": "scene_day8_outside"
+    },
+    {
       "id": "scene_day8_outside_hospital",
       "text": { "zh": "去医院那个方向看看——如果裴嘉应还在里面，或者有任何药品物资，值得冒险。" },
       "conditions": {

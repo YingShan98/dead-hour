@@ -1,0 +1,122 @@
+{
+  "id": "scene_day22_truck",
+  "title": { "zh": "第二十二天·车队" },
+  "act": "act2",
+  "gameTime": { "hoursFromStart": 528 },
+  "onEnter": {
+    "flags": { "spotted_military_convoy": true }
+  },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredFlags": ["pei_alive"] },
+      "position": "prefix",
+      "zh": "裴嘉应在你左后方一步。她感觉到发动机声的时候先抓了你的袖子，轻的，只是示意：不要动，不要叫。"
+    },
+    {
+      "conditions": { "requiredFlags": ["knows_city_layout"] },
+      "position": "suffix",
+      "zh": "你认出了这条路——这不是随机走过来的。是一条你观察过的干道，从南往北，有目的地。它来过不止一次。"
+    },
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "车厢里那个士兵的目光落在你身上，然后往下，在你的右手停了一秒。你不确定那一秒是不是你想象出来的。"
+    }
+  ],
+  "narrative": [
+    { "zh": "你在一条街上走着，走到一半，听见了发动机的声音。" },
+    {
+      "zh": "军绿色的卡车，一辆，从路口拐进来，匀速开过。没有减速，没有停，没有任何要停的意思。车厢里有士兵，装备齐全，靠着车厢侧板坐着，盔甲，武装。"
+    },
+    {
+      "zh": "卡车侧面有一个红十字——但红十字下面，有什么东西被黑色漆抹掉了。漆刷得急，不均匀，底下的形状还隐约看得出来，是某个徽章，或者单位符号。不是医疗队。"
+    },
+    {
+      "zh": "其中一个士兵转头，直视了你一眼。卡车没有停。"
+    },
+    {
+      "zh": "车走远了，发动机声在街道之间回响了一会儿，然后没了。"
+    }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day22_truck_watch",
+      "text": { "zh": "站着，看它走远，什么都不说。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": -1 }
+      },
+      "consequence": [
+        { "zh": "你一直等到发动机声消失在某个拐角。" },
+        { "zh": "军方还在。军方没有停下来。" },
+        {
+          "zh": "这两件事你都记住了，但你不知道该从它们推导出什么结论——或者，你知道结论，只是不想得出它。"
+        }
+      ],
+      "nextSceneId": "scene_day22_to_30_skip"
+    },
+    {
+      "id": "scene_day22_truck_call",
+      "text": { "zh": "叫住它——举手，跑两步，让他们看见你。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "morale": -3, "will": 1 }
+      },
+      "consequence": [
+        { "zh": "你跑了几步，举起手，大声叫。" },
+        {
+          "zh": "卡车没有停。那个士兵又看了你一眼，表情没有任何变化，然后视线移开了，车继续走。"
+        },
+        {
+          "zh": "你站在路中间，手还举着，等到车看不见了，才把手放下来。"
+        },
+        { "zh": "他们看见了你。他们没有停。这两件事都是真的。" }
+      ],
+      "nextSceneId": "scene_day22_to_30_skip"
+    },
+    {
+      "id": "scene_day22_truck_symbol",
+      "text": { "zh": "等它走远之后，走近它来的路口——漆是最近刷的，底下的符号也许还能认出来。" },
+      "conditions": {
+        "requiredStats": [{ "stat": "stealth", "min": 2 }]
+      },
+      "hint": { "zh": "需要：潜行 2+" },
+      "effects": {
+        "stats": { "stealth": 1, "will": 2 }
+      },
+      "consequence": [
+        {
+          "zh": "你顺着它来的方向往前走了半个路口，在墙角发现了一道之前没有注意过的标记：一条竖线，两横，刻在砖缝里，很浅，但是刻意的。"
+        },
+        {
+          "zh": "它代表什么你不知道。但它在那里，是有人放上去的，而且不只是这一处——你在街对面的电线杆上找到了同样的刻痕。"
+        },
+        {
+          "zh": "你把它记进备忘录里，画了草图。它们在这座城市里构成某种坐标，或者边界。"
+        }
+      ],
+      "nextSceneId": "scene_day22_to_30_skip"
+    },
+    {
+      "id": "scene_day22_truck_follow",
+      "text": { "zh": "跟上去一段——不要靠近，只是看它往哪里去。" },
+      "conditions": {},
+      "effects": {
+        "stats": { "will": 1, "morale": -1, "health": -1 }
+      },
+      "consequence": [
+        {
+          "zh": "你跟了大概四个路口，保持在车看不见你的距离。"
+        },
+        {
+          "zh": "它在城南某个路口拐走了，你没有跟进去——那个方向的感染密度很高，你知道。"
+        },
+        {
+          "zh": "但你看清楚了一件事：它走的路是直的，不是绕开感染者的随机路线。它走得很稳，像是这条路走过很多次，像是那些东西，让它过。"
+        }
+      ],
+      "nextSceneId": "scene_day22_to_30_skip"
+    }
+  ]
+}
