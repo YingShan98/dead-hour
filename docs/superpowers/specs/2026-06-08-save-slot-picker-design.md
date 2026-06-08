@@ -29,6 +29,7 @@ Add a slot-picker modal to the title screen so players can see all 3 slots (what
 Lives alongside `AmbientOverlay` (not under `components/game/`) because — unlike `StatPanel`, `InventoryPanel`, etc. — it has no `GameState` dependency; it only operates on `SaveSlotInfo[]`.
 
 It follows the existing overlay convention established by `ConsequenceDisplay`:
+
 - `fixed inset-0 z-50` backdrop with `role="dialog" aria-modal="true"`
 - Escape key, backdrop click, and an explicit Cancel button all close it
 - Owns its own internal UI state (which slot, if any, has a pending confirm step open)
@@ -36,6 +37,7 @@ It follows the existing overlay convention established by `ConsequenceDisplay`:
 This keeps `TitlePage` a thin presentational page (as it is today) and avoids inventing a generic `Modal` primitive that nothing else currently needs — the one other overlay in the codebase (`ConsequenceDisplay`) is purpose-built, not modal-shaped, so there's no existing reusable abstraction to extend, and building one for a single consumer would be premature generalization.
 
 **`TitlePage.tsx` changes:**
+
 - Add `const [pickerOpen, setPickerOpen] = useState(false)`
 - "New Game" and "Continue" both set `pickerOpen = true` instead of acting immediately
 - Render `<SaveSlotPicker>` conditionally; wire its callbacks to `startNewGame(slot)`, `loadFromSave(slot)` (existing store actions, both already accept a slot argument), and `deleteSave(slot)` (already exported from `saveManager.ts`, called directly — matching how `listSaves` is already called directly from `TitlePage` rather than through the store)
@@ -44,8 +46,8 @@ This keeps `TitlePage` a thin presentational page (as it is today) and avoids in
 
 ```ts
 interface SaveSlotPickerProps {
-  saves: SaveSlotInfo[]          // from listSaves(), re-fetched after each mutation
-  isLoading: boolean             // disables interaction during async start/load
+  saves: SaveSlotInfo[] // from listSaves(), re-fetched after each mutation
+  isLoading: boolean // disables interaction during async start/load
   onStartNew: (slot: number) => void
   onContinue: (slot: number) => void
   onDelete: (slot: number) => void
@@ -54,6 +56,7 @@ interface SaveSlotPickerProps {
 ```
 
 `listSaves()` is a synchronous, one-shot `localStorage` read — not reactive — so `TitlePage` holds the slot list in local state (`const [saves, setSaves] = useState(() => listSaves())`), seeded on mount and refreshed via `setSaves(listSaves())`:
+
 - when the picker opens (in case saves changed since the title screen first loaded — e.g. returning from a game session)
 - after `onDelete` and after a confirmed `onStartNew` overwrite (both mutate `localStorage` and must be reflected in the still-open modal)
 
@@ -75,6 +78,7 @@ These are small, contained, and serve the UI directly — no speculative general
 1. **Extend `SaveSlotInfo`** in `src/engine/saveManager.ts` with an optional `hoursFromStart?: number`, populated in `listSaves()` from the parsed save state. This is the only new data the UI needs that isn't already exposed.
 
 2. **Extract day-label computation into a shared pure helper.** `SceneDisplay.tsx` currently has a private `formatGameTime(hoursFromStart)` that computes which in-game day a given `hoursFromStart` falls on (and has a known off-by-one edge case noted in prior sessions — `Math.ceil(hoursFromStart / 24)` mislabels the boundary hours). Rather than re-implementing similar math a second time for the slot picker (and risking a second, possibly-divergent bug), extract the pure computation into `src/engine/timeManager.ts` as something like:
+
    ```ts
    type GameDayLabel =
      | { kind: 'beforeOutbreak'; hours: number }
@@ -83,6 +87,7 @@ These are small, contained, and serve the UI directly — no speculative general
 
    export function getGameDayLabel(hoursFromStart: number): GameDayLabel
    ```
+
    `SceneDisplay` and `SaveSlotPicker` both call this and map the result to localized strings via `LL.time.beforeOutbreak` / `LL.time.dayOne` / `LL.time.day`. This is a targeted refactor of code this feature directly depends on (not a drive-by cleanup) — it ensures the slot picker shows a day number consistent with what the player sees in-game, off-by-one and all, rather than a second implementation that might disagree.
 
 3. **`deleteSave`** is already exported from `saveManager.ts` — `TitlePage` just imports and calls it.
@@ -102,11 +107,13 @@ New keys added to `src/i18n/zh/index.ts` and `src/i18n/en/index.ts` (then `pnpm 
 ## Styling & accessibility
 
 Reuses existing design primitives rather than introducing new ones:
+
 - `panel-card` for slot rows, `choice-btn` / `choice-btn-primary` for actions
 - `ui-label` for the heading and slot metadata
 - The existing `crisis-banner--danger` red treatment for destructive confirm prompts (matches how the game already signals dangerous/irreversible states)
 
 Accessibility, following `ConsequenceDisplay`'s established pattern:
+
 - `role="dialog" aria-modal="true"`, labelled by the heading
 - Escape closes; backdrop click closes (with `stopPropagation` on the inner content, exactly as `ConsequenceDisplay` does)
 - Focus moves into the dialog on open, returns to the triggering button (`New Game` or `Continue`) on close
