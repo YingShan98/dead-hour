@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # Brainstorming visual companion sessions
 .superpowers/
+
+# Local planning docs (push explicitly when needed)
+docs/superpowers/
