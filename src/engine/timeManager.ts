@@ -125,6 +125,25 @@ export function getLeadershipSignal(leadership: number): LeadershipSignalKey | n
   return null
 }
 
+// ── Day label ─────────────────────────────────────────────────────────────────
+// Pure computation: which in-game day does a given hoursFromStart fall on?
+// Returns a discriminated union; callers look up display strings in LL.
+// Maps to: LL.time.beforeOutbreak / LL.time.dayOne / LL.time.day
+
+export type GameDayLabel =
+  | { kind: 'beforeOutbreak'; hours: number }
+  | { kind: 'dayOne' }
+  | { kind: 'day'; day: number }
+
+export function getGameDayLabel(hoursFromStart: number): GameDayLabel {
+  if (hoursFromStart < 0) {
+    return { kind: 'beforeOutbreak', hours: Math.abs(hoursFromStart) }
+  }
+  const days = Math.ceil(hoursFromStart / 24)
+  if (days === 0) return { kind: 'dayOne' }
+  return { kind: 'day', day: days }
+}
+
 // ── Crisis state ──────────────────────────────────────────────────────────────
 // No strings — pure boolean flags for the store.
 
