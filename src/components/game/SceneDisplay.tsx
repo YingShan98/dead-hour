@@ -1,5 +1,6 @@
 import type { Scene, GameState } from '@/engine/types'
 import { evaluate } from '@/engine/evaluator'
+import { getGameDayLabel } from '@/engine/timeManager'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
@@ -23,12 +24,15 @@ export default function SceneDisplay({ scene, state }: Props) {
   const paragraphs = [...prefix, ...resolveLocaleStrings(scene.narrative, locale), ...suffix]
 
   function formatGameTime(hoursFromStart: number): string {
-    if (hoursFromStart < 0) {
-      return interpolate(LL.time.beforeOutbreak, { hours: Math.abs(hoursFromStart) })
+    const label = getGameDayLabel(hoursFromStart)
+    switch (label.kind) {
+      case 'beforeOutbreak':
+        return interpolate(LL.time.beforeOutbreak, { hours: label.hours })
+      case 'dayOne':
+        return LL.time.dayOne()
+      case 'day':
+        return interpolate(LL.time.day, { day: label.day })
     }
-    const days = Math.ceil(hoursFromStart / 24)
-    if (days === 0) return LL.time.dayOne() // h=0 exactly (outbreak start)
-    return interpolate(LL.time.day, { day: days })
   }
 
   return (
