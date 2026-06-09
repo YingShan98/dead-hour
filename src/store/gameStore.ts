@@ -7,6 +7,7 @@ import { checkForEnding, getTimeExpiredSceneId } from '@/engine/endingEvaluator'
 import { checkCrisisState } from '@/engine/timeManager'
 import { applyDailyTicks } from '@/engine/dailyTick'
 import { saveGame, loadGame } from '@/engine/saveManager'
+import { recordEnding } from '@/engine/endingGallery'
 import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import { getItemDef } from '@/data/itemRegistry'
 import { generateJournalEntry } from '@/engine/journalGenerator'
@@ -44,6 +45,7 @@ interface GameStore {
   pendingNextScene: Scene | null
   timeJustExpired: boolean
   awakeningJustTriggered: boolean
+  dayJustAdvanced: number | null
   isSceneTransitioning: boolean
 
   // Actions
@@ -54,6 +56,7 @@ interface GameStore {
   commitChoice: () => Promise<void>
   dismissError: () => void
   clearCrisisFlags: () => void
+  clearDayTransition: () => void
 }
 
 // ─── Store implementation ─────────────────────────────────────────────────────
@@ -70,6 +73,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
   pendingNextScene: null,
   timeJustExpired: false,
   awakeningJustTriggered: false,
+  dayJustAdvanced: null,
   isSceneTransitioning: false,
 
   // ── Start a new game ─────────────────────────────────────────────────────────
@@ -97,6 +101,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         availableEndings: endings,
         triggeredEnding: null,
         isLoading: false,
+        dayJustAdvanced: null,
       })
     } catch (err) {
       console.error('[store] startNewGame failed:', err)
@@ -123,7 +128,13 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       return
     }
 
-    set({ isLoading: true, error: null, timeJustExpired: false, awakeningJustTriggered: false })
+    set({
+      isLoading: true,
+      error: null,
+      timeJustExpired: false,
+      awakeningJustTriggered: false,
+      dayJustAdvanced: null,
+    })
 
     try {
       // 1. Apply choice effects (stats, flags, items, security, timeCost)
@@ -197,6 +208,11 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       // 9a. Apply daily ticks (hunger, cold, infection) if calendar day has advanced
       newState = applyDailyTicks(newState)
 
+      // Day-advance detection (drives DayTransition overlay in GamePage)
+      const preDay = Math.ceil(gameState.gameTime.hoursFromStart / 24)
+      const postDay = Math.ceil(newState.gameTime.hoursFromStart / 24)
+      const dayAdvanced = preDay >= 1 && postDay > preDay ? postDay : null
+
       // 10. Check for triggered ending
       const triggered = checkForEnding(availableEndings, newState)
 
@@ -214,6 +230,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       // No consequence text — crossfade then commit
       set({ isLoading: false, isSceneTransitioning: true })
       await new Promise<void>((resolve) => setTimeout(resolve, 350))
+      if (triggered) recordEnding(triggered.id)
       if (!triggered) saveGame(newState.saveSlot, newState)
       set({
         gameState: newState,
@@ -225,6 +242,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         isSceneTransitioning: false,
         timeJustExpired: !preCrisis.timeExpired && postCrisis.timeExpired,
         awakeningJustTriggered: !preCrisis.awakeningReady && postCrisis.awakeningReady,
+        dayJustAdvanced: dayAdvanced,
       })
     } catch (err) {
       console.error('[store] selectChoice failed:', err)
@@ -289,6 +307,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         availableEndings: endings,
         triggeredEnding: null,
         isLoading: false,
+        dayJustAdvanced: null,
       })
     } catch (err) {
       console.error('[store] loadFromSave failed:', err)
@@ -303,6 +322,11 @@ export const useGameStore = create<GameStore>()((set, get) => ({
 
     const preCrisis = checkCrisisState(gameState)
     const postCrisis = checkCrisisState(pendingNextState)
+
+    const preDay = Math.ceil(gameState.gameTime.hoursFromStart / 24)
+    const postDay = Math.ceil(pendingNextState.gameTime.hoursFromStart / 24)
+    const dayAdvanced = preDay >= 1 && postDay > preDay ? postDay : null
+
     const triggered = checkForEnding(availableEndings, pendingNextState)
 
     // Dismiss overlay immediately, start scene exit animation
@@ -314,6 +338,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
     })
     await new Promise<void>((resolve) => setTimeout(resolve, 350))
 
+    if (triggered) recordEnding(triggered.id)
     if (!triggered) saveGame(pendingNextState.saveSlot, pendingNextState)
     set({
       gameState: pendingNextState,
@@ -322,9 +347,11 @@ export const useGameStore = create<GameStore>()((set, get) => ({
       isSceneTransitioning: false,
       timeJustExpired: !preCrisis.timeExpired && postCrisis.timeExpired,
       awakeningJustTriggered: !preCrisis.awakeningReady && postCrisis.awakeningReady,
+      dayJustAdvanced: dayAdvanced,
     })
   },
 
   dismissError: () => set({ error: null }),
   clearCrisisFlags: () => set({ timeJustExpired: false, awakeningJustTriggered: false }),
+  clearDayTransition: () => set({ dayJustAdvanced: null }),
 }))

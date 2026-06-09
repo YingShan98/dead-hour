@@ -34,6 +34,20 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading, gameFlag
     return () => clearTimeout(t)
   }, [choice, onDone])
 
+  useEffect(() => {
+    if (!visible || isLoading) return
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onDone()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [visible, isLoading, onDone])
+
   if (!choice || !choice.consequence || choice.consequence.length === 0) return null
   if (!visible) return null
 
@@ -58,12 +72,6 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading, gameFlag
       aria-modal="true"
       aria-labelledby="consequence-heading"
       onClick={handleContinue}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          handleContinue()
-        }
-      }}
     >
       <p id="consequence-heading" className="sr-only">
         {LL.ui.continue()}

@@ -30,6 +30,8 @@
   --animate-flicker: flicker 4s infinite;
   --animate-pulse-soft: pulseSoft 2s ease-in-out infinite;
   --animate-fade-out: fadeOut 0.35s ease forwards;
+  --animate-stat-pulse: statPulse 1.4s ease-in-out infinite;
+  --animate-day-banner: dayBanner 1.8s ease forwards;
 }
 
 @keyframes fadeIn {
@@ -93,6 +95,35 @@
   }
 }
 
+@keyframes statPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes dayBanner {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.4em;
+  }
+  12% {
+    opacity: 1;
+    letter-spacing: 0.25em;
+  }
+  78% {
+    opacity: 1;
+    letter-spacing: 0.25em;
+  }
+  100% {
+    opacity: 0;
+    letter-spacing: 0.4em;
+  }
+}
+
 @layer base {
   html {
     background-color: #0a0a0a;
@@ -124,6 +155,30 @@
   :focus-visible {
     outline: 2px solid #c43838;
     outline-offset: 2px;
+  }
+}
+
+/* ── Font-size preference ──────────────────────────────────────────────────── */
+[data-font-size='small'] {
+  --text-narrative: 1rem;
+  --text-narrative--line-height: 1.75;
+}
+
+[data-font-size='large'] {
+  --text-narrative: 1.3rem;
+  --text-narrative--line-height: 1.95;
+}
+
+/* ── Reduce-motion overrides (data-attribute toggle + OS preference) ─────────── */
+[data-reduced-motion='true'] * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

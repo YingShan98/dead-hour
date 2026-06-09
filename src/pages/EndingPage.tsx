@@ -7,6 +7,17 @@ import AmbientOverlay from '@/components/ui/AmbientOverlay'
 import type { EndingType } from '@/engine/types'
 import JournalPanel from '@/components/game/JournalPanel'
 
+const MILESTONE_FLAGS: Array<{ flag: string; zh: string; en: string }> = [
+  { flag: 'pei_alive', zh: '裴嘉应生还', en: 'Pei survived' },
+  { flag: 'helped_stranger', zh: '帮助了陌生人', en: 'Helped a stranger' },
+  { flag: 'superpower_awakening', zh: '超能觉醒', en: 'Awakening' },
+  { flag: 'zombie_turning', zh: '感染失控', en: 'Turning' },
+  { flag: 'has_group', zh: '建立了团队', en: 'Built a group' },
+  { flag: 'scientist_saved', zh: '救出郑博士', en: 'Saved the scientist' },
+  { flag: 'wrote_journal', zh: '留下了日记', en: 'Kept a journal' },
+  { flag: 'survived_first_week', zh: '存活超过一周', en: 'Survived one week' },
+]
+
 const TYPE_COLOURS: Record<EndingType, string> = {
   bad: 'text-danger',
   neutral: 'text-warning',
@@ -96,12 +107,36 @@ export default function EndingPage() {
           <>
             <div className="flex flex-wrap gap-4 sm:gap-6 justify-center font-ui text-xs text-text-dim">
               <span className="panel-card py-2 px-3">
+                {interpolate(LL.ending.daysSurvived, {
+                  count: Math.ceil(gameState.gameTime.hoursFromStart / 24) || 1,
+                })}
+              </span>
+              <span className="panel-card py-2 px-3">
                 {interpolate(LL.ending.choicesMade, { count: gameState.choiceHistory.length })}
               </span>
               <span className="panel-card py-2 px-3">
                 {interpolate(LL.ending.scenesVisited, { count: gameState.visitedScenes.length })}
               </span>
             </div>
+
+            {(() => {
+              const flags = gameState.flags as Record<string, boolean | undefined>
+              const milestones = MILESTONE_FLAGS.filter((m) => flags[m.flag])
+              if (milestones.length === 0) return null
+              return (
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {milestones.map((m) => (
+                    <span
+                      key={m.flag}
+                      className="panel-card py-1 px-2 font-ui text-xs text-text-dim"
+                    >
+                      {locale === 'en' ? m.en : m.zh}
+                    </span>
+                  ))}
+                </div>
+              )
+            })()}
+
             {gameState.journalLog.length > 0 && <JournalPanel entries={gameState.journalLog} />}
           </>
         )}

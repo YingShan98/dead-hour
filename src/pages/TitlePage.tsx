@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
 import { listSaves, deleteSave } from '@/engine/saveManager'
+import { getDiscoveredEndings, TOTAL_PLANNED_ENDINGS } from '@/engine/endingGallery'
+import { isAudioEnabled, toggleAudio } from '@/engine/audioManager'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
@@ -14,6 +16,8 @@ export default function TitlePage() {
 
   const [pickerOpen, setPickerOpen] = useState(false)
   const [saves, setSaves] = useState(() => listSaves())
+  const [audioOn, setAudioOn] = useState(() => isAudioEnabled())
+  const discoveredCount = getDiscoveredEndings().length
 
   const hasSave = saves.some((s) => s.exists)
 
@@ -104,11 +108,32 @@ export default function TitlePage() {
               {localeLabel(l)}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => setAudioOn(toggleAudio())}
+            className={`ui-label text-xs px-3 py-1.5 rounded-md border transition-colors ${
+              audioOn
+                ? 'border-accent text-accent bg-[#1a0c0c]'
+                : 'border-border text-muted hover:border-text-dim hover:text-text-dim'
+            }`}
+            aria-label={audioOn ? LL.settings.soundDisable() : LL.settings.soundEnable()}
+            aria-pressed={audioOn}
+          >
+            ♪
+          </button>
         </div>
 
         <p className="ui-label text-muted text-xs">
           {interpolate(LL.title.version, { version: '0.1.0' })}
         </p>
+        {discoveredCount > 0 && (
+          <p className="ui-label text-muted text-xs">
+            {interpolate(LL.title.endingsFound, {
+              count: discoveredCount,
+              total: TOTAL_PLANNED_ENDINGS,
+            })}
+          </p>
+        )}
       </div>
     </div>
   )

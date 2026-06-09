@@ -19,6 +19,7 @@ const zh: BaseTranslation = {
     newGame: '开始新游戏',
     continue: '继续游戏',
     version: 'v{version:string} — 独立开发',
+    endingsFound: '已解锁结局：{count:number} / {total:number}',
     slots: {
       heading: '选择存档',
       empty: '空',
@@ -37,6 +38,7 @@ const zh: BaseTranslation = {
     loadingScene: '场景载入中…',
     requiresHint: '需要{hint:string}',
     autoSaved: '已自动存档',
+    keyHint: '按 1–N 预选 · Enter 确认',
     crisis: {
       timeExpired: '时间到了。外面的声音变了。',
       breachImminent: '防御正在失效。他们正在渗透进来。',
@@ -162,6 +164,7 @@ const zh: BaseTranslation = {
     },
     choicesMade: '选择次数：{count:number}',
     scenesVisited: '访问场景：{count:number}',
+    daysSurvived: '存活 {count:number} 天',
     journal: '日记',
     journalEntries: '日记条目',
     journalEmpty: '暂无条目。',
@@ -180,6 +183,20 @@ const zh: BaseTranslation = {
     slot: '存档 {slot:number}',
     empty: '空存档',
     savedAt: '存档于 {date:string}',
+  },
+
+  // ── NPC status panel ──────────────────────────────────────────────────────
+  npcs: {
+    label: '人物状态',
+  },
+
+  // ── Settings panel ────────────────────────────────────────────────────────
+  settings: {
+    label: '设置',
+    fontSize: '字体大小',
+    reduceMotion: '减少动画',
+    soundEnable: '开启音效',
+    soundDisable: '关闭音效',
   },
 
   // ── Achievements ───────────────────────────────────────────────────────────

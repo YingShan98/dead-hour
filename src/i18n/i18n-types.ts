@@ -68,6 +68,12 @@ type RootTranslation = {
      * @param {string} version
      */
     version: RequiredParams<'version'>
+    /**
+     * 已​解​锁​结​局​：​{​c​o​u​n​t​}​ ​/​ ​{​t​o​t​a​l​}
+     * @param {number} count
+     * @param {number} total
+     */
+    endingsFound: RequiredParams<'count' | 'total'>
     slots: {
       /**
        * 选​择​存​档
@@ -125,6 +131,10 @@ type RootTranslation = {
      * 已​自​动​存​档
      */
     autoSaved: string
+    /**
+     * 按​ ​1​–​N​ ​选​择​ ​·​ ​E​n​t​e​r​ ​继​续
+     */
+    keyHint: string
     crisis: {
       /**
        * 时​间​到​了​。​外​面​的​声​音​变​了​。
@@ -433,6 +443,11 @@ type RootTranslation = {
      */
     scenesVisited: RequiredParams<'count'>
     /**
+     * 存​活​ ​{​c​o​u​n​t​}​ ​天
+     * @param {number} count
+     */
+    daysSurvived: RequiredParams<'count'>
+    /**
      * 日​记
      */
     journal: string
@@ -488,6 +503,34 @@ type RootTranslation = {
      * @param {string} date
      */
     savedAt: RequiredParams<'date'>
+  }
+  npcs: {
+    /**
+     * 人​物​状​态
+     */
+    label: string
+  }
+  settings: {
+    /**
+     * 设​置
+     */
+    label: string
+    /**
+     * 字​体​大​小
+     */
+    fontSize: string
+    /**
+     * 减​少​动​画
+     */
+    reduceMotion: string
+    /**
+     * 开​启​音​效
+     */
+    soundEnable: string
+    /**
+     * 关​闭​音​效
+     */
+    soundDisable: string
   }
   achievements: {
     /**
@@ -578,6 +621,10 @@ export type TranslationFunctions = {
      * v{version} — 独立开发
      */
     version: (arg: { version: string }) => LocalizedString
+    /**
+     * 已解锁结局：{count} / {total}
+     */
+    endingsFound: (arg: { count: number; total: number }) => LocalizedString
     slots: {
       /**
        * 选择存档
@@ -630,6 +677,10 @@ export type TranslationFunctions = {
      * 已自动存档
      */
     autoSaved: () => LocalizedString
+    /**
+     * 按 1–N 选择 · Enter 继续
+     */
+    keyHint: () => LocalizedString
     crisis: {
       /**
        * 时间到了。外面的声音变了。
@@ -930,6 +981,10 @@ export type TranslationFunctions = {
      */
     scenesVisited: (arg: { count: number }) => LocalizedString
     /**
+     * 存活 {count} 天
+     */
+    daysSurvived: (arg: { count: number }) => LocalizedString
+    /**
      * 日记
      */
     journal: () => LocalizedString
@@ -983,6 +1038,34 @@ export type TranslationFunctions = {
      * 存档于 {date}
      */
     savedAt: (arg: { date: string }) => LocalizedString
+  }
+  npcs: {
+    /**
+     * 人物状态
+     */
+    label: () => LocalizedString
+  }
+  settings: {
+    /**
+     * 设置
+     */
+    label: () => LocalizedString
+    /**
+     * 字体大小
+     */
+    fontSize: () => LocalizedString
+    /**
+     * 减少动画
+     */
+    reduceMotion: () => LocalizedString
+    /**
+     * 开启音效
+     */
+    soundEnable: () => LocalizedString
+    /**
+     * 关闭音效
+     */
+    soundDisable: () => LocalizedString
   }
   achievements: {
     /**

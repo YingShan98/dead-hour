@@ -2,7 +2,7 @@
   "id": "scene_day8_outside",
   "title": { "zh": "城市" },
   "act": "act2",
-  "gameTime": { "hoursFromStart": 176 },
+  "gameTime": { "hoursFromStart": 168 },
   "conditionalNarrative": [
     {
       "conditions": { "requiredFlags": ["delayed_exit_week"] },

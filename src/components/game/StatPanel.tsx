@@ -13,6 +13,7 @@ interface StatRow {
   icon: string
   max: number
   barColour: (value: number) => string
+  dangerBelow?: number
 }
 
 const STAT_ROWS: StatRow[] = [
@@ -22,6 +23,7 @@ const STAT_ROWS: StatRow[] = [
     icon: '❤',
     max: 20,
     barColour: (v) => (v <= 4 ? '#8b2020' : '#4a7c5f'),
+    dangerBelow: 5,
   },
   {
     key: 'morale',
@@ -29,6 +31,7 @@ const STAT_ROWS: StatRow[] = [
     icon: '◈',
     max: 20,
     barColour: (v) => (v <= 4 ? '#8b2020' : '#b08030'),
+    dangerBelow: 5,
   },
   {
     key: 'stealth',
@@ -86,10 +89,11 @@ export default function StatPanel({ stats, flags }: Props) {
       <p className="ui-label text-muted">{LL.stats.label()}</p>
 
       {/* Visible character stats */}
-      {STAT_ROWS.map(({ key, labelKey, icon, max, barColour }) => {
+      {STAT_ROWS.map(({ key, labelKey, icon, max, barColour, dangerBelow }) => {
         const value = stats[key]
         if (key === 'money' && flags.money_obsolete) return null
         const pct = Math.round((value / max) * 100)
+        const isDanger = dangerBelow !== undefined && value < dangerBelow
         return (
           <div key={key} className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
@@ -105,7 +109,7 @@ export default function StatPanel({ stats, flags }: Props) {
             </div>
             <div className="stat-bar">
               <div
-                className="stat-bar-fill"
+                className={`stat-bar-fill${isDanger ? ' animate-stat-pulse' : ''}`}
                 style={{ width: `${pct}%`, backgroundColor: barColour(value) }}
               />
             </div>

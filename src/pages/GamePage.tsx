@@ -11,7 +11,10 @@ import TimeCountdown from '@/components/game/TimeCountdown'
 import SecurityMeter from '@/components/game/SecurityMeter'
 import TransformationHint from '@/components/game/TransformationHint'
 import ConsequenceDisplay from '@/components/game/ConsequenceDisplay'
+import NpcStatusPanel from '@/components/game/NpcStatusPanel'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
+import DayTransition from '@/components/ui/DayTransition'
+import SettingsPanel from '@/components/ui/SettingsPanel'
 import { useI18n } from '@/i18n/useI18n'
 
 type LLErrors = ReturnType<typeof useI18n>['LL']['errors']
@@ -50,12 +53,14 @@ export default function GamePage() {
     error,
     timeJustExpired,
     awakeningJustTriggered,
+    dayJustAdvanced,
     pendingChoice,
     isSceneTransitioning,
     selectChoice,
     commitChoice,
     dismissError,
     clearCrisisFlags,
+    clearDayTransition,
   } = useGameStore()
 
   useEffect(() => {
@@ -73,6 +78,12 @@ export default function GamePage() {
     }
   }, [timeJustExpired, awakeningJustTriggered, clearCrisisFlags])
 
+  useEffect(() => {
+    if (!dayJustAdvanced) return
+    const t = setTimeout(clearDayTransition, 2200)
+    return () => clearTimeout(t)
+  }, [dayJustAdvanced, clearDayTransition])
+
   if (!currentScene || !gameState) {
     return (
       <div className="relative min-h-screen bg-background flex flex-col items-center justify-center gap-4">
@@ -85,7 +96,8 @@ export default function GamePage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-      <AmbientOverlay />
+      <AmbientOverlay danger={gameState.stats.health <= 4} />
+      {dayJustAdvanced !== null && <DayTransition day={dayJustAdvanced} />}
 
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row min-h-screen">
         {/* Mobile header: time, security, collapsible status */}
@@ -115,6 +127,8 @@ export default function GamePage() {
             </summary>
             <div className="mt-3 flex flex-col gap-3">
               <GameStatusPanels />
+              <NpcStatusPanel flags={gameState.flags as Record<string, boolean>} />
+              <SettingsPanel />
             </div>
           </details>
         </header>
@@ -141,6 +155,8 @@ export default function GamePage() {
           </div>
 
           <GameStatusPanels />
+          <NpcStatusPanel flags={gameState.flags as Record<string, boolean>} />
+          <SettingsPanel />
         </aside>
 
         {/* Main narrative column */}

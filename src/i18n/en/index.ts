@@ -24,6 +24,7 @@ const en: Translation = {
     newGame: 'New Game',
     continue: 'Continue',
     version: 'v{version} — solo project',
+    endingsFound: 'Endings found: {count} / {total}',
     slots: {
       heading: 'Choose Save',
       empty: 'Empty',
@@ -42,6 +43,7 @@ const en: Translation = {
     loadingScene: 'Loading scene…',
     requiresHint: 'Requires {hint}',
     autoSaved: 'Auto-saved',
+    keyHint: 'Press 1–N to select · Enter to confirm',
     crisis: {
       timeExpired: 'Time is up. The sounds outside have changed.',
       breachImminent: 'The defenses are failing. They are getting in.',
@@ -166,6 +168,7 @@ const en: Translation = {
     },
     choicesMade: 'Choices made: {count}',
     scenesVisited: 'Scenes visited: {count}',
+    daysSurvived: 'Day {count}',
     journal: 'Journal',
     journalEntries: 'Journal Entries',
     journalEmpty: 'No entries yet.',
@@ -184,6 +187,20 @@ const en: Translation = {
     slot: 'Save {slot}',
     empty: 'Empty slot',
     savedAt: 'Saved at {date}',
+  },
+
+  // ── NPC status panel ──────────────────────────────────────────────────────
+  npcs: {
+    label: 'Characters',
+  },
+
+  // ── Settings panel ────────────────────────────────────────────────────────
+  settings: {
+    label: 'Settings',
+    fontSize: 'Text size',
+    reduceMotion: 'Reduce motion',
+    soundEnable: 'Enable sound',
+    soundDisable: 'Disable sound',
   },
 
   // ── Achievements ───────────────────────────────────────────────────────────

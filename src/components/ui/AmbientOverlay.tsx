@@ -1,8 +1,8 @@
-/**
- * Full-screen atmospheric layer: film grain + edge vignette.
- * pointer-events-none so it never blocks interaction.
- */
-export default function AmbientOverlay() {
+interface Props {
+  danger?: boolean
+}
+
+export default function AmbientOverlay({ danger }: Props) {
   return (
     <>
       <div
@@ -18,8 +18,10 @@ export default function AmbientOverlay() {
         className="pointer-events-none fixed inset-0 z-[1]"
         aria-hidden
         style={{
-          background:
-            'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, rgba(0,0,0,0.55) 100%)',
+          background: danger
+            ? 'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(60,0,0,0.65) 100%)'
+            : 'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, rgba(0,0,0,0.55) 100%)',
+          transition: 'background 2s ease',
         }}
       />
     </>

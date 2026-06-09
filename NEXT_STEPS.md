@@ -259,6 +259,239 @@ Add these to `src/data/endings.json` as each becomes reachable via content. Prio
 
 ---
 
+## Phase 2 Work — Gaming Experience Enhancements
+
+Grouped by effort. These are independent of each other and can be done in any order.
+
+---
+
+### Quick Polish (CSS / minimal logic — under half a day each)
+
+#### A. Critical stat pulse animation
+
+**Files:** `src/index.css`, `src/components/game/StatPanel.tsx`
+
+StatPanel already switches the bar colour to `#8b2020` when `health ≤ 4` or `morale ≤ 4`, but there is no motion cue. Add a slow-pulse keyframe so the bar itself throbs when a stat is in danger range.
+
+```css
+/* src/index.css — new keyframe */
+@keyframes statPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+/* inside @theme */
+--animate-stat-pulse: statPulse 1.4s ease-in-out infinite;
+```
+
+In `StatPanel.tsx`, add `animate-stat-pulse` to the `.stat-bar-fill` `className` when `value ≤ threshold` (use the same `≤ 4` check that already drives `barColour`). Health and morale only — stealth and money do not pulse.
+
+---
+
+#### B. Danger-state ambient vignette
+
+**Files:** `src/components/ui/AmbientOverlay.tsx`, `src/pages/GamePage.tsx`
+
+When `health ≤ 4`, shift the radial-gradient vignette from near-black to a deep blood-red tint. `AmbientOverlay` currently takes no props — add an optional `danger?: boolean` prop. When true, the second `div` uses:
+
+```
+radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(60,0,0,0.65) 100%)
+```
+
+`GamePage` passes `danger={gameState.stats.health <= 4}`. Pure CSS, no animation library.
+
+---
+
+#### C. Days survived on ending screen
+
+**File:** `src/pages/EndingPage.tsx`
+
+EndingPage shows `choicesMade` and `scenesVisited` but not the day number. Add a third badge:
+
+```tsx
+<span className="panel-card py-2 px-3">
+  {interpolate(LL.ending.daysSurvived, {
+    count: Math.ceil(gameState.gameTime.hoursFromStart / 24),
+  })}
+</span>
+```
+
+Requires one new i18n key `ending.daysSurvived` in both locale files (e.g., `zh: "存活 {count} 天"`, `en: "Day {count}"`).
+
+---
+
+#### D. Visible hotkey hint strip
+
+**File:** `src/components/game/ChoiceList.tsx`
+
+The keyboard shortcuts `1`–`N` and `Enter`/`Space` already work but are undiscoverable. Add a single line below the choice nav:
+
+```tsx
+<p className="ui-label text-xs text-muted text-center mt-3" aria-hidden>
+  {LL.game.keyHint()} {/* e.g. "按 1–N 选择 · Enter 确认" */}
+</p>
+```
+
+Only render when `available.length > 0 && !pendingChoiceId`. Requires one i18n key.
+
+---
+
+### Replay & Engagement (new component or small system)
+
+#### E. Endings gallery
+
+**New file:** `src/engine/endingGallery.ts`  
+**Modified:** `src/store/gameStore.ts`, `src/pages/TitlePage.tsx`
+
+A lightweight discovery log stored in localStorage (`dead-hour:endings` — a JSON `string[]` of ending IDs). Independent of save slots.
+
+`endingGallery.ts` exports:
+
+```ts
+recordEnding(id: string): void   // appends if not present
+getDiscoveredEndings(): string[]  // returns sorted array
+```
+
+In `gameStore.ts`, call `recordEnding(triggered.id)` in both `selectChoice` and `commitChoice` when `triggered` is non-null (alongside the current `navigate` to `/ending/:id`).
+
+On `TitlePage.tsx`, below the version label:
+
+```tsx
+<p className="ui-label text-muted text-xs">
+  {interpolate(LL.title.endingsFound, { count: discovered.length, total: 17 })}
+</p>
+```
+
+Motivates replay without requiring Phase 2 content to be finished first.
+
+---
+
+#### F. Run summary milestone flags
+
+**File:** `src/pages/EndingPage.tsx`
+
+Below the `choicesMade / scenesVisited / daysSurvived` badges, render a row of story milestone badges based on flags the player set. Hard-code a small ordered map of "notable" flags to display strings:
+
+```ts
+const NOTABLE_FLAGS: Array<{ flag: string; label: LocaleString }> = [
+  { flag: 'pei_alive', label: { zh: '裴嘉应生还', en: 'Pei survived' } },
+  { flag: 'pei_rescued', label: { zh: '救出裴嘉应', en: 'Pei rescued' } },
+  { flag: 'superpower_awakening', label: { zh: '超能觉醒', en: 'Awakening' } },
+  { flag: 'zombie_turning', label: { zh: '感染失控', en: 'Turning' } },
+  { flag: 'has_group', label: { zh: '建立团队', en: 'Built a group' } },
+  { flag: 'wrote_journal', label: { zh: '留下日记', en: 'Kept a journal' } },
+]
+```
+
+Render only the ones that are `true` in `gameState.flags`. Each renders as a small `panel-card py-1 px-2 font-ui text-xs` badge. Empty if no notable flags are set.
+
+---
+
+#### G. NPC status panel
+
+**New file:** `src/components/game/NpcStatusPanel.tsx`  
+**Modified:** `src/pages/GamePage.tsx`
+
+A sidebar widget showing key NPC statuses derived from flags. Keep it minimal — one row per NPC, status derived at render time with no new store state.
+
+Initial NPC list (expandable when Phase 2 content adds scenes):
+
+| NPC    | Flag logic                                                                                 | Status strings         |
+| ------ | ------------------------------------------------------------------------------------------ | ---------------------- |
+| 裴嘉应 | `pei_alive=true` → alive; `pei_rescued=true AND pei_alive=false` → missing; else → unknown | 生还 / 失踪 / 下落不明 |
+
+Add to both the desktop sidebar and the mobile collapsible section. Only render the component when at least one NPC flag is present in `gameState.flags` (i.e., the player has encountered the character).
+
+---
+
+### Immersion (new component + store state)
+
+#### H. Day transition overlay
+
+**New file:** `src/components/ui/DayTransition.tsx`  
+**Modified:** `src/store/gameStore.ts`, `src/pages/GamePage.tsx`
+
+When the calendar day advances after a choice (compare `Math.ceil(pre / 24)` vs `Math.ceil(post / 24)`), show a centred full-screen overlay for ~1.8s:
+
+```
+── 第 X 天 ──
+```
+
+Same pattern as `timeJustExpired` / `awakeningJustTriggered` — a new `dayJustAdvanced: number | null` field in the store (holds the new day number, cleared after display). `DayTransition` fades in, holds, fades out using CSS, then `clearDayTransition()` resets it.
+
+Style: `fixed inset-0 z-40 flex items-center justify-center bg-background/90 animate-fade-in pointer-events-none`. Large `font-display text-5xl text-text-dim` label with ornamental dashes.
+
+---
+
+#### I. Ambient audio (opt-in)
+
+**New file:** `src/engine/audioManager.ts`  
+**Modified:** `src/pages/TitlePage.tsx`, `src/pages/GamePage.tsx`
+
+Web Audio API only — no external library. A single looping ambient track (atmospheric drone, 30–60s loop, <200 KB, royalty-free). Stored as a URL in a config constant.
+
+`audioManager.ts` API:
+
+```ts
+initAudio(): void          // creates AudioContext + BufferSource on first user gesture
+startAmbient(): void       // begins loop
+stopAmbient(): void        // fades out over 1s
+isEnabled(): boolean       // reads localStorage key dead-hour:audio (default false)
+setEnabled(v: boolean): void
+```
+
+A small mute/unmute icon button in the TitlePage and a subtle `♪` / `✕` icon in the GamePage header. Audio is OFF by default — never starts without explicit opt-in. Browsers require a user gesture before `AudioContext` can be created; `initAudio()` is called on any button press.
+
+---
+
+### Accessibility & UX (settings system)
+
+#### J. Reduce motion toggle
+
+**New file:** `src/engine/settingsManager.ts`  
+**Modified:** `src/pages/GamePage.tsx` (or a shared `App.tsx` wrapper)
+
+`settingsManager.ts` manages a `dead-hour:settings` JSON blob in localStorage. Initial keys:
+
+```ts
+interface GameSettings {
+  reducedMotion: boolean // default false
+  fontSize: 'small' | 'default' | 'large' // default 'default'
+  audioEnabled: boolean // merges with item I
+}
+```
+
+When `reducedMotion: true`, set `data-reduced-motion="true"` on `<html>`. CSS then overrides all animation durations to 0:
+
+```css
+[data-reduced-motion='true'] * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+```
+
+This also respects the OS-level `prefers-reduced-motion` media query — check both.
+
+#### K. Narrative font-size preference
+
+**Modified:** `src/engine/settingsManager.ts`, `src/index.css`, `src/pages/GamePage.tsx`
+
+Three font-size levels for the narrative text:
+
+| Size    | `--text-narrative` | `--text-narrative--line-height` |
+| ------- | ------------------ | ------------------------------- |
+| small   | 1rem               | 1.7                             |
+| default | 1.125rem           | 1.85                            |
+| large   | 1.3rem             | 1.9                             |
+
+Applied via `data-font-size` attribute on `<html>`. A simple `A− / A / A+` control in a compact settings row in the GamePage sidebar (desktop) and collapsible header (mobile).
+
+---
+
 ## Validation
 
 After completing items 1–8, run:
