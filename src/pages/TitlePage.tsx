@@ -1,33 +1,56 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '@/store/gameStore'
-import { listSaves } from '@/engine/saveManager'
+import { listSaves, deleteSave } from '@/engine/saveManager'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
+import SaveSlotPicker from '@/components/ui/SaveSlotPicker'
 
 export default function TitlePage() {
   const navigate = useNavigate()
   const { startNewGame, loadFromSave, isLoading } = useGameStore()
   const { LL, locale, setLocale, supportedLocales, localeLabel } = useI18n()
 
-  const saves = listSaves()
+  const [pickerOpen, setPickerOpen] = useState(false)
+  const [saves, setSaves] = useState(() => listSaves())
+
   const hasSave = saves.some((s) => s.exists)
 
-  async function handleNewGame() {
-    await startNewGame(0)
+  function openPicker() {
+    setSaves(listSaves())
+    setPickerOpen(true)
+  }
+
+  async function handleStartNew(slot: number) {
+    await startNewGame(slot)
     navigate('/game')
   }
 
-  async function handleContinue() {
-    const latestSave = saves.find((s) => s.exists)
-    if (!latestSave) return
-    await loadFromSave(latestSave.slot)
+  async function handleContinue(slot: number) {
+    await loadFromSave(slot)
     navigate('/game')
+  }
+
+  function handleDelete(slot: number) {
+    deleteSave(slot)
+    setSaves(listSaves())
   }
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-12">
       <AmbientOverlay />
+
+      {pickerOpen && (
+        <SaveSlotPicker
+          saves={saves}
+          isLoading={isLoading}
+          onStartNew={handleStartNew}
+          onContinue={handleContinue}
+          onDelete={handleDelete}
+          onClose={() => setPickerOpen(false)}
+        />
+      )}
 
       <div className="relative z-10 flex flex-col items-center gap-10 sm:gap-12 animate-fade-in max-w-md w-full">
         <div className="text-center w-full">
@@ -47,7 +70,7 @@ export default function TitlePage() {
         <div className="flex flex-col gap-3 w-full">
           <button
             type="button"
-            onClick={handleNewGame}
+            onClick={openPicker}
             disabled={isLoading}
             className="choice-btn choice-btn-primary text-center font-display text-xl tracking-wide py-4"
           >
@@ -57,7 +80,7 @@ export default function TitlePage() {
           {hasSave && (
             <button
               type="button"
-              onClick={handleContinue}
+              onClick={openPicker}
               disabled={isLoading}
               className="choice-btn text-center"
             >
