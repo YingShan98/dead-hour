@@ -9,6 +9,7 @@ export interface SaveSlotInfo {
   exists: boolean
   savedAt?: string
   sceneId?: string
+  hoursFromStart?: number
 }
 
 export function saveGame(slot: number, state: GameState): void {
@@ -45,6 +46,7 @@ export function listSaves(): SaveSlotInfo[] {
         exists: true,
         savedAt: state.savedAt,
         sceneId: state.currentSceneId,
+        hoursFromStart: state.gameTime.hoursFromStart,
       }
     } catch {
       return { slot: i, exists: false }

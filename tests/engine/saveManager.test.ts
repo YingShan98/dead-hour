@@ -68,8 +68,18 @@ describe('saveManager', () => {
         exists: true,
         savedAt: expect.any(String),
         sceneId: 'scene_003',
+        hoursFromStart: -48,
       },
     ])
+  })
+
+  it('includes hoursFromStart in slot metadata for occupied slots', () => {
+    saveGame(0, mockState({ currentSceneId: 'scene_005' }))
+    // mockState has gameTime.hoursFromStart = -48
+    const slots = listSaves()
+    expect(slots[0].hoursFromStart).toBe(-48)
+    expect(slots[1].hoursFromStart).toBeUndefined()
+    expect(slots[2].hoursFromStart).toBeUndefined()
   })
 
   it('deletes save data from a slot', () => {
