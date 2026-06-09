@@ -24,6 +24,16 @@ const en: Translation = {
     newGame: 'New Game',
     continue: 'Continue',
     version: 'v{version} — solo project',
+    slots: {
+      heading: 'Choose Save',
+      empty: 'Empty',
+      continue: 'Continue',
+      startNew: 'New Game',
+      overwrite: 'New Game',
+      delete: 'Delete',
+      confirmOverwrite: 'This will overwrite Save {slot} ({day}) — confirm?',
+      confirmDelete: 'This will permanently delete Save {slot} ({day}) — confirm?',
+    },
   },
 
   // ── Game Page ──────────────────────────────────────────────────────────────

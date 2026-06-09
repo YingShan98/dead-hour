@@ -19,6 +19,16 @@ const zh: BaseTranslation = {
     newGame: '开始新游戏',
     continue: '继续游戏',
     version: 'v{version:string} — 独立开发',
+    slots: {
+      heading: '选择存档',
+      empty: '空',
+      continue: '继续',
+      startNew: '开始新游戏',
+      overwrite: '新游戏',
+      delete: '删除',
+      confirmOverwrite: '这将覆盖存档 {slot:number}（{day:string}）— 确定？',
+      confirmDelete: '这将永久删除存档 {slot:number}（{day:string}）— 确定？',
+    },
   },
 
   // ── Game Page ──────────────────────────────────────────────────────────────
