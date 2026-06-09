@@ -29,6 +29,7 @@
   --animate-slide-up: slideUp 0.5s ease forwards;
   --animate-flicker: flicker 4s infinite;
   --animate-pulse-soft: pulseSoft 2s ease-in-out infinite;
+  --animate-fade-out: fadeOut 0.35s ease forwards;
 }
 
 @keyframes fadeIn {
@@ -70,6 +71,15 @@
   }
   97% {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

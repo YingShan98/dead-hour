@@ -3,13 +3,24 @@ import type { Choice } from '@/engine/types'
 import { useI18n } from '@/i18n/useI18n'
 import { resolveLocaleStrings } from '@/i18n/localeString'
 
+const VISIBLE_STATS = ['health', 'morale', 'stealth', 'money'] as const
+type VisibleStat = (typeof VISIBLE_STATS)[number]
+
+const STAT_ICON: Record<VisibleStat, string> = {
+  health: '❤',
+  morale: '◈',
+  stealth: '◉',
+  money: '¥',
+}
+
 interface Props {
   choice: Choice | null
   onDone: () => void
   isLoading: boolean
+  gameFlags?: Record<string, boolean>
 }
 
-export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props) {
+export default function ConsequenceDisplay({ choice, onDone, isLoading, gameFlags }: Props) {
   const { locale, LL } = useI18n()
   const [visible, setVisible] = useState(false)
 
@@ -28,6 +39,13 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
 
   const paragraphs = resolveLocaleStrings(choice.consequence, locale)
   const continueDelay = paragraphs.length * 120 + 600
+
+  const statDeltas = VISIBLE_STATS.flatMap((key) => {
+    if (key === 'money' && gameFlags?.money_obsolete) return []
+    const val = (choice.effects.stats as Record<string, number> | undefined)?.[key]
+    if (!val) return []
+    return [{ key, value: val }]
+  })
 
   function handleContinue() {
     if (!isLoading) onDone()
@@ -70,6 +88,31 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
         ))}
       </div>
 
+      {statDeltas.length > 0 && (
+        <div
+          className="flex flex-wrap gap-2 mt-8 pointer-events-none"
+          style={{
+            animation: `fadeIn 0.6s ease ${continueDelay}ms forwards`,
+            opacity: 0,
+            animationFillMode: 'forwards',
+          }}
+        >
+          {statDeltas.map(({ key, value }) => (
+            <span
+              key={key}
+              className="font-ui text-xs px-2 py-1 rounded border"
+              style={{
+                color: value > 0 ? '#4a9a6a' : '#c43838',
+                background: value > 0 ? '#0a1f12' : '#1a0808',
+                borderColor: value > 0 ? '#1a3a22' : '#3a1010',
+              }}
+            >
+              {STAT_ICON[key]} {value > 0 ? `+${value}` : value}
+            </span>
+          ))}
+        </div>
+      )}
+
       <button
         type="button"
         onClick={(e) => {
@@ -77,7 +120,7 @@ export default function ConsequenceDisplay({ choice, onDone, isLoading }: Props)
           handleContinue()
         }}
         disabled={isLoading}
-        className="mt-14 choice-btn max-w-xs text-center ui-label tracking-widest pointer-events-auto"
+        className="mt-8 choice-btn max-w-xs text-center ui-label tracking-widest pointer-events-auto"
         style={{
           animation: `fadeIn 0.6s ease ${continueDelay}ms forwards`,
           opacity: 0,

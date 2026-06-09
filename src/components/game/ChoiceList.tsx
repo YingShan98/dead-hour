@@ -10,9 +10,16 @@ interface Props {
   gameState: GameState
   onSelect: (choiceId: string) => void
   disabled?: boolean
+  pendingChoiceId?: string
 }
 
-export default function ChoiceList({ choices, gameState, onSelect, disabled }: Props) {
+export default function ChoiceList({
+  choices,
+  gameState,
+  onSelect,
+  disabled,
+  pendingChoiceId,
+}: Props) {
   const { locale, LL } = useI18n()
 
   const available = getAvailableChoices(choices, gameState)
@@ -42,22 +49,26 @@ export default function ChoiceList({ choices, gameState, onSelect, disabled }: P
 
       {available.map((choice, i) => {
         const timeCost = choice.effects.timeCost
+        const isSelected = pendingChoiceId === choice.id
+        const isLocked = pendingChoiceId !== undefined && !isSelected
         return (
           <button
             key={choice.id}
             type="button"
             onClick={() => onSelect(choice.id)}
-            disabled={disabled}
-            className="choice-btn animate-slide-up flex items-center gap-3"
+            disabled={disabled || isLocked}
+            className={`choice-btn animate-slide-up flex items-center gap-3 ${
+              isSelected ? 'border-accent bg-[#1a0808]' : ''
+            } ${isLocked ? 'opacity-[0.15] scale-y-[0.9] origin-top pointer-events-none' : ''}`}
             style={{
               animationDelay: `${300 + i * 80}ms`,
-              opacity: 0,
+              opacity: isLocked ? undefined : 0,
               animationFillMode: 'forwards',
             }}
             aria-keyshortcuts={`${i + 1}`}
           >
             <span className="choice-index" aria-hidden>
-              {i + 1}
+              {isSelected ? '▶' : i + 1}
             </span>
             <span className="flex-1">{resolveLocaleString(choice.text, locale)}</span>
             {timeCost != null && timeCost > 0 && (

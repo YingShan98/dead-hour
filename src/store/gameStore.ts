@@ -44,13 +44,14 @@ interface GameStore {
   pendingNextScene: Scene | null
   timeJustExpired: boolean
   awakeningJustTriggered: boolean
+  isSceneTransitioning: boolean
 
   // Actions
   startNewGame: (saveSlot?: number) => Promise<void>
   selectChoice: (choiceId: string) => Promise<void>
   useItem: (itemId: string) => void
   loadFromSave: (slot: number) => Promise<void>
-  commitChoice: () => void
+  commitChoice: () => Promise<void>
   dismissError: () => void
   clearCrisisFlags: () => void
 }
@@ -69,6 +70,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
   pendingNextScene: null,
   timeJustExpired: false,
   awakeningJustTriggered: false,
+  isSceneTransitioning: false,
 
   // ── Start a new game ─────────────────────────────────────────────────────────
   startNewGame: async (saveSlot = 0) => {
@@ -209,8 +211,10 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         return
       }
 
-      // No consequence text — commit immediately
-      saveGame(newState.saveSlot, newState)
+      // No consequence text — crossfade then commit
+      set({ isLoading: false, isSceneTransitioning: true })
+      await new Promise<void>((resolve) => setTimeout(resolve, 350))
+      if (!triggered) saveGame(newState.saveSlot, newState)
       set({
         gameState: newState,
         currentScene: nextScene,
@@ -218,7 +222,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
         pendingChoice: null,
         pendingNextState: null,
         pendingNextScene: null,
-        isLoading: false,
+        isSceneTransitioning: false,
         timeJustExpired: !preCrisis.timeExpired && postCrisis.timeExpired,
         awakeningJustTriggered: !preCrisis.awakeningReady && postCrisis.awakeningReady,
       })
@@ -293,7 +297,7 @@ export const useGameStore = create<GameStore>()((set, get) => ({
   },
 
   // ── Commit consequence display ────────────────────────────────────────────────
-  commitChoice: () => {
+  commitChoice: async () => {
     const { pendingNextState, pendingNextScene, availableEndings, gameState } = get()
     if (!pendingNextState || !pendingNextScene) return
 
@@ -301,14 +305,21 @@ export const useGameStore = create<GameStore>()((set, get) => ({
     const postCrisis = checkCrisisState(pendingNextState)
     const triggered = checkForEnding(availableEndings, pendingNextState)
 
-    saveGame(pendingNextState.saveSlot, pendingNextState)
+    // Dismiss overlay immediately, start scene exit animation
+    set({
+      pendingChoice: null,
+      pendingNextState: null,
+      pendingNextScene: null,
+      isSceneTransitioning: true,
+    })
+    await new Promise<void>((resolve) => setTimeout(resolve, 350))
+
+    if (!triggered) saveGame(pendingNextState.saveSlot, pendingNextState)
     set({
       gameState: pendingNextState,
       currentScene: pendingNextScene,
       triggeredEnding: triggered,
-      pendingChoice: null,
-      pendingNextState: null,
-      pendingNextScene: null,
+      isSceneTransitioning: false,
       timeJustExpired: !preCrisis.timeExpired && postCrisis.timeExpired,
       awakeningJustTriggered: !preCrisis.awakeningReady && postCrisis.awakeningReady,
     })

@@ -51,6 +51,7 @@ export default function GamePage() {
     timeJustExpired,
     awakeningJustTriggered,
     pendingChoice,
+    isSceneTransitioning,
     selectChoice,
     commitChoice,
     dismissError,
@@ -143,7 +144,9 @@ export default function GamePage() {
         </aside>
 
         {/* Main narrative column */}
-        <main className="flex-1 w-full min-w-0 px-4 sm:px-8 lg:px-12 py-8 lg:py-12 max-w-2xl mx-auto lg:mx-0">
+        <main
+          className={`flex-1 w-full min-w-0 px-4 sm:px-8 lg:px-12 py-8 lg:py-12 max-w-2xl mx-auto lg:mx-0${isSceneTransitioning ? ' animate-fade-out pointer-events-none' : ''}`}
+        >
           {timeJustExpired && (
             <div className="crisis-banner crisis-banner--danger" role="alert">
               <span className="font-ui text-danger text-lg leading-none" aria-hidden>
@@ -192,12 +195,18 @@ export default function GamePage() {
             choices={currentScene.choices}
             gameState={gameState}
             onSelect={selectChoice}
-            disabled={isLoading || !!pendingChoice}
+            disabled={isLoading}
+            pendingChoiceId={pendingChoice?.id}
           />
         </main>
       </div>
 
-      <ConsequenceDisplay choice={pendingChoice} onDone={commitChoice} isLoading={isLoading} />
+      <ConsequenceDisplay
+        choice={pendingChoice}
+        onDone={commitChoice}
+        isLoading={isLoading}
+        gameFlags={gameState?.flags}
+      />
     </div>
   )
 }
