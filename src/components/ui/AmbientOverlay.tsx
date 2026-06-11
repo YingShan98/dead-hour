@@ -1,3 +1,14 @@
+/* eslint-disable react-refresh/only-export-components -- pure helpers co-located with overlay component */
+
+export function infectionTintOpacity(infection: number): number {
+  const clamped = Math.min(Math.max(infection, 2), 10)
+  return ((clamped - 2) / 8) * 0.5
+}
+
+export function baseVignetteColor(hoursFromStart: number): string {
+  return hoursFromStart < 0 ? 'rgba(10, 18, 35, 0.55)' : 'rgba(0, 0, 0, 0.55)'
+}
+
 interface Props {
   danger?: boolean
 }
