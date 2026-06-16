@@ -16,6 +16,7 @@ import AmbientOverlay from '@/components/ui/AmbientOverlay'
 import DayTransition from '@/components/ui/DayTransition'
 import SettingsPanel from '@/components/ui/SettingsPanel'
 import { useI18n } from '@/i18n/useI18n'
+import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 
 type LLErrors = ReturnType<typeof useI18n>['LL']['errors']
 
@@ -87,7 +88,10 @@ export default function GamePage() {
   if (!currentScene || !gameState) {
     return (
       <div className="relative min-h-screen bg-background flex flex-col items-center justify-center gap-4">
-        <AmbientOverlay />
+        <AmbientOverlay
+          hoursFromStart={DEFAULT_GAME_STATE.gameTime.hoursFromStart}
+          infection={DEFAULT_GAME_STATE.stats.infection}
+        />
         <div className="loading-dot" />
         <p className="ui-label text-muted relative z-10">{LL.ui.loading()}</p>
       </div>
@@ -96,7 +100,11 @@ export default function GamePage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-      <AmbientOverlay danger={gameState.stats.health <= 4} />
+      <AmbientOverlay
+        hoursFromStart={gameState.gameTime.hoursFromStart}
+        infection={gameState.stats.infection}
+        danger={gameState.stats.health <= 4}
+      />
       {dayJustAdvanced !== null && <DayTransition day={dayJustAdvanced} />}
 
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row min-h-screen">

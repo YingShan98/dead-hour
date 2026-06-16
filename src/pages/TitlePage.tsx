@@ -7,6 +7,7 @@ import { isAudioEnabled, toggleAudio } from '@/engine/audioManager'
 import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
+import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import SaveSlotPicker from '@/components/ui/SaveSlotPicker'
 
 export default function TitlePage() {
@@ -43,7 +44,10 @@ export default function TitlePage() {
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-12">
-      <AmbientOverlay />
+      <AmbientOverlay
+        hoursFromStart={DEFAULT_GAME_STATE.gameTime.hoursFromStart}
+        infection={DEFAULT_GAME_STATE.stats.infection}
+      />
 
       {pickerOpen && (
         <SaveSlotPicker

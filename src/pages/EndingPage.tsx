@@ -4,6 +4,7 @@ import { useI18n } from '@/i18n/useI18n'
 import { interpolate } from '@/i18n/interpolate'
 import { resolveLocaleString, resolveLocaleStrings } from '@/i18n/localeString'
 import AmbientOverlay from '@/components/ui/AmbientOverlay'
+import { DEFAULT_GAME_STATE } from '@/engine/defaults'
 import type { EndingType } from '@/engine/types'
 import JournalPanel from '@/components/game/JournalPanel'
 
@@ -46,7 +47,10 @@ export default function EndingPage() {
   if (!triggeredEnding || triggeredEnding.id !== endingId) {
     return (
       <div className="relative min-h-screen bg-background flex flex-col items-center justify-center gap-6 px-6">
-        <AmbientOverlay />
+        <AmbientOverlay
+          hoursFromStart={DEFAULT_GAME_STATE.gameTime.hoursFromStart}
+          infection={DEFAULT_GAME_STATE.stats.infection}
+        />
         <p className="font-body text-text-dim relative z-10">{LL.ending.noData()}</p>
         <button
           type="button"
@@ -70,7 +74,12 @@ export default function EndingPage() {
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
-      <AmbientOverlay />
+      <AmbientOverlay
+        hoursFromStart={
+          gameState?.gameTime.hoursFromStart ?? DEFAULT_GAME_STATE.gameTime.hoursFromStart
+        }
+        infection={gameState?.stats.infection ?? DEFAULT_GAME_STATE.stats.infection}
+      />
 
       <div
         className={`relative z-10 max-w-lg w-full flex flex-col gap-8 animate-fade-in panel-card border-2 ${borderClass}`}
