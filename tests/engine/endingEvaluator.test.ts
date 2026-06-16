@@ -44,6 +44,117 @@ function ending(overrides: Partial<Ending>): Ending {
   }
 }
 
+// Shared ending stubs matching production conditions
+const COLD_DEATH = ending({
+  id: 'ending_cold_death',
+  priority: 1.5,
+  conditions: {
+    requiredStats: [{ stat: 'health', max: 0 }],
+    blockedFlags: ['winter_shelter_established', 'base_bunker'],
+  },
+})
+
+const DEATH_HEALTH = ending({
+  id: 'ending_death_health',
+  priority: 2,
+  conditions: { requiredStats: [{ stat: 'health', max: 0 }] },
+})
+
+const FORTRESS_SOLO = ending({
+  id: 'ending_fortress_solo',
+  priority: 6,
+  conditions: {
+    requiredFlags: ['survived_one_year', 'base_factory'],
+    blockedFlags: ['has_group', 'zombie_turning'],
+    requiredStats: [
+      { stat: 'infection', max: 2 },
+      { stat: 'health', min: 1 },
+    ],
+    securityMin: 80,
+  },
+})
+
+describe('ending_cold_death', () => {
+  it('fires when health is 0 and no shelter established', () => {
+    const state = mockState({ stats: { ...mockState().stats, health: 0 } })
+    expect(checkForEnding([COLD_DEATH, DEATH_HEALTH], state)?.id).toBe('ending_cold_death')
+  })
+
+  it('does not fire when winter_shelter_established is set — falls back to death_health', () => {
+    const state = mockState({
+      stats: { ...mockState().stats, health: 0 },
+      flags: { winter_shelter_established: true },
+    })
+    expect(checkForEnding([COLD_DEATH, DEATH_HEALTH], state)?.id).toBe('ending_death_health')
+  })
+
+  it('does not fire when base_bunker is set — falls back to death_health', () => {
+    const state = mockState({
+      stats: { ...mockState().stats, health: 0 },
+      flags: { base_bunker: true },
+    })
+    expect(checkForEnding([COLD_DEATH, DEATH_HEALTH], state)?.id).toBe('ending_death_health')
+  })
+
+  it('does not fire when health is above 0', () => {
+    expect(checkForEnding([COLD_DEATH], mockState())?.id).toBeUndefined()
+  })
+})
+
+describe('ending_fortress_solo', () => {
+  function fortressState(overrides: Partial<GameState> = {}): GameState {
+    return mockState({
+      stats: { ...mockState().stats, health: 5, infection: 1 },
+      flags: { survived_one_year: true, base_factory: true },
+      security: 80,
+      ...overrides,
+    })
+  }
+
+  it('fires when all conditions are met', () => {
+    expect(checkForEnding([FORTRESS_SOLO], fortressState())?.id).toBe('ending_fortress_solo')
+  })
+
+  it('does not fire without base_factory', () => {
+    expect(
+      checkForEnding([FORTRESS_SOLO], fortressState({ flags: { survived_one_year: true } }))?.id,
+    ).toBeUndefined()
+  })
+
+  it('does not fire with has_group', () => {
+    expect(
+      checkForEnding(
+        [FORTRESS_SOLO],
+        fortressState({ flags: { survived_one_year: true, base_factory: true, has_group: true } }),
+      )?.id,
+    ).toBeUndefined()
+  })
+
+  it('does not fire with zombie_turning', () => {
+    expect(
+      checkForEnding(
+        [FORTRESS_SOLO],
+        fortressState({
+          flags: { survived_one_year: true, base_factory: true, zombie_turning: true },
+        }),
+      )?.id,
+    ).toBeUndefined()
+  })
+
+  it('does not fire when security is below 80', () => {
+    expect(checkForEnding([FORTRESS_SOLO], fortressState({ security: 79 }))?.id).toBeUndefined()
+  })
+
+  it('does not fire when infection exceeds 2', () => {
+    expect(
+      checkForEnding(
+        [FORTRESS_SOLO],
+        fortressState({ stats: { ...mockState().stats, health: 5, infection: 3 } }),
+      )?.id,
+    ).toBeUndefined()
+  })
+})
+
 describe('checkForEnding()', () => {
   it('returns null when no ending conditions match', () => {
     const endings = [
