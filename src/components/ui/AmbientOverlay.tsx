@@ -10,10 +10,12 @@ export function baseVignetteColor(hoursFromStart: number): string {
 }
 
 interface Props {
+  hoursFromStart: number
+  infection: number
   danger?: boolean
 }
 
-export default function AmbientOverlay({ danger }: Props) {
+export default function AmbientOverlay({ hoursFromStart, infection, danger }: Props) {
   return (
     <>
       <div
@@ -29,9 +31,23 @@ export default function AmbientOverlay({ danger }: Props) {
         className="pointer-events-none fixed inset-0 z-[1]"
         aria-hidden
         style={{
-          background: danger
-            ? 'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(60,0,0,0.65) 100%)'
-            : 'radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, rgba(0,0,0,0.55) 100%)',
+          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, ${baseVignetteColor(hoursFromStart)} 100%)`,
+          transition: 'background 2s ease',
+        }}
+      />
+      <div
+        className="pointer-events-none fixed inset-0 z-[1]"
+        aria-hidden
+        style={{
+          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(50, 10, 55, ${infectionTintOpacity(infection)}) 100%)`,
+          transition: 'background 2s ease',
+        }}
+      />
+      <div
+        className="pointer-events-none fixed inset-0 z-[1]"
+        aria-hidden
+        style={{
+          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(60, 0, 0, ${danger ? 0.65 : 0}) 100%)`,
           transition: 'background 2s ease',
         }}
       />
