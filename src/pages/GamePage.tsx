@@ -96,7 +96,12 @@ export default function GamePage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-      <AmbientOverlay danger={gameState.stats.health <= 4} />
+      <AmbientOverlay
+        hoursFromStart={gameState.gameTime.hoursFromStart}
+        infection={gameState.stats.infection}
+        will={gameState.stats.will}
+        danger={gameState.stats.health <= 4}
+      />
       {dayJustAdvanced !== null && <DayTransition day={dayJustAdvanced} />}
 
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row min-h-screen">

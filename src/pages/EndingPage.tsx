@@ -70,7 +70,11 @@ export default function EndingPage() {
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
-      <AmbientOverlay />
+      <AmbientOverlay
+        endingType={triggeredEnding.type}
+        infection={gameState?.stats.infection}
+        will={gameState?.stats.will}
+      />
 
       <div
         className={`relative z-10 max-w-lg w-full flex flex-col gap-8 animate-fade-in panel-card border-2 ${borderClass}`}
