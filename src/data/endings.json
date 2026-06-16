@@ -17,6 +17,22 @@
       "epilogue": null
     },
     {
+      "id": "ending_cold_death",
+      "title": { "zh": "极寒中的无声熄火" },
+      "type": "bad",
+      "priority": 1.5,
+      "conditions": {
+        "requiredStats": [{ "stat": "health", "max": 0 }],
+        "blockedFlags": ["winter_shelter_established", "base_bunker"]
+      },
+      "narrative": [
+        { "zh": "不是某一刻决定的。" },
+        { "zh": "只是体温又低了一点，然后又低了一点，低到你觉得暖和了——那是最后一步。" },
+        { "zh": "工具箱还在桌上，干干净净的。" }
+      ],
+      "epilogue": null
+    },
+    {
       "id": "ending_death_health",
       "title": { "zh": "这座城市带走了你" },
       "type": "bad",
@@ -64,6 +80,28 @@
         { "zh": "精密的工程，完美的囚笼。" }
       ],
       "epilogue": { "zh": "那台修好的电焊机一直立在矮桌上，安静，完好，没有人再用它了。" }
+    },
+    {
+      "id": "ending_fortress_solo",
+      "title": { "zh": "最强钉子户" },
+      "type": "neutral",
+      "priority": 6,
+      "conditions": {
+        "requiredFlags": ["survived_one_year", "base_factory"],
+        "blockedFlags": ["has_group", "zombie_turning"],
+        "requiredStats": [
+          { "stat": "infection", "max": 2 },
+          { "stat": "health", "min": 1 }
+        ],
+        "securityMin": 80
+      },
+      "narrative": [
+        { "zh": "你用一年的时间把这栋楼六层的一个单元变成了任何东西都攻不进来的地方。" },
+        { "zh": "防御指数八十。工厂那边弄来的材料已经用完了，但比你最初计划的还多撑了三个月。" },
+        { "zh": "还剩三罐食物。比你最乐观的估算多一罐。" },
+        { "zh": "你在门板的计数格旁边写下了「365」，然后在旁边划了一个小圆圈。表示完成。" }
+      ],
+      "epilogue": { "zh": "外面的声音小了很多。不知道是因为它们走远了，还是因为你已经习惯了。" }
     },
     {
       "id": "ending_solo_survivor",
