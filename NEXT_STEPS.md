@@ -39,7 +39,7 @@ Raised during the "Reactive Visual Atmosphere" immersion brainstorm (2026-06-11)
 for that feature derives an ambient day/night tint from `hoursFromStart < 0` (before/after
 outbreak) plus infection level — both unambiguous from existing data.
 
-A full day/night *cycle* (dawn/day/dusk/night tinting) was considered but deferred because
+A full day/night _cycle_ (dawn/day/dusk/night tinting) was considered but deferred because
 `hoursFromStart % 24` does not reliably match a scene's narrative time-of-day. Examples:
 
 - `scene_day3_night` (h=72) and `scene_day4_morning` (h=96) both resolve to `% 24 === 0`, despite

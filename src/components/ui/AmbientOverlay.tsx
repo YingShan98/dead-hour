@@ -1,21 +1,41 @@
-/* eslint-disable react-refresh/only-export-components -- pure helpers co-located with overlay component */
-
-export function infectionTintOpacity(infection: number): number {
-  const clamped = Math.min(Math.max(infection, 2), 10)
-  return ((clamped - 2) / 8) * 0.5
-}
-
-export function baseVignetteColor(hoursFromStart: number): string {
-  return hoursFromStart < 0 ? 'rgba(10, 18, 35, 0.55)' : 'rgba(0, 0, 0, 0.55)'
-}
+import {
+  infectionTintOpacity,
+  baseVignetteColor,
+  willTintOpacity,
+  endingVignetteColor,
+} from '@/engine/atmosphereHelpers'
+import type { EndingType } from '@/engine/types'
 
 interface Props {
-  hoursFromStart: number
-  infection: number
+  hoursFromStart?: number
+  infection?: number
+  will?: number
   danger?: boolean
+  endingType?: EndingType
 }
 
-export default function AmbientOverlay({ hoursFromStart, infection, danger }: Props) {
+function VignetteLayer({ color, clearStop = 25 }: { color: string; clearStop?: number }) {
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 z-[1]"
+      aria-hidden
+      style={{
+        background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent ${clearStop}%, ${color} 100%)`,
+        transition: 'background 2s ease',
+      }}
+    />
+  )
+}
+
+export default function AmbientOverlay({
+  hoursFromStart = -48,
+  infection = 0,
+  will = 0,
+  danger,
+  endingType,
+}: Props) {
+  const baseColor = endingType ? endingVignetteColor(endingType) : baseVignetteColor(hoursFromStart)
+
   return (
     <>
       <div
@@ -27,30 +47,10 @@ export default function AmbientOverlay({ hoursFromStart, infection, danger }: Pr
           backgroundSize: '128px',
         }}
       />
-      <div
-        className="pointer-events-none fixed inset-0 z-[1]"
-        aria-hidden
-        style={{
-          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, ${baseVignetteColor(hoursFromStart)} 100%)`,
-          transition: 'background 2s ease',
-        }}
-      />
-      <div
-        className="pointer-events-none fixed inset-0 z-[1]"
-        aria-hidden
-        style={{
-          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(50, 10, 55, ${infectionTintOpacity(infection)}) 100%)`,
-          transition: 'background 2s ease',
-        }}
-      />
-      <div
-        className="pointer-events-none fixed inset-0 z-[1]"
-        aria-hidden
-        style={{
-          background: `radial-gradient(ellipse 85% 75% at 50% 45%, transparent 25%, rgba(60, 0, 0, ${danger ? 0.65 : 0}) 100%)`,
-          transition: 'background 2s ease',
-        }}
-      />
+      <VignetteLayer color={baseColor} clearStop={35} />
+      <VignetteLayer color={`rgba(50, 10, 55, ${infectionTintOpacity(infection)})`} />
+      <VignetteLayer color={`rgba(180, 140, 20, ${willTintOpacity(will)})`} />
+      <VignetteLayer color={`rgba(60, 0, 0, ${danger ? 0.65 : 0})`} />
     </>
   )
 }
