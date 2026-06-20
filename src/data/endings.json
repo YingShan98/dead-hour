@@ -17,6 +17,22 @@
       "epilogue": null
     },
     {
+      "id": "ending_last_stand_fail",
+      "title": { "zh": "第364天功亏一篑" },
+      "type": "bad",
+      "priority": 1.4,
+      "conditions": {
+        "requiredFlags": ["day_364_survived"],
+        "requiredStats": [{ "stat": "health", "max": 0 }]
+      },
+      "narrative": [
+        { "zh": "三百六十四天。" },
+        { "zh": "你数过的，反反复复数过的。明天就是一年了。" },
+        { "zh": "身体没有给你这一天。" }
+      ],
+      "epilogue": null
+    },
+    {
       "id": "ending_cold_death",
       "title": { "zh": "极寒中的无声熄火" },
       "type": "bad",

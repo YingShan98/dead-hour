@@ -86,6 +86,7 @@ export type GameFlag =
   | 'survived_first_week'
   | 'survived_first_month'
   | 'survived_first_winter'
+  | 'day_364_survived'
   | 'survived_one_year'
 
   // ── Hidden / secret ───────────────────────────────────────────────────────
@@ -359,6 +360,13 @@ export const FLAG_REGISTRY: FlagDefinition[] = [
       icon: '❄️',
       secret: false,
     },
+  },
+  {
+    key: 'day_364_survived',
+    description:
+      'Player has survived to day 364, one day short of the full year. Used by ending_last_stand_fail to distinguish a death this close to the end from an ordinary death_health ending.',
+    category: 'survival',
+    achievement: null,
   },
   {
     key: 'survived_one_year',

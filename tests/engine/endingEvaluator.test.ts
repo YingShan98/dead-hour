@@ -54,6 +54,15 @@ const COLD_DEATH = ending({
   },
 })
 
+const LAST_STAND_FAIL = ending({
+  id: 'ending_last_stand_fail',
+  priority: 1.4,
+  conditions: {
+    requiredFlags: ['day_364_survived'],
+    requiredStats: [{ stat: 'health', max: 0 }],
+  },
+})
+
 const DEATH_HEALTH = ending({
   id: 'ending_death_health',
   priority: 2,
@@ -72,6 +81,38 @@ const FORTRESS_SOLO = ending({
     ],
     securityMin: 80,
   },
+})
+
+describe('ending_last_stand_fail', () => {
+  it('fires when day_364_survived is set and health is 0', () => {
+    const state = mockState({
+      stats: { ...mockState().stats, health: 0 },
+      flags: { day_364_survived: true },
+    })
+    expect(checkForEnding([LAST_STAND_FAIL, DEATH_HEALTH], state)?.id).toBe(
+      'ending_last_stand_fail',
+    )
+  })
+
+  it('takes priority over ending_cold_death when both could apply', () => {
+    const state = mockState({
+      stats: { ...mockState().stats, health: 0 },
+      flags: { day_364_survived: true },
+    })
+    expect(checkForEnding([LAST_STAND_FAIL, COLD_DEATH, DEATH_HEALTH], state)?.id).toBe(
+      'ending_last_stand_fail',
+    )
+  })
+
+  it('does not fire without day_364_survived — falls back to death_health', () => {
+    const state = mockState({ stats: { ...mockState().stats, health: 0 } })
+    expect(checkForEnding([LAST_STAND_FAIL, DEATH_HEALTH], state)?.id).toBe('ending_death_health')
+  })
+
+  it('does not fire when health is above 0', () => {
+    const state = mockState({ flags: { day_364_survived: true } })
+    expect(checkForEnding([LAST_STAND_FAIL], state)?.id).toBeUndefined()
+  })
 })
 
 describe('ending_cold_death', () => {

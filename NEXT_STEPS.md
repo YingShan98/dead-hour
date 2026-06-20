@@ -1,6 +1,6 @@
 # Dead Hour — Next Steps
 
-> Updated 2026-06-11.
+> Updated 2026-06-20.
 >
 > Everything from the 2026-06-05 analysis (immediate bugs #1-3, doc corrections #5-6, dead-code
 > cleanup #7, missing data #8, and Quick Polish / Replay & Engagement / Immersion / Accessibility
@@ -11,25 +11,30 @@
 
 ## Remaining Endings
 
-9 endings exist (`ending_full_zombie`, `ending_death_health`, `ending_death_morale`,
-`ending_fortress_irony`, `ending_solo_survivor`, `ending_escape_truck`,
-`ending_superpower_awakening`, `ending_community_leader`, `ending_the_record`). The 9 below from
-the original GDD plan are still missing:
+12 endings exist (`ending_full_zombie`, `ending_last_stand_fail`, `ending_cold_death`,
+`ending_death_health`, `ending_death_morale`, `ending_fortress_irony`, `ending_fortress_solo`,
+`ending_solo_survivor`, `ending_escape_truck`, `ending_superpower_awakening`,
+`ending_community_leader`, `ending_the_record`). The 6 below from the original GDD plan are still
+missing:
 
-| ID                        | Name                 | Trigger condition                                           |
-| ------------------------- | -------------------- | ----------------------------------------------------------- |
-| `ending_cold_death`       | BE-1 极寒熄火        | Survived winter but health reaches 0 from cold              |
-| `ending_last_stand_fail`  | BE-3 第364天功亏一篑 | Survived 364 days then health reaches 0                     |
-| `ending_fortress_solo`    | H-1 最强钉子户       | High security + solo + survived one year                    |
-| `ending_together`         | H-2 双向奔赴         | Pei alive + excessive_exertion + survived one year          |
-| `ending_dawn_of_man`      | A-1 凡人钢铁黎明     | Survived without awakening or turning                       |
-| `ending_gene_blocker`     | A-2 基因阻断剂       | 郑博士 saved + pei_research_complete + infection controlled |
-| `ending_new_human_leader` | B-2 新人类领袖       | Awakening + factions_allied + leadership ≥15                |
-| `ending_species_shift`    | C-2 物种更替         | Full zombie + zombie_signal_received                        |
-| `ending_ceasefire`        | B-1 停战协议         | factions_allied + survived one year + no zombie arc         |
+| ID                        | Name             | Trigger condition                                           |
+| ------------------------- | ---------------- | ----------------------------------------------------------- |
+| `ending_together`         | H-2 双向奔赴     | Pei alive + excessive_exertion + survived one year          |
+| `ending_dawn_of_man`      | A-1 凡人钢铁黎明 | Survived without awakening or turning                       |
+| `ending_gene_blocker`     | A-2 基因阻断剂   | 郑博士 saved + pei_research_complete + infection controlled |
+| `ending_new_human_leader` | B-2 新人类领袖   | Awakening + factions_allied + leadership ≥15                |
+| `ending_species_shift`    | C-2 物种更替     | Full zombie + zombie_signal_received                        |
+| `ending_ceasefire`        | B-1 停战协议     | factions_allied + survived one year + no zombie arc         |
 
-Priority: BE-1 and H-1 have the simplest conditions and can be added without new content. The
-rest require Phase 2+ content to be reachable.
+All 6 require Phase 2+ content (faction alliance arc, awakening arc, 郑博士 rescue line) before
+they're reachable from any scene.
+
+Note: `ending_cold_death`, `ending_fortress_solo`, and `ending_last_stand_fail` are implemented
+and unit-tested (`tests/engine/endingEvaluator.test.ts`), but not yet reachable in actual play —
+they key off `winter_shelter_established`, `survived_one_year`, `base_factory`, and the new
+`day_364_survived` flag, none of which any scene currently sets (content currently tops out around
+day 90). They'll activate automatically once the day-90→365 content arc is built; no further
+engine or data work is needed for these three.
 
 ---
 
