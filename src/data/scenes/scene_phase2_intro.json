@@ -3,26 +3,50 @@
   "title": { "zh": "第二阶段·铁血之春" },
   "act": "act3",
   "gameTime": { "hoursFromStart": 2184 },
+  "conditionalNarrative": [
+    {
+      "conditions": { "requiredStats": [{ "stat": "infection", "min": 3 }] },
+      "position": "suffix",
+      "zh": "你看了一眼自己的右手。伤口早就愈合了，愈合得比任何一道伤口都快，快到你已经不再提起这件事。今天阳光照在指节上，皮肤底下的纹路安静地躺着，等着被想起来。"
+    }
+  ],
   "narrative": [
     { "zh": "春天来了。" },
     {
-      "zh": "三个月过去了。你活下来了——不只是活着，是建造了什么，维持了什么，在这座城市的某个角落站稳了脚。"
+      "zh": "三个月。你数过的——不是凭感觉，是真的数过，在墙上，在日历背面，在脑子里反复确认过的数字。你活下来了，不只是活着，是建造了什么，维持了什么，在这座城市的某个角落站稳了脚。"
+    },
+    {
+      "zh": "但冬天那种活法不能再继续了。窝在同一个临时落脚点，靠囤的东西硬撑，每天醒来先确认还剩多少——那是熬过去的方式，不是过日子的方式。"
     },
     {
       "zh": "接下来是另一件事。不是生存，是选择怎么生存。"
-    },
-    {
-      "zh": "（第二阶段内容建设中）"
     }
   ],
   "conditions": {},
   "choices": [
     {
-      "id": "scene_phase2_intro_continue",
-      "text": { "zh": "继续。" },
-      "conditions": {},
+      "id": "scene_phase2_intro_continue_group",
+      "text": { "zh": "开始找一个能长期待下去的地方。" },
+      "conditions": { "requiredFlags": ["pei_alive"] },
       "effects": {},
-      "nextSceneId": "scene_phase2_intro"
+      "consequence": [
+        {
+          "zh": "接下来的四天，你们俩在城市里跑了三个地方。每一个都有理由，每一个都有代价。"
+        }
+      ],
+      "nextSceneId": "scene_day95_base_selection"
+    },
+    {
+      "id": "scene_phase2_intro_continue_solo",
+      "text": { "zh": "开始找一个能长期待下去的地方。" },
+      "conditions": { "blockedFlags": ["pei_alive"] },
+      "effects": {},
+      "consequence": [
+        {
+          "zh": "接下来的四天，你一个人跑了三个地方。每一个都有理由，每一个都有代价，没有人能商量。"
+        }
+      ],
+      "nextSceneId": "scene_day95_base_selection"
     }
   ]
 }

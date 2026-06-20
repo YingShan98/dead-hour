@@ -1,0 +1,66 @@
+{
+  "id": "scene_day95_base_selection",
+  "title": { "zh": "第九十五天·据点选址" },
+  "act": "act3",
+  "gameTime": { "hoursFromStart": 2280 },
+  "narrative": [
+    { "zh": "第九十五天。三个地方，三个不一样的答案。" },
+    {
+      "zh": "废弃的机械厂——三相电还没断，有一台车床看起来还能转，地板厚得能扛住任何东西从下面顶上来。"
+    },
+    {
+      "zh": "地下防空洞——七十年代的工事，两道钢门，通风系统还在转，是这座城市里最安全的地方，前提是你能忍受不见天日。"
+    },
+    {
+      "zh": "郊区的农场——土地是真实的。土地会继续存在，不管外面发生了什么。但围墙矮，离市区远，谁也保护不了它。"
+    },
+    { "zh": "你只能选一个。" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day95_base_selection_factory",
+      "text": { "zh": "机械厂。靠技术和工具活下去。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "base_factory": true },
+        "security": 15
+      },
+      "consequence": [
+        { "zh": "「这地方有三相电，」你说，「有一台还能转的车床。地板够厚。」" },
+        {
+          "zh": "防御指数不高，但这里能造东西。冬天靠囤积撑过去，往后得靠制造撑过去。"
+        }
+      ],
+      "nextSceneId": "scene_day95_base_factory_intro"
+    },
+    {
+      "id": "scene_day95_base_selection_bunker",
+      "text": { "zh": "防空洞。靠厚墙和钢门活下去。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "base_bunker": true },
+        "security": 45
+      },
+      "consequence": [
+        { "zh": "「七十年代的，」你说，「两道钢门，通风系统还在转。最安全的地方。」" },
+        { "zh": "地底下没有窗。但今晚，你第一次不用守夜也能睡着。" }
+      ],
+      "nextSceneId": "scene_day95_base_bunker_intro"
+    },
+    {
+      "id": "scene_day95_base_selection_farm",
+      "text": { "zh": "农场。靠土地活下去。" },
+      "conditions": {},
+      "effects": {
+        "flags": { "base_farm": true },
+        "security": 8
+      },
+      "consequence": [
+        { "zh": "「土地是真实的，」你说，「土地会继续存在。」" },
+        { "zh": "围墙矮得让人不安。但今天你第一次想起来，存粮总有一天会吃完，而土地不会。" }
+      ],
+      "nextSceneId": "scene_day95_base_farm_intro"
+    }
+  ]
+}

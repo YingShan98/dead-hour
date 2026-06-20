@@ -22,9 +22,9 @@ Built with **React + TypeScript**, powered by a data-driven story engine where a
 - Depraved Insight: conditional scene text that shifts with infection level (3 tiers)
 - Trust & Leadership signal system: threshold-triggered UI indicators instead of raw numbers
 - Journal log panel: contextual first-person entries, persists to ending screen
-- Inventory and resource management — 14 item types across medical, food, tool, weapon, misc
-- 50+ narrative flags driving scene branching and ending eligibility
-- 8 endings implemented (17 planned) — bad, neutral, good, and secret
+- Inventory and resource management — 15 item types across medical, food, tool, weapon, misc
+- 74 narrative flags driving scene branching and ending eligibility
+- 12 endings implemented (18 planned) — bad, neutral, good, and secret
 - Auto-save with 3 save slots (localStorage)
 - i18n architecture: base locale `zh` (Chinese), `en` keys defined but not yet authored
 - No server required — runs entirely client-side
@@ -109,12 +109,13 @@ src/
 ├── data/                 # Story content (JSON — no TypeScript)
 │   ├── scenes/           # All scene files in a flat directory (prefixed by phase/day)
 │   │   ├── scene_101.json, scene_102.json ...  (pre-outbreak, T−48h)
-│   │   ├── scene_day3_*.json, scene_day4_*.json ...  (Days 3–14)
-│   │   └── scene_crisis_*.json  (crisis branch scenes)
+│   │   ├── scene_day3_*.json ... scene_day90_thaw.json  (Days 3–90)
+│   │   ├── scene_crisis_*.json  (crisis branch scenes)
+│   │   └── scene_phase2_intro.json  (placeholder — Phase 2/Iron Spring content not yet written)
 │   ├── flags.ts          # GameFlag union type + FLAG_REGISTRY with descriptions
-│   ├── items.json        # 14 item definitions
+│   ├── items.json        # 15 item definitions
 │   ├── stats.json        # 9 stat definitions with defaults, min/max, visibility
-│   └── endings.json      # 8 endings (17 planned)
+│   └── endings.json      # 12 endings implemented (18 planned)
 ├── components/           # React UI components
 │   └── game/             # SceneDisplay, StatPanel, InventoryPanel, JournalPanel, ...
 ├── pages/                # TitlePage, GamePage, EndingPage
@@ -128,12 +129,17 @@ src/
 
 ## Story Overview
 
-| Phase   | In-Game Time   | GDD Name                   | Description                                                          | Status             |
-| ------- | -------------- | -------------------------- | -------------------------------------------------------------------- | ------------------ |
-| Phase 1 | T−48h → Day 90 | 血色之冬 (Crimson Winter)  | Outbreak, first survival week, Pei rescue, establish base            | Days 1–14 playable |
-| Phase 2 | Day 91–180     | 铁血之春 (Iron Spring)     | Base building, NPC recruitment, infection arc, faction foreshadowing | Not started        |
-| Phase 3 | Day 181–270    | 瘟疫之夏 (Plague Summer)   | Three-front pressure: plague, intelligent horde, human factions      | Not started        |
-| Phase 4 | Day 271–365    | 审判之秋 (Judgment Autumn) | Siege, convergence, endings                                          | Not started        |
+| Phase   | In-Game Time   | GDD Name                   | Description                                                          | Status                                       |
+| ------- | -------------- | -------------------------- | -------------------------------------------------------------------- | -------------------------------------------- |
+| Phase 1 | T−48h → Day 90 | 血色之冬 (Crimson Winter)  | Outbreak, first survival week, Pei rescue, establish base            | Playable, T−48h → Day 90                     |
+| Phase 2 | Day 91–180     | 铁血之春 (Iron Spring)     | Base building, NPC recruitment, infection arc, faction foreshadowing | Stub only — `scene_phase2_intro` placeholder |
+| Phase 3 | Day 181–270    | 瘟疫之夏 (Plague Summer)   | Three-front pressure: plague, intelligent horde, human factions      | Not started                                  |
+| Phase 4 | Day 271–365    | 审判之秋 (Judgment Autumn) | Siege, convergence, endings                                          | Not started                                  |
+
+These "Phase" numbers are the GDD's in-fiction story phases (Crimson Winter, Iron Spring, ...) —
+not the same as the dev-roadmap phases in the Development Status table below, which number
+engineering milestones instead. The two schemes share labels by coincidence; check the context
+column when in doubt.
 
 Protagonist: 喻城 (Yù Chéng), 23-year-old vocational school mechanic. Companion: 裴嘉应 (Péi Jiā-yīng), trainee nurse. The game is written in Chinese (base locale `zh`).
 
@@ -195,17 +201,17 @@ Full project documentation lives in `/docs`:
 
 ## Development Status
 
-| Phase                       | Status         | Notes                                                                                                                 |
-| --------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Phase 0 — Project setup     | ✅ Complete    | Vite + React + TS + Tailwind + Vitest configured                                                                      |
-| Phase 1 — Engine core       | ✅ Complete    | evaluator, executor, loader, saveManager, endingEvaluator, timeManager all implemented and tested                     |
-| Phase 2 — Act 1 playable    | 🟨 In progress | UI complete; scene content covers T−48h through Day 14 (out of 90-day Act 1); game cannot yet be completed end-to-end |
-| Phase 3 — Act 2 + branching | ⬜ Not started | Requires Day 15–Day 90 scenes, base selection, NPC recruitment                                                        |
-| Phase 4 — Act 3 + factions  | ⬜ Not started | Faction system, plague mechanics, Pei kidnapping arc                                                                  |
-| Phase 5 — Act 4 + endings   | ⬜ Not started | Siege mechanics, 9 remaining endings, NG+                                                                             |
-| Phase 6 — Polish + release  | ⬜ Not started |                                                                                                                       |
+| Phase                       | Status         | Notes                                                                                                                                                                   |
+| --------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Phase 0 — Project setup     | ✅ Complete    | Vite + React + TS + Tailwind + Vitest configured                                                                                                                        |
+| Phase 1 — Engine core       | ✅ Complete    | evaluator, executor, loader, saveManager, endingEvaluator, timeManager all implemented and tested                                                                       |
+| Phase 2 — Act 1 playable    | ✅ Complete    | UI complete; scene content covers T−48h through Day 14; fully playable end-to-end (superseded by Phase 3 content below)                                                 |
+| Phase 3 — Act 2 + branching | 🟨 In progress | Day 15–Day 90 scenes complete (winter survival, infection/awakening mechanics, passive cold/hunger drain); base selection and NPC recruitment (Day 95+) not yet started |
+| Phase 4 — Act 3 + factions  | ⬜ Not started | Faction system, plague mechanics, Pei kidnapping arc                                                                                                                    |
+| Phase 5 — Act 4 + endings   | 🟨 In progress | 12 of 18 endings defined and unit-tested; 6 require Phase 4+ content (faction alliance, awakening, NPC rescue arcs) to be reachable; siege mechanics not started        |
+| Phase 6 — Polish + release  | ⬜ Not started |                                                                                                                                                                         |
 
-**Content scope:** ~32 scene JSON files implemented, covering the pre-outbreak period and the first two weeks of survival. The planned full game spans 365 in-game days across ~120–150 scenes. Passive mechanics (daily food/water consumption, cold damage, infection passive escalation) and deferred systems (crafting, overclocking, Pei's notebook) are not yet implemented.
+**Content scope:** 48 scene JSON files implemented, covering the pre-outbreak period through Day 90 (end of the first winter). The planned full game spans 365 in-game days across ~120–150 scenes; Day 91 onward (`scene_phase2_intro.json`) is currently a placeholder stub. Passive mechanics (daily hunger drain, passive cold damage, infection escalation) are implemented; deferred systems (crafting, overclocking, base building, Pei's notebook) are not yet implemented.
 
 ---
 

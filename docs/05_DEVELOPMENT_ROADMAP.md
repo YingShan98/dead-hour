@@ -2,6 +2,14 @@
 
 ### Dead Hour | Solo Dev Plan
 
+> **Note on numbering:** the Phase 0–6 labels below are engineering milestones from the original
+> pre-build plan, not the GDD's in-fiction story phases (Crimson Winter / Iron Spring / Plague
+> Summer / Judgment Autumn — see `GDD_FULL_STORYLINE.md` and the README's Story Overview table).
+> The two schemes happen to share the label "Phase 2" for unrelated things: here it means "Act 1
+> playable" (done); in the GDD it means "Iron Spring, Day 91–180" (not yet started). This roadmap
+> document is the original plan and has not been kept in sync task-by-task — see `NEXT_STEPS.md`
+> for current, accurate status.
+
 ---
 
 ## Principles for Solo Dev

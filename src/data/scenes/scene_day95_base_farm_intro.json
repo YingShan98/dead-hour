@@ -1,0 +1,20 @@
+{
+  "id": "scene_day95_base_farm_intro",
+  "title": { "zh": "农场·安顿" },
+  "act": "act3",
+  "gameTime": { "hoursFromStart": 2280 },
+  "narrative": [
+    { "zh": "围墙矮，地很大。第一件事是把围栏立起来。" },
+    { "zh": "（农场科技树与阿福招募内容建设中）" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day95_base_farm_intro_continue",
+      "text": { "zh": "继续。" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_day95_base_farm_intro"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "scene_day95_base_factory_intro",
+  "title": { "zh": "机械厂·安顿" },
+  "act": "act3",
+  "gameTime": { "hoursFromStart": 2280 },
+  "narrative": [
+    { "zh": "你把第一批东西搬进了机械厂。" },
+    { "zh": "（机械厂科技树与老许招募内容建设中）" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day95_base_factory_intro_continue",
+      "text": { "zh": "继续。" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_day95_base_factory_intro"
+    }
+  ]
+}

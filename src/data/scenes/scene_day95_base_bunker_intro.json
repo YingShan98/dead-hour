@@ -1,0 +1,20 @@
+{
+  "id": "scene_day95_base_bunker_intro",
+  "title": { "zh": "防空洞·安顿" },
+  "act": "act3",
+  "gameTime": { "hoursFromStart": 2280 },
+  "narrative": [
+    { "zh": "钢门在你身后关上的声音，闷得像是从很远的地方传来的。" },
+    { "zh": "（防空洞科技树与连珏招募内容建设中）" }
+  ],
+  "conditions": {},
+  "choices": [
+    {
+      "id": "scene_day95_base_bunker_intro_continue",
+      "text": { "zh": "继续。" },
+      "conditions": {},
+      "effects": {},
+      "nextSceneId": "scene_day95_base_bunker_intro"
+    }
+  ]
+}
